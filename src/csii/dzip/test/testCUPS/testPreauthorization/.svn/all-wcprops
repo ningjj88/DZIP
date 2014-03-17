@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization
+END
+PreAuthAdd_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization/PreAuthAdd_test.java
+END
+PreAuthComplete_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization/PreAuthComplete_test.java
+END
+PreAuth_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization/PreAuth_test.java
+END
+PreAuthCompCancelRev_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization/PreAuthCompCancelRev_test.java
+END
+PreAuthCompReversal_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization/PreAuthCompReversal_test.java
+END
+PreAuthReversal_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization/PreAuthReversal_test.java
+END
+PreAuthCompCancel_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization/PreAuthCompCancel_test.java
+END
+PreAuthCancel_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testPreauthorization/PreAuthCancel_test.java
+END

@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT config (( bean |
+										chain | command | template| transaction | style | rule | action | validator |
+										userRegistry | policy | user | coreController |
+									  propertyConfigurer | applicationListener | messageSource | beanPostProcessor |
+									  localeResolver | multipartResolver | viewResolver | httpController | 
+									  exceptionResolver | urlMapping | httpInterceptor | 
+									  transport | server | handlerMapping | channelFactory | transformerFactory |
+									  handler | executor | serverSocketFactoryProvider | socketFactoryProvider |
+									  dataSource | transactionManager | sqlExecutor | transactionTemplate | scriptRunner |
+									  idFactory | journal | sessionManager | sqlMap | sqlMapExecutor |
+									  sharedMap | sharedList | sharedSet | converter | automaton| rolepool | menu
+										)*)>
+									  
+<!ATTLIST config default-lazy-init (true | false) "false"
+				 default-dependency-check (none | objects | simple | all) "none"
+				 default-autowire (no | byName | byType | constructor | autodetect) "no"
+				 namespace CDATA #IMPLIED
+>
+								 
+<!-- public definition: these tag auto process by parser, no need to define in tag-definition.xml. -->
+<!ELEMENT param (#PCDATA)>
+<!ATTLIST param	name CDATA #IMPLIED>
+
+<!ELEMENT ref (#PCDATA)>
+<!ATTLIST ref name CDATA #IMPLIED>
+
+<!ELEMENT null (#PCDATA)>
+<!ATTLIST null name CDATA #IMPLIED>
+
+
+<!ELEMENT list ((ref | null | list | set | map | props | param | bean)*)>
+<!ATTLIST list name CDATA #IMPLIED>
+
+<!ELEMENT set ((ref | null | list | set | map | props | param | bean)*)>
+<!ATTLIST set name CDATA #IMPLIED>
+
+<!ELEMENT map ((ref | null | list | set | map | props | param | bean)*)>
+<!ATTLIST map name CDATA #IMPLIED>
+
+<!ELEMENT props ((param)*)>
+<!ATTLIST props name CDATA #IMPLIED>
+
+<!ELEMENT constructor-arg (description?,(map | list | set | props | ref | null | param | bean)*)>
+<!ATTLIST constructor-arg index CDATA #IMPLIED
+													type CDATA #IMPLIED>
+													
+<!ELEMENT lookup-method EMPTY>
+<!ATTLIST lookup-method name CDATA #IMPLIED
+												bean CDATA #IMPLIED>
+												
+<!ELEMENT replaced-method ((arg-type)*)>
+<!ATTLIST replaced-method name CDATA #IMPLIED
+													replacer CDATA #IMPLIED>
+
+<!ELEMENT arg-type (#PCDATA)>
+<!ATTLIST arg-type match CDATA #IMPLIED>
+											
+
+<!ELEMENT bean ((description?, (map | list | set | props | ref | null |null | param | bean | constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST bean	id CDATA #IMPLIED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>										 								 								 								 		
+		 						 											 											 						 											 									 									 										 				 							 	
+<!-- end of public -->
+
+<!ELEMENT description (#PCDATA)>
+
+<!-- core definition -->						
+<!ELEMENT chain ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), commands?, setting?)>
+<!ATTLIST chain	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT command (description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*)>
+<!ATTLIST command	id CDATA #REQUIRED
+							 	name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT template ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), actions?, setting?)>
+<!ATTLIST template id CDATA #IMPLIED
+								chain CDATA #IMPLIED
+							 	name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT transaction ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), actions?, fields?, rules?, channels?, setting?)>
+<!ATTLIST transaction	id CDATA #REQUIRED
+								template CDATA #REQUIRED
+							 	name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 				
+<!ELEMENT action (description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*)>
+<!ATTLIST action id CDATA #IMPLIED
+							 	name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT style ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), validators?, setting?,messages?)>
+<!ATTLIST style	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							  class CDATA #IMPLIED
+							  parent CDATA #IMPLIED
+						 	  abstract (true | false) "false"							  
+							  singleton (true | false) "true"
+							  lazy-init (true | false | default) "default"
+							  autowire (no | byName | byType | constructor | autodetect | default) "default"
+							  dependency-check (none | objects | simple | all | default) "default"
+							  depends-on CDATA #IMPLIED
+							  init-method CDATA #IMPLIED
+							  destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT validator ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST validator	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							  class CDATA #IMPLIED
+							  parent CDATA #IMPLIED
+						 	  abstract (true | false) "false"							  
+							  singleton (true | false) "true"
+							  lazy-init (true | false | default) "default"
+							  autowire (no | byName | byType | constructor | autodetect | default) "default"
+							  dependency-check (none | objects | simple | all | default) "default"
+							  depends-on CDATA #IMPLIED
+							  init-method CDATA #IMPLIED
+							  destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT rule (description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*)>
+<!ATTLIST rule id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							  class CDATA #IMPLIED
+							  parent CDATA #IMPLIED
+						 	  abstract (true | false) "false"							  
+							  singleton (true | false) "true"
+							  lazy-init (true | false | default) "default"
+							  autowire (no | byName | byType | constructor | autodetect | default) "default"
+							  dependency-check (none | objects | simple | all | default) "default"
+							  depends-on CDATA #IMPLIED
+							  init-method CDATA #IMPLIED
+							  destroy-method CDATA #IMPLIED
+							  factory-method CDATA #IMPLIED>
+
+<!ELEMENT fields ((field | field-list)*)>
+							 										 		 						 
+<!ELEMENT field (#PCDATA)>
+<!ATTLIST field name CDATA #REQUIRED>
+
+<!ELEMENT field-list (fields?)>
+<!ATTLIST field-list name CDATA #REQUIRED
+				     counter CDATA #REQUIRED
+				     condition CDATA #IMPLIED
+				     skipSignature (true | false) "false"
+				     >
+							 
+<!ELEMENT rules ((ref | null | rule)*)>
+							 		 
+<!ELEMENT actions ((ref | null | action)*)>
+
+<!ELEMENT validators ((ref | null | validator)*)>
+
+<!ELEMENT channels (channel+)>
+<!ELEMENT channel (param+)>
+<!ATTLIST channel	type CDATA #REQUIRED>
+
+<!ELEMENT commands ((ref | null | command)*)>
+
+<!ELEMENT setting (param*)>
+<!ELEMENT messages (param*)>
+<!-- end of core -->
+
+<!-- extended core -->
+<!ELEMENT userRegistry ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST userRegistry	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT policy ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST policy	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 	
+<!ELEMENT user ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST user	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+							 	
+<!ELEMENT coreController ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST coreController	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>								 					 	
+							 	
+<!-- base -->
+<!ELEMENT propertyConfigurer ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), properties?)>
+<!ATTLIST propertyConfigurer	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 	
+<!ELEMENT properties (param*)>
+
+<!ELEMENT applicationListener ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST applicationListener	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT beanPostProcessor ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST beanPostProcessor	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 	
+<!ELEMENT messageSource ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), fileEncodings?)>
+<!ATTLIST messageSource 
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+							 	
+<!ELEMENT fileEncodings (param*)>				
+
+<!-- http -->
+<!ELEMENT localeResolver ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST localeResolver
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			 			
+							 	
+							 	
+<!ELEMENT multipartResolver ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST multipartResolver
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>		
+							 	
+<!ELEMENT viewResolver ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*, resolvers?))>
+<!ATTLIST viewResolver id CDATA #IMPLIED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+							 	
+<!ELEMENT resolvers (viewResolver*)>
+
+<!ELEMENT httpController ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST httpController	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+
+<!ELEMENT exceptionResolver ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), mappedHandlers?, exceptionMappings?)>
+<!ATTLIST exceptionResolver	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+
+<!ELEMENT exceptionMappings (param*)>	
+
+<!ELEMENT mappedHandlers (ref*)> 	
+
+<!ELEMENT urlMapping ((description?, (map | list | set | props |ref|  param | bean| constructor-arg | lookup-method | replaced-method )*), interceptors?, mappings?)>
+<!ATTLIST urlMapping	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+
+<!ELEMENT mappings (param*)>	
+
+<!ELEMENT interceptors (ref*)>
+
+<!ELEMENT httpInterceptor ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST httpInterceptor	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!-- tcp channel -->						 	
+<!ELEMENT serverSocketFactoryProvider ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST serverSocketFactoryProvider	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>	
+							 	
+<!ELEMENT socketFactoryProvider ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST socketFactoryProvider	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>				
+							 	
+<!ELEMENT executor ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST executor	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>		
+							 	
+<!ELEMENT transformerFactory ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST transformerFactory	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+							 	
+<!ELEMENT idFactory ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST idFactory	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>	
+							 	
+<!ELEMENT journal ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST journal	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>								 								 	
+							 	
+<!ELEMENT handler ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST handler	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+							 	
+<!ELEMENT channelFactory ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST channelFactory	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>	
+							 	
+<!ELEMENT handlerMapping ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*, handlers?))>
+<!ATTLIST handlerMapping	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>						
+							 	
+<!ELEMENT handlers ((ref | null | bean)*)>	
+
+<!ELEMENT server ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST server	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>						
+
+<!ELEMENT transport ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST transport	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>					
+							 	
+<!ELEMENT dataSource ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST dataSource	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+							 	
+<!ELEMENT transactionManager ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST transactionManager	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+							 	
+<!ELEMENT sqlExecutor ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST sqlExecutor	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>			
+							 	
+<!ELEMENT transactionTemplate ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST transactionTemplate	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>										 								 								 								 		
+
+<!ELEMENT scriptRunner ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST scriptRunner	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>					
+							 	
+<!ELEMENT sessionManager ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST sessionManager	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>		
+							 	
+<!ELEMENT sqlMap ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST sqlMap	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>		
+							 	
+<!ELEMENT sqlMapExecutor ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST sqlMapExecutor	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>		
+							 	
+<!ELEMENT sharedList ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST sharedList	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>	
+							 	
+<!ELEMENT sharedMap ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST sharedMap	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>	
+							 	
+<!ELEMENT sharedSet ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST sharedSet	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>				
+							 	
+<!ELEMENT converter ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST converter	id CDATA #REQUIRED
+							  name CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>	
+							 	
+							 	
+<!ELEMENT automaton ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), eventFilter?,transitionLogger?,states)>
+<!ATTLIST automaton	id CDATA #REQUIRED
+								initState CDATA #REQUIRED
+							 	type (0|1|2) "1"	
+							 	wait (true | false) "false"													 									
+							 	path CDATA #IMPLIED								
+							 	priority CDATA "0"															 	
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 								 					 								 								 								 								 										 						 								 								 								 		
+
+<!ELEMENT eventFilter ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST eventFilter	id CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+
+<!ELEMENT transitionLogger ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST transitionLogger	id CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 	
+<!ELEMENT states ((state)+)>							 	
+							 								 					 								 								 								 								 										 						 								 								 								 		
+
+<!ELEMENT state ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), entryAction?,transitions?)>
+<!ATTLIST state	name CDATA #REQUIRED
+								halt (true | false) "false"	
+								release (true | false) "false"	
+								keepEventData (true | false) "false"									
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+	
+<!ELEMENT entryAction ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST entryAction	id CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 	
+<!ELEMENT transitions ((transition)+)>	
+						 								 	
+<!ELEMENT transition ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), condition?,afterAction?)>
+<!ATTLIST transition name CDATA #REQUIRED
+								nextState CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 	
+<!ELEMENT condition ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST condition	id CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 	
+<!ELEMENT afterAction ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*))>
+<!ATTLIST afterAction	id CDATA #IMPLIED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>
+							 	
+
+<!ELEMENT rolepool ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), roles? )>
+<!ATTLIST rolepool	id CDATA #REQUIRED
+							 	class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>							 	
+
+<!ELEMENT roles ((param| bean | role | trsrole | rolegroup)*)>
+
+		 						 		
+<!ELEMENT rolegroup ((description?, (map | list | set | props | ref | null | param | bean| constructor-arg | lookup-method | replaced-method )*), roles? )>
+<!ATTLIST rolegroup	name CDATA #REQUIRED
+	 							class CDATA #IMPLIED
+							 	parent CDATA #IMPLIED
+							 	abstract (true | false) "false"							 	
+							 	singleton (true | false) "true"
+							 	lazy-init (true | false | default) "default"
+							 	autowire (no | byName | byType | constructor | autodetect | default) "default"
+							 	dependency-check (none | objects | simple | all | default) "default"
+							 	depends-on CDATA #IMPLIED
+							 	init-method CDATA #IMPLIED
+							 	destroy-method CDATA #IMPLIED
+							 	factory-method CDATA #IMPLIED>							 	
+		 						 		
+<!ELEMENT role (#PCDATA)>
+
+<!ELEMENT trsrole (#PCDATA)>
+<!ATTLIST trsrole name CDATA #REQUIRED>
+
+
+<!ELEMENT menus (( menu | menuItem )*)>
+		 						 		
+<!ELEMENT menu ((description?), menus )>
+<!ATTLIST menu	id CDATA #IMPLIED
+                name CDATA #REQUIRED
+				role CDATA #IMPLIED>
+				
+<!ELEMENT menuItem  (#PCDATA) >
+<!ATTLIST menuItem	 name CDATA   #REQUIRED
+				     action CDATA #REQUIRED
+				     role CDATA #IMPLIED>
+				
+
+		 						 		
+		 						 											 											 						 											 									 									 										 				 							 	

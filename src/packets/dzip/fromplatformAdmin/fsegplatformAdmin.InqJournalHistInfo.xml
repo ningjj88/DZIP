@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-08-23
+-->
+<segment>
+    <xmlTag><String name="CashBoxNbr" /></xmlTag><!--钱箱号  -->
+	<xmlTag><String name="SysSeqNo" /></xmlTag><!--平台流水号渠道号  -->
+	<xmlTag><String name="TranDate_Start" /></xmlTag><!-- 起始日期 -->
+	<xmlTag><String name="TranDate_End" /></xmlTag><!-- 结束日期-->
+	<xmlTag><String name="ChannId" /></xmlTag><!--渠道号  -->
+	<xmlTag><String name="RtxnCatCd" /></xmlTag><!--业务代理  -->
+	<xmlTag><String name="TranStat" /></xmlTag><!-- 交易状态 -->
+	<xmlTag><String name="Credit_Debit" /></xmlTag><!--交易类型  -->
+	<xmlTag><String name="TranAMT_Start" /></xmlTag><!-- 起始金额 -->
+	<xmlTag><String name="TranAMT_End" /></xmlTag><!--结束金额 -->
+</segment>

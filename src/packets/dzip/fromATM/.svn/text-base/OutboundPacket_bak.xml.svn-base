@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE outboundPacket SYSTEM "packet.dtd">
+<!--
+
+	by 张永庆	since:2010-06-10
+
+-->
+<outboundPacket nameOfBodyLength="BodyLength" parsePrefix="p" formatPrefix="f" >
+
+	<segment>	
+		<fixNumber name="BodyLength" length="4" />
+		<fixString name="HeadTxType" length="4" />
+	</segment>	
+
+	<include keyName="_TransactionId"></include>
+
+	<mapAlias name="format">
+		<elementAlias name="ACCTNO"  alias="bit2" /><!-- 主帐号 -->
+		<elementAlias name="PROCODE"  alias="bit3" /><!--交易码处理  -->
+		<elementAlias name="TRANSDTTIME"  alias="bit7" /><!--交易传输时间  -->
+		<elementAlias name="SYSTRACENUM"  alias="bit11" /><!-- 系统跟踪号 -->
+		<elementAlias name="LOCTRANSTIME"  alias="bit12" />  <!--受卡方所在地时间  -->
+		<elementAlias name="LOCTRANSDATE"  alias="bit13" /><!-- 受卡方所在地日期 -->
+		<elementAlias name="MERCHANTTYPE"  alias="bit18" /><!-- 商户类型 -->
+		<elementAlias name="SERENTRYMODE"  alias="bit22" /><!-- 服务点输入方式码 -->
+		<elementAlias name="SERCONDCODE"  alias="bit25" /><!-- 服务点条件码 -->
+		<elementAlias name="CARDACCID"  alias="bit41" /><!-- 受卡机终端标识码-->
+		<elementAlias name="CARDACCNAME"  alias="bit43" /><!-- 受卡方名称地址-->
+	</mapAlias>
+
+</outboundPacket>

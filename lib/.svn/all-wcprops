@@ -1,0 +1,311 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib
+END
+koal_wyra_client_1.1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/koal_wyra_client_1.1.2.jar
+END
+ftp-client.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/ftp-client.jar
+END
+jstl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jstl.jar
+END
+jakarta-oro-2.0.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jakarta-oro-2.0.8.jar
+END
+bcprov-jdk14-136.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/bcprov-jdk14-136.jar
+END
+commons-discovery-0.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-discovery-0.2.jar
+END
+pe-transform-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-transform-guard.jar
+END
+logback-classic-1.0.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/logback-classic-1.0.3.jar
+END
+dom4j-1.6.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/dom4j-1.6.1.jar
+END
+commons-io-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-io-1.2.jar
+END
+pe-dev-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-dev-guard.jar
+END
+concurrent.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/concurrent.jar
+END
+commons-pool.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-pool.jar
+END
+j2ee.jar
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/j2ee.jar
+END
+ojdbc14.jar
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/ojdbc14.jar
+END
+commons-collections.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-collections.jar
+END
+jaxrpc.jar
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jaxrpc.jar
+END
+pe-tcp-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-tcp-guard.jar
+END
+pe-monitor.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-monitor.jar
+END
+commons-fileupload-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-fileupload-1.1.1.jar
+END
+commons-lang.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-lang.jar
+END
+ibatis-2.3.0.677.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/ibatis-2.3.0.677.jar
+END
+commons-logging-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-logging-1.1.jar
+END
+jxl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jxl.jar
+END
+pe-schedule-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-schedule-guard.jar
+END
+standard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/standard.jar
+END
+pe-service-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-service-guard.jar
+END
+jcl-over-slf4j-1.6.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jcl-over-slf4j-1.6.4.jar
+END
+ognl-2.6.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/ognl-2.6.5.jar
+END
+pe-security-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-security-guard.jar
+END
+pe-base-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-base-guard.jar
+END
+commons-dbcp-1.2.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-dbcp-1.2.2.jar
+END
+pe-ibs-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-ibs-guard.jar
+END
+pe-http-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-http-guard.jar
+END
+ServerFrameWork.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/ServerFrameWork.jar
+END
+commons-httpclient-3.0.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-httpclient-3.0.1.jar
+END
+logback-core-1.0.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/logback-core-1.0.3.jar
+END
+commons-codec-1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-codec-1.3.jar
+END
+quartz-1.5.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/quartz-1.5.2.jar
+END
+spring-webmvc-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/spring-webmvc-2.5.6.jar
+END
+pe-core-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-core-guard.jar
+END
+unionhsmapi.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/unionhsmapi.jar
+END
+pe-ws-guard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-ws-guard.jar
+END
+ojdbc14_g.jar
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/ojdbc14_g.jar
+END
+slf4j-api-1.6.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/slf4j-api-1.6.4.jar
+END
+commons-net-1.4.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-net-1.4.1.jar
+END
+commons-beanutils.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-beanutils.jar
+END
+JNative.jar
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/JNative.jar
+END
+backport-util-concurrent.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/backport-util-concurrent.jar
+END
+pe-lc.jar
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-lc.jar
+END
+jcraft_jzlib.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jcraft_jzlib.jar
+END

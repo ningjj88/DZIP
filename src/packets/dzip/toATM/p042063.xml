@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+
+<!-- 现金充值圈存冲正请求报文 -->
+<mapAlias name="parse">
+	<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+	<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+	<elementAlias name="AUTRESCOD"  alias="bit38"   /><!--预授权码  -->
+	<elementAlias name="ICCSYSRELDATA" alias="bit55" /><!-- 55# 基于PBOC借贷记标准的IC卡数据域 -->
+	<elementAlias name="ORGDATA"  alias="bit90" /><!-- 原始数据元 -->
+	<elementAlias name="MESAUTHCD"  alias="bit128" /> <!--MAC-->
+</mapAlias>

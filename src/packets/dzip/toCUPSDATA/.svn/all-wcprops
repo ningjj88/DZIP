@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/dzip/!svn/ver/300/DZIP_NEWDEDV/src/packets/dzip/toCUPSDATA
+END
+pcupsdata.CloseAccountRegistration.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/300/DZIP_NEWDEDV/src/packets/dzip/toCUPSDATA/pcupsdata.CloseAccountRegistration.xml
+END
+OutboundPacketRes.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dzip/!svn/ver/185/DZIP_NEWDEDV/src/packets/dzip/toCUPSDATA/OutboundPacketRes.xml
+END
+pcupsdata.ValidateICData.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dzip/!svn/ver/185/DZIP_NEWDEDV/src/packets/dzip/toCUPSDATA/pcupsdata.ValidateICData.xml
+END
+fcupsdata.CloseAccountRegistration.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/300/DZIP_NEWDEDV/src/packets/dzip/toCUPSDATA/fcupsdata.CloseAccountRegistration.xml
+END
+OutboundPacket.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/185/DZIP_NEWDEDV/src/packets/dzip/toCUPSDATA/OutboundPacket.xml
+END
+fcupsdata.ValidateICData.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dzip/!svn/ver/185/DZIP_NEWDEDV/src/packets/dzip/toCUPSDATA/fcupsdata.ValidateICData.xml
+END

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 达州商行本行卡ATM修改密码返回报文-->
+<iso8583Packet  >
+	<bitMap defaultValue="2,3,7,11,12,13,14,18,22,23,25,32,33,37,39,41,42,43,48,53,54,60" />
+	<include include="i8583fields" ></include>
+	<mapAlias name="format">	
+		<elementAlias name="EXPDAT"  alias="bit14" /><!-- 卡有效期 -->
+		<elementAlias name="SERENTRYMODE"  alias="bit22" /><!-- 服务点输入方式码 -->
+		<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+		<elementAlias name="CARDACCNAME"  alias="bit43" /><!-- 受卡方名称地址-->		
+		<elementAlias name="ADDDATAPRI"  alias="bit48"  /><!-- 附加数据－私有(新密码)-->
+		<elementAlias name="SECURCONTRINFO"  alias="bit53" /><!--  安全控制信息-->
+		<elementAlias name="BALAMT"  alias="bit54" defaultValue="0001156C0000000000000002156C000000000000"/><!-- 余额 -->
+	</mapAlias>
+</iso8583Packet>

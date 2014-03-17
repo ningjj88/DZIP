@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+	柜面指定账户圈提测试报文
+	add by xiehai
+    date 2014-01-14
+-->
+<segment>
+	<xmlTag><String name="ACCTNO"/></xmlTag><!--交易帐号-->
+	<xmlTag><String name="TRANAMT"/></xmlTag><!--交易金额-->
+	<xmlTag><String name="TRANSDTTIME"/></xmlTag><!--主机系统时间-->
+	<xmlTag><String name="SYSTRACENUM"/></xmlTag><!--终端系统跟踪号-->
+	<xmlTag><String name="LOCTRANSTIME"/></xmlTag><!--交易时间-->
+	<xmlTag><String name="LOCTRANSDATE"/></xmlTag><!--交易日期-->
+	<xmlTag><String name="SERENTRYMODE"/></xmlTag><!--服务点输入方式-->
+	<xmlTag><String name="CARDSEQNBR"/></xmlTag><!--卡序列号-->
+	<xmlTag><String name="CARDACCID"/></xmlTag><!--终端号-->
+	<xmlTag><String name="CARDACCCODE"/></xmlTag><!--受卡方标识码-->
+	<xmlTag><String name="CARDACCNAME"/></xmlTag><!--受卡方名称地址-->
+	<xmlTag><String name="CURCODE"/></xmlTag><!--币种-->
+	<xmlTag><String name="PINDATA"/></xmlTag><!--卡密码-->
+	<xmlTag><String name="ICCSYSRELDATA"/></xmlTag><!--基于PBOC借贷记标准的IC卡数据-->
+	<xmlTag><String name="REACODE"/></xmlTag><!--自定义域-->
+</segment>

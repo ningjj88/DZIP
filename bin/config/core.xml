@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	核心配置文件
+	
+	by 张永庆	since:2010-05-20
+
+-->
+<config>
+
+    <!-- 信息输出的国际化定义 -->
+	<messageSource>
+		<param name="basenames">classpath:/config/msg/dictionary,/config/msg/DzipErrors</param>
+		<param name="cacheSeconds">10</param>
+		<param name="fallbackToSystemLocale">false</param>
+		<param name="defaultEncoding">UTF-8</param>
+	</messageSource>
+	
+
+	<!-- Controller that creates Context and calls CoreController  -->
+	<coreController id="coreController" class="com.csii.pe.core.CoreControllerImpl" >
+		<ref name="loggingInterceptor">loggingInterceptor</ref>
+	</coreController>
+	
+	<bean id="loggingInterceptor" class="com.csii.pe.core.LoggingInterceptor">
+		<param name="loggingFields">AcNo=account</param>		
+	</bean>	
+ 
+	<bean id="transactionRoleResolver" class="com.csii.pe.accesscontrol.rc.support.TransactionRoleResolver"></bean>
+	
+    <!-- 系统服务定义 -->
+	<bean id="ibsTrsAgent" class="com.csii.ibs.IbsTrsAgent"/>
+
+</config>

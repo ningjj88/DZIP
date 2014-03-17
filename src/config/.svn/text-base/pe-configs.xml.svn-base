@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<!--
+
+	PowerEngine Main Configuration
+
+	by 张永庆	since:2010-05-20
+
+-->
+<properties>
+
+	 <comment>
+		 Mode:
+		 Mode.DEV
+		 Mode.PROD
+	 </comment>
+
+	 <entry key="CurrentMode" >Mode.DEV</entry>
+<!--	 <entry key="CurrentMode" >Mode.PROD</entry>-->
+
+	 <entry key="Mode.DEV" >
+			classpath:/config/peconfigdev.xml
+	 </entry>
+
+	 <entry key="Mode.PROD" >
+			classpath:/config/peconfig.xml
+	 </entry>
+
+	 <entry key="Modules" >MainConfig,Module.Dzip</entry>
+
+	 <entry key="MainConfig" >
+			classpath:/config/chain.xml,
+			classpath:/config/core.xml,
+			classpath:/config/event.xml,
+			classpath:/config/template.xml,
+			classpath:/config/svc_localdb.xml,
+			classpath:/config/svc_corebankdb.xml,
+			classpath:/config/dzipService.xml,
+			classpath:/config/dzip/dzipConfig.xml,
+			classpath:/config/baseAction.xml,
+		 	classpath:/config/tcpService4CUPS8583.xml,
+			classpath:/config/tcpService4ATM.xml,
+            classpath:/config/tcpService4JinCheng.xml,
+            classpath:/config/tcpService4ONLI.xml,
+			classpath:/config/scheduler.xml,
+			classpath:/config/tcpService4PlatformAdmin.xml,
+			classpath:/config/initializer.xml
+	 </entry>
+
+	 <entry key="Module.Common" >
+
+	 </entry>
+
+	 <entry key="Module.Dzip" >
+	 		classpath:/config/dzip/tran4DzipATM.xml,
+	 		classpath:/config/dzip/tran4JCK.xml,
+	 		classpath:/config/dzip/tran4CUPS.xml,
+	 		classpath:/config/dzip/tran4Scheduler.xml,
+	 		classpath:/config/dzip/tran4PreAuthorization.xml,
+	 		classpath:/config/dzip/tran4PlatformAdmin.xml,
+	 		classpath:/config/dzip/DzipMessageCodeMapping.xml,
+	 		classpath:/config/outbound/cupsdata/common.xml,
+	 		classpath:/config/outbound/cupsdata/trans.xml,
+	 		classpath:/config/outbound/cupsdata/TCPR001.xml,
+	 		classpath:/config/outbound/cupsdata/transformer.xml
+	 </entry>
+</properties>

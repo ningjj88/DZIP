@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	系统配置属性文件
+	
+	by 张永庆	since:2010-05-20
+
+-->
+  <config>
+	<bean id="commonResourceLocationResolver" class="com.csii.uibs.ResourceLocationResolver">
+	    <list name="locations">
+		   <param>classpath:/config/peconfigdev.properties</param>
+		 </list>
+	</bean>
+	
+	<bean id="placeholderConfig" class="com.csii.uibs.HierarchicalPropertyPlaceholderConfigurer">
+		<ref name="commonResourceLocationResolver">commonResourceLocationResolver</ref>
+		 <list name="locations">
+		 </list>
+		 <param name="decryptFieldNames">ibsdbDataSource.password,corebankdbDataSource.password</param>
+		 <bean name="decryptModule" class="com.csii.uibs.DefaltDecryptModule" />
+	</bean>
+	<!--  
+	<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<list name="locations">
+		   <param>classpath:/config/peconfigdev.properties</param>
+		 </list>
+	</bean>
+	-->
+</config>

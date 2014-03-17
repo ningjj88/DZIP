@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+
+<!-- 代收交易报文 -->
+<mapAlias name="parse">
+        <elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+        <elementAlias name="SETAMT"  alias="bit5" /><!-- 清算金额 -->
+		<elementAlias name="CHDAMT"  alias="bit6" /><!-- 持卡人扣账金额 -->
+        <elementAlias name="EXPDAT"  alias="bit14" /><!--卡有效期  -->
+		<elementAlias name="SETDATE"  alias="bit15" /><!-- 清算日期 -->
+		<elementAlias name="ADDDATAPRI"  alias="bit48" /> <!--附加数据－私有  -->
+		<elementAlias name="IDENNUMBE"  alias="bit61" /><!--  持卡人身份认证信息-->
+		<elementAlias name="RCVCODE"  alias="bit100" /> <!-- 接收方机构码-->
+		<elementAlias name="NANSCRESERVE"  alias="bit121" /><!--  CUPS 保留-->
+		<elementAlias name="MESAUTHCD"  alias="bit128" /><!-- MAC-->
+</mapAlias>

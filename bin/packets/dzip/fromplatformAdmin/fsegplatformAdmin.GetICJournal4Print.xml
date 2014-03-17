@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xiehai
+    date 2013-09-10
+-->
+<segment>
+	<xmlTag><String name="TransDate"/></xmlTag><!--交易日期-->
+	<xmlTag><String name="Account"/></xmlTag><!--帐号-->
+	<xmlTag><String name="Amt"/></xmlTag><!--交易金额-->
+	<xmlTag><String name="TransCode"/></xmlTag><!--交易代码-->
+	<xmlTag><String name="ChargeFlag"/></xmlTag><!--记账状态-->
+</segment>

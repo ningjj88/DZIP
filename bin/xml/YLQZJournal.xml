@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fields>
+	<field name="ACQU" format="ALL" length="11" digit="0" /><!-- 收理机构标识码 -->
+	<field name="FORW" format="COM" length="11" digit="0" /><!-- 发送机构标识码 -->
+	<field name="TRAC" format="ALL" length="6" digit="0" /><!--系统跟踪号  -->
+	<field name="TRDT" format="ALL" length="10" digit="0" /><!-- 传输日期和时间-->
+	<field name="PAN"  format="ALL" length="19" digit="0" /><!--主帐号 -->
+	<field name="AMT"  format="ALL" length="12" digit="100" /><!-- 交易金额  -->
+	<field name="REAMT" format="COM" length="12" digit="100" /><!--部分代收时的承兑金额  -->
+	<field name="FEE" format="COM" length="12" digit="100" /><!--交易费  -->
+	<field name="MESG" format="ALL" length="4" digit="0" /><!--消息类型  -->
+	<field name="PROC" format="ALL" length="6" digit="0" /><!-- 处理码 -->
+	<field name="MERC" format="ALL" length="4" digit="0" /><!--商户类型-->
+	<field name="CATI" format="ALL" length="8" digit="0" /><!--受卡方终端标识 -->
+	<field name="CAID" format="COM" length="15" digit="0" /><!--受卡方标识码  -->
+	<field name="RETR" format="ALL" length="12" digit="0" /><!-- 索引参考号 -->
+	<field name="POSC" format="ALL" length="2" digit="0" /><!--服务点条件码  -->
+	<field name="AUTH" format="ALL" length="6" digit="0" /><!-- 授权码-->
+	<field name="DEST" format="ALL" length="11" digit="0" /><!--接收机构标识  -->
+	<field name="YS_TRAC" format="ALL" length="6" digit="0" /><!--原始流水号 -->
+	<field name="RESP" format="ALL" length="2" digit="0" /><!--应答码  -->
+	<field name="POSE" format="ALL" length="3" digit="0" /><!-- 服务点输入方式 -->
+	<field name="PDG1" format="ACOMATFL" length="12" digit="100" /><!--受理方应收手续费-->
+	<field name="PDG2" format="ACOMATFL" length="12" digit="100" /><!--受理方应付手续费  -->
+	<field name="PDG3" format="ICOMIOTFL" length="12" digit="100" /><!--发卡方应收手续费 -->
+	<field name="PDG4" format="ICOMIOTFL" length="12" digit="100" /><!--发卡方应付手续费 -->
+	<field name="PDG5" format="ALL" length="12" digit="100" /><!--转接服务费 -->
+	<field name="FEE" format="TFL" length="12" digit="100" /><!--交易费  -->
+	<field name="TRANSFER1"  format="TFL" length="11" digit="0" /><!--转出机构标识  -->
+	<field name="ACCID1"  format="TFL" length="19" digit="0" /><!--转出卡号  -->
+	<field name="TRANSFER2"  format="TFL" length="11" digit="0" /><!--转入机构标识 -->
+	<field name="ACCID2"  format="TFL" length="19" digit="0" /><!--转入卡号 -->
+	<field name="SFI" format="COM" length="1" digit="0" /><!-- 单双转换标志-->
+	<field name="CARDSEQ" format="ALL" length="3" digit="0" /><!-- 卡片序列号-->
+	<field name="TRQ" format="ALL" length="1" digit="0" /><!--终端读取能力-->
+	<field name="ICCD" format="ALL" length="1" digit="0" /><!-- IC 卡条件代码-->
+	<field name="TYI" format="TFL" length="1" digit="0" /><!-- 同城/异地标志-->
+	<field name="TTPY" format="TFL" length="2" digit="0" /><!-- 终端类型-->
+	<field name="YS_TRDT" format="ALL" length="10" digit="0" /><!-- 原始交易日期时间 -->
+	<field name="ISS1" format="COM" length="11" digit="0" /><!--发卡机构标识 -->
+	<field name="TDI" format="COM" length="1" digit="0" /><!--交易地域标志  -->
+	<field name="TTPY" format="COM" length="2" digit="0" /><!-- 终端类型-->
+	<field name="ECII" format="COM" length="2" digit="0" /><!-- ECI标志  -->
+	<field name="OTFEE" format="COM" length="12" digit="100" /><!-- 分期付款附加手续费  -->
+	<field name="FORW" format="TFL" length="11" digit="0" /><!-- 发送机构标识码 -->
+</Fields>

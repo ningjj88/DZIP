@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE outboundPacket SYSTEM "packet.dtd">
+<outboundPacket  parsePrefix="p"  >
+
+	<segment>	
+		<fixNumber name="BodyLength" length="4" />
+		<!-- 
+		<fixString name="TransType" length="4" />
+		 -->
+	</segment>
+
+	<include keyName="_HostTransactionCode"></include>
+	
+</outboundPacket>

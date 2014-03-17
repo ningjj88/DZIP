@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/JCKtoATM
+END
+i8583fields.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/JCKtoATM/i8583fields.xml
+END
+f021001.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/JCKtoATM/f021001.xml
+END
+InboundPacketResError.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/JCKtoATM/InboundPacketResError.xml
+END
+f021030.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/JCKtoATM/f021030.xml
+END
+ToAtmPacket.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/JCKtoATM/ToAtmPacket.xml
+END
+f043001.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/JCKtoATM/f043001.xml
+END
+ferror.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/JCKtoATM/ferror.xml
+END

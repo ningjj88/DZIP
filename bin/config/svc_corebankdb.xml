@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	by 张永庆	since:2010-05-20
+	 
+	说明：数据库连接服务配置。
+	说明：此处提供了对数据库服务的连接配置、事务管理配置。
+	
+ -->
+<config namespace="corebankdb" >
+
+	<bean id="jdbcAccessCoreBank" class="com.csii.pe.config.support.JdbcAccessAwareProcessor">	
+		<ref name="sqlExecutor">ibsdbSqlExecutor</ref>
+		<map name="sqlExecutors">
+			<ref name="ibsdb">ibsdbSqlExecutor</ref>
+		</map>
+
+		<ref name="sqlMap">ibsdbSqlMapExecutor</ref>
+		<map name="sqlMaps">
+			<ref name="ibsdb">ibsdbSqlMapExecutor</ref>
+		</map>
+
+		<ref name="transactionTemplate">ibsdbTxTemplate</ref>
+		<map name="transactionTemplates">
+			<ref name="ibsdb">ibsdbTxTemplate</ref>
+		</map>
+	</bean>
+	
+	<!-- sqlExecutor configs -->
+	<sqlExecutor id="ibsdbSqlExecutor">
+		<param name="showSql">false</param>
+		<ref name="dataSource">ibsdbDataSource</ref>
+	</sqlExecutor>
+
+	<!--  IBS DB Definiation -->	
+	<bean name="SqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<param name="configLocation">classpath:/config/sqlMapConfig.xml</param>
+	</bean>
+	
+	<bean id="ibsdbSqlMapExecutor" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<ref name="dataSource">ibsdbDataSource</ref>
+		<ref name="sqlMapClient">SqlMapClient</ref>
+	</bean>
+	
+	<!-- transaction template config -->
+	<!-- ibsdb -->
+	<transactionManager id="ibsdbTxManager">
+		<ref name="dataSource">ibsdbDataSource</ref>
+	</transactionManager>
+
+	<transactionTemplate id="ibsdbTxTemplate">
+		<ref name="transactionManager">ibsdbTxManager</ref>
+		<param name="propagationBehaviorName">PROPAGATION_REQUIRED</param>
+		<param name="isolationLevelName">ISOLATION_READ_COMMITTED</param>
+		<param name="readOnly">false</param>
+		<param name="timeout">10</param><!-- in seconds -->
+	</transactionTemplate>	
+
+	<dataSource id="ibsdbDataSource" class="com.csii.pe.common.jdbc.BasicDataSource" destroy-method="close">		
+	    <!--最大连接数量 可在属性文件配置-->
+        <param name="maxActive">${corebankdbDataSource.maxActive}</param>
+        <!--初始化连接数量 可在属性文件配置-->
+        <param name="initialSize">0</param>
+        <!--是否自动回收超时连接-->
+        <!--<param name="removeAbandoned">false</param>-->
+        <!--是否在自动回收超时连接的时候打印连接的超时错误-->
+        <!--<param name="logAbandoned">false</param>-->
+        <!--超时时间（以秒为单位）-->
+        <!--<param name="removeAbandonedTimeout">60</param>-->
+        <param name="validationQuery">select 1 from dual</param>
+		<param name="driverClassName">${corebankdbDataSource.driverClassName}</param>
+        <param name="url">${corebankdbDataSource.url}</param>
+		<param name="username">${corebankdbDataSource.username}</param>
+		<param name="password">${corebankdbDataSource.password}</param>
+		<props name="connectionProperties">
+			<param name="oracle.jdbc.ReadTimeout">${corebankdbDataSource.readtimeout}</param>
+		</props>
+	</dataSource>
+	
+</config>

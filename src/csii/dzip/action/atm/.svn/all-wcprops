@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/14/DZIP_NEWDEDV/src/csii/dzip/action/atm
+END
+ValidateAcctAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/ValidateAcctAction.java
+END
+ModifyPwd4ATMAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/ModifyPwd4ATMAction.java
+END
+Reversal4ATMAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/Reversal4ATMAction.java
+END
+Transfer4ATMAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dzip/!svn/ver/14/DZIP_NEWDEDV/src/csii/dzip/action/atm/Transfer4ATMAction.java
+END
+DepositConfirm4ATMAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/DepositConfirm4ATMAction.java
+END
+Query4ATMAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/Query4ATMAction.java
+END
+Withdrawal4ATMAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/Withdrawal4ATMAction.java
+END
+Deposit4ATMAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/Deposit4ATMAction.java
+END
+NoCardDepositAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/NoCardDepositAction.java
+END
+PersNameQueryAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/atm/PersNameQueryAction.java
+END

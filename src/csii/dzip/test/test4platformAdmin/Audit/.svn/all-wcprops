@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit
+END
+DownLoadFtpFile_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/DownLoadFtpFile_test.java
+END
+QueryFileInfo_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/QueryFileInfo_test.java
+END
+AuditExcute_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/AuditExcute_test.java
+END
+ImportFtpFile_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/ImportFtpFile_test.java
+END
+generalAudit_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/generalAudit_test.java
+END
+ImportTaskList_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/ImportTaskList_test.java
+END
+QueryAudit_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/QueryAudit_test.java
+END
+QueryImportFileInfo_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/QueryImportFileInfo_test.java
+END
+QueryTaskStatus_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Audit/QueryTaskStatus_test.java
+END

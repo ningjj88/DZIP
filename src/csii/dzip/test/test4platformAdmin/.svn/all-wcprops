@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/dzip/!svn/ver/297/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin
+END
+QueryICEwalletctl_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/QueryICEwalletctl_test.java
+END
+ClearDataHistory_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/ClearDataHistory_test.java
+END
+DoICErrorHandle_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/DoICErrorHandle_test.java
+END
+UpdChannelTran_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/UpdChannelTran_test.java
+END
+GetChannel_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/GetChannel_test.java
+END
+CloseAccountRegistration_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dzip/!svn/ver/297/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/CloseAccountRegistration_test.java
+END
+ClearDataOnLin_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/ClearDataOnLin_test.java
+END
+UpdChannel_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/UpdChannel_test.java
+END
+DoICJournalCharge_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/DoICJournalCharge_test.java
+END
+DoSingleICJournalCharge_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dzip/!svn/ver/272/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/DoSingleICJournalCharge_test.java
+END
+InqJournalHistInfo_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/InqJournalHistInfo_test.java
+END
+GetCurrentPostDate_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/GetCurrentPostDate_test.java
+END
+Monitor_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/Monitor_test.java
+END
+GetChannelTran_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/GetChannelTran_test.java
+END
+InqJournalInfo_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/InqJournalInfo_test.java
+END
+DaySwicth_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/DaySwicth_test.java
+END
+ValidateICData_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dzip/!svn/ver/185/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/ValidateICData_test.java
+END

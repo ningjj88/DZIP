@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	系统接入渠道定义  XML格式报文
+	
+	by 张永庆	since:2010-05-20
+
+-->
+<config namespace="counter">
+
+	<bean id="TcpServer" class="com.csii.pe.service.comm.tcp.TcpServer">
+		<param name="id">${counter.tcp.id}</param>
+		<param name="name">${counter.tcp.name}</param>
+		<param name="port">${counter.tcp.port}</param>
+		<param name="socketTimeout">${counter.tcp.socketTimeout}</param>
+		<param name="reuseAddress">true</param>
+		<ref name="executor">threadPool</ref>
+		<ref name="handlerMapping">handlerMapping</ref>
+		<param name="period">1000</param>
+		<param name="eventId">20001</param> 
+	</bean>
+	
+	<executor id="threadPool">
+		<param name="name">${counter.threadPool.name}</param>
+		<param name="initSize">${counter.threadPool.initSize}</param>
+		<param name="maxSize">${counter.threadPool.maxSize}</param>
+		<param name="minSize">${counter.threadPool.minSize}</param>
+		<param name="queueSize">${counter.threadPool.queueSize}</param>
+		<param name="keepAliveTime">${counter.threadPool.keepAliveTime}</param>
+	</executor>
+	
+	<handlerMapping id="handlerMapping">
+		<handlers>
+			<ref name="*">serverHandler</ref>
+		</handlers>
+	</handlerMapping>	
+	
+	<!--  XML Handler  -->
+	<handler id="serverHandler" class="csii.dzip.core.XMLHandler">
+		<ref name="transformerFactory">TransformerFactory</ref>
+		<ref name="coreController">.coreController</ref>
+		<ref name="identityResolver">transactionIdResolver</ref>
+		<ref name="parserResolver">parserResolver</ref>
+		<param name="defaultFormat">InboundPacketRes</param>
+		<param name="defaultErrorFormat">InboundPacketResError</param>
+		<param name="debug">${counter.serverHandler.debug}</param>
+		<param name="dumpPath">${counter.serverHandler.dumpPath}</param>
+		<param name="endTagName">${counter.serverHandler.endTagName}</param>
+		<ref name="fixedLengthISO8583Parser">dzip.FixedLengthISO8583Parser</ref>
+	</handler>
+	
+	<bean id="transactionIdResolver" class="com.csii.pe.channel.stream.MappingTrsIdResolver">
+		<param name="idParameterName">TRANCODE</param>
+		<map name="mapping"> 
+
+            <!-- 用于测试 -->
+			<param name="dzipCounter.Query2">dzipCounter.Query</param>
+            <!-- 用于测试 -->
+            
+		</map>
+	</bean>
+	
+	<bean id="parserResolver" class="com.csii.pe.channel.stream.ChannelAttributeParserResolver">
+		<param name="key">tcpchannel.localport</param>
+		<param name="defaultParser">xmlPacketParser</param>
+		<map name="mapping">
+		
+		</map>
+	</bean>  
+	
+ 	<!-- xml transformer -->
+	<bean name="TransformerFactory" class="com.csii.pe.transform.XmlTransformerFactory">
+		<param name="path">/packets/dzip/tocounter</param>
+		<param name="debug">${counter.TransformerFactory.debug}</param>
+		<param name="cacheEnable">${counter.TransformerFactory.cacheEnable}</param>
+		<map name="parsers">
+			<ref name="xmlPacketParser">XmlPacketParser</ref>
+		</map>
+	</bean>	
+	
+	<!--xml parser -->
+	<bean name="XmlPacketParser" class="com.csii.pe.transform.stream.xml.XmlStreamParser">
+		<param name="debug">${counter.XmlPacketParser.debug}</param>
+		<param name="tagClassMapping">/packets/dzip/tocounter/xmltagmapping.properties</param>
+		<param name="tagAliasMapping">/packets/dzip/tocounter/xmlaliasmapping.properties</param>
+	</bean>
+	
+</config>

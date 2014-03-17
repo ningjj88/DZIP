@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+
+<segment>
+	<xmlTag><String name="CardNo"/></xmlTag><!--卡号-->
+	<xmlTag><String name="SeqNo"/></xmlTag><!--卡片序列号-->
+	<xmlTag><String name="ICData" /></xmlTag><!--IC卡数据域-->
+</segment>

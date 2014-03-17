@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xiehai
+    date 2013-09-11
+    IC卡交易流水差错记账
+-->
+<segment>
+	<xmlTag><String name="AcqInstCode" /></xmlTag><!--受理机构标识-->
+	<xmlTag><String name="TraceNo" /></xmlTag><!-- 系统跟踪号-->
+	<xmlTag><String name="TransDate" /></xmlTag><!-- 交易日期-->
+</segment>

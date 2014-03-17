@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/dzip/!svn/ver/185/DZIP_NEWDEDV/src/csii/dzip/action/cups/pos
+END
+PosConsumeCancelAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dzip/!svn/ver/11/DZIP_NEWDEDV/src/csii/dzip/action/cups/pos/PosConsumeCancelAction.java
+END
+PosConsumeCancelReversalAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/cups/pos/PosConsumeCancelReversalAction.java
+END
+PosConsumeAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dzip/!svn/ver/42/DZIP_NEWDEDV/src/csii/dzip/action/cups/pos/PosConsumeAction.java
+END
+PosPurchaseReturnAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dzip/!svn/ver/185/DZIP_NEWDEDV/src/csii/dzip/action/cups/pos/PosPurchaseReturnAction.java
+END
+PosConsumeReversalAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/cups/pos/PosConsumeReversalAction.java
+END

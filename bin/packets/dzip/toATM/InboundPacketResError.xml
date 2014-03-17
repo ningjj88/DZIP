@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE inboundPacket SYSTEM "packet.dtd">
+<!--
+
+	by 张永庆	since:2010-06-10
+
+-->
+<inboundPacket  nameOfBodyLength="BodyLength" parsePrefix="p" formatPrefix="f"  >
+	<segment>	
+		<fixNumber name="BodyLength" length="4" add="4" />	
+        <fixString name="HeadTxType" length="4" defaultValue="0210" />
+	</segment>	
+	<include include="error" />
+	<mapAlias name="format">
+		 <elementAlias name="RESCODE"  alias="bit39" defaultValue="91"/><!-- 应答码-->
+		 <elementAlias name="ErrorMessage"  alias="bit44" />			  				  
+	</mapAlias>	
+</inboundPacket>

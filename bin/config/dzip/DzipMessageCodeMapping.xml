@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+ 
+<config namespace="dzip" >
+    <!-- for mapping beps errorMassage to error code, you must config them here -->
+
+	<sharedMap id="messageCodeMapping">
+	<map name="sourceMap">
+		<!--
+			for mapping errorMassage to error code, you must config them
+			here
+		-->   
+		 <!-- 渠道管理   -->
+		<param name="Get_monitor_info_failed">0100</param>
+		
+		 <!-- 渠道管理   -->
+		<param name="Get_channel_info_failed">0200</param>
+		<param name="Update_channel_info_failed">0201</param> 
+		
+         <!-- 渠道交易管理   -->
+		<param name="Get_channel_Tran_failed">0202</param>
+		<param name="Update_channel_Tran_failed">0203</param> 
+		
+		 <!-- 交易流水查询   -->
+		<param name="Get_Journal_Hist_failed">0300</param>
+		<param name="Get_Journal_failed">0301</param> 
+		
+		 <!-- 日切   -->
+		<param name="Audit_not_occured">0400</param>
+		<param name="Get_core_post_date_failed">0401</param> 
+		<param name="History_date_not_clear">0402</param> 
+		<param name="Get_system_date_failed">0403</param> 
+		<!-- 对账-->
+		<param name="Audit_has_occured">0700</param> 
+		<param name="DownLoad_ftp_file_failed">0701</param> 
+		<param name="Export_core_joural_failed">0702</param> 
+		<param name="Import_core_joural_failed">0703</param> 
+		<param name="Insert_CheckTrans_Rec_failed">0704</param> 
+		<param name="Insert_downLoad_file_failed">0705</param> 
+		<param name="Insert_ftp_file_info_failed">0706</param> 
+		<param name="Insert_taskList_failed">0707</param> 
+		<param name="Parse_downLoad_file_failed">0708</param> 
+		<param name="Parse_taskList_failed">0709</param> 
+		<param name="Query_audit_info_failed">0710</param> 
+		<param name="Query_file_info_failed">00711</param> 
+		<param name="Query_import_file_info_failed">0712</param> 
+		<param name="Query_task_list_failed">0713</param> 
+		<param name="Task_is_invalidate">0714</param> 
+		<param name="Task_has_excuted">0715</param> 
+		<param name="PrivTask_is_unsuccessful">0716</param> 
+		<param name="Download_task_has_excuted">0717</param> 
+		<param name="Import_ftp_file_data_failed">0718</param> 
+		<param name="Could_not_get_JDBC_Connection">0719</param> 
+		<param name="Task_list_has_exsit">0720</param> 
+		<param name="Task_list_not_exsit">0721</param> 
+		<param name="Import_ftp_file_data_has_excuted">0722</param> 
+		<param name="Ftp_file_is_not_exist">0723</param> 
+		<param name="Logged_in_ftp_failed">0724</param> 
+		<param name="Connect_ftp_failed">0725</param> 
+
+		<param name="System_error">1000</param> 
+		<param name="Datebase_error">1001</param> 
+		
+		<param name="No_clear_data">1001</param> 
+		<param name="Corertxn_no_exist_data">1001</param>  
+		
+		 <!-- 导出流水信息   -->
+		<param name="More_import_journal_batch">1001</param>  
+		<param name="No_import_journal_batch">1002</param>
+		<param name="Re_exec_journal_batch">1000</param>  
+		<param name="No_exec_journal_batch">1003</param>  
+		<param name="Re_import_journal_batch">1004</param>
+		<param name="No_jck_audit_journal">1001</param>
+		<!--
+			for mapping errorMassage to error code, you must config them
+			here
+		-->
+	</map>
+</sharedMap>	
+	     
+</config>

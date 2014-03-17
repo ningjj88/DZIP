@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Group SYSTEM "packetutf8.dtd">
+
+<!--
+    add by xiehai
+    date 2014-01-14
+    前台电子现金交易请求
+ -->
+<Group name="Message" xmlHead="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;">
+	<Group name="Head">
+		<xmlTag tagName="_TransactionId" >
+			<String name="_TransactionCode" ></String>
+		</xmlTag>
+
+		<xmlTag tagName="IBSTrsTimestamp" >
+			<String name="IBSTrsTimestamp" ></String>
+		</xmlTag>
+	</Group>
+	<Group name="Body">
+		<include keyName="_TransactionCode"></include>
+	</Group>
+</Group>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xujin
+    date 2013-09-04
+    function IC卡交易流水差错记账
+-->
+<segment>
+	<xmlTag><String name="PostDate" /></xmlTag><!--交易日期-->
+	<xmlTag><String name="AuditType" /></xmlTag><!-- 对账类型-->
+</segment>

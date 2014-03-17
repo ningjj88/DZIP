@@ -1,0 +1,429 @@
+/**
+ * 变长 ISO8583
+ */
+package csii.dzip.core;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.net.Socket;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.csii.pe.channel.stream.tcp.DefaultHandler;
+import com.csii.pe.core.Context;
+import com.csii.pe.service.comm.Channel;
+import com.csii.pe.transform.TransformException;
+import com.csii.pe.transform.Transformer;
+import com.csii.pe.transform.TransformerFactory;
+import com.csii.pe.transform.stream.VirtualSegment;
+
+import csii.base.action.util.ISO8583MsgLogUtils;
+import csii.base.action.util.Util;
+import csii.base.constant.Constants;
+import csii.dzip.action.util.ActionUtilProcessor;
+import csii.dzip.action.util.DzipDataProcessor;
+import csii.dzip.action.util.DzipProcessTemplate;
+import csii.dzip.action.util.Init;
+import csii.dzip.action.util.UpdateJoural;
+import csii.pe.service.comm.tcp.queue.LockUtil;
+import csii.pe.service.comm.tcp.queue.SingleTcpClient;
+
+/**
+ * @author xujin
+ * @version 1.0.0
+ * @since 2012-10-22
+ */
+public class CUPSResponse4ATMHandler extends DefaultHandler {
+
+	private boolean debug;
+
+	public static final String INVALID_PARAMSMAP = "invalidParamsMap";
+
+	private DzipVirtualSegment dzipVirtualSegment;
+
+	private DzipProcessTemplate dzipProcessTemplate;
+
+	private DzipDataProcessor dataProcessor;
+
+	private ActionUtilProcessor utilProcessor;
+
+	private SingleTcpClient singleTcpClient;
+
+	private UpdateJoural updateJoural;
+
+	/**默认报文路径*/
+	private String defaultPath;
+	/**柜面交易返回报文配置*/
+	private String onliFormat;
+	/**柜面交易报文路径*/
+	private String onliPath;
+
+	@SuppressWarnings("unchecked")
+	protected Object parseStream(Channel paramChannel, byte[] paramArrayOfByte) throws TransformException {
+		((TransformerFactory)getTransformerFactory()).setPath(defaultPath);//恢复解析银联来的报文跟路径
+		String s = null;
+		if (getParserResolver() == null) {
+			s = getDefaultParser();
+		} else {
+			s = getParserResolver().getParser(paramChannel, paramArrayOfByte);
+		}
+		Transformer transformer = getTransformerFactory().getTransformer(s);
+		VirtualSegment vs = (VirtualSegment) transformer;
+		dzipVirtualSegment.setVirtualSegment(vs);
+		Map map = new HashMap();
+		log.info("recv Length =====>" + paramArrayOfByte.length);
+		log.info("recv =====>" +new String(paramArrayOfByte));
+		try {
+			map = (Map) dzipVirtualSegment.parse(new ByteArrayInputStream(paramArrayOfByte), null);
+		} catch (TransformException e) {
+			map.put(Constants.ISO8583_RESCODE,Constants.PE_98);
+		}
+		return map;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected byte[] handleInternal(Channel paramChannel, Object paramObject) {
+		log.info("=======================>handleInternal is Excuting");
+		Map paramsMap = (Map) paramObject;
+		ISO8583MsgLogUtils.logFormat(paramsMap,"收到银联发来的响应报文", log);
+		Map outputMap = new HashMap(); // 传出参数Map
+		String transactionId = getIdentityResolver().getIdentity(paramsMap);
+		String sessionID = null; // 获得SessionID
+		String outtranid = null;
+		Context context = createContext(transactionId, paramsMap, sessionID, getSessionManager(), paramChannel);
+		String formatName = getDefaultFormat();//resolveFormatName(context);   // 返回报文格式定义文件名
+		String errorFormatName = getDefaultErrorFormat();//resolveFormatName(context); // 错误报文格式定义文件名
+		boolean isOnliTransaction = Init.isTransactionFromOnli(context);
+		log.info("format name======>" + formatName + " " + errorFormatName);
+		if(!Constants.PE_98.equals(context.getString(Constants.ISO8583_RESCODE))){	//若返回响应码为98就不发给ATMP
+			try {
+				String peJournalNO =context.getString(Constants.ISO8583_SYSTRACENUM);  //转发报文中的系统跟踪号是平台流水号。
+				Map resultMap=utilProcessor.getJournalInfo(peJournalNO);//通过平台流水号查询交易流水。
+				context.setData(Constants.PE_OUT_TRANCD,resultMap.get(Constants.PE_OUT_TRANCD));
+				context.setData(Constants.PE_SETTLMTDATE, context.getData(Constants.ISO8583_SETDATE)); // 银联返回的清算日期
+				context.setData(Constants.PE_HOST_RESP_CD,context.getData(Constants.ISO8583_RESCODE));   //银联返回的响应码
+				context.setData(Constants.RTXNCATCD,Constants.RTXNCATCD_02);			 //业务性质 ；本代他
+				context.setData(Constants.ISO8583_SYSTRACENUM,resultMap.get(Constants.PE_SYS_TRACE_NUM));//将系统跟踪号还原
+			//	context.setData(Constants.ISO8583_RCVCODE,InitData4Dzip.getRcvgCd());    //接收方机构码
+				context.setData(Constants.PE_JOURNAL_NO,peJournalNO);					 //平台流水号
+				context.setData(Constants.PE_REQ_CHANN, Constants.PE_ATMP);  			 //通信渠道
+				context.setData(Constants.IN_AVAILMETHCD, Constants.AVAILMETHCD);        // 填充可用方式
+				context.setData(Constants.PRI_SOURCE, Constants.PRI_SOURCE_YLQZ_VALUE);  //填充交易来源前缀
+				if(context.getData(Constants.ISO8583_TRANAMT) ==null||
+						Constants.PE_NULL.equals(context.getString(Constants.ISO8583_TRANAMT).trim())){
+					context.setData(Constants.ISO8583_TRANAMT,Constants.TRANAMT_DEFAULT); //防止交易金额取空，发生异常
+				}
+				BigDecimal tranAmt = Util.getAmount(String.valueOf(context.getData(Constants.ISO8583_TRANAMT)));
+				tranAmt = tranAmt.movePointLeft(2);
+				context.setData(Constants.PE_TRAN_AMT, tranAmt);// 填充交易金额
+				log.info("==================>begin excute : " + context.getTransactionId());
+				getCoreController().execute(context); // 关联本地Action 进行数据库等操作
+				log.info("==================>excute : " + context.getTransactionId() + " ok!");
+			} catch (Exception e) {
+				log.error(e.getMessage());
+				e.printStackTrace();
+				String message = Errors.SYSTEM_UNDEFINED_TRANSACTION;
+				if (e.getMessage().contains(Errors.SYSTEM_UNDEFINED_TRANSACTION))
+					message = Errors.SYSTEM_UNDEFINED_TRANSACTION;
+				if(isOnliTransaction){
+					return exceptionProcessor(errorFormatName, context, message);
+				}else{
+					return exceptionProcessor(errorFormatName, outtranid, context, message);// 异常处理
+				}
+			}
+			if (context.getState() == -1)
+				return null;
+			if(isOnliTransaction){//如果是柜面交易,更改返回柜面解析报文格式
+				((TransformerFactory)getTransformerFactory()).setPath(onliPath);
+				formatName = onliFormat;
+				Init.getResponseTransactionID(context);
+				context.setData(Constants.ISO8583_ICCSYSRELDATA,
+						Util.StringToHex(String.valueOf(context.getData(Constants.ISO8583_ICCSYSRELDATA))));//转换55#为二进制
+				try {
+					Map<String, Object> resMap = dzipProcessTemplate.getResp(String.valueOf(context.getData(Constants.ISO8583_RESCODE)));
+					String respname = new String(String.valueOf(resMap.get(Constants.RESPNAME)));
+					context.setData(Constants.ISO8583_ADDDATA, respname);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			outputMap = context.getDataMap();// 获得返回数据
+			ISO8583MsgLogUtils.logFormat(outputMap,"返回银联响应报文到ATMP端", log);
+			if(isOnliTransaction){//如果是柜面交易
+				try {
+					log.info("==================>response message to onli!");
+					byte[] responMessage = formatStream(outputMap, formatName, context);
+					String msg = new String(responMessage);
+					msg = new String(msg.getBytes(Constants.CHARSET_GBK), Constants.CHARSET_UTF8);
+					log.info("发送到ONLI数据["+ msg +"]");
+					Socket localSocket = getSingleTcpClient().getLocalSocket();
+					if(localSocket.isConnected()){
+					    log.info("==================>ONLI主机：" +localSocket.getInetAddress() +"， 端口：  "+localSocket.getPort());
+						localSocket.getOutputStream().write(responMessage);
+						localSocket.getOutputStream().flush();
+						log.info("==================>数据发送成功");
+					}
+					return null; // 返回结果报文
+				}catch (IOException e) {
+					e.printStackTrace();
+					log.error("=============>发送ONLI数据失败" );
+					context.setData(Constants.PE_HOST_RESP_CD,Constants.PE_30);
+					updateJoural.executeRespond(context);
+				}
+				catch (TransformException e) {
+					e.printStackTrace();
+					log.error("=============>发送ONLI数据组包失败" );
+					context.setData(Constants.PE_HOST_RESP_CD,Constants.PE_30);
+					updateJoural.executeRespond(context);
+				}
+			}else {
+				try {
+					log.info("==================>return response message!" + getDefaultFormat());
+					byte[] responMessage = formatStream(outputMap, formatName, context);
+					log.info("发送到ATMP数据["+ new String(responMessage)+"]");
+					Socket localSocket = getSingleTcpClient().getLocalSocket();
+					if(localSocket.isConnected()){
+					    log.info("==================>ATMP主机：" +localSocket.getInetAddress() +"， 端口：  "+localSocket.getPort());
+						localSocket.getOutputStream().write(responMessage);
+						localSocket.getOutputStream().flush();
+						log.info("==================>数据发送成功");
+					}
+					return null; // 返回结果报文
+				}catch (IOException e) {
+					log.error("=============>发送ATMP数据失败" );
+					e.printStackTrace();
+					context.setData(Constants.PE_HOST_RESP_CD,Constants.PE_30);
+					updateJoural.executeRespond(context);
+				}
+				catch (TransformException e) {
+					log.error("=============>发送ATMP数据组包失败" );
+					e.printStackTrace();
+					context.setData(Constants.PE_HOST_RESP_CD,Constants.PE_30);
+					updateJoural.executeRespond(context);
+				}
+			}
+		}
+/*应答到柜面*/
+		{
+			String Key="TraceNo="+context.getData("TraceNo");
+			LockUtil.unLock(Key, context.getDataMap());
+		}
+		return null; // 返回结果报文
+	}
+
+	/**
+	 * 返回柜面错误报文
+	 * @param formatName
+	 * @param context
+	 * @param message
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private byte[] exceptionProcessor(String formatName, Context context,
+			String message) {
+		log.info("==================>柜面交易异常：" + message);
+		Init.getResponseTransactionID(context);
+		Map<String, Object> outputMap = context.getDataMap();
+		outputMap.put(Constants.PE_MESSAGE_CODE, context.getData(Constants.ISO8583_RESCODE));
+		Map<String, Object> resMap;
+		try {
+			resMap = dzipProcessTemplate.getResp(String.valueOf(context.getData(Constants.ISO8583_RESCODE)));
+			String respname = new String(String.valueOf(resMap.get(Constants.RESPNAME)));
+			outputMap.put(Constants.PE_ERROR_MESSAGE, respname);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			context.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT); // 交易状态
+			updateJoural.execute(context);
+			((TransformerFactory)getTransformerFactory()).setPath(onliPath);//柜面报文路径
+			byte[] responMessage = formatStream(outputMap, formatName, context);// 返回错误报文
+			String msg = new String(responMessage);
+			msg = new String(msg.getBytes(Constants.CHARSET_GBK), Constants.CHARSET_UTF8);
+			log.info("发送到ONLI数据["+ msg +"]");
+			Socket localSocket = getSingleTcpClient().getLocalSocket();
+			if (localSocket.isConnected()) {
+				log.info("==================>ONLI主机：" +localSocket.getInetAddress() +"， 端口：  "+localSocket.getPort());
+				localSocket.getOutputStream().write(responMessage);
+				localSocket.getOutputStream().flush();
+				log.info("==================>数据发送成功");
+			}
+			return null; // 返回结果报文
+		}catch (IOException e) {
+			log.error("=============>发送ONLI数据失败" );
+			e.printStackTrace();
+			context.setData(Constants.PE_HOST_RESP_CD,Constants.PE_30);
+			updateJoural.executeRespond(context);
+		}
+		catch (TransformException e) {
+			log.error("=============>发送ONLI数据组包失败" );
+			e.printStackTrace();
+			context.setData(Constants.PE_HOST_RESP_CD,Constants.PE_30);
+			updateJoural.executeRespond(context);
+		}
+		return null;
+	}
+
+	/**
+	 * @param formatName
+	 * @param outtranid
+	 * @param context
+	 * @param e
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private byte[] exceptionProcessor(String formatName, String outtranid,
+			Context context, String message) {
+		Map outputMap = null;
+		// context.setData(Constants.ISO8583_PRO_CODE, outtranid); //
+		// 将交易码恢复成外部交易码
+		context.setData(Constants.ISO8583_ADDDATA, message); // 将交易码恢复成外部交易码
+		outputMap = context.getDataMap();
+		ISO8583MsgLogUtils.logFormat(outputMap,"返回银联响应报文到ATMP端", log);
+		try {
+			context.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT); // 交易状态
+			updateJoural.execute(context);
+			byte[] responMessage = formatStream(outputMap, formatName, context);// 返回错误报文
+			log.info("发送到ATMP数据["+ new String(responMessage)+"]");
+			Socket localSocket = getSingleTcpClient().getLocalSocket();
+			if (localSocket.isConnected()) {
+				log.info("==================>ATMP主机：" +localSocket.getInetAddress() +"， 端口：  "+localSocket.getPort());
+				localSocket.getOutputStream().write(responMessage);
+				localSocket.getOutputStream().flush();
+				log.info("==================>数据发送成功");
+			}
+			return null; // 返回结果报文
+		}catch (IOException e) {
+			log.error("=============>发送ATMP数据失败" );
+			context.setData(Constants.PE_HOST_RESP_CD,Constants.PE_30);
+			updateJoural.executeRespond(context);
+		}
+		catch (TransformException e) {
+			log.error("=============>发送ATMP数据组包失败" );
+			context.setData(Constants.PE_HOST_RESP_CD,Constants.PE_30);
+			updateJoural.executeRespond(context);
+		}
+		return null;
+	}
+
+	public boolean isDebug() {
+		return debug;
+	}
+
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
+
+
+	public DzipProcessTemplate getDzipProcessTemplate() {
+		return dzipProcessTemplate;
+	}
+
+	public void setDzipProcessTemplate(DzipProcessTemplate dzipProcessTemplate) {
+		this.dzipProcessTemplate = dzipProcessTemplate;
+	}
+
+	public DzipDataProcessor getDataProcessor() {
+		return dataProcessor;
+	}
+
+	public void setDataProcessor(DzipDataProcessor dataProcessor) {
+		this.dataProcessor = dataProcessor;
+	}
+
+
+	public SingleTcpClient getSingleTcpClient() {
+		return singleTcpClient;
+	}
+
+	public void setSingleTcpClient(SingleTcpClient singleTcpClient) {
+		this.singleTcpClient = singleTcpClient;
+	}
+
+	public ActionUtilProcessor getUtilProcessor() {
+		return utilProcessor;
+	}
+
+	public void setUtilProcessor(ActionUtilProcessor utilProcessor) {
+		this.utilProcessor = utilProcessor;
+	}
+
+	public UpdateJoural getUpdateJoural() {
+		return updateJoural;
+	}
+
+	public void setUpdateJoural(UpdateJoural updateJoural) {
+		this.updateJoural = updateJoural;
+	}
+	public DzipVirtualSegment getDzipVirtualSegment() {
+		return dzipVirtualSegment;
+	}
+
+	public void setDzipVirtualSegment(DzipVirtualSegment dzipVirtualSegment) {
+		this.dzipVirtualSegment = dzipVirtualSegment;
+	}
+
+public String getDefaultPath() {
+		return defaultPath;
+	}
+
+	public void setDefaultPath(String defaultPath) {
+		this.defaultPath = defaultPath;
+	}
+
+	public String getOnliFormat() {
+		return onliFormat;
+	}
+
+	public void setOnliFormat(String onliFormat) {
+		this.onliFormat = onliFormat;
+	}
+
+	public String getOnliPath() {
+		return onliPath;
+	}
+
+	public void setOnliPath(String onliPath) {
+		this.onliPath = onliPath;
+	}
+
+/**
+ *
+ * @param b 需要被转换的数据
+ * @return 转换后的结果
+ */
+	public static String byte2Hex(byte[] b) {
+		StringBuffer strBuffer = new StringBuffer();
+		String str = null;
+		for (int n = 0; n < b.length; n++) {
+			str = String.format(("%02x"), b[n]);
+			strBuffer.append(str);
+		}
+		return strBuffer.toString();
+	}
+
+	/**
+	 *
+	 * @param pin
+	 * @return
+	 */
+	public static String toString(byte[] pin) {
+		String s = "";
+		for (int i = 0; i < pin.length; i++) {
+			s += Integer.toHexString(pin[i]);
+		}
+		return s;
+	}
+
+
+	public static String padLeft(int num, String str) {
+		String result = str;
+		while (num > result.length()) {
+			result = "0" + result;
+		}
+		return result;
+
+	}
+}

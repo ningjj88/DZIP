@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-08-23
+-->
+<segment>
+  <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+			    <xmlTag><String name="ReqOrgCd" /></xmlTag><!--受理机构号  -->
+                <xmlTag><String name="CashBoxNbr" /></xmlTag><!--钱箱号  -->
+			    <xmlTag><String name="SysSeqNo"></String></xmlTag><!-- 平台流水号 -->
+				<xmlTag><String name="HostSeqNo"></String></xmlTag><!-- 主机流水号 -->
+				<xmlTag><String name="TranDate"></String></xmlTag><!-- 交易日期 -->
+				<xmlTag><String name="ChannName"></String></xmlTag><!-- 交易渠道 -->
+				<xmlTag><String name="SysTraceNum"></String></xmlTag><!-- 渠道跟踪号 -->
+				<xmlTag><String name="TranStat"></String></xmlTag><!-- 交易状态-->
+				<xmlTag><String name="Credit_Debit"></String></xmlTag><!--交易类型 -->
+				<xmlTag><String name="TranAMT"></String></xmlTag><!-- 交易金额 -->
+				<xmlTag><String name="AcctNo"></String></xmlTag><!-- 卡号 -->
+				<xmlTag><String name="TranDesc"></String></xmlTag><!-- 交易描述-->
+				<xmlTag><String name="RespDesc"></String></xmlTag><!-- 响应吗描述-->
+			</Group>
+		</idxField>
+	</xmlTag>
+	<xmlTag><String name="TotalCount"></String></xmlTag><!--总共笔数 -->
+	<xmlTag><String name="ValidateCount"></String></xmlTag><!--成功 笔数-->
+	<xmlTag><String name="InvalidateCount"></String></xmlTag><!--失败 笔数-->
+	<xmlTag><String name="OtherCount"></String></xmlTag><!--其他笔数-->
+	<xmlTag><String name="TotalAMT"></String></xmlTag><!--总金额 -->
+	<xmlTag><String name="ValidateAMT"></String></xmlTag><!--成功 金额-->
+	<xmlTag><String name="InvalidateAMT"></String></xmlTag><!--失败 金额-->
+	<xmlTag><String name="OtherAMT"></String></xmlTag><!--其他金额-->
+</segment>

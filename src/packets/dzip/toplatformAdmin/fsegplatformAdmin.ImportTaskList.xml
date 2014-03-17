@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-10-19
+-->
+<segment>
+	<segment>
+<xmlTag>
+<idxField name="RecordList" >
+<Group name="RecordMap">
+		<xmlTag><String name="PostDate"></String></xmlTag><!--交易日期-->
+		<xmlTag><String name="TaskName"></String></xmlTag><!--任务名称-->
+		<xmlTag><String name="TaskDesc"></String></xmlTag><!--任务描述-->
+		<xmlTag><String name="TaskSeqNum"></String></xmlTag><!--任务序号-->
+		<xmlTag><String name="TaskStat"></String></xmlTag><!--任务状态-->
+	</Group>
+</idxField>
+</xmlTag>
+</segment>
+
+</segment>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-08-24
+-->
+<segment>
+	<xmlTag><String name="ChannId" /></xmlTag><!--渠道号  -->
+	<xmlTag><String name="TranCd" /></xmlTag><!-- 交易代码-->
+	<xmlTag><String name="TranDesc" /></xmlTag><!-- 交易描述-->
+	<xmlTag><String name="TranStat" /></xmlTag><!-- 交易状态 -->
+</segment>

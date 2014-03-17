@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="GB18030"?>
+<!DOCTYPE Group SYSTEM "packetutf8.dtd">
+<!--
+
+	by xiehai since:2014-01-14
+	响应柜面交易
+-->
+<Group name="Message" xmlHead="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;">
+	<Group name="Head">
+		<xmlTag tagName="_TransactionId" >
+			<String name="_TransactionId" ></String>
+		</xmlTag>
+
+		<xmlTag tagName="IBSTrsTimestamp" >
+			<String name="IBSTrsTimestamp" ></String>
+		</xmlTag>
+
+		<xmlTag tagName="RSPCODE">
+		   <String name="MessageCode" defaultValue="0000"></String>
+		</xmlTag>
+	</Group>
+	<Group name="Body">
+		<include keyName="_TransactionId"></include>
+	</Group>
+</Group>

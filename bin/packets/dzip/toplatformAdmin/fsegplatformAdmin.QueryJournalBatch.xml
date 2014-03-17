@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xujn
+    date 2010-04-23
+-->
+<segment>
+  <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+			    <xmlTag><String name="PostDate"></String></xmlTag><!-- 系统日期 -->
+				<xmlTag><String name="TranTime"></String></xmlTag><!-- 主机交易时间 -->		
+				<xmlTag><String name="AcctNo"></String></xmlTag><!-- 卡号 -->	
+				<xmlTag><String name="TranAMT"></String></xmlTag><!-- 金额-->
+				<xmlTag><String name="Credit_Debit"></String></xmlTag><!-- 交易类型 -->		
+				<xmlTag><String name="RtxnCatCd"></String></xmlTag><!-- 业务性质 -->	
+			    <xmlTag><String name="ChannName"></String></xmlTag><!-- 渠道名称 -->	
+				<xmlTag><String name="TranStat"></String></xmlTag><!-- 交易状态 -->	
+				<xmlTag><String name="HostSeqNo"></String></xmlTag><!-- 主机流水号 -->		
+				<xmlTag><String name="SysSeqNo"></String></xmlTag><!-- 平台流水号 -->	
+			    <xmlTag><String name="HostSeqNoNew"></String></xmlTag><!-- 新主机流水号 -->	
+				<xmlTag><String name="TranStatNew"></String></xmlTag><!-- 新交易状态 -->			
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

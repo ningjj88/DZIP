@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 达州商行本行卡ATM取款冲正交易报文 -->
+<iso8583Packet>
+	<bitMap defaultValue="2,3,4,7,11,12,13,18,22,25,32,33,37,38,41,42,43,49,60,90,121,128" />
+	
+	<include include="8583fields" ></include>
+	
+	<mapAlias name="format">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="SETDATE"  alias="bit15" /><!-- 清算日期 -->
+		<elementAlias name="ACQCODE"  alias="bit32" /><!-- 受理机构标识 -->
+		<elementAlias name="FORWARDCODE"  alias="bit33" /><!--发送机构标识码  -->
+		<elementAlias name="RTVREFNUM"  alias="bit37" /><!-- 检索参考号 -->
+		<elementAlias name="AUTRESCOD"  alias="bit38" /><!-- 预授权码 -->
+		<elementAlias name="CARDACCCODE"  alias="bit42" /><!--受卡方标识码  -->
+		<elementAlias name="CURCODE"  alias="bit49" /> <!--交易货币代码  -->
+		<elementAlias name="REACODE"  alias="bit60" /><!--  自定义域-->
+		<elementAlias name="ORGDATA"  alias="bit90" /><!-- 原始数据元 -->
+		<elementAlias name="RCVCODE"  alias="bit100" /><!--  接收方机构码-->
+		<elementAlias name="NANSCRESERVE"  alias="bit121" /><!--  CUPS 保留-->
+		<elementAlias name="MESAUTHCD"  alias="bit128" /><!-- MAC-->
+	</mapAlias>
+	
+	<mapAlias name="parse">
+	</mapAlias>
+
+</iso8583Packet>

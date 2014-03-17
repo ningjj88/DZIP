@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xujn
+    date 2010-04-23
+-->
+<segment>
+  <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+				<xmlTag><String name="AcquCd"></String></xmlTag><!-- 受理机构标识-->	
+				<xmlTag><String name="TranTime"></String></xmlTag><!-- 交易时间 -->	
+		        <xmlTag><String name="SysTraceNum"></String></xmlTag><!-- 系统跟踪号 -->	
+				<xmlTag><String name="AcctNo"></String></xmlTag><!-- 卡号-->
+			    <xmlTag><String name="TranAMT"></String></xmlTag><!-- 金额 -->						
+			    <xmlTag><String name="PDG1"></String></xmlTag><!-- -受理方收 -->	
+				<xmlTag><String name="PDG2"></String></xmlTag><!-- 对方行收-->		
+				<xmlTag><String name="PDG3"></String></xmlTag><!-- 交换中心收 -->	
+				<xmlTag><String name="PDG4"></String></xmlTag><!-- 银联中心收 -->	
+				<xmlTag><String name="PDG5"></String></xmlTag><!--  手续费收入-->
+		    	<xmlTag><String name="TranCat"></String></xmlTag><!-- 交易类别-->
+			</Group>
+		</idxField>
+	</xmlTag>
+    <xmlTag><String name="TotalCount"></String></xmlTag><!--总共笔数 -->
+	<xmlTag><String name="TotalAMT"></String></xmlTag><!--总金额 -->
+	<xmlTag><String name="TotalPDG1"></String></xmlTag><!--受理方收总金额-->
+	<xmlTag><String name="TotalPDG2"></String></xmlTag><!--对方行收总金额-->
+	<xmlTag><String name="TotalPDG3"></String></xmlTag><!--交换中心总金额-->
+	<xmlTag><String name="TotalPDG4"></String></xmlTag><!--银联中心收总金额-->
+	<xmlTag><String name="TotalPDG5"></String></xmlTag><!--手续费收入总金额-->
+</segment>

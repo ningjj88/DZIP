@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+
+	 add by shengzhoutao
+	 date   2010-08-23
+
+-->
+<sqlMap namespace="pos">
+
+	<!--别名设置-->
+	<typeAlias alias="result" type="java.util.HashMap" />
+	<typeAlias alias="param" type="java.util.HashMap" />
+	<typeAlias alias="integer" type="java.lang.Integer" />
+	<typeAlias alias="integer" type="java.lang.Integer" />
+	<typeAlias alias="bigDecimal" type="java.math.BigDecimal" />
+	<typeAlias alias="date" type="java.util.Date" />
+
+	<!--========================查询账户信息交易，调用核心存储过程 ===================-->
+	 <parameterMap id="SelectAcctInfoParameters" class="param">
+		<parameter property="in_ACCTNO" jdbcType="VARCHAR"  mode="IN" />
+        <parameter property="in_CARDACCTFLAG" jdbcType="INTEGER" mode="IN" />
+        <parameter property="in_MEDIAACCTSEQNO" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_CHKMAGFLAG" jdbcType="INTEGER"   mode="IN" />
+		<parameter property="in_PostDate" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TRACK2" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TRACK3" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_PIN" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_RTXNSOURCECD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TELLERNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_CASHBOXNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_RTXNTYPCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TrackYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_PinYN" jdbcType="CHAR"  mode="IN" />
+	    <parameter property="in_IdenInfo" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_ExpireDate" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TranAMT" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_Trancd" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_AssBusTyp" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="out_AcctStatCd" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_AcctStatDesc" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_AcctNo" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_MjType" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_MiType" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_MjAcctTypCat" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_OpenBrc" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_OpenDate" jdbcType="TIMESTAMP" mode="OUT" />
+		<parameter property="out_BalAmt" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_AvailBalAmt" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_Ccy" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_CrFiag" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_CustomId" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_AcctName" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_CustomType" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_DrawType" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_DueDate" jdbcType="TIMESTAMP" mode="OUT" />
+		<parameter property="out_Address" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_Remark" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_VouType" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_VouNo" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_IdNo" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_IdType" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_IdTypeDesc" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_FrozenFlg" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_MarginFlag" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_MortFlag" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_StopPayFlag" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_StrDate" jdbcType="TIMESTAMP" mode="OUT" />
+		<parameter property="out_TermTyp" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_Term" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_TranLvl" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_EXPIREYEAR" jdbcType="VARCHAR"  mode="OUT" />
+        <parameter property="out_ACCTTYPCD" jdbcType="VARCHAR"  mode="OUT" />
+	    <parameter property="out_RESPONCD" jdbcType="VARCHAR"  mode="OUT" />
+		<parameter property="out_ERRORNBR" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ERRORMSG" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_ORAERRORMSG" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="SelectAcctInfo" parameterMap="SelectAcctInfoParameters" resultClass="result">
+		 { call PACKGEN_CARDZ.PROC_QZ_SELECTACCTINFO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+
+</sqlMap>

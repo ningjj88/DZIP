@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+
+	DZIP 综合前置平台管理配置
+	
+	add by chendshaoqi
+	
+	date 2010-08-23
+
+-->
+<sqlMap namespace="platformAdmin">
+	<!--别名设置-->
+	<typeAlias alias="result" type="java.util.HashMap" />
+	<typeAlias alias="param" type="java.util.HashMap" />
+	<typeAlias alias="integer" type="java.lang.Integer" />
+	<typeAlias alias="string" type="java.lang.String" />
+	<typeAlias alias="bigDecimal" type="java.math.BigDecimal" />
+	<typeAlias alias="date" type="java.util.Date" />
+
+	<!--========================实时监控/查询流水交易表==============================-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="backMapMonitor" class="result">
+	    <result property="ReqOrgCd" column="REQORGCD" />
+	    <result property="CashBoxNbr" column="CASHBOXNBR" />
+	    <result property="RtxnCatCd" column="RTXNCATCD" />
+		<result property="SysSeqNo" column="SYSSEQNO" />
+		<result property="ChannName" column="CDNAME" />
+		<result property="TranTime" column="TRANTIME" />
+		<result property="Credit_Debit" column="CRDB" />
+		<result property="TranAMT" column="TRANAMT" />
+		<result property="TranStat" column="TRANSTAT" />
+		<result property="AcctNo" column="ACCTNO" />
+		<result property="TranDesc" column="TRANDESC" />
+		<result property="RespDesc" column="RESPDESC" />
+	</resultMap>
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="MonitorParam" class="param">
+	    <parameter property="in_RecordNum" jdbcType="INTEGER" javaType="integer" mode="IN" />
+	    
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapMonitor" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="getMonitor" parameterMap="MonitorParam"> 
+		 { call PackGen_PE.GetChannleTranMonitor(?,?,?,?)} 
+	</procedure>
+	
+	
+	<!--********************************渠道信息管理***************************************-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="backMapChannel" class="result">
+		<result property="ChannId" column="CHANNID" />
+		<result property="ChannName" column="CDNAME" />
+		<result property="ChannStat" column="CHANNSTAT" />
+	</resultMap>
+	<!-- ========查询参数集配置=========== -->
+	<parameterMap id="GetChannelParam" class="param">
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapChannel" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<!--========================查询渠道信息==============================-->
+	<procedure id="GetChannel" parameterMap="GetChannelParam"> 
+		 { call PackGen_PE.GetChannel(?,?,?)} 
+	</procedure>
+
+	<!-- ========更改参数集配置=========== -->
+	<parameterMap id="UpdChannelParam" class="param">
+	    <parameter property="in_Channid" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_ChannStat" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_CdName" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapChannel" />
+		<parameter property="out_RowCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<!--========================更改渠道状态==============================-->
+	<procedure id="UpdChannel" parameterMap="UpdChannelParam"> 
+		 { call PackGen_PE.UpdChannel(?,?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!--********************************渠道交易关系管理***************************************-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="backMapChannelTran" class="result">
+		<result property="ChannName" column="CHANNAME" />
+		<result property="ChannId" column="CHANNID" />
+		<result property="TranCd" column="TRANCD" />
+		<result property="TranDesc" column="TRANDESC" />
+		<result property="TranStat" column="TRANSTAT" />
+	</resultMap>
+	<!-- ========查询参数集配置=========== -->
+	<parameterMap id="GetChannelTranParam" class="param">
+	    <parameter property="in_TranCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapChannelTran" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+   <!--========================查询渠道交易关系==============================-->
+	<procedure id="GetChannelTran" parameterMap="GetChannelTranParam"> 
+		 { call PackGen_PE.GetChannelTran(?,?,?,?)} 
+	</procedure>
+    
+    <!-- ========更改参数集配置=========== -->
+	<parameterMap id="UpdChannelTranParam" class="param">
+	    <parameter property="in_TranCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_Channid" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_TranDesc" jdbcType="VARCHAR" javaType="string" mode="IN" />	    
+		<parameter property="in_TranStat" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapChannelTran" />		
+		<parameter property="out_RowCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<!--=======================更改渠道交易关系==============================-->
+	<procedure id="UpdChannelTran" parameterMap="UpdChannelTranParam"> 
+		 { call PackGen_PE.UpdChannelTran(?,?,?,?,?,?,?,?)} 
+	</procedure>
+	
+	
+	<!--*****************************************流水信息查询************************************-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="backMapJournalInfo" class="result">
+	    <result property="ReqOrgCd" column="REQORGCD" />
+	    <result property="CashBoxNbr" column="CASHBOXNBR" />
+		<result property="SysSeqNo" column="SYSSEQNO" />
+		<result property="AuthCd" column="AUTHCD" />
+		<result property="HostSeqNo" column="HSTSEQNO" />
+		<result property="TranDate" column="TRANDATE" />
+		<result property="ChannName" column="CDNAME" />
+		<result property="SysTraceNum" column="SYSTRACENUM" />
+		<result property="TranStat" column="TRANSTAT" />
+		<result property="Credit_Debit" column="CRDB" />
+		<result property="TranAMT" column="TRANAMT" />
+		<result property="AcctNo" column="ACCTNO" />
+		<result property="TranDesc" column="TRANDESC" />
+		<result property="RespDesc" column="RESPDESC" />
+	</resultMap>
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="InqJournalInfoParam" class="param">
+		<parameter property="in_CASHBOXNBR" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	    <parameter property="in_RtxnCatCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_SysSeqNO" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	    <parameter property="in_TranDate" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_Channid" jdbcType="VARCHAR" javaType="string" mode="IN" />   
+		<parameter property="in_TranStat" jdbcType="VARCHAR" javaType="string" mode="IN" />	
+		<parameter property="in_CRDB" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranAMTStart" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranAMTEnd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapJournalInfo" />					
+		<parameter property="out_TotalCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ValidateCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_InvalidateCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_OtherCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />	
+		<parameter property="out_TotalAMT" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ValidateAMT" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_InvalidateAMT" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_OtherAMT" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<!--======================== 流水信息当日查询==============================-->
+	<procedure id="InqJournalInfo" parameterMap="InqJournalInfoParam"> 
+		 { call PackGen_PE.InqJournalInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)} 
+	</procedure>
+	<!--======================== 流水信息历史查询==============================-->
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="InqJournalHistInfoParam" class="param">
+	    <parameter property="in_CASHBOXNBR" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	    <parameter property="in_RtxnCatCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_SysSeqNO" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	    <parameter property="in_TranDateStart" jdbcType="VARCHAR" javaType="string" mode="IN" />  
+	    <parameter property="in_TranDateEnd" jdbcType="VARCHAR" javaType="string" mode="IN" />  
+	    <parameter property="in_Channid" jdbcType="VARCHAR" javaType="string" mode="IN" />   
+		<parameter property="in_TranStat" jdbcType="VARCHAR" javaType="string" mode="IN" />	
+		<parameter property="in_CRDB" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranAMTStart" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranAMTEnd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapJournalInfo" />				
+		<parameter property="out_TotalCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ValidateCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_InvalidateCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_OtherCount" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />	
+		<parameter property="out_TotalAMT" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ValidateAMT" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_InvalidateAMT" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_OtherAMT" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="InqJournalHistInfo" parameterMap="InqJournalHistInfoParam"> 
+		 { call PackGen_PE.InqJournalHistInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!--========================导出流水交易表到批量流水交易表==============================-->
+	<!-- ========结果集配置=========== -->
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="JournalBatchParam" class="param">
+	    <parameter property="in_TRANDATETIME" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_EndDateTime" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_SysSeqNO" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_ExcYN" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="out_MaxDateTime" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="ImportJournalBatch" parameterMap="JournalBatchParam"> 
+		 { call PackGen_PE.ImportJournalBatch(?,?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!--========================查询批量流水交易表==============================-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="backMapBatchParam" class="result">
+	    <result property="PostDate" column="POSTDATE" />
+		<result property="TranTime" column="LASTUPDTIME" />
+		<result property="AcctNo" column="ACCTNO" />
+		<result property="TranAMT" column="TRANAMT" />
+		<result property="Credit_Debit" column="CRDB" />	
+		<result property="RtxnCatCd" column="RTXNCATCD" />
+		<result property="ChannName" column="CDNAME" />
+		<result property="TranStat" column="TRANSTAT" />
+		<result property="HostSeqNo" column="HSTSEQNO" />	
+		<result property="SysSeqNo" column="SYSSEQNO" />
+		<result property="HostSeqNoNew" column="HSTSEQNONEW" />
+		<result property="TranStatNew" column="TRANSTATNEW" />			
+	</resultMap>
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="JournalBatchParam" class="param">
+	    <parameter property="in_RtxnCatCd" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	   	<parameter property="in_CRDB" jdbcType="VARCHAR" javaType="string" mode="IN" />  
+	   	<parameter property="in_TranStat" jdbcType="VARCHAR" javaType="string" mode="IN" />	
+	    <parameter property="in_Channid" jdbcType="VARCHAR" javaType="string" mode="IN" />   
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapBatchParam" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="QueryJournalBatch" parameterMap="JournalBatchParam"> 
+		 { call PackGen_PE.QueryJournalBatch(?,?,?,?,?,?,?)} 
+	</procedure>
+	<!--========================查询批量流水交易表==============================-->
+	<resultMap id="MapBatchParam" class="result">
+		<result property="TransSeqnNo" column="TRANSEQNO"/>
+		<result property="RtxnTypCd" column="RTXNTYPCD"/>
+		<result property="OrgNbr" column="ORGNBR"/>
+		<result property="GlAcctTitlrNbr" column="GLACCTTITLENBR"/>
+	</resultMap>
+	<select id="QueryJourBatch" resultMap="MapBatchParam" parameterClass="param">
+		select TRANSEQNO,trim(RTXNTYPCD) RTXNTYPCD,ORGNBR,GLACCTTITLENBR
+		from rtxnchalparam t
+		where RTXNSOURCECD=#RtxnSourceCd#
+		and RTXNCATCD=#RtxnCatCd#          
+		and TRANCD= #TranCd# 
+		order by TRANSEQNO ASC
+	</select>
+	
+  <!--========================通存通兑流水表==============================-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="depAndWthParam" class="result">
+	    <result property="OrgNo" column="ORGNO" />
+		<result property="PersNo" column="PERSNO" />
+		<result property="CashBoxNo" column="CASHBOXNBR" />
+		<result property="AcquCd" column="REQORGCD" />
+		<result property="MsgType" column="MSGTYP" />	
+		<result property="AcctNo" column="ACCTNO" />
+		<result property="TranCat" column="TRANCAT" />
+		<result property="Credit_Debit" column="CRDB" />	
+		<result property="MerType" column="MERTYPE" />
+		<result property="TranAMT" column="TRANAMT" />
+		<result property="ATMFee" column="ATMFEE" />	
+		<result property="POSFee" column="POSFEE" />
+		<result property="TranStat" column="TRANSTAT" />
+		<result property="CancelID" column="CANCELID" />	
+		<result property="TranTime" column="TRANTIME" />
+		<result property="SysTraceNum" column="SYSTRACENUM" />
+		<result property="AuditFlag" column="AUDITFLAG" />			
+	</resultMap>
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="JournalBatchParam" class="param">
+	    <parameter property="in_RtxnCatCd" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	   	<parameter property="in_PostDate" jdbcType="VARCHAR" javaType="string" mode="IN" />  
+	   	<parameter property="in_TranStat" jdbcType="VARCHAR" javaType="string" mode="IN" />	
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="depAndWthParam" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="GetDepAndWthJournal" parameterMap="JournalBatchParam"> 
+		 { call PackGen_PE.GetDepAndWthJournal(?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!--========================成商对账文件导出==============================-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="AuditDetailParam" class="result">
+		<result property="AcquCd" column="ACQU" />
+		<result property="TranTime" column="TRANTIME" />	
+		<result property="SysTraceNum" column="TRAC" />
+		<result property="AcctNo" column="ACCTNO" />
+		<result property="TranAMT" column="TRANAMT" />
+		<result property="PDG1" column="PDG1" />	
+		<result property="PDG2" column="PDG2" />
+		<result property="PDG3" column="PDG3" />
+		<result property="PDG4" column="PDG4" />	
+		<result property="PDG5" column="PDG5" />
+		<result property="TranCat" column="TRANCAT" />		
+	</resultMap>
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="JCKAuditDetailParam" class="param">
+	   	<parameter property="in_PostDate" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	   	<parameter property="in_Flag" jdbcType="VARCHAR" javaType="string" mode="IN" />    
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="AuditDetailParam" />
+		<parameter property="out_TotalCount" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_TotalAMT" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_TotalPDG1" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_TotalPDG2" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_TotalPDG3" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_TotalPDG4" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_TotalPDG5" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="GetJCKAuditDetail" parameterMap="JCKAuditDetailParam"> 
+		 { call PackGen_PE.GetJCKAuditDetail(?,?,?,?,?,?,?,?,?,?,?,?)} 
+	</procedure>
+	
+    <!--========================获得手续费规则信息==============================-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="backMapFeeCodex" class="result">
+	    <result property="BusiCd" column="BUSICD" />
+	    <result property="BusiTyp" column="BUSITYP" />
+	    <result property="BusiDesc" column="BUSIDESC" />
+		<result property="Decdigit" column="DECDIGIT" />
+		<result property="DownLine" column="DOWNLINE" />
+		<result property="UpLine" column="UPLINE" />
+		<result property="Arithmetic" column="ARITHMETIC" />
+	</resultMap>
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="FeeCodexParam" class="param"> 
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapFeeCodex" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="GetFeeCodex" parameterMap="FeeCodexParam"> 
+		 { call PackGen_PE.GetFeeCodex(?,?,?)} 
+	</procedure>
+	
+	 <!--========================手续费规则维护==============================-->
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="ManFeeCodexParam" class="param"> 
+		<parameter property="in_BusiCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_BusiTyp" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_BusiDesc" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_Decdigit" jdbcType="VARCHAR" javaType="string" mode="IN" />  
+		<parameter property="in_DownLine" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_UpLine" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_Arithmetic" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_Flag" jdbcType="VARCHAR" javaType="string" mode="IN" /> 
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="ManagementFeeCodex" parameterMap="ManFeeCodexParam"> 
+		 { call PackGen_PE.ManagementFeeCodex(?,?,?,?,?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!--========================银联品牌服务费==============================-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="SvChDetailParam" class="result">
+		<result property="AcquCd" column="ACQU" />
+		<result property="TranTime" column="TRANTIME" />	
+		<result property="SysTraceNum" column="TRAC" />
+		<result property="AcctNo" column="ACCTNO" />
+		<result property="TranAMT" column="TRANAMT" />
+		<result property="PDG1" column="PDG1" />	
+		<result property="PDG2" column="PDG2" />
+		<result property="TranCat" column="TRANCAT" />		
+	</resultMap>
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="BrandSvChDetailParam" class="param">
+	   	<parameter property="in_PostDate" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	   	<parameter property="in_Flag" jdbcType="VARCHAR" javaType="string" mode="IN" />    
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="SvChDetailParam" />
+		<parameter property="out_TotalCount" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_TotalPDG1" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_TotalPDG2" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="GetBrandSvChDetail" parameterMap="BrandSvChDetailParam"> 
+		 { call PackGen_PE.GetBrandSvChDetail(?,?,?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!--========================获得渠道类型交易==============================-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="channelTypTranParam" class="result">
+		<result property="RegionRangeFlag" column="REGIONRANGEFLAG" />
+		<result property="RegionCd" column="REGIONCD" />	
+		<result property="BusTypDesc" column="BUSTYPDESC" />
+		<result property="ChannelTypDesc" column="CHANNELTYPDESC" />
+		<result property="TranDesc" column="TRANDESC" />
+		<result property="OpenYN" column="OPENYN" />	
+		<result property="TranLLimitAmt" column="TRANLLIMITAMT" />
+		<result property="DailyTranLLimitAmt" column="DAILYTRANLLIMITAMT" />
+		<result property="DailyLimitTranCnt" column="DAILYLIMITTRANCNT" />
+		<result property="AcctSrcDailyLimittCnt" column="ACCTSRCDAILYLIMITTERRORCNT" />		
+	</resultMap>
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="GetChannelTypTranParam" class="param"> 
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="channelTypTranParam" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="GetChannelTypTran" parameterMap="GetChannelTypTranParam"> 
+		 { call PackGen_PE.GetChannelTypTran(?,?,?)} 
+	</procedure>
+	
+	<!-- ========更改参数集配置=========== -->
+	<parameterMap id="UpdChannelTypTranParam" class="param">
+	    <parameter property="in_OutsideFlag" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_RegionCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_BusiTyp" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_ChannelTypCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_Flag" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_TranLLimitAmt" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_DailyTranLLimitAmt" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_DailyLimitTranCnt" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_AcctSrcDailyLimittCnt" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<!--========================更改渠道类型交易==============================-->
+	<procedure id="UpdChannelTypTran" parameterMap="UpdChannelTypTranParam"> 
+		 { call PackGen_PE.UpdChannelTypTran(?,?,?,?,?,?,?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!--********************************渠道类型管理***************************************-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="backMapChannelTyp" class="result">
+		<result property="ChannId" column="CHANNID" />
+	    <result property="ChannName" column="CHANNAME" />
+		<result property="ChannelTypCd" column="CHANNELTYPCD" />
+		<result property="ChannelTypDesc" column="CHANNELTYPDESC" />
+		<result property="ChannelTypStat" column="CHANNELTYPSTAT" />
+	</resultMap>
+	<!-- ========查询参数集配置=========== -->
+	<parameterMap id="GetChannelTypParam" class="param">
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapChannelTyp" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+   <!--========================查询渠道类型==============================-->
+	<procedure id="GetChannelTyp" parameterMap="GetChannelTypParam"> 
+		 { call PackGen_PE.GetChannelTyp(?,?,?)} 
+	</procedure>
+    
+    <!-- ========更改参数集配置=========== -->
+	<parameterMap id="UpdChannelTypParam" class="param">
+	    <parameter property="in_Channid" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_ChannelTypCd" jdbcType="VARCHAR" javaType="string" mode="IN" />	    
+		<parameter property="in_ChannelTypStat" jdbcType="VARCHAR" javaType="string" mode="IN" />	
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<!--=======================更改渠道类型==============================-->
+	<procedure id="UpdChannelTyp" parameterMap="UpdChannelTypParam"> 
+		 { call PackGen_PE.UpdChannelTyp(?,?,?,?,?)} 
+	</procedure>
+</sqlMap>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+<!-- 他行ATM无卡存款交易请求报文发到银联  -->
+<iso8583Packet>
+	<bitMap defaultValue="2,3,4,7,11,12,13,14,18,22,25,26,32,33,37,41,42,43,48,49,60,61,122,128" />
+	<include include="i8583fields" ></include>
+	<mapAlias name="format">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="EXPDAT"  alias="bit14" /> <!--卡有效期  -->
+		<elementAlias name="SERCAPCODE"  alias="bit26" /><!--服务点PIN获取码  -->
+		<elementAlias name="ADDDATAPRI"  alias="bit48" /><!--附加数据 -->
+	    <elementAlias name="IDENNUMBE"  alias="bit61" /> <!--证件编号-->
+	    <elementAlias name="ACQRESERVE"  alias="bit122" /><!--  CUPS 保留-->
+	    <elementAlias name="MESAUTHCD"  alias="bit128" /><!--  MAC-->
+	</mapAlias>
+</iso8583Packet>

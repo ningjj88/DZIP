@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 引入的外部属性文件 -->
+	<property resource="config/peconfigdev.properties" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{ISO8601} %t %-5p [%c] %m%n</pattern>
+		</layout>
+	</appender>
+	<!-- Perf4J appenders -->
+    <!--
+       This AsyncCoalescingStatisticsAppender groups StopWatch log messages
+       into GroupedTimingStatistics messages which it sends on the
+       file appender defined below
+    -->
+	<appender name="CoalescingStatistics" class="org.perf4j.logback.AsyncCoalescingStatisticsAppender">
+        <!--
+          The TimeSlice option is used to determine the time window for which
+          all received StopWatch logs are aggregated to create a single
+          GroupedTimingStatistics log. Here we set it to 10 seconds, overriding
+          the default of 30000 ms
+        -->
+		<param name="TimeSlice" value="30000" />
+		<appender-ref ref="PERF" />
+	</appender>
+    <appender name="PERF" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<file>${log.path}.perf.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}-%d{yyyy-MM}.%i.perf.zip</fileNamePattern>
+			<maxHistory>12</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
+			    <!-- or whenever the file size reaches 10MB --> 
+			    <maxFileSize>8MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{ISO8601} %t [%c] %m%n</pattern>
+		</layout>
+	</appender>
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<file>${log.path}.debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}-%d{yyyy-MM-dd}.%i.debug.zip</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
+			    <!-- or whenever the file size reaches 10MB --> 
+			    <maxFileSize>8MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{ISO8601} %t %-5p [%c] %m%n</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+		</filter>
+	</appender>
+	<appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<file>${log.path}.info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}-%d{yyyy-MM-dd}.%i.info.zip</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
+			    <!-- or whenever the file size reaches 10MB --> 
+			    <maxFileSize>8MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{ISO8601} %t %-5p [%c] %m%n</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+	</appender>
+	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<file>${log.path}.error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}-%d{yyyy-MM}.%i.error.zip</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
+			    <!-- or whenever the file size reaches 10MB --> 
+			    <maxFileSize>8MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{ISO8601} %t %-5p [%c] %m%n</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+	</appender>
+	<!-- Loggers -->
+    <!--
+      The Perf4J logger. Note that org.perf4j.TimingLogger is the value of the
+      org.perf4j.StopWatch.DEFAULT_LOGGER_NAME constant. Also, note that
+      additivity is set to false, which is usually what is desired - this means
+      that timing statements will only be sent to this logger and NOT to
+      upstream loggers.
+    -->
+	<logger name="org.perf4j.TimingLogger" additivity="false">
+		<appender-ref ref="PERF" />
+	</logger>
+	<root>
+		<level value="${log.root.level}" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DEBUG" />
+		<appender-ref ref="INFO" />
+		<appender-ref ref="ERROR" />
+	</root>
+</configuration>

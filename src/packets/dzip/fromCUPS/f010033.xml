@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 帐号验证交易报文 -->
+<iso8583Packet  >
+	<bitMap defaultValue="2,3,7,11,12,13,14,18,22,23,25,26,32,33,35,36,37,41,42,43,48,49,60,61,122,128" />
+	<include include="i8583fields" ></include>
+	<mapAlias name="format">	
+        <elementAlias name="EXPDAT"  alias="bit14"/><!--卡有效期  -->
+        <elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+		<elementAlias name="SERCAPCODE"  alias="bit26" /><!--服务点PIN获取码  -->
+		<elementAlias name="TRACK2DATA"  alias="bit35" /><!-- 第二磁道数据 -->
+		<elementAlias name="TRACK3DATA"  alias="bit36" /> <!--第 三磁道数据  -->	
+		<elementAlias name="ADDDATAPRI"  alias="bit48" /> <!--附加数据－私有  -->
+		<elementAlias name="IDENNUMBE"  alias="bit61" /><!--  持卡人身份认证信息-->
+		<elementAlias name="ACQRESERVE"  alias="bit122" /> <!-- 受理方保留-->
+		<elementAlias name="MESAUTHCD"  alias="bit128" /><!-- MAC-->
+	</mapAlias>
+	<mapAlias name="parse">
+	</mapAlias>
+</iso8583Packet>

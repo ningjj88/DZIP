@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xujin
+    date 2010-04-23
+-->
+<segment>
+  <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+			    <xmlTag><String name="SysSeqNo"></String></xmlTag><!-- 平台流水号 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+
+<!-- 他行非指定账户转入圈存 -->
+<mapAlias name="parse">
+	<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+	<elementAlias name="EXPDAT"  alias="bit14" /><!-- 卡有效期 -->
+	<elementAlias name="SETDATE"  alias="bit15" /><!-- 清算日期 -->
+	<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+	<elementAlias name="IC_PBOC_DATA_RESVD" alias="bit58" /><!-- 58# 基于PBOC电子钱包/存折IC卡标准的交易数据 -->
+	<elementAlias name="IDENNUMBE"  alias="bit61" /><!--  持卡人身份认证信息-->
+	<elementAlias name="RCVCODE"  alias="bit100" /> <!-- 接收方机构码-->
+	<elementAlias name="ACCIDEN1"  alias="bit102" /> <!--账户标识1 -->
+	<elementAlias name="ACCIDEN2"  alias="bit103" /><!-- 账户标识2 -->
+	<elementAlias name="NANSCRESERVE"  alias="bit121" /><!--  CUPS 保留-->
+	<elementAlias name="MESAUTHCD"  alias="bit128" /><!-- MAC-->
+</mapAlias>

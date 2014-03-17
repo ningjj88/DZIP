@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/dzip/core
+END
+DzipVirtualSegment.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dzip/!svn/ver/265/DZIP_NEWDEDV/src/csii/dzip/core/DzipVirtualSegment.java
+END
+CUPS8583Handler.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/CUPS8583Handler.java
+END
+TripleDES_MD5.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/TripleDES_MD5.java
+END
+XMLPacket4ProcedureParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/XMLPacket4ProcedureParser.java
+END
+JNative4CapDes.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/JNative4CapDes.java
+END
+ISO8583Handler_temp.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/ISO8583Handler_temp.java
+END
+CUPSHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/CUPSHandler.java
+END
+InitData4Dzip.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/csii/dzip/core/InitData4Dzip.java
+END
+DzipJinCheng2HostTransport.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/DzipJinCheng2HostTransport.java
+END
+JCKResponse4ATMHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/119/DZIP_NEWDEDV/src/csii/dzip/core/JCKResponse4ATMHandler.java
+END
+Errors.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/csii/dzip/core/Errors.java
+END
+CUPSResponse4ATMHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/dzip/core/CUPSResponse4ATMHandler.java
+END
+ISO8583Handler.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dzip/!svn/ver/280/DZIP_NEWDEDV/src/csii/dzip/core/ISO8583Handler.java
+END
+DzipToCUPSTransport.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/dzip/core/DzipToCUPSTransport.java
+END
+Dict.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/dzip/!svn/ver/296/DZIP_NEWDEDV/src/csii/dzip/core/Dict.java
+END
+JinchengHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/JinchengHandler.java
+END
+XML2ISO8583Handler.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dzip/!svn/ver/280/DZIP_NEWDEDV/src/csii/dzip/core/XML2ISO8583Handler.java
+END
+CUPS8583Handler_temp.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/CUPS8583Handler_temp.java
+END
+FixedLength8583Handler.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/FixedLength8583Handler.java
+END
+Encrypt4Des3.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/Encrypt4Des3.java
+END
+FixedLength8583Processor.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/FixedLength8583Processor.java
+END
+DictGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/DictGenerator.java
+END
+Decrypt4Des.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/Decrypt4Des.java
+END
+JCKHandler_temp.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/core/JCKHandler_temp.java
+END

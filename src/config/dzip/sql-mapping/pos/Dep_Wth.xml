@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+
+	POS交易
+	
+	by chenshaoqi since:2010-08-05
+
+-->
+<sqlMap namespace="pos">	
+    <!-- =========================达州商行存/取款验证交易 =========================-->
+ 	<parameterMap id="Val_DepWth_Parameters" class="param">
+		<parameter property="in_ONLINEYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_AVAILMETHCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_RTXNTYPCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_FUNDTYPARRAYSIZE" jdbcType="INTEGER"  mode="IN" />
+		<parameter property="in_FUNDTYPCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_FUNDTYPDTLCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_CLEARCATCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_NBROFITEMS" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_FUNDSAMT"  jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_BALCATARRAYSIZE" jdbcType="INTEGER" mode="IN" />
+		<parameter property="in_BALCATCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_BALTYPCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_BALAMT" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_ACCTNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_DEPFLAG" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_PIN" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_ATMYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_ORIGPERSNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_CASHBOXNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_EFFDATE" jdbcType="DATE" mode="IN" />
+		<parameter property="in_DEBUGYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_GENTOTAL" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_REGDYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_ISVOUCHER" jdbcType="CHAR"  mode="IN" />
+		
+		<parameter property="out_RESPONCD" jdbcType="VARCHAR"  mode="OUT" />
+		<parameter property="out_ERRORNBR" jdbcType="INTEGER"  mode="OUT" />
+		<parameter property="out_ERRORMSG" jdbcType="VARCHAR"  mode="OUT" />	
+		<parameter property="out_ORAERRORMSG" jdbcType="VARCHAR"  mode="OUT" />
+	</parameterMap>
+	<procedure id="Val_DepWth" parameterMap="Val_DepWth_Parameters" resultClass="result">
+	{ call PACKGEN_CARDZ.varifyDepwth(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+	
+	<!-- ============================确定交易是否需要补录 ==================================-->
+ 	<parameterMap id="ConfirmDepositParameters" class="param">
+ 	    <parameter property="in_PreFlag" jdbcType="VARCHAR" javaType="string"  mode="IN" />
+		<parameter property="in_TRACENBR" jdbcType="VARCHAR" javaType="string"  mode="IN" />
+		<parameter property="in_EFFDATE" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_RTXNSTATCD" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_RtxnCatCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="out_DepositSuccYN" jdbcType="VARCHAR"  javaType="string"  mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />	
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR"  javaType="string"  mode="OUT" />	
+	</parameterMap>
+	<procedure id="ComfirmBatchRtxn" parameterMap="ConfirmDepositParameters" resultClass="result"> 
+		 { call PACKGEN_PE_BAT_DEPOSIT.PROC_PE_BAT_COMFIRMRTXN(?,?,?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!-- ==================存取款 =========================================-->
+ 	<parameterMap id="DepWth_Parameters" class="param">
+		<parameter property="in_ORGNBR" jdbcType="VARCHAR" mode="IN" />             
+		<parameter property="in_CARDACCTFLAG" jdbcType="INTEGER"  mode="IN" />      
+		<parameter property="in_FUNDTYPARRAYSIZE" jdbcType="INTEGER"  mode="IN" />  
+		<parameter property="in_FUNDTYPCD" jdbcType="VARCHAR"  mode="IN" />         
+		<parameter property="in_FUNDTYPDTLCD" jdbcType="VARCHAR"  mode="IN" />      
+		<parameter property="in_CLEARCATCD" jdbcType="VARCHAR"  mode="IN" />        
+		<parameter property="in_NBROFITEMS" jdbcType="VARCHAR"  mode="IN" />        
+		<parameter property="in_FUNDSAMT" jdbcType="VARCHAR"  mode="IN" />          
+		<parameter property="in_BALCATARRAYSIZE" jdbcType="INTEGER"  mode="IN" />   
+		<parameter property="in_BALCATCD" jdbcType="VARCHAR"  mode="IN" />          
+		<parameter property="in_BALTYPCD" jdbcType="VARCHAR"  mode="IN" />          
+		<parameter property="in_BALAMT" jdbcType="VARCHAR"  mode="IN" />            
+		<parameter property="in_ACCTNBR" jdbcType="VARCHAR"  mode="IN" />       
+		<parameter property="in_PARENTACCTNBR" jdbcType="VARCHAR" mode="IN" />      
+		<parameter property="in_PARENTRTXNNBR" jdbcType="VARCHAR"  mode="IN" />    
+		<parameter property="in_PARENTRTXNTYPCD" jdbcType="VARCHAR"  mode="IN" />   
+		<parameter property="in_CASHBOXNBR" jdbcType="VARCHAR"  mode="IN" />        
+		<parameter property="in_RTXNTYPCD" jdbcType="VARCHAR"  mode="IN" />        
+		<parameter property="in_INITIALCARDNBR" jdbcType="VARCHAR"  mode="IN" />    
+		<parameter property="in_TRACENBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_EFFDATE" jdbcType="VARCHAR"  mode="IN" />              
+		<parameter property="in_ORIGPERSNBR" jdbcType="VARCHAR"  mode="IN" />       
+		<parameter property="in_ORIGNTWKNODENBR" jdbcType="VARCHAR"  mode="IN" />		
+		<parameter property="in_RTXNSTATCD" jdbcType="VARCHAR"  mode="IN" />        
+		<parameter property="in_RTXNSOURCECD" jdbcType="VARCHAR"  mode="IN" />   
+		<parameter property="in_RTXNREASONCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_ORIGTRACKNBR" jdbcType="VARCHAR"  mode="IN" />     
+		<parameter property="in_POSTYN" jdbcType="CHAR"  mode="IN" />							  
+		<parameter property="in_COMMITYN" jdbcType="CHAR"  mode="IN" />             
+		<parameter property="in_DEBUGYN" jdbcType="CHAR"  mode="IN" />              
+		<parameter property="in_CASHANALYSISCD" jdbcType="VARCHAR"  mode="IN" /> 
+		<parameter property="in_OrigPostDate" jdbcType="VARCHAR"  mode="IN" />  
+		<parameter property="in_TxnSeqNbr" jdbcType="INTEGER"  mode="IN" />  
+		<parameter property="out_POSTDATE" jdbcType="CHAR"  mode="OUT" />     
+		<parameter property="out_ACCTNO" jdbcType="VARCHAR"  mode="OUT" />      
+		<parameter property="out_RTXNNBR" jdbcType="VARCHAR"  mode="OUT" />         
+		<parameter property="out_ERRORNBR" jdbcType="INTEGER"  mode="OUT" />        
+		<parameter property="out_ERRORMSG" jdbcType="VARCHAR"  mode="OUT" />	      
+		<parameter property="out_ORAERRORMSG" jdbcType="VARCHAR"  mode="OUT" />	    
+	</parameterMap>
+	<procedure id="Batch_DepWth" parameterMap="DepWth_Parameters" resultClass="result">
+		{ call PACKGEN_PE_BAT_DEPOSIT.PROC_PE_BAT_DEPOSITTXN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}  
+	</procedure>
+	<!-- ==================验证+存取款 =========================================-->
+ 	<parameterMap id="deposittxn_Parameters" class="param">
+ 		<parameter property="in_ORGNBR" jdbcType="VARCHAR" mode="IN" />
+ 		<parameter property="in_CARDACCTFLAG" jdbcType="INTEGER"  mode="IN" />
+ 		<parameter property="in_MEDIAACCTSEQNO" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_FUNDTYPARRAYSIZE" jdbcType="INTEGER"  mode="IN" />
+		<parameter property="in_FUNDTYPCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_FUNDTYPDTLCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_CLEARCATCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_NBROFITEMS" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_FUNDSAMT" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_BALCATARRAYSIZE" jdbcType="INTEGER"  mode="IN" />
+ 		<parameter property="in_BALCATCD" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_BALTYPCD" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_BALAMT" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_ACCTNBR" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_DEPFLAG" jdbcType="CHAR"  mode="IN" />
+ 		<parameter property="in_PARENTACCTNBR" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_PARENTRTXNNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_PARENTRTXNTYPCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_CASHBOXNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_RTXNTYPCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_RTXNNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_INITIALCARDNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TRACENBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_EFFDATE" jdbcType="DATE"  mode="IN" />
+		<parameter property="in_ORIGPERSNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_ORIGNTWKNODENBR" jdbcType="VARCHAR"  mode="IN" />		
+		<parameter property="in_RTXNSTATCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_RTXNSOURCECD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_POSTYN" jdbcType="CHAR"  mode="IN" />							
+ 		<parameter property="in_COMMITYN" jdbcType="CHAR"  mode="IN" />
+ 		<parameter property="in_PIN" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_ORIGTRACKNBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_OrigPostDate" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_TRACK2" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_ONLINEYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_AVAILMETHCD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_GENTOTAL" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_REGDYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_ISVOUCHER" jdbcType="CHAR"  mode="IN" />
+ 		<parameter property="in_DEBUGYN" jdbcType="CHAR"  mode="IN" />
+ 		<parameter property="in_CASHANALYSISCD" jdbcType="VARCHAR"  mode="IN" />
+ 		<parameter property="in_VOUHTYPE" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_VOUHNO" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_GENRTXNARRAYSIZE" jdbcType="INTEGER" mode="IN" />
+		<parameter property="in_GENRTXNTYPCD" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_GENRTXNAMT" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_GENRTXNPROCESSYN" jdbcType="CHAR" mode="IN" />
+		<parameter property="in_GENTOTALF" jdbcType="CHAR" mode="IN" />
+		<parameter property="in_REVFLAG" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_TrackYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_PinYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_IdenInfo" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_ExpireDate" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TxnSeqNbr" jdbcType="INTEGER"  mode="IN" />
+		<parameter property="out_EXPIREYEAR" jdbcType="VARCHAR"  mode="OUT" />
+        <parameter property="out_ACCTTYPCD" jdbcType="VARCHAR"  mode="OUT" />
+        <parameter property="out_BalAmt" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_AvailBalAmt" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_POSTDATE" jdbcType="VARCHAR"  mode="OUT" />
+        <parameter property="out_RTXNNBR" jdbcType="VARCHAR"  mode="OUT" />
+        <parameter property="out_ACCTNO" jdbcType="VARCHAR"  mode="OUT" />
+        <parameter property="out_AcctName" jdbcType="VARCHAR" mode="OUT" />
+        <parameter property="out_RESPONCD" jdbcType="VARCHAR"  mode="OUT" />
+		<parameter property="out_ERRORNBR" jdbcType="INTEGER"  mode="OUT" />
+		<parameter property="out_ERRORMSG" jdbcType="VARCHAR"  mode="OUT" />	
+		<parameter property="out_ORAERRORMSG" jdbcType="VARCHAR"  mode="OUT" />	
+	</parameterMap>
+	<procedure id="deposittxn" parameterMap="deposittxn_Parameters" resultClass="result">
+	{ call PACKGEN_CARDZ.qz_deposittxn(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+	
+	<!-- ==================存款确认 =========================================-->
+	<parameterMap id="confirmDeposit_Parameters" class="param">
+		<parameter property="in_OrigSysTraceNum" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_OrigSysDateTime" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_OrigAcquIdCd" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_OrigForwardIdCd" jdbcType="VARCHAR"  mode="IN" />
+		
+		<parameter property="out_DepositSuccYN" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="NUMERIC"   mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR"   mode="OUT" />	
+	</parameterMap>
+	<procedure id="confirmDeposit" parameterMap="confirmDeposit_Parameters" resultClass="result">
+	{ call PACKGEN_Rz.confirmDeposit(?,?,?,?,?,?,?)}
+	</procedure>
+	<!-- ==================获取授权异常信息 =========================================-->
+ 
+	<resultMap id="backMapGetRtxnExcp" class="result">
+		<result property="RtxnExcpNbr" column="rtxnexcpnbr" />
+		<result property="RtxnExcpDesc" column="rtxnexcpdesc" />
+		<result property="OnlineOverrideYN" column="onlineoverrideyn" />
+		<result property="ApprAuthCD" column="apprauthcd" />
+		<result property="RejectOfflineYN" column="rejectofflineyn" />
+		<result property="IntrUseYN" column="intruseyn" />
+		<result property="NoticeYN" column="noticeyn" />
+		<result property="CriticalRepairYN" column="criticalrepairyn" />
+		<result property="Priority" column="priority" />
+		<result property="PocketNbr" column="pocketnbr" />
+		<result property="ServiceChargeYN" column="servicechargeyn" />
+		<result property="OnYN" column="onyn" />
+		<result property="RejecteTranYN" column="rejectetranyn" />
+		<result property="DescTokenNbr" column="desctokennbr" />
+		<result property="DescNameSpaceCD" column="descnamespacecd" />
+		<result property="DateLastMaint" column="datelastmaint" />
+	</resultMap>
+	<parameterMap id="GetRtxnExcp_Parameters" class="param">
+		<parameter property="in_RtxnExcpNbr" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_FetchOptions" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_CultureCd" jdbcType="VARCHAR"  mode="IN" />
+		
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapGetRtxnExcp" />
+		<parameter property="out_ErrorNbr" jdbcType="NUMERIC"   mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR"   mode="OUT" />	
+	</parameterMap>
+	<procedure id="GetRtxnExcp" parameterMap="GetRtxnExcp_Parameters" resultClass="result">
+	{ call PACKGEN_Rz.GETRtxnExcp(?,?,?,?,?,?)}
+	</procedure>
+	<!--==============================返回消息类型=====================-->
+	<resultMap id="inprocd" class="result">
+		<result property="respmsgtyp" column="RESPMSGTYP"/>
+	</resultMap>
+	<select id="queryResMsgTyp" resultMap="inprocd" parameterClass="string">
+	select distinct RESPMSGTYP from t_outinprocd where MSGTYP=#MsgType#
+	</select>
+	
+    <!-- ========更新电子钱包余额=========== -->
+	<parameterMap id="getICEWALLETCTLParam" class="param">
+		<parameter property="in_mediumId" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_TranCd" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_amt" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_RESPONCD" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_ERRORNBR" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ERRORMSG" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="updICEWALLETCTL" parameterMap="getICEWALLETCTLParam"> 
+		{call PACKGEN_CARDZ.Proc_updICEWALLETCTL(?,?,?,?,?,?)} 
+	</procedure>
+	
+	<!-- ========查询电子钱包余额=========== -->
+	<parameterMap id="QueryICEWALLETCTLParam" class="param">
+		<parameter property="in_mediumId" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_BalAmt" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_ERRORNBR" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ERRORMSG" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="QueryICEWALLETCTL" parameterMap="QueryICEWALLETCTLParam"> 
+		{call PACKGEN_CARDZ.Proc_QeuryICEWALLETCTL(?,?,?,?)} 
+	</procedure>
+</sqlMap>

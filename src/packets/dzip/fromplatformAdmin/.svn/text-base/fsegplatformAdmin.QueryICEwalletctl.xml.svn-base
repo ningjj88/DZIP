@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by longt
+    date 2013-10-09
+    function IC卡电子钱包余额查询
+-->
+<segment>
+	<xmlTag><String name="AcctNo" /></xmlTag><!-- 卡号-->
+</segment>

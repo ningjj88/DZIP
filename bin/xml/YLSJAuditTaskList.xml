@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<YLSJAuditTaskList>
+	<Task TaskName ="FTPFILE" TaskSeqNum="1" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="0" TaskNextSeqNum="2" TaskDesc="下载银联数据对账文件" />
+	<Task TaskName ="LOADCHALREC" TaskSeqNum="2" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="1" TaskNextSeqNum="3" TaskDesc="将银联数据对账文件导入银联数据流水表" />
+	<Task TaskName ="LOADCOREREC" TaskSeqNum="3" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="2" TaskNextSeqNum="4" TaskDesc="当日核心交易流水导入" />
+	<Task TaskName ="CHECKPECORE" TaskSeqNum="4" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="3" TaskNextSeqNum="5" TaskDesc="前置流水与核心流水核对 " />
+	<Task TaskName ="CHECKPECHAL" TaskSeqNum="5" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="4" TaskNextSeqNum="" TaskDesc="前置流水与银联数据流水核对" />
+</YLSJAuditTaskList>

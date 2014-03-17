@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuditTaskList>
+	<Task TaskName ="FTPFILE" TaskSeqNum="1" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="0" TaskNextSeqNum="2" TaskDesc="下载银联对账文件" />
+	<Task TaskName ="LOADCHALREC" TaskSeqNum="2" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="1" TaskNextSeqNum="3" TaskDesc="将银联对账文件导入渠道流水表" />
+	<Task TaskName ="LOADCOREREC" TaskSeqNum="3" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="2" TaskNextSeqNum="4" TaskDesc="当日核心交易流水导入" />
+	<Task TaskName ="CHECKPECORE" TaskSeqNum="4" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="3" TaskNextSeqNum="5" TaskDesc="前置流水与核心流水核对 " />
+	<Task TaskName ="CHECKPECHAL" TaskSeqNum="5" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="4" TaskNextSeqNum="" TaskDesc="前置流水与渠道流水核对" />
+	<!--<Task TaskName ="CRETHOLD" TaskSeqNum="6" TaskStat="01" TaskExecYN="0"
+		TaskPrivSeqNum="5" TaskNextSeqNum="" TaskDesc="对平账的转入账生成账户冻结记录" />-->
+<!--	<Task TaskName ="ADJUSTFORTElLER" TaskSeqNum="7" TaskStat="01"-->
+<!--		TaskExecYN="0" TaskPrivSeqNum="6" TaskNextSeqNum="8" TaskDesc="不平账手工调平（由柜员控制）" />-->
+<!--	<Task TaskName ="CALSTLDATA" TaskSeqNum="8" TaskStat="01" TaskExecYN="0"-->
+<!--		TaskPrivSeqNum="7" TaskNextSeqNum="9" TaskDesc="生成清算入账数据" />-->
+<!--	<Task TaskName ="INSSTLDATA" TaskSeqNum="9" TaskStat="01" TaskExecYN="0"-->
+<!--		TaskPrivSeqNum="8" TaskNextSeqNum="" TaskDesc="清算金额入账，手续费入账" />-->
+</AuditTaskList>

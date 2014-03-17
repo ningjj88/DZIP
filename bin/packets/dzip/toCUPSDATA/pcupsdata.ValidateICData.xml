@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+
+<segment>
+	<fixString name="TrxType" length="4" />
+	<fixString name="RetCode" length="2" />
+	<fixString name="InstNo" length="10" />
+	<fixNumber name="TranSeq" length="6" />
+	<fixString name="TranTime" length="10" />
+	<fixString name="CardNo" length="19" />
+	<fixString name="SeqNo" length="3" />
+	<fixString name="RsqNo" length="2" />
+	<fixNumber name="ICDataLength" length="3" />
+	<fixString name="ICData" length="252" encoding="iso8859-1" />
+</segment>

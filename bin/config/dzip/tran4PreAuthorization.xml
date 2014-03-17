@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "pe-config.dtd">
+<!--
+
+	transaction configuration
+	
+	author:chenshaoqi	since:2010-08-16
+
+-->
+
+<config namespace="cups">
+
+	<!-- ======================POS预授权===================================-->
+	<action id="PreAuthAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="PreAuth" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthAction</ref>
+		</actions>
+	</transaction>
+	<!-- ======================POS预授权冲正===================================-->
+	<action id="PreAuthReversalAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthReversalAction</ref>
+		</actions>
+	</transaction>
+	<!-- ======================POS预授权撤销===================================-->
+	<action id="PreAuthCancelAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthCancelAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthCancel" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthCancelAction</ref>
+		</actions>
+	</transaction>
+	<!-- ======================POS预授权撤销冲正===================================-->
+	<action id="PreAuthCancelRevAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthCancelRevAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthCancelReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthCancelRevAction</ref>
+		</actions>
+	</transaction>
+	<!-- ======================POS预授权完成===================================-->
+	<action id="PreAuthCompAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthCompAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthComplete" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthCompAction</ref>
+		</actions>
+	</transaction>
+	<!-- ======================POS预授权完成冲正===================================-->
+	<action id="PreAuthCompRevAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthCompRevAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthCompReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthCompRevAction</ref>
+		</actions>
+	</transaction>
+	<!-- ======================POS预授权完成撤销===================================-->
+	<action id="PreAuthCompCancelAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthCompCancelAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthCompCancel" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthCompCancelAction</ref>
+		</actions>
+	</transaction>
+	<!-- ======================POS预授权完成撤销冲正===================================-->
+	<action id="PreAuthCompCancelRevAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthCompCancelRevAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthCompCancelReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthCompCancelRevAction</ref>
+		</actions>
+	</transaction>	
+	<!-- ======================POS预授权追加===================================-->
+	<action id="PreAuthAddAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthAddAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthAdd" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthAddAction</ref>
+		</actions>
+	</transaction>
+	<!-- ======================POS预授权追加冲正===================================-->
+	<action id="PreAuthAddReversalAction" class="csii.dzip.action.cups.PreAuthorization.PreAuthAddReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PreAuthAddReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PreAuthAddReversalAction</ref>
+		</actions>
+	</transaction>	
+</config>

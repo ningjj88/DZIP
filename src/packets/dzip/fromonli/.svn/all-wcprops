@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli
+END
+fsegonli.Debit4Load.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.Debit4Load.xml
+END
+xmlaliasmapping.properties
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/xmlaliasmapping.properties
+END
+fsegonli.CashRecharge4Credit4Load.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.CashRecharge4Credit4Load.xml
+END
+OutboundPacket.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/OutboundPacket.xml
+END
+packetutf8.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/packetutf8.dtd
+END
+fsegonli.CashRecharge4Credit4LoadReversal.xml
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.CashRecharge4Credit4LoadReversal.xml
+END
+fsegonli.CashRecharge4Credit4LoadCancel.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.CashRecharge4Credit4LoadCancel.xml
+END
+fsegonli.Debit4LoadConfirm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.Debit4LoadConfirm.xml
+END
+fsegonli.CashRecharge4Credit4LoadCancelReversal.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.CashRecharge4Credit4LoadCancelReversal.xml
+END
+fsegonli.Credit4Load.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.Credit4Load.xml
+END
+xmltagmapping.properties
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/xmltagmapping.properties
+END
+fsegonli.Credit4LoadReversal.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.Credit4LoadReversal.xml
+END
+fsegonli.TransferCredit4Load.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.TransferCredit4Load.xml
+END
+fsegonli.ScriptNotice.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.ScriptNotice.xml
+END
+fsegonli.TransferCredit4LoadReversal.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/284/DZIP_NEWDEDV/src/packets/dzip/fromonli/fsegonli.TransferCredit4LoadReversal.xml
+END

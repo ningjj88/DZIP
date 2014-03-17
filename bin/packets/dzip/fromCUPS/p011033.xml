@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+
+<!-- 他行卡账号验证交易报文 -->
+<mapAlias name="parse">
+	    <elementAlias name="EXPDAT"  alias="bit14"/><!--卡有效期  -->
+	    <elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+		<elementAlias name="ADDDATA"  alias="bit44"/><!--附加响应数据-->
+		<elementAlias name="BALAMT"  alias="bit54" /> <!--实际余额  -->
+		<elementAlias name="ADD_DATA_PRI"  alias="bit57" /> <!--附加交易信息  -->
+		<elementAlias name="IDENNUMBE"  alias="bit61" /><!--  持卡人身份认证信息-->
+		<elementAlias name="RCVCODE"  alias="bit100" /> <!-- 接收方机构码-->
+		<elementAlias name="NANSCRESERVE"  alias="bit121" /><!--  CUPS 保留-->
+		<elementAlias name="MESAUTHCD"  alias="bit128" /><!-- MAC-->
+</mapAlias>

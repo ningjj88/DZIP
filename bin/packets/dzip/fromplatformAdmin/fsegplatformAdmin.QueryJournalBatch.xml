@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xujin
+    date 2010-04-23
+-->
+<segment>
+	<xmlTag><String name="RtxnCatCd" /></xmlTag><!--业务性质  -->
+	<xmlTag><String name="Credit_Debit" /></xmlTag><!--交易类型  -->
+	<xmlTag><String name="TranStat" /></xmlTag><!-- 交易状态 -->
+    <xmlTag><String name="ChannId" /></xmlTag><!--渠道号  -->
+</segment>

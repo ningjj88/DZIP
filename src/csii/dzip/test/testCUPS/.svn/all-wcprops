@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS
+END
+PosConsumeCancel_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/PosConsumeCancel_test.java
+END
+EstablishEntrust_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/EstablishEntrust_test.java
+END
+Query_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/Query_test.java
+END
+PosConsumeCancelReversal_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/PosConsumeCancelReversal_test.java
+END
+ReversalAtATM_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/ReversalAtATM_test.java
+END
+TransferIn_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/TransferIn_test.java
+END
+TransferOut_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/TransferOut_test.java
+END
+testMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/testMap.java
+END
+TransferOutReversal_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/TransferOutReversal_test.java
+END
+DepositATCDM_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/DepositATCDM_test.java
+END
+WithdrawAtATM_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/WithdrawAtATM_test.java
+END
+RemoveEntrust_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/RemoveEntrust_test.java
+END
+ValidateAcct_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/ValidateAcct_test.java
+END
+TransferInComfirm_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/TransferInComfirm_test.java
+END
+QueryDetail_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/QueryDetail_test.java
+END
+PosConsume_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/PosConsume_test.java
+END
+PosPurchaseReturn_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/PosPurchaseReturn_test.java
+END
+DepositATCDMComfirm_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/DepositATCDMComfirm_test.java
+END
+PosConsumeReversal_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS/PosConsumeReversal_test.java
+END

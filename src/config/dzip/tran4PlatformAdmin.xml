@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "pe-config.dtd">
+	<!--
+		transaction configuration author:chenshaoqi since:2010-08-20
+	-->
+<config namespace="platformAdmin">
+
+	<!--======================实时监控=========================-->
+	<action id="MonitorAction" class="csii.dzip.action.platformAdmin.MonitorAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="Monitor" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">MonitorAction</ref>
+		</actions>
+	</transaction>
+	<!--======================查询渠道信息======================-->
+	<action id="GetChannelAction" class="csii.dzip.action.platformAdmin.GetChannelAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetChannel" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetChannelAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================更改渠道状态==========================-->
+	<action id="UpdChannelAction" class="csii.dzip.action.platformAdmin.UpdChannelAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="UpdChannel" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">UpdChannelAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================查询渠道交易关系==========================-->
+	<action id="GetChannelTranAction" class="csii.dzip.action.platformAdmin.GetChannelTranAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetChannelTran" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetChannelTranAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================更改渠道交易关系==========================-->
+	<action id="UpdChannelTranAction" class="csii.dzip.action.platformAdmin.UpdChannelTranAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="UpdChannelTran" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">UpdChannelTranAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================流水信息当日查询==========================-->
+	<action id="InqJournalInfoAction" class="csii.dzip.action.platformAdmin.InqJournalInfoAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="InqJournalInfo" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">InqJournalInfoAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================流水信息历史查询==========================-->
+	<action id="InqJournalHistInfoAction"
+		class="csii.dzip.action.platformAdmin.InqJournalHistInfoAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="InqJournalHistInfo" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">InqJournalHistInfoAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================获得当前账务日期==========================-->
+	<action id="GetCurrentPostDateAction" class="csii.dzip.action.platformAdmin.GetCurrentPostDateAction">
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="GetCurrentPostDate" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetCurrentPostDateAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================日切==========================-->
+	<action id="DaySwicthAction" class="csii.dzip.action.platformAdmin.DaySwicthAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="DaySwicth" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DaySwicthAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================联机数据清理==========================-->
+	<action id="ClearDataOnLineAction"
+		class="csii.dzip.action.platformAdmin.ClearDataOnLineAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="ClearDataOnLine" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">ClearDataOnLineAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================历史数据清理==========================-->
+	<action id="ClearDataHistoryAction"
+		class="csii.dzip.action.platformAdmin.ClearDataHistoryAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="ClearDataHistory" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">ClearDataHistoryAction</ref>
+		</actions>
+	</transaction>
+	<!--
+		********************************对账管理*******************************************
+	-->
+
+	<!--=====================装载任务=========================-->
+	<action id="InsertTaskAction"
+		class="csii.dzip.action.platformAdmin.Audit.InsertTaskAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="ImportTaskList" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">InsertTaskAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================对账文件下载==========================-->
+	<action id="DownLoadAction" class="csii.dzip.action.platformAdmin.Audit.DownLoadAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+		<ref name="collectData">dzip.CollectData</ref>
+		<param name="localFilepath">${CUPS8583.detailCheck.localFilePath}</param>
+	</action>
+	<transaction id="DownLoadFtpFile" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">InsertTaskAction</ref>
+			<ref name="act02">DownLoadAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================装载对账文件==========================-->
+	<action id="ImportDataToDBAction"
+		class="csii.dzip.action.platformAdmin.Audit.ImportDataToDBAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="ImportFtpFile" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">ImportDataToDBAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================装载核心交易流水==========================-->
+	<action id="ImportCoreJouralToDBAction"
+		class="csii.dzip.action.platformAdmin.Audit.ImportCoreJouralToDBAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<!--=====================核对大前置流水与核心流水==========================-->
+	<action id="CmpCoreToPEAction"
+		class="csii.dzip.action.platformAdmin.Audit.CmpCoreToPEAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<!--=====================核对大前置流水与渠道流水==========================-->
+	<action id="CmpPEToChannelAction"
+		class="csii.dzip.action.platformAdmin.Audit.CmpPEToChannelAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+
+	<!--=====================对账==========================-->
+	<action id="AuditAction" class="csii.dzip.action.platformAdmin.Audit.AuditAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="AuditExcute" template="SequenceTemplate">
+		<actions>
+		    <ref name="act01">VerifyOffLinePreAuthCompAction</ref> <!--验证是否存在异常的离线预授权完成没有处理 -->
+			<ref name="act02">ImportCoreJouralToDBAction</ref> <!--装载核心流水 -->
+			<ref name="act03">CmpCoreToPEAction</ref> <!-- 核对大前置流水与核心流水 -->
+			<ref name="act04">CmpPEToChannelAction</ref> <!--核对大前置流水与渠道流水 -->
+			<!--<ref name="act05">AuditAction</ref>--><!-- 对账 -->
+		</actions>
+	</transaction>
+	<!-- =================综合对账交易 =======================-->
+	<transaction id="generalAudit" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">InsertTaskAction</ref>  <!--装载任务 -->
+			<ref name="act02">DownLoadAction</ref> <!-- 下载对账文件 -->
+			<ref name="act03">ImportDataToDBAction</ref><!--装载对账文件	-->
+			<ref name="act04">VerifyOffLinePreAuthCompAction</ref> <!--验证是否存在异常的离线预授权完成没有处理 -->
+			<ref name="act05">ImportCoreJouralToDBAction</ref> <!--装载核心流水 -->
+			<ref name="act06">CmpCoreToPEAction</ref> <!-- 核对大前置流水与核心流水 -->
+			<ref name="act07">CmpPEToChannelAction</ref> <!--核对大前置流水与渠道流水 -->
+			<!--<ref name="act08">AuditAction</ref>--><!-- 对账 -->
+		</actions>
+	</transaction>
+
+	<!--=====================查询任务状态==========================-->
+	<action id="QueryTaskStatAction"
+		class="csii.dzip.action.platformAdmin.Audit.QueryTaskStatAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="QueryTaskStatus" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryTaskStatAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================查询对账文件==========================-->
+	<action id="QueryFileInfoAction"
+		class="csii.dzip.action.platformAdmin.Audit.QueryFileInfoAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="QueryFileInfo" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryFileInfoAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================查询装载文件信息==========================-->
+	<action id="QueryImportFileInfoAction"
+		class="csii.dzip.action.platformAdmin.Audit.QueryImportFileInfoAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="QueryImportFileInfo" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryImportFileInfoAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================查询对账信息==========================-->
+	<action id="QueryAuditAction"
+		class="csii.dzip.action.platformAdmin.Audit.QueryAuditAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	</action>
+	<transaction id="QueryAudit" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryAuditAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================导出到临时表==========================-->
+	<action id="ImportJournalBatchAction"
+		class="csii.dzip.action.platformAdmin.JournalBatch.ImportJournalBatchAction">
+		<ref name="auditProcessor">dzip.AuditProcessor</ref>
+	    <ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="ImportJournalBatch" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">ImportJournalBatchAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================查询临时表==========================-->
+	<action id="QueryJournalBatchAction"
+		class="csii.dzip.action.platformAdmin.JournalBatch.QueryJournalBatchAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="QueryJournalBatch" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryJournalBatchAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================读取t_journal的数据，对核心数据库记账==========================-->
+	<action id="TranJournalBatchAction"
+		class="csii.dzip.action.platformAdmin.JournalBatch.TranJournalBatchAction">
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="TranJournalBatch" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TranJournalBatchAction</ref>
+		</actions>
+	</transaction>
+		<!--=====================通存通兑流水==========================-->
+	<action id="InqDepAndWthJournalAction"
+		class="csii.dzip.action.platformAdmin.InqDepAndWthJournalAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="InqDepAndWthJournal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">InqDepAndWthJournalAction</ref>
+		</actions>
+	</transaction>
+
+   <!--=====================查询成商银联卡对帐明细表==========================-->
+	<action id="InqJCKAuditDetailAction"
+		class="csii.dzip.action.platformAdmin.InqJCKAuditDetailAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="InqJCKAuditDetail" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">InqJCKAuditDetailAction</ref>
+		</actions>
+	</transaction>
+
+	 <!--=====================查询手续费规则信息==========================-->
+	<action id="GetFeeCodexAction"
+		class="csii.dzip.action.platformAdmin.ManFeeCodex.GetFeeCodexAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetFeeCodex" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetFeeCodexAction</ref>
+		</actions>
+	</transaction>
+
+	 <!--=====================查询手续费规则信息==========================-->
+	<action id="ManagementFeeCodexAction"
+	 class="csii.dzip.action.platformAdmin.ManFeeCodex.ManagementFeeCodexAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="ManagementFeeCodex" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">ManagementFeeCodexAction</ref>
+		</actions>
+	</transaction>
+
+	   <!--=====================查询银联品牌服务费==========================-->
+	<action id="BrandSvChDetailAction"
+		class="csii.dzip.action.platformAdmin.InqBrandSvChDetailAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="BrandSvChDetail" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">BrandSvChDetailAction</ref>
+		</actions>
+	</transaction>
+
+     <!--=====================离线预授权处理==========================-->
+	<action id="DoOffLinePreAuthCompAction"
+		class="csii.dzip.action.platformAdmin.DoOffLinePreAuthCompAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+	</action>
+	<transaction id="DoOffLinePreAuthComp" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DoOffLinePreAuthCompAction</ref>
+		</actions>
+	</transaction>
+
+<!--=====================验证是否存在异常的离线预授权完成交易==========================-->
+	<action id="VerifyOffLinePreAuthCompAction"
+		class="csii.dzip.action.platformAdmin.Audit.VerifyOffLinePreAuthCompAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="VerifyOffLinePreAuthComp" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">VerifyOffLinePreAuthCompAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================获得渠道类型交易==========================-->
+	<action id="GetChannelTypTranAction"
+		class="csii.dzip.action.platformAdmin.GetChannelTypTranAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetChannelTypTran" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetChannelTypTranAction</ref>
+		</actions>
+	</transaction>
+    <!--=====================更新渠道类型交易==========================-->
+	<action id="UpdChannelTypTranAction"
+		class="csii.dzip.action.platformAdmin.UpdChannelTypTranAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="UpdChannelTypTran" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">UpdChannelTypTranAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================获得渠道类型==========================-->
+	<action id="GetChannelTypAction"
+		class="csii.dzip.action.platformAdmin.GetChannelTypAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetChannelTyp" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetChannelTypAction</ref>
+		</actions>
+	</transaction>
+    <!--=====================更新渠道类型==========================-->
+	<action id="UpdChannelTypAction"
+		class="csii.dzip.action.platformAdmin.UpdChannelTypAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="UpdChannelTyp" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">UpdChannelTypAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================IC卡交易流水差错记账==========================-->
+	<action id="DoICJournalChargeAction"
+		class="csii.dzip.action.platformAdmin.DoICJournalChargeAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="DoICJournalCharge" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DoICJournalChargeAction</ref>
+		</actions>
+	</transaction>
+	<!-- IC卡交易流水差错单笔记账 -->
+	<action id="DoSingleICJournalChargeAction"
+		class="csii.dzip.action.platformAdmin.DoSingleICJournalChargeAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="DoSingleICJournalCharge" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DoSingleICJournalChargeAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================查询银联数据未对平交易流水==========================-->
+	<action id="GetICJournal4ChargeAction"
+		class="csii.dzip.action.platformAdmin.GetICJournal4ChargeAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetICJournal4Charge" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetICJournal4ChargeAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================借记IC卡电子钱包交易流水打印(打印流水查询)==========================-->
+	<action id="GetICJournal4PrintAction"
+		class="csii.dzip.action.platformAdmin.GetICJournal4PrintAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetICJournal4Print" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetICJournal4PrintAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================IC卡交易流水统计汇总==========================-->
+	<action id="DoICJournalStatisticsAction"
+		class="csii.dzip.action.platformAdmin.DoICJournalStatisticsAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="DoICJournalStatistics" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DoICJournalStatisticsAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================IC卡圈存圈提差错记账==========================-->
+	<action id="DoICErrorHandleAction"
+		class="csii.dzip.action.platformAdmin.DoICErrorHandleAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="DoICErrorHandle" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DoICErrorHandleAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================IC卡电子钱包余额查询==========================-->
+	<action id="QueryICEwalletctlAction"
+		class="csii.dzip.action.platformAdmin.QueryICEwalletctlAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="QueryICEwalletctl" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryICEwalletctlAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================IC卡电子现金柜面交易前获得数据==========================-->
+	<action id="GetOnliIcCardTranInfoAction"
+		class="csii.dzip.action.platformAdmin.GetOnliIcCardTranInfoAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetOnliIcCardTranInfo" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetOnliIcCardTranInfoAction</ref>
+		</actions>
+	</transaction>
+	<!--**********************与银联数据的交易**************************-->
+	<!--=====================借记IC卡ARQC校验==========================-->
+	<action id="ValidateICDataAction"
+		class="csii.dzip.action.platformAdmin.ValidateICDataAction" parent="cupsdata.BaseQueryAction">
+		<ref name="peJournalNOIdFactory">dzipService.peJournalNO</ref>
+	</action>
+	<transaction id="ValidateICData" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">ValidateICDataAction</ref>
+		</actions>
+	</transaction>
+	<!--=====================借记IC卡销户登记==========================-->
+	<action id="CloseAccountRegistrationAction"
+		class="csii.dzip.action.platformAdmin.CloseAccountRegistrationAction" parent="cupsdata.BaseQueryAction">
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="actionUtilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="peJournalNOIdFactory">dzipService.peJournalNO</ref>
+	</action>
+	<transaction id="CloseAccountRegistration" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CloseAccountRegistrationAction</ref>
+		</actions>
+	</transaction>
+</config>

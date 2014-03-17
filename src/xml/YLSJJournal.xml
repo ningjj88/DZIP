@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fields>
+	<field name="ACQINSTCODE" format="ALL" length="11" digit="0" /><!-- 收理机构标识码 -->
+	<field name="TRACENO" format="ALL" length="6" digit="0" /><!--系统跟踪号  -->
+	<field name="CENDT" format="ALL" length="10" digit="0" /><!-- 传输日期和时间-->
+	<field name="TRANSCODE" format="ALL" length="3" digit="0" /><!-- 交易代码-->
+	<field name="ACCOUNT"  format="ALL" length="19" digit="0" /><!--主帐号 -->
+	<field name="AMT"  format="ALL" length="12" digit="100" /><!-- 交易金额  -->
+	<field name="CRDB" format="ALL" length="1" digit="0" /><!--借贷标志 -->
+	<field name="MSGTYPE" format="ALL" length="4" digit="0" /><!--消息类型  -->
+	<field name="PROCCODE" format="ALL" length="6" digit="0" /><!-- 处理码 -->
+	<field name="MERCHTYPE" format="ALL" length="4" digit="0" /><!--商户类型-->
+	<field name="ACPTTERM" format="ALL" length="8" digit="0" /><!--受卡方终端标识 -->
+	<field name="REFCD" format="ALL" length="12" digit="0" /><!-- 索引参考号 -->
+	<field name="POSCONDCODE" format="ALL" length="2" digit="0" /><!--服务点条件码  -->
+	<field name="AUTHCD" format="ALL" length="6" digit="0" /><!--授权应答码-->
+	<field name="FWDINSTCODE" format="ALL" length="11" digit="0" /><!--发送方标识码  -->
+	<field name="SETTLEDATE" format="ALL" length="4" digit="0" /><!--清算日期 -->
+	<field name="ORIGTRACENUM" format="ALL" length="6" digit="0" /><!--原始交易的系统跟踪号  -->
+	<field name="ISSUINST" format="ALL" length="6" digit="0" /><!--发卡行网点 -->
+	<field name="ACQINSTRESVD"  format="ALL" length="6" digit="0" /><!--受理方保留域  -->
+	<field name="REVIND" format="ALL" length="1" digit="0" /><!--撤销标志-->
+    <field name="HOSTCODE" format="ALL" length="4" digit="0" /><!--主机码-->
+	<field name="FEE" format="ALL" length="12" digit="100" /><!--手续费  -->
+	<field name="ORIGCUR" format="ALL" length="3" digit="0" /><!-- 原始交易币种 -->
+	<field name="ORIGAMT" format="ALL" length="12" digit="100" /><!--原始交易金额-->
+	<field name="ORIGRATE" format="ALL" length="15" digit="10000000" /><!--终端加载的转换汇率 -->
+	<field name="MERCD" format="ALL" length="15" digit="0" /><!--商户号-->
+	<field name="CURRCD"  format="ALL" length="3" digit="0" /><!--扣账币种 -->
+	<field name="SEQNOFE"  format="ALL" length="15" digit="0" /><!--前置流水号 -->
+	<field name="ORIGDATETIME" format="ALL" length="10" digit="0" /><!--原始交易时间  -->
+	<field name="RESERVED" format="ALL" length="154" digit="0" /><!--保留 -->
+</Fields>

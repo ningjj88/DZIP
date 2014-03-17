@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-08-23
+-->
+<segment>
+	<xmlTag><String name="PostDate"/></xmlTag><!--交易日期-->
+	<xmlTag><String name="AuditType"/></xmlTag><!-- 对账类型-->
+	<xmlTag><String name="Flag" /></xmlTag><!--忽略异常的离线预授权完成标识-->
+</segment>

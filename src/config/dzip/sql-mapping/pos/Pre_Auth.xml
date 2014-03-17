@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+
+	POS交易
+	
+	by chenshaoqi since:2010-08-05
+
+-->
+<sqlMap namespace="pos">	
+	<!-- ===========================预授权交易 冻结（解冻）==========================-->
+	<parameterMap id="preAuth_Parameters" class="param">
+		<parameter property="in_holdFlag" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_mediumId" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_effDate" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_optNbr" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_amt" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_strDate" jdbcType="DATE"  mode="IN" />
+		<parameter property="in_matDate" jdbcType="DATE"  mode="IN" />
+		<parameter property="in_branchNbr" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_tellerNo" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_RTXNSOURCECD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_Track" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_PIN" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_PreFlag" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_TrackYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_PinYN" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_IdenInfo" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_ExpireDate" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TRACENBR" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="out_optNbr" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_TranAcctNo" jdbcType="VARCHAR"   mode="OUT" />
+		<parameter property="out_ExpireDate" jdbcType="VARCHAR"   mode="OUT" />
+		<parameter property="out_RespCode" jdbcType="VARCHAR"   mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="NUMERIC"   mode="OUT" />
+		<parameter property="out_OraErrorMsg" jdbcType="VARCHAR"   mode="OUT" />	
+	</parameterMap>
+	<procedure id="preAuth" parameterMap="preAuth_Parameters" resultClass="result">
+	{ call PACKgen_cardz.Proc_Csii_PreAuthTran(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+	
+	<!-- =====================获取预授权冻结编号 =========================================-->
+ 	<resultMap id="getOptNbrMap" class="result">
+		<result property="optnbr" column="OPTNBR"/>
+		<result property="transtat" column="TRANSTAT"/>
+		<result property="tranamt" column="TRANAMT"/>
+		<result property="rltseqno" column="RLTSEQNO"/>
+		<result property="rltpostdate" column="RLTPOSTDATE"/>
+	</resultMap>
+	<select id="getOptNbr" resultMap="getOptNbrMap" parameterClass="string">
+		select NVL(OPTNBR,'0') OPTNBR,TRANSTAT,TRANAMT,RLTSEQNO,RLTPOSTDATE
+		       from t_journal
+		       where SYSSEQNO=#authrid#
+       		     and POSTDATE =(select MAX(POSTDATE) 
+                         from  t_journal
+                         where SYSSEQNO=#authrid#)
+	</select>
+	
+		<!-- ===========================批量补入预授权交易 冻结（解冻）==========================-->
+	<parameterMap id="preAuth_Parameters" class="param">
+		<parameter property="in_holdFlag" jdbcType="CHAR"  mode="IN" />
+		<parameter property="in_mediumId" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_effDate" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_optNbr" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_amt" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_strDate" jdbcType="DATE"  mode="IN" />
+		<parameter property="in_matDate" jdbcType="DATE"  mode="IN" />
+		<parameter property="in_branchNbr" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_tellerNo" jdbcType="NUMERIC"  mode="IN" />
+		<parameter property="in_RTXNSOURCECD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_TRACENBR" jdbcType="VARCHAR"  mode="IN" />
+	    <parameter property="in_OrigPostDate" jdbcType="VARCHAR"  mode="IN" />   
+		<parameter property="out_optNbr" jdbcType="NUMERIC" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="NUMERIC"   mode="OUT" />
+		<parameter property="out_OraErrorMsg" jdbcType="VARCHAR"   mode="OUT" />	
+	</parameterMap>
+	<procedure id="batchPreAuth" parameterMap="preAuth_Parameters" resultClass="result">
+	{ call PACKGEN_PE_BAT_DEPOSIT.Proc_BatchPreAuthTran(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+</sqlMap>

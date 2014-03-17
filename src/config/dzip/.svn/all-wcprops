@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/config/dzip
+END
+tran4JCK.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/dzip/tran4JCK.xml
+END
+tran4PreAuthorization.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/dzip/tran4PreAuthorization.xml
+END
+tran4DzipATM.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/dzip/!svn/ver/276/DZIP_NEWDEDV/src/config/dzip/tran4DzipATM.xml
+END
+DzipMessageCodeMapping.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/dzip/DzipMessageCodeMapping.xml
+END
+tran4CUPS.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/dzip/!svn/ver/275/DZIP_NEWDEDV/src/config/dzip/tran4CUPS.xml
+END
+tran4PlatformAdmin.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dzip/!svn/ver/291/DZIP_NEWDEDV/src/config/dzip/tran4PlatformAdmin.xml
+END
+tran4Scheduler.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/dzip/tran4Scheduler.xml
+END
+dzipConfig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/config/dzip/dzipConfig.xml
+END

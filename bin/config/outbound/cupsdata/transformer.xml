@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+
+<config namespace="cupsdata">
+
+
+	<transport id="TransformerTransport" class="com.csii.pe.service.comm.TransformTransport">
+		<ref name="transformerFactory">TransformerFactory</ref>
+		<ref name="transport">${cupsdata.TransformerTransport.transport}</ref>
+		<param name="formatName">OutboundPacket</param>
+		<param name="parseName">OutboundPacketRes</param>
+		<param name="debug">${cupsdata.TransformerTransport.debug}</param>
+		<param name="dumpPath">${cupsdata.TransformerTransport.dumpPath}</param>
+	</transport>
+
+	
+	<!--  Transformer Factory Definition  -->
+	
+   <!-- transformer -->
+ 	<bean name="TransformerFactory" class="com.csii.pe.transform.TransformerFactory">
+			<param name="path">/packets/dzip/toCUPSDATA</param>
+			<param name="debug">${cupsdata.TransformerFactory.debug}</param>
+			<param name="cacheEnable">${cupsdata.TransformerFactory.cacheEnable}</param>
+	</bean>				
+</config>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+	初始化器
+	since:2011-03-05
+-->
+<config namespace="DzipInit">
+
+	<!--在程序启动时初始化查询数据-->
+	<bean id="initData4Dzip" class="csii.dzip.core.InitData4Dzip"> 
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</bean>
+
+</config>

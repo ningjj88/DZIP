@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!-- 销户登记 -->
+<segment>
+	<xmlTag><String name="Card_No"/></xmlTag><!--卡号-->
+	<xmlTag><String name="ActCode"/></xmlTag><!--动作代码-->
+	<xmlTag><String name="TrxType" /></xmlTag><!--交易代码-->
+	<xmlTag><String name="LgnType" /></xmlTag><!--登录身份类型-->
+	<xmlTag><String name="Source" /></xmlTag><!--交易来源-->
+	<xmlTag><String name="LgnInstCode" /></xmlTag><!--登录机构代码-->
+	<xmlTag><String name="TranceNo" /></xmlTag><!--系统跟踪号-->
+	<xmlTag><String name="LgnMerchCode" /></xmlTag><!--登录网点代码-->
+	<xmlTag><String name="LgnSerCode" /></xmlTag><!--登录操作员代码-->
+	<xmlTag><String name="RtnWay" /></xmlTag><!--IC卡余额退还方式-->
+	<xmlTag><String name="NameFlag" /></xmlTag><!--是否验证客户信息-->
+	<xmlTag><String name="Id_Type" /></xmlTag><!--证件类型-->
+	<xmlTag><String name="Id_Code" /></xmlTag><!--证件号码-->
+	<xmlTag><String name="PinFlag" /></xmlTag><!--是否验证密码-->
+	<xmlTag><String name="PIN" /></xmlTag><!--密码-->
+	<xmlTag><String name="RtnFlag" /></xmlTag><!--是否回收卡片-->
+</segment>

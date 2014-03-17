@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 达州商行本行卡ATM取款交易返回报文 -->
+<iso8583Packet  >
+
+	<bitMap defaultValue="2,3,4,7,11,12,13,14,15,18,25,32,33,37,39,41,42,49" />
+	<include include="i8583fields" ></include>
+	
+	<mapAlias name="format">	
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="EXPDAT"  alias="bit14" defaultValue="9999" /><!--卡有效期  -->
+		<elementAlias name="SERENTRYMODE"  alias="bit22" /><!-- 服务点输入方式码 -->		
+		<elementAlias name="SERCAPCODE"  alias="bit26" /><!--服务点PIN获取码  -->
+<!--		<elementAlias name="TRACK2DATA"  alias="bit35" /> 第二磁道数据 		-->
+		<elementAlias name="CARDACCCODE"  alias="bit42"  /><!--受卡方标识码  -->
+		<elementAlias name="CARDACCNAME"  alias="bit43" /><!-- 受卡方名称地址-->		
+		<elementAlias name="CURCODE"  alias="bit49" /><!-- 交易货币代码 -->
+		<elementAlias name="PINDATA"  alias="bit52" /><!-- 个人标识码数据 -->
+<!--		<elementAlias name="SECURCONTRINFO"  alias="bit53" />  安全控制信息		-->
+	    <elementAlias name="BALAMT"  alias="bit54"  /><!-- 余额 -->
+	    <elementAlias name="REACODE"  alias="bit60" /><!-- 自定义域 -->
+	    <elementAlias name="IDENNUMBE"  alias="bit61" /> <!--证件编号-->
+<!--	    <elementAlias name="ACQRESERVE"  alias="bit122" />  CUPS 保留-->
+	</mapAlias>
+</iso8583Packet>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-08-23
+-->
+<segment>
+	<xmlTag>
+		<idxField name="RecordList">
+			<Group name="RecordMap">
+			    <xmlTag><String name="ReqOrgCd"></String></xmlTag><!-- 受理机构-->
+				<xmlTag><String name="SysSeqNum"></String></xmlTag><!--平台流水号-->
+				<xmlTag><String name="TraceNo"></String></xmlTag><!--系统跟踪号-->
+				<xmlTag><String name="RtxnCatCd"></String></xmlTag><!--业务性质-->
+				<xmlTag><String name="RtxnTypCd"></String></xmlTag><!--业务类型-->
+				<xmlTag><String name="RtxnPlat"></String></xmlTag><!--交易平台-->
+				<xmlTag><String name="TranTypeDef"></String></xmlTag><!--交易类型-->
+				<xmlTag><String name="TransDate"></String></xmlTag><!--交易日期-->
+				<xmlTag><String name="TransTime"></String></xmlTag><!--交易日期-->
+				<xmlTag><String name="AccountNum"></String></xmlTag><!--卡号-->
+				<xmlTag><String name="TransAmt"></String></xmlTag><!--交易金额-->
+				<xmlTag><String name="AuditStatus"></String></xmlTag><!--对账状态-->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

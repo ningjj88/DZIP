@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "pe-config.dtd">
+<!--
+
+	transaction configuration
+
+	author:chenshaoqi	since:2010-08-16
+
+-->
+
+<config namespace="cups">
+
+	<!-- ======================他行POS消费===================================-->
+	<action id="PosConsumeAction" class="csii.dzip.action.cups.pos.PosConsumeAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="PosConsume" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PosConsumeAction</ref>
+		</actions>
+	</transaction>
+
+	<!--====================== 他行POS消费撤销===================================-->
+	<action id="PosConsumeCancelAction" class="csii.dzip.action.cups.pos.PosConsumeCancelAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PosConsumeCancel" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PosConsumeCancelAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行POS消费冲正===================================-->
+	<action id="PosConsumeReversalAction" class="csii.dzip.action.cups.pos.PosConsumeReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PosConsumeReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PosConsumeReversalAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行POS消费撤销冲正===============================-->
+	<action id="PosConsumeCancelReversalAction" class="csii.dzip.action.cups.pos.PosConsumeCancelReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PosConsumeCancelReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PosConsumeCancelReversalAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行POS消费退货===============================-->
+	<action id="PosPurchaseReturnAction" class="csii.dzip.action.cups.pos.PosPurchaseReturnAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PosPurchaseReturn" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">PosPurchaseReturnAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行余额查询 :Pos,ATM,CDM==================================-->
+	<action id="QueryAction" class="csii.dzip.action.cups.common.QueryAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="corebankAccess">corebankdb.jdbcAccessCoreBank</ref>
+	</action>
+	<transaction id="Query" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行明细查询 :ATM,CDM==================================-->
+	<action id="QueryDetailAction" class="csii.dzip.action.cups.common.QueryDetailAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="corebankAccess">corebankdb.jdbcAccessCoreBank</ref>
+	</action>
+	<transaction id="QueryDetail" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryDetailAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行ATM现金取款==================================-->
+	<action id="WithdrawAtATMAction" class="csii.dzip.action.cups.atm.WithdrawAtATMAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="WithdrawAtATM" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">WithdrawAtATMAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行ATM现金取款冲正==================================-->
+	<action id="ReversalAtATMAction" class="csii.dzip.action.cups.atm.ReversalAtATMAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="ReversalAtATM" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">ReversalAtATMAction</ref>
+		</actions>
+	</transaction>
+
+			<!--
+			附加内容
+			-->
+	<!--====================== 他行转出记账：ATM，CDM==================================-->
+	<action id="TransferOutAction" class="csii.dzip.action.cups.common.TransferOutAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="TransferOut" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TransferOutAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行转出记账冲正：ATM，CDM==================================-->
+	<action id="TransferOutReversalAction" class="csii.dzip.action.cups.common.TransferOutReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="TransferOutReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TransferOutReversalAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行转入记账：ATM，CDM==================================-->
+	<action id="TransferInAction" class="csii.dzip.action.cups.common.TransferInAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="TransferIn" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TransferInAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行转入记账确认：ATM，CDM=================================-->
+	<action id="TransferInComfirmAction" class="csii.dzip.action.cups.common.TransferInComfirmAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="TransferInComfirm" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TransferInComfirmAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行CDM存款==================================-->
+	<action id="DepositATCDMAction" class="csii.dzip.action.cups.atm.DepositATCDMAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="DepositATCDM" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DepositATCDMAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行柜面存款撤销==================================-->
+	<action id="DepositATCDMCancelAction" class="csii.dzip.action.cups.atm.DepositATCDMCancelAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="DepositATCDMCancel" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DepositATCDMCancelAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 他行柜面存款撤销==================================-->
+	<action id="DepositATCDMCancelReversalAction" class="csii.dzip.action.cups.atm.DepositATCDMCancelReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="DepositATCDMCancelReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DepositATCDMCancelReversalAction</ref>
+		</actions>
+	</transaction>
+
+	<!--====================== 他行CDM存款确认===================================-->
+	<action id="DepositATCDMComfirmAction" class="csii.dzip.action.cups.atm.DepositATCDMComfirmAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="DepositATCDMComfirm" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">DepositATCDMComfirmAction</ref>
+		</actions>
+	</transaction>
+
+
+	<!--====================== 银联中心的对账通知交易===================================-->
+	<action id="CheckAction" class="csii.dzip.action.cups.check.CheckAction" >
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="CupsCheck" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CheckAction</ref>
+		</actions>
+	</transaction>
+
+		<!--====================== 银联中心建立委托交易===================================-->
+	<action id="EstablishEntrustAction" class="csii.dzip.action.cups.common.EstablishEntrustAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="EstablishEntrust" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">EstablishEntrustAction</ref>
+		</actions>
+	</transaction>
+		<!--====================== 银联中心建立委托冲正交易===================================-->
+	<action id="EstablishEntrustReversalAction" class="csii.dzip.action.cups.common.EstablishEntrustReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="EstablishEntrustReversal" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">EstablishEntrustReversalAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 银联中心解除委托交易===================================-->
+	<action id="RemoveEntrustAction" class="csii.dzip.action.cups.common.RemoveEntrustAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="RemoveEntrust" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">RemoveEntrustAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 银联中心解除委托冲正交易===================================-->
+	<action id="RemoveEntrustReversalAction" class="csii.dzip.action.cups.common.RemoveEntrustReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="RemoveEntrustReversal" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">RemoveEntrustReversalAction</ref>
+		</actions>
+	</transaction>
+		<!--====================== 银联中心帐号验证交易===================================-->
+	<action id="ValidateAcctAction" class="csii.dzip.action.cups.common.ValidateAcctAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="ValidateAcct" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">ValidateAcctAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 银联中心代付交易===================================-->
+	<action id="PaidAction" class="csii.dzip.action.cups.common.PaidAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="Paid" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">PaidAction</ref>
+		</actions>
+	</transaction>
+		<!--====================== 银联中心代付确认交易===================================-->
+	<action id="PaidComfirmAction" class="csii.dzip.action.cups.common.PaidComfirmAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="PaidComfirm" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">PaidComfirmAction</ref>
+		</actions>
+	</transaction>
+
+		<!--====================== 银联中心代收交易===================================-->
+	<action id="CollectionAction" class="csii.dzip.action.cups.common.CollectionAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="Collection" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">CollectionAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 银联中心代收冲正交易===================================-->
+	<action id="CollectionReversalAction" class="csii.dzip.action.cups.common.CollectionReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="CollectionReversal" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">CollectionReversalAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 银联中心代收撤销交易===================================-->
+	<action id="CollectionCancelAction" class="csii.dzip.action.cups.common.CollectionCancelAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="CollectionCancel" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">CollectionCancelAction</ref>
+		</actions>
+	</transaction>
+	<!--====================== 银联中心代收撤销冲正交易===================================-->
+	<action id="CollectionCancelReversalAction" class="csii.dzip.action.cups.common.CollectionCancelReversalAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="CollectionCancelReversal" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">CollectionCancelReversalAction</ref>
+		</actions>
+	</transaction>
+
+	<!--====================== 银联中心汇款交易===================================-->
+	<action id="RemittanceAction" class="csii.dzip.action.cups.common.RemittanceAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="Remittance" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">RemittanceAction</ref>
+		</actions>
+	</transaction>
+
+	<!--====================== 银联中心汇款验证交易===================================-->
+	<action id="RemittanceVerificationAction" class="csii.dzip.action.cups.common.RemittanceVerificationAction" >
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+	</action>
+	<transaction id="RemittanceVerification" template="SequenceTemplate">
+		<actions>
+             <ref name="act01">RemittanceVerificationAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行圈存机圈存 -->
+	<action id="Credit4LoadAction" class="csii.dzip.action.cups.ec.Credit4LoadAction">
+		<ref name="actionUtilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="Credit4Load" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">Credit4LoadAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行圈存机圈存冲正 -->
+	<action id="Credit4LoadReversalAction" class="csii.dzip.action.cups.ec.Credit4LoadReversalAction">
+		<ref name="actionUtilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="Credit4LoadReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">Credit4LoadReversalAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行圈存机圈提确认 -->
+	<action id="Debit4LoadConfirmAction" class="csii.dzip.action.cups.ec.Debit4LoadConfirmAction">
+		<ref name="actionUtilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="Debit4LoadConfirm" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">Debit4LoadConfirmAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行非指定账户转出圈存 -->
+	<action id="TransferOut4CreditForLoadAction" class="csii.dzip.action.cups.atm.TransferOut4CreditForLoadAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="TransferOut4CreditForLoad" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TransferOut4CreditForLoadAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行非指定账户转出圈存冲正 -->
+	<action id="TransferOut4CreditForLoadReversalAction" class="csii.dzip.action.cups.atm.TransferOut4CreditForLoadReversalAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="TransferOut4CreditForLoadReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TransferOut4CreditForLoadReversalAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行非指定账户转入圈存 -->
+	<action id="TransferIn4CreditForLoadAction" class="csii.dzip.action.cups.atm.TransferIn4CreditForLoadAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="TransferIn4CreditForLoad" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TransferIn4CreditForLoadAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行非指定账户转入圈存冲正 -->
+	<action id="TransferIn4CreditForLoadReversalAction" class="csii.dzip.action.cups.atm.TransferIn4CreditForLoadReversalAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="TransferIn4CreditForLoadReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">TransferIn4CreditForLoadReversalAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行指定账户圈存 -->
+	<action id="Credit4LoadAction" class="csii.dzip.action.cups.atm.Credit4LoadAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="Credit4Load" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">Credit4LoadAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行指定账户圈存冲正 -->
+	<action id="Credit4LoadReversalAction" class="csii.dzip.action.cups.atm.Credit4LoadReversalAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="Credit4LoadReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">Credit4LoadReversalAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行现金充值圈存 -->
+	<action id="CashRecharge4CreditForLoadAction" class="csii.dzip.action.cups.atm.CashRecharge4CreditForLoadAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="CashRecharge4CreditForLoad" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CashRecharge4CreditForLoadAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行现金充值圈存冲正 -->
+	<action id="CashRecharge4CreditForLoadReversalAction" class="csii.dzip.action.cups.atm.CashRecharge4CreditForLoadReversalAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="CashRecharge4CreditForLoadReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CashRecharge4CreditForLoadReversalAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行现金充值圈存撤销 -->
+	<action id="CashRecharge4CreditForLoadCancelAction" class="csii.dzip.action.cups.atm.CashRecharge4CreditForLoadCancelAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="CashRecharge4CreditForLoadCancel" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CashRecharge4CreditForLoadCancelAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行现金充值圈存撤销冲正 -->
+	<action id="CashRecharge4CreditForLoadCancelReversalAction" class="csii.dzip.action.cups.atm.CashRecharge4CreditForLoadCancelReversalAction">
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="CashRecharge4CreditForLoadCancelReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CashRecharge4CreditForLoadCancelReversalAction</ref>
+		</actions>
+	</transaction>
+
+	<!-- 他行脚本通知 -->
+	<action id="ScriptNoticeAction" class="csii.dzip.action.cups.atm.ScriptNoticeAction">
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+	</action>
+	<transaction id="ScriptNotice" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">ScriptNoticeAction</ref>
+		</actions>
+	</transaction>
+</config>

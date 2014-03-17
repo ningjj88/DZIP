@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	模板配置文件
+	
+	by 张永庆	since:2010-05-20
+
+-->
+<config>
+
+	<template id="SequenceTemplate" class="csii.pe.ibsExtend.PayExecuteTemplate" chain="chainForPublic">
+		<actions>
+				<ref name="action">Placeholder</ref>
+		</actions>
+	</template>	
+   
+    <template id="PubSequenceTemplate" class="csii.pe.ibsExtend.PayExecuteTemplate" chain="chainForPublic">
+		<actions>
+				<ref name="action">Placeholder</ref>
+		</actions>
+	</template>	
+
+</config>

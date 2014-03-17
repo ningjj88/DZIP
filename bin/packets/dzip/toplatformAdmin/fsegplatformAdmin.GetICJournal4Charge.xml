@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xiehai
+    date 2013-09-06
+-->
+<segment>
+	 <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+				<xmlTag><String name="TransDate"></String></xmlTag><!-- 交易日期 -->
+				<xmlTag><String name="TransTime"></String></xmlTag><!-- 交易时间 -->
+			    <xmlTag><String name="TraceNo"></String></xmlTag><!-- 系统跟踪号 -->
+			    <xmlTag><String name="SettleDate"></String></xmlTag><!-- 清算日期 -->
+			    <xmlTag><String name="Account"></String></xmlTag><!-- 帐号 -->
+				<xmlTag><String name="Amt"></String></xmlTag><!-- 交易金额 -->
+				<xmlTag><String name="Fee"></String></xmlTag><!-- 交易手续费 -->
+				<xmlTag><String name="TransCode"></String></xmlTag><!-- 交易代码-->
+				<xmlTag><String name="ChargeFlag"></String></xmlTag><!-- 记账状态 -->
+				<xmlTag><String name="ErrMsg"></String></xmlTag><!-- 错误代码 -->
+				<xmlTag><String name="AcqInstCode"></String></xmlTag><!-- 受理方机构标识 -->
+				<xmlTag><String name="HstAcct"></String></xmlTag><!-- 主机账号 -->
+				<xmlTag><String name="CheckFlag"></String></xmlTag><!-- 对账状态 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

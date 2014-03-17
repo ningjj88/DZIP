@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/config
+END
+event.xml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/event.xml
+END
+pe-config.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/pe-config.dtd
+END
+chain.xml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/chain.xml
+END
+sqlMapConfig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/sqlMapConfig.xml
+END
+initializer.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/initializer.xml
+END
+tcpServiceJCK_temp.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/tcpServiceJCK_temp.xml
+END
+peconfigdev_IC卡上线前.properties
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dzip/!svn/ver/186/DZIP_NEWDEDV/src/config/peconfigdev_IC%E5%8D%A1%E4%B8%8A%E7%BA%BF%E5%89%8D.properties
+END
+peconfigdev.properties
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/dzip/!svn/ver/186/DZIP_NEWDEDV/src/config/peconfigdev.properties
+END
+tcpService4CUPS.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/tcpService4CUPS.xml
+END
+dzipService.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/dzip/!svn/ver/276/DZIP_NEWDEDV/src/config/dzipService.xml
+END
+core.xml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/core.xml
+END
+peconfigdev.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/peconfigdev.xml
+END
+pe-configs.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dzip/!svn/ver/276/DZIP_NEWDEDV/src/config/pe-configs.xml
+END
+tcpService4fix8583.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/tcpService4fix8583.xml
+END
+tcpService4Counter.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/tcpService4Counter.xml
+END
+tcpService4ATM.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/dzip/!svn/ver/241/DZIP_NEWDEDV/src/config/tcpService4ATM.xml
+END
+tcpServiceATM_temp.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/tcpServiceATM_temp.xml
+END
+tcpService4JinCheng.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/tcpService4JinCheng.xml
+END
+tcpService4CUPS8583_temp.xml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/tcpService4CUPS8583_temp.xml
+END
+svc_corebankdb.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/svc_corebankdb.xml
+END
+baseAction.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/baseAction.xml
+END
+tcpService4PlatformAdmin.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/config/tcpService4PlatformAdmin.xml
+END
+svc_localdb.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/svc_localdb.xml
+END
+template.xml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/template.xml
+END
+tcpService4ONLI.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dzip/!svn/ver/276/DZIP_NEWDEDV/src/config/tcpService4ONLI.xml
+END
+scheduler.xml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/scheduler.xml
+END
+tcpService4CUPS8583.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dzip/!svn/ver/276/DZIP_NEWDEDV/src/config/tcpService4CUPS8583.xml
+END

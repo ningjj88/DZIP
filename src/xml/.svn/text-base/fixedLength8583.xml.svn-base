@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--仿8583定长报文格式定义  -->
+<FixedLengthISO8583>
+    <BANKID nullable="false" length="8" fixed="true" format="n" alias="" default="94002710" property = "行号编号"/>	<!--行号编号	-->
+	<MESG nullable="false" length="4" fixed="true" format="n" alias="HeadTxType" property = "消息类型"/>	<!--消息类型	-->
+	<PAN nullable="false" length="19" fixed="false" format="n" alias="ACCTNO" property = "主帐号"/>	<!--2#主帐号	-->
+	<PROC nullable="false" length="6" fixed="true" format="n" alias="PROCODE" property = "处理码"/>	<!--3#处理码	-->
+	<AMT nullable="false" length="12" fixed="false" format="n" alias="TRANAMT" default="000000000000" property = "交易金额"/>	<!--4#交易金额-->
+	<TRDT nullable="false" length="10" fixed="true" format="n" alias="TRANSDTTIME" property = "传输日期和时间"/><!--7#传输日期和时间 	-->
+	<TRAC nullable="false" length="6" fixed="true" format="n" alias="SYSTRACENUM" property = "系统跟踪号"/><!--11#系统跟踪号	-->
+	<LOCT nullable="false" length="6" fixed="true" format="n" alias="LOCTRANSTIME" property = "受卡方所在地时间"/><!--12#受卡方所在地时间 	-->
+	<LOCD nullable="false" length="4" fixed="true" format="n" alias="LOCTRANSDATE" property = "受卡方所在地日期"/><!--13#受卡方所在地日期	-->
+	<EXPI nullable="true" length="4" fixed="true" format="n" alias="EXPDAT" property = "卡有效期"/><!--14#卡有效期-->
+	<SETT nullable="true" length="4" fixed="true" format="n" alias="SETDATE" property = "清算日期"/><!--15#清算日期-->
+	<MERC nullable="false" length="4" fixed="true" format="n" alias="MERCHANTTYPE" property = "商户类型"/><!--18#商户类型-->
+	<POSE nullable="false" length="3" fixed="true" format="n" alias="SERENTRYMODE" property = "服务点输入方式码"/><!--22#服务点输入方式码	-->
+	<POSC nullable="false" length="2" fixed="true" format="n" alias="SERCONDCODE" property = "服务点条件码"/><!--25#服务点条件码	-->
+	<POSP nullable="false" length="2" fixed="true" format="n" alias="SERCAPCODE" default="06" property = "服务点PIN获取码"/><!--26#服务点PIN获取码-->
+	<FEE nullable="true" length="9" fixed="false" format="na" alias="TRANSFEE" property = "交易费"/><!--28#交易费-->
+	<ACQU nullable="false" length="11" fixed="false" format="nsp" alias="ACQCODE"  property = "受理机构标识码"/><!--32#收理机构标识码-->
+	<FORW nullable="false" length="11" fixed="false" format="nsp" alias="FORWARDCODE" property = "发送机构标识码"/><!--33#发送机构标识码-->
+	<TRACK2 nullable="false" length="37" fixed="false" format="35#" alias="TRACK2DATA" property = "第二磁道信息"/><!--35#第二磁道信息-->
+	<TRACK3 nullable="true" length="104" fixed="false" format="" alias="TRACK3DATA" property = "第三磁道信息"/><!--36#第三磁道信息-->
+	<RETR nullable="false" length="12" fixed="true" format="n" alias="RTVREFNUM" property = "索引参考号"/><!--37#索引参考号-->
+	<AUTH nullable="true" length="6" fixed="false" format="n" alias="AUTRESCOD" property = "授权码"/><!--38#授权码-->
+	<RESP nullable="true" length="2" fixed="false" format="n" alias="RESCODE" property = "应答码"/><!--39#应答码-->
+	<CATI nullable="false" length="8" fixed="true" format="n" alias="CARDACCID" property = "受卡方终端标识"/><!--41#受卡方终端标识-->
+	<CAID nullable="false" length="15" fixed="true" format="n" alias="CARDACCCODE" property = "受卡方标识码"/><!--42#受卡方标识码	-->
+	<CANL nullable="true" length="40" fixed="false" format="" alias="CARDACCNAME" property = "受卡方名称地址"/><!--43#受卡方名称地址-->
+	<ADDI nullable="true" length="512" fixed="false" format="" alias="ADDDATAPRI" property = "附加数据"/><!--48#附加数据	-->
+	<TRCU nullable="false" length="3" fixed="true" format="n" alias="CURCODE" default="156" property = "交易货币代码"/><!--49#交易货币代码-->
+	<PIN nullable="true" length="16" fixed="true" format="na" alias="PINDATA" property = "个人标识码数据"/><!--52#个人标识码数据-->
+	<SECU nullable="true" length="16" fixed="false" format="" alias="SECURCONTRINFO" property = "安全控制信息"/><!--53#安全控制信息-->
+	<RETU nullable="true" length="40" fixed="true" format="na" alias="BALAMT" property = "实际余额"/><!--54#实际余额-->
+	<RESE nullable="true" length="30" fixed="false" format="" alias="REACODE" default="0000" property = "自定义域"/><!--60#自定义域-->
+	<IDEN nullable="true" length="31" fixed="false" format="" alias="IDENNUMBE" property = "持卡人身份认证信息"/><!--61#持卡人身份认证信息	-->
+	<ORIG nullable="true" length="42" fixed="false" format="" alias="ORGDATA" property = "原始数据元"/><!--90#原始数据元-->
+	<DEST nullable="false" length="11" fixed="false" format="nsp" alias="RCVCODE" default="" property = "接收机构标识码"/><!--100#接收机构标识码	-->
+	<ACCID1 nullable="true" length="28" fixed="false" format="" alias="ACCIDEN1" property = "帐户标识1"/><!--102#帐户标识1	-->
+	<ACCID2 nullable="true" length="28" fixed="false" format="" alias="ACCIDEN2" property = "帐户标识2"/><!--103#帐户标识2	-->
+	<NAIT_RESE nullable="true" length="100" fixed="false" format="" alias="NANSCRESERVE" property = "交换中心保留"/><!--121#交换中心保留	-->
+	<ACQU_RESE nullable="true" length="100" fixed="false" format="" alias="ACQRESERVE" property = "受理方保留"/><!--122#受理方保留	-->
+	<DEST_RESE nullable="true" length="100" fixed="false" format="" alias="ISURESERVE" property = "发卡方保留"/><!--123#发卡方保留 	-->
+	<MAC nullable="false" length="16" fixed="true" format="na" alias="MESAUTHCD" default="9400270004296510" property = "MAC" /><!--MAC#MAC-->
+	<CACC nullable="false" length="8" fixed="true" format="n" alias="" default="94002710" property = "受理方编号	"/><!--CACC#受理方编号	-->
+	<ISS1 nullable="true" length="8" fixed="true" format="n" alias="" default="" property = "发卡行1编号"/><!--ISS1#发卡行1编号 	-->
+	<ISS2 nullable="true" length="8" fixed="true" format="n" alias="" default="" property = "发卡行2编号"/><!--ISS2#发卡行2编号	-->
+</FixedLengthISO8583>

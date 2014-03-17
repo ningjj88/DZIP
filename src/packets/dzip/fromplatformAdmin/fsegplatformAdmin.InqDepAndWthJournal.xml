@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xujin
+    date 2010-04-23
+-->
+<segment>
+	<xmlTag><String name="RtxnCatCd" /></xmlTag><!--业务性质  -->
+	<xmlTag><String name="PostDate"/></xmlTag><!--交易日期-->
+</segment>

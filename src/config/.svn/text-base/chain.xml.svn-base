@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	责任链配置文件
+	
+	by 张永庆	since:2010-05-20
+
+-->
+<config>
+
+	<!--  Public Chain -->
+	<chain id="emptyChain">
+		<commands>
+		</commands>
+	</chain>
+	
+	<chain id="chainForPublic">
+		<commands>
+			<ref>validationCommand</ref>
+			<ref>delegateCommand</ref>
+		</commands>
+	</chain>
+	
+	<chain id="chainForRoleControl">
+		<commands>
+			<!--<ref>roleControlCommand</ref>-->
+			<ref>validationCommand</ref>
+			<ref>ruleCommand</ref>
+			<ref>delegateCommand</ref>
+			<ref>monitorCommand</ref>
+		</commands>
+	</chain>
+
+	<!-- End of Role Control Chain -->
+	<command id="dummyCommand" class="com.csii.pe.chain.command.DummyCommand" />
+	<command id="delegateCommand" class="com.csii.pe.chain.command.DelegateCommand" />
+	<command id="validationCommand" class="com.csii.pe.chain.command.StyleValidationCommand" />
+	<command id="ruleCommand" class="com.csii.pe.chain.command.RuleCommand" />
+
+<!--	<command id="roleControlCommand" class="com.csii.pe.chain.command.AccessControlCommand">-->
+<!--		<list name="policies">-->
+<!--			<ref>jdbcRoleControlPolicy</ref>-->
+<!--		</list>-->
+<!--	</command>-->
+<!--	-->
+<!--	<bean id="jdbcRoleControlPolicy" class="com.csii.payment.common.TellerRolePolicy">-->
+<!--	</bean>-->
+
+	<command id="monitorCommand" class="com.csii.pe.monitor.activity.FilterMonitorCommand">
+		<ref name="eventDispatcher">eventDispatcher</ref>
+		<param name="ignorePattern">^(pre[0-9a-zA-Z]*)|([0-9a-zA-Z]*Confirm)$</param>
+		<param name="fields"> Amount AcNo=Account AcNo2=Account </param>
+	</command>
+
+</config>

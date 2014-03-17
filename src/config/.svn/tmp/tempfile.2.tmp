@@ -1,0 +1,344 @@
+# **********************************************************
+#	system&app parameters definition.
+#
+#   ��Ʒϵͳ����
+#
+#   ������  2010-05-19
+#
+# **********************************************************
+
+
+
+
+#=============================ǰ����ݿ������=============================#
+ibsdbDataSource.driverClassName = oracle.jdbc.OracleDriver
+ibsdbDataSource.url = jdbc:oracle:thin:@192.168.20.6:1521:devdb2
+ibsdbDataSource.username = dzip
+ibsdbDataSource.password = 8ffe7566be6557dcf65361b0d165314d9144d744a42919989af598409d6e6190e7cfb720f05e4a27ac16ad4e2091fc49efef3fd56612025688db3fbe0f794d2179422d810f14f45a09c008c1ec7d1d242060a008017fd48b2cd2831f2133cfb8f78782bfc275966e35c058f66179a5b4ca1b92a19075c78a93ddcf336c0802a1
+#dzip:8ffe7566be6557dcf65361b0d165314d9144d744a42919989af598409d6e6190e7cfb720f05e4a27ac16ad4e2091fc49efef3fd56612025688db3fbe0f794d2179422d810f14f45a09c008c1ec7d1d242060a008017fd48b2cd2831f2133cfb8f78782bfc275966e35c058f66179a5b4ca1b92a19075c78a93ddcf336c0802a1
+ibsdbDataSource.maxActive =24
+#=============================������ݿ������=============================#
+corebankdbDataSource.driverClassName = oracle.jdbc.OracleDriver
+corebankdbDataSource.url = jdbc:oracle:thin:@192.168.20.6:1521:devdb
+corebankdbDataSource.username = osibank
+corebankdbDataSource.password = 49e7801ecc7d3336e7b353457774c5afa70abc999f01cfebea77688eac00b7f15a1ca425ca738afdfc506625340d084bfc120555d4922a8b844ee150adf1b556fae23d664b751a1eaa9fc5a301bc05334cafa454f282acc6ca1e35fb9881e7e76323438009932e59133e70c0611a6ef15968a83e88865413ff5fe3445aea1e78
+#coreuser:40b9ff878e6da0707d5c2f7d745b18120b88339bcb74a9d96c8af2c6fe802f1a03ffb48841162d0732cf36f98f4895e94c0250609f7b81dec76f81e4e18b62057c0c4fdaec539dde2aedfe6ca4796ff2c041890e7109d9a7d0cfef9453105668aa1ccae4707597d4e0f16b06920a7359d6f20ffb97ee18e5e2476e7f7d2a60c8
+#osibank:49e7801ecc7d3336e7b353457774c5afa70abc999f01cfebea77688eac00b7f15a1ca425ca738afdfc506625340d084bfc120555d4922a8b844ee150adf1b556fae23d664b751a1eaa9fc5a301bc05334cafa454f282acc6ca1e35fb9881e7e76323438009932e59133e70c0611a6ef15968a83e88865413ff5fe3445aea1e78
+corebankdbDataSource.readtimeout=60000
+corebankdbDataSource.maxActive =24
+
+#==========================�ۺ�ǰ��ƽ̨����===========================#
+
+platformAdmin.tcp.id = PLATFORMADMIN
+platformAdmin.tcp.name = PLATFORMADMIN-Server
+platformAdmin.tcp.port = 20000
+platformAdmin.tcp.socketTimeout = 0
+
+platformAdmin.threadPool.name = PLATFORMADMIN-APP-ThreadPool
+platformAdmin.threadPool.initSize = 50
+platformAdmin.threadPool.maxSize = 100
+platformAdmin.threadPool.minSize = 50
+platformAdmin.threadPool.queueSize = 100
+platformAdmin.threadPool.keepAliveTime = 300
+
+platformAdmin.TransformerFactory.debug = true
+platformAdmin.TransformerFactory.cacheEnable = true
+platformAdmin.XmlPacketParser.debug = true
+
+platformAdmin.serverHandler.debug = true
+platformAdmin.serverHandler.dumpPath = C:\\tmpPlatformAdmin\\
+
+platformAdmin.serverHandler.endTagName = Message
+
+platformAdmin.serverHandler.maxErrorMessageLength = 200
+platformAdmin.serverHandler.errorMessageEncoding = UTF-8
+platformAdmin.serverHandler.defaultMappingCode = 9999
+platformAdmin.clearHistoryMaxDateRange=30
+platformAdmin.clearHistoryDay=30
+
+#柜面通XML格式报文解析
+#==========================系统接入渠道定义===========================#
+
+counter.tcp.id = COUNTERXML
+counter.tcp.name = InBound-COUNTERXML-Server
+counter.tcp.port = 19999
+counter.tcp.socketTimeout = 0
+
+counter.threadPool.name = COUNTERXML-APP-ThreadPool
+counter.threadPool.initSize = 50
+counter.threadPool.maxSize = 100
+counter.threadPool.minSize = 50
+counter.threadPool.queueSize = 100
+counter.threadPool.keepAliveTime = 300
+
+counter.TransformerFactory.debug = true
+counter.TransformerFactory.cacheEnable = true
+counter.XmlPacketParser.debug = true
+
+counter.serverHandler.debug = true
+counter.serverHandler.dumpPath = c:/tmpCounter
+
+counter.serverHandler.endTagName = ROOT
+
+counter.serverHandler.maxErrorMessageLength = 80
+counter.serverHandler.errorMessageEncoding = UTF-8
+counter.serverHandler.defaultMappingCode = 99999
+
+#==========================系统接入渠道定义===========================#
+#==========================��jǰ�ý������6��壨�䳤8583��===========================#
+CUPS8583.tcp.soketTimeout = 0
+CUPS8583.tcp.name = Inbound-CUPS8583-Server
+CUPS8583.tcp.id = CUPS8583
+
+CUPS8583.tcpclient.host=192.168.20.228
+CUPS8583.tcpServer.port=8005,8006,8007,8008
+CUPS8583.tcpServer.timeout=120000
+CUPS8583.tcpclient.portlist=8001,8002,8003,8004
+
+CUPS8583.tcpclient.timeout=15000
+CUPS8583.tcpclient.idle=60000
+CUPS8583.tcpclient.idlestring=0000
+
+CUPS8583.queueStream.name = Inbound-CUPS8583-QueueStream
+CUPS8583.queueStream.type = cupsIso
+CUPS8583.queueTcpServer.name = Inbound-CUPS8583-QueueTcpServer
+
+CUPS8583.threadPool.name = UDF-APP-ThreadPool
+CUPS8583.threadPool.initSize = 20
+CUPS8583.threadPool.maxSize = 40
+CUPS8583.threadPool.minSize = 20
+CUPS8583.threadPool.queueSize = 20
+CUPS8583.threadPool.keepAliveTime = 500
+CUPS8583.tcp.idle = 50000
+CUPS8583.tcp.idlestring = 0000
+CUPS8583.serverHandler.debug = false
+CUPS8583.serverHandler.dumpPath = /home/redhat/csii/deployment/channel/dzip/tmp
+
+CUPS8583.detailCheck.ftpHost = 192.168.0.10
+CUPS8583.detailCheck.ftpPort=21
+CUPS8583.detailCheck.ftpUserName = rptdz3
+CUPS8583.detailCheck.ftpPassWord = password
+CUPS8583.detailCheck.remoteFilePath =
+CUPS8583.detailCheck.localFilePath =C:\\FTP_Audit\\YLQZ\\
+
+CUPS8583.serverHandler.maxErrorMessageLength = 40
+CUPS8583.serverHandler.errorMessageEncoding = GBK
+CUPS8583.serverHandler.defaultMappingCode = 99999
+
+CUPS8583.serverHandler.headLength = 4
+CUPS8583.serverHandler.offsetOfLengthField = 0
+CUPS8583.serverHandler.type = LLLL
+CUPS8583.serverHandler.headIncluded = false
+
+CUPS8583.TransformerFactory.debug = true
+CUPS8583.TransformerFactory.cacheEnable = true
+
+CUPS8583.pinSecurityModule.bankpinkey=7229F9D30656652A
+CUPS8583.pinSecurityModule.mackey=1AFEAD0492191ACD
+
+common.pinSecurityModule.ip=10.136.6.1
+common.pinSecurityModule.port=17102
+common.pinSecurityModule.macFields=HeadTxType,PrimaryAcct,ProcessCode,TranAmt,TranDateTime,TraceNum,MerchType,PosCondCode,TranFeeAmt,AcqCode,FwdCode,AuthResp,RespCode,AccpTermId,AccpId,NetwkCode,OrigDataElemts,RcvCode,AcctId1,AcctId2,SettlmtCode,CreditsFeeAmt,DebitsFeeAmt,CreditsAmt,CreditsRevsalAmt,DebitsAmt,DebitsRevsalAmt,SettlmtNetAmt
+common.pinSecurityModule.devm=b2e103027d7f251a4d10555281091473a28322f4e5d884efbd6e1343e0f638c1fc784bbc74e3f41b748885742475e744157c02bfd683500ac4cf54f4a134a6a15480609c61785e0812146a55a43d2eb58db857f2bbdb5ed9d919290a1bedd4ff66eb21b6b4160897acf1a4ad2fe1c336ebfd9f10047dca18b289831ce86cb955
+common.pinSecurityModule.deve=10001
+common.pinSecurityModule.m=b901736503ca676b2c1542e3abb930fd90c862f6a5b28dff2d57aef79096cc49a9f1810f2632256398dbc230923e07e9651926f35c2acd07c7b727400f4d76b289f8e455d49990474562b8133a902f2ae224379143271da28763d21fb840db7f6e3c0b186ccd21ed17f628786561e3dbdab09d12e9782d8e92fea6afdcb03db3
+common.pinSecurityModule.e=10001
+common.pinSecurityModule.HSM=false
+
+#==========================��ǿ�ǰ�ý������6��壨����8583��===========================#
+jincheng.tcpclient.host=192.168.1.157
+
+jincheng.tcpServer.port=60005
+jincheng.tcpclient.port=60001,8012
+jincheng.tcp.id = JINCHENG
+jincheng.tcp.name = JINCHENG-Server
+jincheng.tcpclient.timeout=15000
+jincheng.tcp.socketTimeout = 0
+#��ʱ��,������ɾ��#
+jincheng.tcp.port_temp=28221
+jincheng.tcp.id_temp = JINCHENG_temp
+jincheng.tcp.name_temp = JINCHENG-Server_temp
+jincheng.tcpclient.timeout_temp=15000
+jincheng.tcp.socketTimeout_temp = 0
+#************************************************#
+
+jincheng.queueStream.name = JINCHENG-QueueStream
+jincheng.queueStream.type = jincheng
+jincheng.queueTcpServer.name = JINCHENG-QueueTcpServer
+jincheng.singleTcpClient.name = JINCHENG-SingleTcpClient
+
+jincheng.tcpclient.idle=0000
+jincheng.tcpclient.idlestring=0000
+
+jincheng.threadPool.name = JINCHENG-APP-ThreadPool
+jincheng.threadPool.initSize = 20
+jincheng.threadPool.maxSize = 40
+jincheng.threadPool.minSize = 20
+jincheng.threadPool.queueSize = 40
+jincheng.threadPool.keepAliveTime = 300
+
+jincheng.TransformerFactory.debug = true
+jincheng.TransformerFactory.cacheEnable = true
+jincheng.XmlPacketParser.debug = true
+
+jincheng.serverHandler.headLength = 4
+jincheng.serverHandler.offsetOfLengthField = 0
+jincheng.serverHandler.type = LLLL
+jincheng.serverHandler.headIncluded = false
+
+jincheng.serverHandler.debug = true
+jincheng.serverHandler.dumpPath = /home/redhat/csii/deployment/channel/dzip/tmpJinCheng
+
+jincheng.serverHandler.maxErrorMessageLength = 80
+jincheng.serverHandler.errorMessageEncoding = UTF-8
+jincheng.serverHandler.defaultMappingCode = 99999
+
+#==========================��jǰ�ý������6��壨����8583��===========================#
+cups.tcp.host.ip=192.168.1.228
+cups.tcp.id = CUPS
+cups.tcp.name = CUPS-Server
+cupsClient.tcp.port = 55789
+cupsServer.tcp.port = 28001
+cups.tcp.socketTimeout = 60000
+
+cups.threadPool.name = CUPS-APP-ThreadPool
+cups.threadPool.initSize = 50
+cups.threadPool.maxSize = 100
+cups.threadPool.minSize = 50
+cups.threadPool.queueSize = 100
+cups.threadPool.keepAliveTime = 300
+
+cups.TransformerFactory.debug = true
+cups.TransformerFactory.cacheEnable = true
+cups.XmlPacketParser.debug = true
+
+cups.serverHandler.headLength = 4
+cups.serverHandler.offsetOfLengthField = 0
+cups.serverHandler.type = LLLL
+cups.serverHandler.headIncluded = false
+
+cups.serverHandler.debug = true
+cups.serverHandler.dumpPath =/home/redhat/csii/deployment/channel/dzip/tmpCUPS
+
+cups.serverHandler.maxErrorMessageLength = 80
+cups.serverHandler.errorMessageEncoding = UTF-8
+cups.serverHandler.defaultMappingCode = 99999
+
+#==========================ATM���=��붨�壨�䳤8583��===========================#
+iudf.tcp.soketTimeout = 0
+iudf.tcp.id_bak = IUDF_bak
+iudf.tcp.name = Inbound-IUDF-Server
+iudf.atmp.host=192.168.1.100
+
+iudf.atmp.port=6302
+iudf.tcp.port_bak = 6301
+iudf.tcp.id = IUDF
+
+iudf.queueStream.name = Inbound-IUDF-QueueStream
+iudf.queueStream.type = iudf_bak
+iudf.queueTcpServer.name = Inbound-IUDF-QueueTcpServer
+iudf.singleTcpClient.name = Inbound-IUDF-SingleTcpClient
+
+
+iudf.atmp.timeout=15000
+iudf.atmp.idle=60000
+iudf.atmp.idlestring=0000
+
+iudf.threadPool.name = UDF-APP-ThreadPool
+iudf.threadPool.initSize = 20
+iudf.threadPool.maxSize = 40
+iudf.threadPool.minSize = 20
+iudf.threadPool.queueSize = 20
+iudf.threadPool.keepAliveTime = 500
+
+iudf.serverHandler.debug = false
+iudf.serverHandler.dumpPath = /home/redhat/csii/deployment/channel/dzip/tmp
+
+iudf.serverHandler.maxErrorMessageLength = 40
+iudf.serverHandler.errorMessageEncoding = GBK
+iudf.serverHandler.defaultMappingCode = 99999
+
+iudf.serverHandler.headLength = 4
+iudf.serverHandler.offsetOfLengthField = 0
+iudf.serverHandler.type = LLLL
+iudf.serverHandler.headIncluded = false
+
+iudf.TransformerFactory.debug = true
+iudf.TransformerFactory.cacheEnable = true
+
+
+cups.rcvg.inst.id.code = 00010000
+jck.rcvg.inst.id.code = 04296501
+iudf.acqr.inst.id.code = 04296750
+iudf.fwrd.inst.id.code = 04296510
+iudf.othercard.channID=005
+
+#���ܻ���ܲ�������#
+iudf.decryptSecApi.csmp=192.168.1.135
+iudf.decryptSecApi.port=6667
+iudf.decryptSecApi.clnt=192.168.1.135
+iudf.decryptSecApi.timeout=15
+iudf.decryptSecApi.headlen=0
+iudf.decryptSecApi.taillen=0
+iudf.decryptSecApi.errlv=1
+iudf.decryptSecApi.logpath=C:/tmpSecApi/
+
+iudf.decryptSecApi.pinforemat=0x01
+iudf.decryptSecApi.pwdlen=6
+iudf.decryptSecApi.piklen=0x01
+iudf.decryptSecApi.keylen=8
+iudf.decryptSecApi.bankpindex=668
+iudf.decryptSecApi.bankpinkey=7229F9D30656652A
+iudf.decryptSecApi.pinkey=ca9b0863d033f918
+#D830C9271204DB50
+iudf.decryptSecApi.mackey=7117FFFF50FB15BE
+#==========================���˹������ã���ǿ���===========================#
+audit.JCK.ftpServer.ip=192.168.0.11
+audit.JCK.ftpServer.port=21
+audit.JCK.ftp.userName = limingyang
+audit.JCK.ftp.passWord = limingyang
+audit.JCK.remote.path=
+audit.JCK.loclal.path= C:\\FTP_Audit\\JCK\\
+#==========================���˹������ã���jǰ�ã�========================#
+audit.YLQZ.ftpServer.ip=192.168.20.210
+audit.YLQZ.ftpServer.port=21
+audit.YLQZ.ftp.userName = card
+audit.YLQZ.ftp.passWord = card
+audit.YLQZ.remote.path=\\YLQZ\\
+audit.YLQZ.loclal.path= C:\\FTP_Audit\\YLQZ\\
+
+#==========================日志输出配置========================#
+log.root.level=DEBUG
+log.path=c:/logs_dzip/dzip
+
+#=========================������������ϵͳ����=========================#
+soketTimeout=60000
+csii.log.fileUrl= C:\\log\\mylog\\
+event.udpTransport.address = 230.0.0.1
+event.udpTransport.port = 22000
+
+
+#==========================ϵͳ�������6���===========================#
+#event
+event.udpTransport.address = 230.0.0.1
+event.udpTransport.port = 22000
+
+#=========================银联数据验证IC卡===========================#
+TCPR001.TcpTransport.headLength=4
+TCPR001.TcpTransport.offsetOfLengthField=0
+TCPR001.TcpTransport.type=LLLL
+TCPR001.TcpTransport.headIncluded=false
+TCPR001.TcpTransport.host=192.168.1.7
+TCPR001.TcpTransport.port=28001
+TCPR001.TcpTransport.timeout=60000
+
+cupsdata.TransformerFactory.debug=false
+cupsdata.TransformerFactory.cacheEnable=true
+
+cupsdata.BaseTwoPhaseAction.IdFactoryName=IdFactory
+cupsdata.BaseQueryAction.IdFactoryName=IdFactory
+
+cupsdata.TransformerTransport.transport=TCPR001.TcpTransport
+cupsdata.TransformerTransport.debug=false
+cupsdata.TransformerTransport.dumpPath=c:/tmp
+#=========================银联数据验证IC卡===========================#

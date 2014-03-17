@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+
+<!-- 收到银联发来本带他ATM查询交易响应报文 -->
+<mapAlias name="parse">
+        <elementAlias name="COUNTRYCD"  alias="bit19" /><!-- 国家代码 -->
+        <elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->	
+		<elementAlias name="BALAMT"  alias="bit54" /><!-- 实际余额 -->
+		<elementAlias name="ICCSYSRELDATA"  alias="bit55" /><!-- 基于PBOC借贷记标准的IC卡数据域-->
+		<elementAlias name="ADD_DATA_PRI"  alias="bit57" /> <!--附加交易信息  -->
+		<elementAlias name="IDENNUMBE"  alias="bit61" /> <!--证件编号-->
+		<elementAlias name="RCVCODE"  alias="bit100" /> <!-- 接收方机构码-->
+		<elementAlias name="NANSCRESERVE"  alias="bit121" /><!--  CUPS 保留-->
+</mapAlias>

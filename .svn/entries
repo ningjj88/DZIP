@@ -1,0 +1,61 @@
+8
+
+dir
+308
+https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV
+https://192.168.20.210:8443/svn/dzip
+
+
+
+2014-03-10T06:34:44.022625Z
+308
+zengli
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0e52adb7-1c73-714e-b5c1-db04d86b8944
+
+.classpath
+file
+
+
+
+
+2013-10-14T06:50:00.000000Z
+716f18d87988b825e8cfabe42d4dbb09
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+.project
+file
+
+
+
+
+2013-10-14T06:50:00.000000Z
+149aeb12f6d97f470ec1fc3df81feb8c
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+lib
+dir
+
+src
+dir
+
+.settings
+dir
+

@@ -1,0 +1,281 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/dzip/!svn/ver/197/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin
+END
+fsegplatformAdmin.ManagementFeeCodex.xml
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.ManagementFeeCodex.xml
+END
+fsegplatformAdmin.QueryFileInfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.QueryFileInfo.xml
+END
+fsegplatformAdmin.GetFeeCodex.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.GetFeeCodex.xml
+END
+fsegplatformAdmin.AuditExcute.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.AuditExcute.xml
+END
+fsegplatformAdmin.ImportFtpFile.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.ImportFtpFile.xml
+END
+fsegplatformAdmin.ClearDataOnLine.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.ClearDataOnLine.xml
+END
+fsegplatformAdmin.GetCurrentPostDate.xml
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.GetCurrentPostDate.xml
+END
+fsegplatformAdmin.GetICJournal4Print.xml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.GetICJournal4Print.xml
+END
+packetutf8.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/packetutf8.dtd
+END
+fsegplatformAdmin.ImportTaskList.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.ImportTaskList.xml
+END
+fsegplatformAdmin.GetChannelTran.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.GetChannelTran.xml
+END
+InboundPacketRes.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dzip/!svn/ver/197/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/InboundPacketRes.xml
+END
+fsegplatformAdmin.DaySwicth.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.DaySwicth.xml
+END
+fsegplatformAdmin.ValidateICData.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/dzip/!svn/ver/185/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.ValidateICData.xml
+END
+fsegplatformAdmin.TranJournalBatch.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.TranJournalBatch.xml
+END
+fsegplatformAdmin.QueryICEwalletctl.xml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.QueryICEwalletctl.xml
+END
+fsegplatformAdmin.UpdChannelTypTran.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.UpdChannelTypTran.xml
+END
+xmltagmapping.properties
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/xmltagmapping.properties
+END
+fsegplatformAdmin.DoICErrorHandle.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.DoICErrorHandle.xml
+END
+fsegplatformAdmin.UpdChannelTran.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.UpdChannelTran.xml
+END
+fsegplatformAdmin.GetChannel.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.GetChannel.xml
+END
+InboundPacketResError.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/InboundPacketResError.xml
+END
+fsegplatformAdmin.QueryImportFileInfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.QueryImportFileInfo.xml
+END
+fsegplatformAdmin.DoOffLinePreAuthComp.xml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.DoOffLinePreAuthComp.xml
+END
+fsegplatformAdmin.UpdChannelTyp.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.UpdChannelTyp.xml
+END
+xmlaliasmapping.properties
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/xmlaliasmapping.properties
+END
+fsegplatformAdmin.DownLoadFtpFile.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.DownLoadFtpFile.xml
+END
+fsegplatformAdmin.InqDepAndWthJournal.xml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.InqDepAndWthJournal.xml
+END
+fsegplatformAdmin.UpdChannel.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.UpdChannel.xml
+END
+fsegplatformAdmin.DoICJournalCharge.xml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.DoICJournalCharge.xml
+END
+fsegplatformAdmin.DoICJournalStatistics.xml
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.DoICJournalStatistics.xml
+END
+fsegplatformAdmin.GetICJournal4Charge.xml
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.GetICJournal4Charge.xml
+END
+fsegplatformAdmin.DoSingleICJournalCharge.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.DoSingleICJournalCharge.xml
+END
+fsegplatformAdmin.InqJournalHistInfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.InqJournalHistInfo.xml
+END
+fsegplatformAdmin.Monitor.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.Monitor.xml
+END
+fsegplatformAdmin.InqJCKAuditDetail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.InqJCKAuditDetail.xml
+END
+fsegplatformAdmin.GetChannelTypTran.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.GetChannelTypTran.xml
+END
+fsegplatformAdmin.QueryAudit.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.QueryAudit.xml
+END
+fsegplatformAdmin.QueryTaskStatus.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.QueryTaskStatus.xml
+END
+fsegplatformAdmin.InqJournalInfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.InqJournalInfo.xml
+END
+fsegplatformAdmin.QueryJournalBatch.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.QueryJournalBatch.xml
+END
+fsegplatformAdmin.ClearDataHistory.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.ClearDataHistory.xml
+END
+fsegplatformAdmin.generalAudit.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.generalAudit.xml
+END
+fsegplatformAdmin.InqBrandSvChDetail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.InqBrandSvChDetail.xml
+END
+fsegplatformAdmin.GetChannelTyp.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.GetChannelTyp.xml
+END
+fsegplatformAdmin.ImportJournalBatch.xml
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin/fsegplatformAdmin.ImportJournalBatch.xml
+END

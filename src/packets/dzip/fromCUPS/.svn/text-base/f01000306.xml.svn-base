@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- ATM取款交易报文 -->
+<iso8583Packet  >
+
+	<bitMap defaultValue="2,3,4,7,11,12,13,18,22,25,26,32,33,35,36,37,41,42,43,49,52,53,60,61" />
+	<include include="i8583fields" ></include>
+	
+	<mapAlias name="format">	
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="EXPDAT"  alias="bit14" defaultValue="5012" /><!--卡有效期  -->
+		<elementAlias name="SERENTRYMODE"  alias="bit22" /><!-- 服务点输入方式码 -->	
+		<elementAlias name="TRACK2DATA"  alias="bit35" /><!-- 第二磁道数据 -->
+		<elementAlias name="TRACK3DATA"  alias="bit36" /> <!--第 三磁道数据  -->	
+		<elementAlias name="CARDACCCODE"  alias="bit42"  /><!--受卡方标识码  -->
+		<elementAlias name="PINDATA"  alias="bit52" /><!-- 个人标识码数据 -->
+		<elementAlias name="SECURCONTRINFO"  alias="bit53" /><!--  安全控制信息-->		
+	    <elementAlias name="BALAMT"  alias="bit54"  /><!-- 余额 -->
+		<elementAlias name="REACODE"  alias="bit60"  defaultValue = "20000000010000"/><!--  自定义域-->
+	    <elementAlias name="IDENNUMBE"  alias="bit61" defaultValue="00000000000000000000000"  /> <!--证件编号-->
+	    <elementAlias name="RCVCODE"  alias="bit100" /><!--接收机构标识码 -->
+	   	<elementAlias name="MESAUTHCD"  alias="bit128" /> <!--MAC-->
+	</mapAlias>
+</iso8583Packet>

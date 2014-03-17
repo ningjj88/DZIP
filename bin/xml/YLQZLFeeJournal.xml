@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fields>
+    <field name="OGRCD1" format="ALL" length="11" digit="0" /><!-- 发卡方一级分行代码 -->
+    <field name="YLFlAG" format="ALL" length="1" digit="0" /><!-- 是否银联标准卡c-->
+    <field name="DCFlAG" format="ALL" length="2" digit="0" /><!-- 借贷记卡标志d-->
+    <field name="TTPY" format="ALL" length="2" digit="0" /><!-- 终端类型-->
+    <field name="CMED" format="ALL" length="1" digit="0" /><!--卡介质e -->
+    <field name="TDI" format="ALL" length="1" digit="0" /><!--交易地域标志  -->
+    <field name="MERC" format="ALL" length="4" digit="0" /><!--商户类型-->
+    <field name="OGRCD2" format="ALL" length="11" digit="0" /><!-- 发卡方二级分行代码 -->
+	<field name="ACQU" format="ALL" length="11" digit="0" /><!-- 收理机构标识码 -->
+	<field name="FORW" format="ALL" length="11" digit="0" /><!-- 发送机构标识码 -->
+	<field name="ISS1" format="ALL" length="11" digit="0" /><!--发卡机构标识 -->
+	<field name="DEST" format="ALL" length="11" digit="0" /><!--接收机构标识  -->
+	<field name="ACD" format="ALL" length="11" digit="0" /><!--收单机构标识  -->
+	<field name="MESG" format="ALL" length="4" digit="0" /><!--消息类型  -->
+	<field name="PROC" format="ALL" length="6" digit="0" /><!-- 处理码 -->
+	<field name="POSC" format="ALL" length="2" digit="0" /><!--服务点条件码  -->
+	<field name="TRAC" format="ALL" length="6" digit="0" /><!--系统跟踪号  -->
+	<field name="TRDT" format="ALL" length="10" digit="0" /><!-- 传输日期和时间-->
+	<field name="PAN"  format="ALL" length="19" digit="0" /><!--主帐号 -->
+	<field name="ACCID1"  format="ALL" length="28" digit="0" /><!--转出卡号  -->
+	<field name="ACCID2"  format="ALL" length="28" digit="0" /><!--转入卡号 -->
+	<field name="ORIGDATA"  format="ALL" length="42" digit="0" /><!--原始交易信息 -->
+	<field name="CATI" format="ALL" length="8" digit="0" /><!--受卡方终端标识 -->
+	<field name="CAID" format="ALL" length="15" digit="0" /><!--受卡方标识码  -->
+	<field name="RETR" format="ALL" length="12" digit="0" /><!-- 索引参考号 -->
+	<field name="AMT"  format="ALL" length="12" digit="100" /><!-- 交易金额  -->
+	<field name="PDG3" format="ALFEE" length="12" digit="100" /><!--受理方手续费 -->
+	<field name="PDG4" format="ILFEE" length="12" digit="100" /><!--发卡方手续费 -->
+	<field name="PDG1" format="ALFEE" length="12" digit="100" /><!--受理方品牌服务费收入-->
+	<field name="PDG2" format="ILFEE" length="12" digit="100" /><!--发卡方品牌服务费支出 -->
+	<field name="RTT" format="ALL" length="12" digit="0" /><!--保留使用-->
+    <field name="PDG5" format="ALL" length="13" digit="100" /><!--净金额m-->
+</Fields>

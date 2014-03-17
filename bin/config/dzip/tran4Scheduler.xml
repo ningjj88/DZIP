@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "pe-config.dtd">
+<!--
+
+	时间表处理的Action
+	
+	author:张永庆	since:2011-03-2
+
+-->
+
+<config namespace="scheduler">
+	<action id="SchedulerAction" class="csii.dzip.action.scheduler.SchedulerAction" >
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="collectData">dzip.CollectData</ref>
+		<param name="localFilepath">${CUPS8583.detailCheck.localFilePath}</param>
+		<param name="tmpFilepath">${platformAdmin.serverHandler.dumpPath}</param>
+	</action>
+	<transaction id="Scheduler" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">SchedulerAction</ref>
+		</actions>
+    </transaction>
+</config>

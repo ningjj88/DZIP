@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+
+	ATM交易
+
+	by 张永庆	since:2010-06-20
+
+-->
+<sqlMap namespace="atm">
+
+	<!--别名设置-->
+	<typeAlias alias="result" type="java.util.HashMap" />
+	<typeAlias alias="param" type="java.util.HashMap" />
+	<typeAlias alias="integer" type="java.lang.Integer" />
+
+	<!--========================达州商行本行卡ATM存款/取款,查询交易，调用核心存储过程 ===================-->
+	 <parameterMap id="atmTxnParameters" class="param">
+		<parameter property="in_TranCode" jdbcType="VARCHAR" javaType="string" mode="IN" />
+        <parameter property="in_XML" jdbcType="VARCHAR" javaType="string" mode="IN" />
+        <parameter property="in_XMLCnt" jdbcType="INTEGER" javaType="integer" mode="IN" />
+		<parameter property="out_XML" jdbcType="VARCHAR" javaType="string"  mode="OUT" />
+		<parameter property="out_XMLCnt" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_OraErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="atmTxn" parameterMap="atmTxnParameters" resultClass="result">
+		 { call PACK_ATM_TXN.PROC_ATM_TXN(?,?,?,?,?,?,?,?)}
+	</procedure>
+
+	<!-- ============================达州商行本行卡ATM 存款确认交易 ==================================-->
+ 	<parameterMap id="ConfirmDepositParameters" class="param">
+		<parameter property="in_OrigSysTraceNum" jdbcType="VARCHAR" javaType="string"  mode="IN" />
+		<parameter property="in_OrigSysDateTime" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_OrigAcquIdCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_OrigForwardIdCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="out_DepositSuccYN" jdbcType="VARCHAR"  javaType="string"  mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR"  javaType="string"  mode="OUT" />
+	</parameterMap>
+	<procedure id="ConfirmDeposit" parameterMap="ConfirmDepositParameters" resultClass="result">
+		 { call PACKGEN_CARDZ.confirmDeposit(?,?,?,?,?,?,?)}
+	</procedure>
+
+	<!-- ============================达州商行本行卡ATM 改密交易 ====================================-->
+ 	<parameterMap id="UpdCardPasswordParameters" class="param">
+		<parameter property="in_Pan" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_Track2" jdbcType="VARCHAR" javaType="string" mode="IN" />
+        <parameter property="in_ChgOrReset" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_OldPassword" jdbcType="VARCHAR" javaType="string"  mode="IN" />
+		<parameter property="in_NewPassword" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_RTXNSOURCECD" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="out_RESPONCODE" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ERRORNBR" jdbcType="INTEGER"  mode="OUT" />
+		<parameter property="out_ERRORMSG" jdbcType="VARCHAR"  mode="OUT" />
+	</parameterMap>
+	<procedure id="UpdCardPassword" parameterMap="UpdCardPasswordParameters" resultClass="result">
+		 { call PACKGEN_CARDZ.UpdCardPassword(?,?,?,?,?,?,?,?,?)}
+	</procedure>
+
+	<!-- =====================ATM 验证是否达州商行本行卡操作 =========================================-->
+ 	<parameterMap id="ChkOurCardYNParameters" class="param">
+		<parameter property="in_Pan" jdbcType="VARCHAR" javaType="string" mode="IN" />
+        <parameter property="out_YNFlag" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR"  javaType="string"  mode="OUT" />
+	</parameterMap>
+	<procedure id="ChkOurCardYN" parameterMap="ChkOurCardYNParameters" resultClass="result">
+		 { call PACKGEN_CARDZ.ChkOurCardYN(?,?,?,?)}
+	</procedure>
+	<!-- =====================ATM 验证密码 =========================================-->
+<!-- 	<parameterMap id="ChkOurCardYNParameters" class="param">-->
+<!--		<parameter property="in_Pan" jdbcType="VARCHAR" javaType="string" mode="IN" />-->
+<!--        <parameter property="out_YNFlag" jdbcType="VARCHAR" javaType="string" mode="OUT" />-->
+<!--		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />-->
+<!--		<parameter property="out_ErrorMsg" jdbcType="VARCHAR"  javaType="string"  mode="OUT" />	-->
+<!--	</parameterMap>-->
+<!--	<procedure id="ChkOurCardYN" parameterMap="ChkOurCardYNParameters" resultClass="result"> -->
+<!--		 { call OSIBANK.PACKGEN_CARDZ.ChkOurCardYN(?,?,?,?)} -->
+<!--	</procedure>-->
+<!-- =====================ATM 获得加密的密钥 =========================================-->
+<!-- 	<parameterMap id="ChkOurCardYNParameters" class="param">-->
+<!--		<parameter property="in_Pan" jdbcType="VARCHAR" javaType="string" mode="IN" />-->
+<!--        <parameter property="out_YNFlag" jdbcType="VARCHAR" javaType="string" mode="OUT" />-->
+<!--		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />-->
+<!--		<parameter property="out_ErrorMsg" jdbcType="VARCHAR"  javaType="string"  mode="OUT" />	-->
+<!--	</parameterMap>-->
+<!--	<procedure id="ChkOurCardYN" parameterMap="ChkOurCardYNParameters" resultClass="result"> -->
+<!--		 { call OSIBANK.PACKGEN_CARDZ.ChkOurCardYN(?,?,?,?)} -->
+<!--	</procedure>-->
+	<!-- =====================ATM 获得IC卡电子钱包余额 =========================================-->
+ 	<parameterMap id="getIcCardBalMap" class="param">
+		<parameter property="in_mediumId" jdbcType="VARCHAR" javaType="string" mode="IN" />
+        <parameter property="out_BalAmt" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ERRORNBR" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ERRORMSG" jdbcType="VARCHAR"  javaType="string"  mode="OUT" />
+	</parameterMap>
+	<procedure id="getIcCardBal" parameterMap="getIcCardBalMap" resultClass="result">
+		 { call PACKGEN_CARDZ.Proc_QeuryICEWALLETCTL(?,?,?,?)}
+	</procedure>
+</sqlMap>

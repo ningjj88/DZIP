@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 预授权完成交易返回报文（离线） -->
+<iso8583Packet  >
+	<bitMap defaultValue="2,3,4,7,11,12,13,15,18,19,25,32,33,37,39,41,42,49,60,100,121,128" />
+	<include include="i8583fields" ></include>
+	<mapAlias name="format">	
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="EXPDAT"  alias="bit14" defaultValue="5012" /><!--卡有效期  -->
+	    <elementAlias name="IDENNUMBE"  alias="bit61" /> <!--证件编号-->
+	    <elementAlias name="RCVCODE"  alias="bit100" /><!--接收机构标识码 -->
+		<elementAlias name="NANSCRESERVE"  alias="bit121" /><!-- CUPS 保留-->
+	   	<elementAlias name="MESAUTHCD"  alias="bit128" /> <!--MAC-->
+	</mapAlias>
+</iso8583Packet>

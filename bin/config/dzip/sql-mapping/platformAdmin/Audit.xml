@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+	<!--
+		DZIP 综合前置平台管理配置 add by chendshaoqi date 2010-08-23
+	-->
+<sqlMap namespace="Audit">
+	<!--别名设置-->
+	<typeAlias alias="result" type="java.util.HashMap" />
+	<typeAlias alias="param" type="java.util.HashMap" />
+	<typeAlias alias="integer" type="java.lang.Integer" />
+	<typeAlias alias="string" type="java.lang.String" />
+	<typeAlias alias="bigDecimal" type="java.math.BigDecimal" />
+	<typeAlias alias="date" type="java.util.Date" />
+	<!--========================对账——验证是否已经对账==============================-->
+<!--	<select id="queryAuditIsOccured" resultClass="result" parameterClass="param">-->
+<!--	    select * from T_DayEndTaskList -->
+<!--	    where POSTDATE=#PostDate# -->
+<!--	    and   TASKTYP = #TaskTyp#-->
+<!--	    and   TASKNAME =#TaskName#-->
+<!--	</select>-->
+
+	<!--========================对账——记录日终任务表==============================-->
+	<insert id="insertTaskList" parameterClass="param"> insert into
+		T_DayEndTaskList ( POSTDATE, TASKNAME, TASKTYP, TASKDESC, TASKSEQNUM,
+		TASKSTAT, TASKEXECYN, TASKPRIVSEQNUM, TASKNEXTSEQNUM ) values (
+		#PostDate#, #TaskName#, #TaskTyp#, #TaskDesc#, #TaskSeqNum#,
+		#TaskStat#, #TaskExecYN#, #TaskPrivSeqNum#, #TaskNextSeqNum# ) 
+	</insert>
+	<!--
+		========================对账——更新日终任务状态==============================
+	-->
+	<update id="updateTaskStatus" parameterClass="param">
+		UPDATE T_DayEndTaskList SET TASKSTAT=#TaskStat#
+		<dynamic>
+			<isNotEmpty property="TaskFailReason">
+				 <![CDATA[ ,TASKFAILREASON=#TaskFailReason# ]]>
+			</isNotEmpty>
+		</dynamic>
+		where POSTDATE=#PostDate# 
+		  and TASKNAME =#TaskName#
+		  and TASKTYP = #TaskTyp#
+		<dynamic>
+			<isNotEmpty prepend="and" property="TaskSeqNum">
+				<![CDATA[ TASKSEQNUM=#TaskSeqNum# ]]>
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<!--========================对账——记录文件处理信息======================-->
+	<insert id="insertFileInfo" parameterClass="param"> insert into
+		T_PROCFILEINFO ( FILENAME, FILETYPE, POSTDATE, PROCDATE, STAT, ROWNO )
+		values ( #FileName#, #FileType#, #PostDate#, #ProDate#, #Status#,
+		#RowNo# ) </insert>
+	<!--========================对账——删除文件处理信息======================-->
+	<delete id="deleteFileInfo" parameterClass="param"> 
+	   delete from T_PROCFILEINFO  
+		where FILETYPE =#FileType# 
+		and POSTDATE =#PostDate#
+    </delete>
+    <!--========================对账——删除渠道前置交易流水======================-->
+	<delete id="deleteJournal" parameterClass="param"> 
+	   delete from T_JCKJOURNAL  
+		where POSTDATE =#PostDate#
+    </delete>
+	<!--
+		========================对账——更新文件处理状态==============================
+	-->
+	<update id="updateFileStatus" parameterClass="param">
+		UPDATE T_PROCFILEINFO SET STAT=#Status#
+		<dynamic>
+			<isNotEmpty property="RowNo">
+				 <![CDATA[ ,ROWNO =#RowNo# ]]>
+			</isNotEmpty>
+		</dynamic>
+		where FILENAME =#FileName# 
+		and FILETYPE =#FileType# 
+		and POSTDATE =#PostDate#
+	</update>
+	<!--========================对账——导入前置交易流水======================-->
+	<insert id="importJournal" parameterClass="param">
+	insert into T_JCKJOURNAL ( ACQU, FORW, TRAC, TRDT, PAN, AMT, REAMT,
+	FEE, MESG, PROC, MERC, CATI, CAID, RETR, POSC, AUTH, DEST, YS_TRAC,
+	RESP, POSE, ACCID1, ACCID2, CACC, ISS1, ISS2, PDG1, PDG2, PDG3, PDG4,
+	PDG5, FLG, CHKFLG,POSTDATE,YS_TRDT) 
+	values ( #ACQU#, #FORW#, #TRAC#, #TRDT#, #PAN#,
+	#AMT#, #REAMT#, #FEE#, #MESG#, #PROC#, #MERC#, #CATI#, #CAID#, #RETR#,
+	#POSC#, #AUTH#, #DEST#, #YS_TRAC#, #RESP#, #POSE#, #ACCID1#, #ACCID2#,
+	#CACC#, #ISS1#, #ISS2#, #PDG1#, #PDG2#, #PDG3#, #PDG4#, #PDG5#, #FLG#,
+	#CHKFLG#,#postdate#,#YS_TRDT#)</insert>
+	<!--========================对账——导出核心交易流水======================-->
+	<resultMap id="backMapRTXN" class="result">
+		<result property="ACCTNBR" column="ACCTNBR" />
+		<result property="RTXNNBR" column="RTXNNBR" />
+		<result property="PARENTACCTNBR" column="PARENTACCTNBR" />
+		<result property="PARENTRTXNNBR" column="PARENTRTXNNBR" />
+		<result property="QUENBR" column="QUENBR" />
+		<result property="APPLNBR" column="APPLNBR" />
+		<result property="RTMTTXNCATCD" column="RTMTTXNCATCD" />
+		<result property="ALLOTSUBACCTNBR" column="ALLOTSUBACCTNBR" />
+		<result property="ALLOTNBR" column="ALLOTNBR" />
+		<result property="RTXNTYPCD" column="RTXNTYPCD" />
+		<result property="EXTRTXNDESCNBR" column="EXTRTXNDESCNBR" />
+		<result property="INTRRTXNDESCNBR" column="INTRRTXNDESCNBR" />
+		<result property="INITIALCARDNBR" column="INITIALCARDNBR" />
+		<result property="QUESUBNBR" column="QUESUBNBR" />
+		<result property="RTMTYR" column="RTMTYR" />
+		<result property="NOTENBR" column="NOTENBR" />
+		<result property="HOLDACCTNBR" column="HOLDACCTNBR" />
+		<result property="HOLDSUBACCTNBR" column="HOLDSUBACCTNBR" />
+		<result property="CHECKNBR" column="CHECKNBR" />
+		<result property="TRACENBR" column="TRACENBR" />
+		<result property="DATELASTMAINT" column="DATELASTMAINT" />
+		<result property="CURRRTXNSTATCD" column="CURRRTXNSTATCD" />
+		<result property="TRANAMT" column="TRANAMT" />
+		<result property="ORIGPOSTDATE" column="ORIGPOSTDATE" />
+		<result property="REVERSALRTXNNBR" column="REVERSALRTXNNBR" />
+		<result property="OFFLINEDATETIME" column="OFFLINEDATETIME" />
+		<result property="OFFLINESEQNBR" column="OFFLINESEQNBR" />
+		<result property="REENTRYPERSNBR" column="REENTRYPERSNBR" />
+		<result property="REENTRYNTWKNODENBR" column="REENTRYNTWKNODENBR" />
+		<result property="ALLOTINSTANCENBR" column="ALLOTINSTANCENBR" />
+		<result property="RTXNSOURCECD" column="RTXNSOURCECD" />
+		<result property="RTXNREASONCD" column="RTXNREASONCD" />
+		<result property="REGDYN" column="REGDYN" />
+		<result property="RTXNAUXNBR" column="RTXNAUXNBR" />
+	</resultMap>
+	
+	<!-- ========参数集配置=========== -->
+	<parameterMap id="getRTXNParam" class="param">
+		<parameter property="in_PostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_RTXNSTATCD" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_RTXNSOURCECD" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapRTXN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="getRTXN" parameterMap="getRTXNParam"> 
+	{ call  PACKGEN_CARDZ.GetRTXNInfo(?,?,?,?,?,?)} 
+	</procedure>
+	<!--========================对账——导入核心交易流水======================-->
+	<insert id="importRTXN" parameterClass="param"> insert into
+		T_CORERTXN( ACCTNBR, RTXNNBR, PARENTACCTNBR, PARENTRTXNNBR,
+		QUENBR, APPLNBR, RTMTTXNCATCD, ALLOTSUBACCTNBR, ALLOTNBR, RTXNTYPCD,
+		EXTRTXNDESCNBR, INTRRTXNDESCNBR, INITIALCARDNBR, QUESUBNBR, RTMTYR,
+		NOTENBR, HOLDACCTNBR , HOLDSUBACCTNBR, CHECKNBR, TRACENBR,
+		DATELASTMAINT, CURRRTXNSTATCD, TRANAMT, ORIGPOSTDATE, REVERSALRTXNNBR,
+		OFFLINEDATETIME, OFFLINESEQNBR, REENTRYPERSNBR, REENTRYNTWKNODENBR,
+		ALLOTINSTANCENBR , RTXNSOURCECD, RTXNREASONCD, REGDYN, RTXNAUXNBR )
+		VALUES(#ACCTNBR#, #RTXNNBR#, #PARENTACCTNBR#, #PARENTRTXNNBR#,
+		#QUENBR#, #APPLNBR#, #RTMTTXNCATCD#, #ALLOTSUBACCTNBR#, #ALLOTNBR#,
+		#RTXNTYPCD#, #EXTRTXNDESCNBR#, #INTRRTXNDESCNBR#, #INITIALCARDNBR#,
+		#QUESUBNBR#, #RTMTYR#, #NOTENBR#, #HOLDACCTNBR#, #HOLDSUBACCTNBR#,
+		#CHECKNBR#, #TRACENBR#, #DATELASTMAINT#, #CURRRTXNSTATCD#, #TRANAMT#,
+		#ORIGPOSTDATE#, #REVERSALRTXNNBR#, #OFFLINEDATETIME#, #OFFLINESEQNBR#,
+		#REENTRYPERSNBR#, #REENTRYNTWKNODENBR#, #ALLOTINSTANCENBR#,
+		#RTXNSOURCECD#, #RTXNREASONCD#, #REGDYN#, #RTXNAUXNBR# ) </insert>
+	<!--=============核对前置流水与核心流水=================-->
+	<parameterMap id="Check_CoreAndJCKParam" class="param">
+		<parameter property="in_PostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="Check_CoreAndJCK" parameterMap="Check_CoreAndJCKParam"> 
+	{ call PACKGEN_PE.Check_CoreAndJCKTran(?,?,?)} </procedure>
+	<procedure id="Check_CoreAndJCKTranForIC" parameterMap="Check_CoreAndJCKParam"> 
+	{ call PACKGEN_PE.Check_CoreAndJCKTranForIC(?,?,?)} </procedure>
+	
+	<!--=============核对前置流水与渠道流水=================-->
+	<parameterMap id="Add_CheckTransRecParam" class="param">
+		<parameter property="in_PostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="Add_CheckTransRec" parameterMap="Add_CheckTransRecParam"> 
+	{ call PACKGEN_PE.Add_CheckTransRec(?,?,?)} </procedure>
+	<procedure id="Add_CheckTransRecForIC" parameterMap="Add_CheckTransRecParam"> 
+	{ call PACKGEN_PE.Add_CheckTransRecForIC(?,?,?)} </procedure>
+	
+	<!--=============导出不一致信息表========================-->
+	<resultMap id="backMapCheckTransRec" class="result">
+		<result property="in_PAN" column="ACCOUNT" />
+		<result property="in_TranAMT" column="AMT" />
+	</resultMap>
+	<parameterMap id="GetCheckTransRecParam" class="param">
+    	<parameter property="in_PostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapCheckTransRec" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="GetCheckTransRec" parameterMap="GetCheckTransRecParam"> 
+	{ call PACKGEN_PE.GetCheckTransRec(?,?,?,?)} </procedure>
+		
+	<!--=============记录账户冻结信息========================-->
+	<parameterMap id="Add_AcctAcctHoldParam" class="param">
+		<parameter property="in_PAN" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_TranAMT" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="Add_AcctAcctHold" parameterMap="Add_AcctAcctHoldParam">
+	 { call packgen_Cardz.Add_AcctAcctHold(?,?,?,?)} </procedure>
+		
+	<!--=====================查询任务状态==========================-->
+	<resultMap id="TaskStatus" class="result">
+		<result property="PostDate" column="POSTDATE" />
+		<result property="TaskName" column="TASKNAME" />
+		<result property="TaskDesc" column="TASKDESC" />
+		<result property="TaskSeqNum" column="TASKSEQNUM" />
+		<result property="TaskStat" column="TASKSTAT" />
+	</resultMap>
+	<select id="queryTaskStatus" resultMap="TaskStatus"> 
+	    select to_char(to_date(POSTDATE,'yyyy-MM-dd'),'yyyy-MM-dd')POSTDATE,TASKNAME, TASKDESC, TASKSEQNUM, 
+          decode(TASKSTAT,  '00', '执行完成',
+                      	 '01', '初始化',
+                         '02', '正在执行',
+                         '99', '执行失败',
+           TASKSTAT)TASKSTAT from
+		   T_DayEndTaskList where POSTDATE = #PostDate# and TASKTYP = #TaskTyp#
+		order by TASKSEQNUM,POSTDATE
+	</select>
+	<!--=====================查询对账文件==========================-->
+	<resultMap id="FileInfo" class="result">
+		<result property="PostDate" column="POSTDATE" />
+		<result property="AuditType" column="FILETYPE" />
+		<result property="FileName" column="FILENAME" />
+		<result property="Status" column="STAT" />
+		<result property="RowNo" column="ROWNO" />
+	</resultMap>
+	<select id="queryFileInfo" resultMap="FileInfo" parameterClass="param">
+		 select FILENAME,
+		 decode(FILETYPE, '01', '锦城卡前置文件',
+                          '02', '银联前置文件',
+                          '03', '银联数据文件',
+        FILETYPE) FILETYPE,
+		to_char(to_date(POSTDATE,'yyyy-MM-dd'),'yyyy-MM-dd')POSTDATE, 
+		decode(STAT, '00', '执行完成',
+                      '01', '初始化',
+                      '02', '正在执行',
+                      '99', '执行失败',
+         STAT)STAT,
+         ROWNO
+		from T_PROCFILEINFO
+		where POSTDATE =#PostDate# 
+		and FILETYPE = #FileType#
+	</select>
+	<!--=====================验证对账文件==========================-->
+	<select id="checkFileInfo" resultMap="FileInfo" parameterClass="param">
+		 select FILENAME,
+		 decode(FILETYPE, '01', '锦城卡前置文件',
+                          '02', '银联前置文件',
+        FILETYPE) FILETYPE,
+		to_char(to_date(POSTDATE,'yyyy-MM-dd'),'yyyy-MM-dd')POSTDATE, 
+		decode(STAT, '00', '执行完成',
+                      '01', '初始化',
+                      '02', '正在执行',
+                      '99', '执行失败',
+         STAT)STAT,
+         ROWNO
+		from T_PROCFILEINFO
+		where POSTDATE =#PostDate# 
+		and FILETYPE = #FileType#
+		and FILENAME =#FileName#
+	</select>
+	<!--=====================对账查询==========================-->
+	<resultMap id="backMapAuditInfo" class="result">
+	    <result property="ReqOrgCd" column="ACQINSTCODE" />
+		<result property="SysSeqNum" column="SYSSEQNO" />
+		<result property="TraceNo" column="TRACENO" />
+		<result property="RtxnCatCd" column="RTXNCATCD" />
+		<result property="RtxnTypCd" column="RTXNTYPCD" />
+		<result property="RtxnPlat" column="RTXNPLAT" />
+		<result property="TranTypeDef" column="TRANTYPEDEF" />
+		<result property="TransDate" column="TRANSDATETIME" />
+		<result property="TransTime" column="TRANSTIME" />
+		<result property="AccountNum" column="ACCOUNT" />
+		<result property="TransAmt" column="AMT" />
+		<result property="AuditStatus" column="CHECKFLAG" />
+	</resultMap>
+	<parameterMap id="getAuditInfoParam" class="param">
+		<parameter property="in_PostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_AUDITSTATUS" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapAuditInfo" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="queryAuditInfo" parameterMap="getAuditInfoParam"> 
+	{ call  PackGen_PE.GetAllCheckTransRec(?,?,?,?,?)} 
+	</procedure>
+	<procedure id="queryIcJournalInfo" parameterMap="getAuditInfoParam"> 
+	{ call  PackGen_PE.GetAllCheckTransRecForIC(?,?,?,?,?)} 
+	</procedure>
+	
+<!--	<select id="queryAuditInfo" resultMap="AuditInfo"-->
+<!--		parameterClass="param">-->
+<!--    	select NVL(SYSSEQNO,'00000') SYSSEQNO,-->
+<!--         decode(TRACENO, '0' , '未知',TRACENO) TRACENO,-->
+<!--         decode(TRANTYPEDEF, '0', '未知',-->
+<!--                             '1', '发卡方交易',-->
+<!--                             '2', '受理方交易',-->
+<!--        TRANTYPEDEF) TRANTYPEDEF,-->
+<!--        to_Char(to_date(to_char(sysdate,'yyyy')||substr(TRANSDATETIME,1,4),'yyyy-MM-dd'),'yyyy-MM-dd')As TRANSDATETIME,-->
+<!--		    ACCOUNT,-->
+<!--        AMT,-->
+<!--        decode(CHECKFLAG, -->
+<!--                     '0', '未对账',-->
+<!--                     '1', '对平账',-->
+<!--                     '2', '不平账(状态不一致)',-->
+<!--                     '3', '不平账(状态不一致)',-->
+<!--                     '4', '不平账(渠道多)',-->
+<!--                     '5', '不平账(核心多)',-->
+<!--        CHECKFLAG) CHECKFLAG-->
+<!--        from T_CHECKTRANSREC where TRANSDATETIME like-->
+<!--        #PostDate# ||'%'-->
+<!--		select SYSSEQNO, TRACENO, TRANTYPEDEF, TRANSDATETIME,-->
+<!--		ACCOUNT,AMT,CHECKFLAG from T_CHECKTRANSREC where TRANSDATETIME like-->
+<!--		#PostDate# ||'%'-->
+<!--	    <dynamic>-->
+<!--			<isNotEmpty prepend="and" property="AuditStatus">-->
+<!--				<![CDATA[ CHECKFLAG=#AuditStatus# ]]>-->
+<!--			</isNotEmpty>-->
+<!--		</dynamic>-->
+<!--	</select>-->
+	<!--=================验证任务是否可以执行==================-->
+	<resultMap id="TaskIsvalidate" class="result">
+		<result property="PrivTaskStat" column="PRIVTASKSTAT"/>
+		<result property="TaskExecYN" column="TASKEXECYN"/>
+		<result property="TaskStat" column="TASKSTAT"/>
+	</resultMap>
+	<select id="queryTaskIsvalidate" resultMap="TaskIsvalidate" parameterClass="param">
+	  <![CDATA[  select nvl(b.taskstat,'00') as privtaskstat ,a.taskexecyn ,a.taskstat 
+  				 from (select taskseqnum,taskexecyn ,taskprivseqnum , taskstat from t_dayendtasklist t
+  				       where t.taskname =#TaskName#
+						 and t.postdate =#PostDate#
+					     and t.tasktyp = #TaskTyp# )a, t_dayendtasklist b , DUAL X
+                 where   NVL('X', X.DUMMY) = NVL('X', a.ROWID (+) ) 
+                 and b.taskseqnum(+)=nvl(a.taskprivseqnum,0) 
+                 and b.tasktyp(+)=#TaskTyp#
+                 and b.postdate(+)=#PostDate#
+                 
+		]]>
+	</select>
+	
+	<!--=====================获得需要下载的银联对账文件==========================-->
+	<resultMap id="CupsAuditFile" class="result">
+	    <result property="FileCatCd" column="FILECATCD" />
+		<result property="FileTypCd" column="FILETYPCD" />
+		<result property="FileName" column="FILENAME" />
+		<result property="FileNameCn" column="FILENAMECN" />
+		<result property="FileDesc" column="FILEDESC" />
+		<result property="FileStatCd" column="FILESTATCD" />
+		<result property="FileAuditYN" column="FILEAUDITYN" />
+	</resultMap>
+	<select id="queryCupsAuditFile" resultMap="CupsAuditFile" parameterClass="string">
+	  select FILECATCD,FILETYPCD,FILENAME,FILENAMECN,FILEDESC,FILESTATCD,FILEAUDITYN
+		from t_CupsAuditFile
+		where TASKTYP=#taskType#
+	</select>
+	
+	<!--========================对账——导入IC卡银联数据交易流水======================-->
+	<insert id="importCUPSDJournal" parameterClass="param">
+	insert into T_CUPSDJOURNAL ( CHECKDATE, ACQINSTCODE, TRACENO, TRANSDATE, TRANSTIME, TRANSCODE, ACCOUNT,
+	AMT, FEE, CRDB, MSGTYPE, PROCCODE, MERCHTYPE, MERCD, ACPTTERM, REFCD, POSCONDCODE, AUTHCD,
+	FWDINSTCODE, SETTLEDATE, ORIGTRACENUM, ORIGCUR, ORIGAMT, ORIGDATETIME, ISSUINST, REVIND, HOSTCODE, ORIGRATE, CURRCD,
+	SEQNOFE, ACQINSTRESVD, RESERVED) 
+	values ( #postdate#, #ACQINSTCODE#, #TRACENO#, substr(#CENDT#,1,4), substr(#CENDT#,5,6), 
+	#TRANSCODE#, #ACCOUNT#, #AMT#, #FEE#, #CRDB#, #MSGTYPE#, #PROCCODE#, #MERCHTYPE#, #MERCD#,
+	#ACPTTERM#, #REFCD#, #POSCONDCODE#, #AUTHCD#, #FWDINSTCODE#, #SETTLEDATE#, #ORIGTRACENUM#, #ORIGCUR#,
+	#ORIGAMT#, #ORIGDATETIME#, #ISSUINST#, #REVIND#, #HOSTCODE#, #ORIGRATE#, #CURRCD#, #SEQNOFE#, #ACQINSTRESVD#,
+	#RESERVED#)</insert>
+	
+	    <!--========================对账——删除IC卡银联数据交易流水======================-->
+	<delete id="deleteCUPSDJournal" parameterClass="param"> 
+	   delete from T_CUPSDJOURNAL  
+		where CHECKDATE =#PostDate#
+    </delete>
+</sqlMap>

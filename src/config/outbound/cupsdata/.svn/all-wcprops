@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/dzip/!svn/ver/292/DZIP_NEWDEDV/src/config/outbound/cupsdata
+END
+transformer.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/config/outbound/cupsdata/transformer.xml
+END
+trans.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dzip/!svn/ver/292/DZIP_NEWDEDV/src/config/outbound/cupsdata/trans.xml
+END
+common.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/config/outbound/cupsdata/common.xml
+END
+TCPR001.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/config/outbound/cupsdata/TCPR001.xml
+END

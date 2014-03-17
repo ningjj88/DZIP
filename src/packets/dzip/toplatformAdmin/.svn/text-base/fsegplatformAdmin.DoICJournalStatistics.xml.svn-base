@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xiehai
+    date 2013-10-08
+-->
+<segment>
+	<xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+				<xmlTag><String name="CodeVal"></String></xmlTag><!-- 交易名称 -->
+				<xmlTag><String name="CheckFlag"></String></xmlTag><!-- 对账状态 -->
+			    <xmlTag><String name="Count"></String></xmlTag><!-- 交易总笔数 -->
+			    <xmlTag><String name="SumAmt"></String></xmlTag><!-- 总金额 -->
+			    <xmlTag><String name="SumFee"></String></xmlTag><!-- 总手续费 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

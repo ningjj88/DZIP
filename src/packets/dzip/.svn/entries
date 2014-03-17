@@ -1,0 +1,64 @@
+8
+
+dir
+308
+https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src/packets/dzip
+https://192.168.20.210:8443/svn/dzip
+
+
+
+2014-02-25T02:56:17.983375Z
+300
+xiehai
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0e52adb7-1c73-714e-b5c1-db04d86b8944
+
+toplatformAdmin
+dir
+
+fromplatformAdmin
+dir
+
+tocounter
+dir
+
+fromcounter
+dir
+
+toATM
+dir
+
+toonli
+dir
+
+fromATM
+dir
+
+fromonli
+dir
+
+toCUPSDATA
+dir
+
+JCKtoATM
+dir
+
+toCUPS
+dir
+
+fromCUPS
+dir
+

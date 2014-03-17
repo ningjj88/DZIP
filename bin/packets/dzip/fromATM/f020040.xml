@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!--达州商行本行卡ATM 转账交易报文 -->
+
+<iso8583Packet>
+    <bitMap defaultValue="2,3,4,7,11,12,13,18,22,25,26,32,33,35,37,41,42,43,49,52,53,60,102,103,128" />
+	
+	<include include="8583fields" ></include>
+	
+	<mapAlias name="format">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="SERCAPCODE"  alias="bit26" /><!--服务点PIN获取码  -->
+		<elementAlias name="ACQCODE"  alias="bit32" /><!-- 受理机构标识 -->
+		<elementAlias name="FORWARDCODE"  alias="bit33" /><!--发送机构标识码  -->
+		<elementAlias name="TRACK2DATA"  alias="bit35" /><!-- 第二磁道数据 -->
+		<elementAlias name="RTVREFNUM"  alias="bit37" /><!-- 检索参考号 -->
+		<elementAlias name="CARDACCCODE"  alias="bit42" /><!--受卡方标识码  -->
+		<elementAlias name="CURCODE"  alias="bit49" /> <!--交易货币代码  -->
+		<elementAlias name="PINDATA"  alias="bit52" /><!-- 个人标识码数据 -->
+		<elementAlias name="SECURCONTRINFO"  alias="bit53" /><!--  安全控制信息-->
+		<elementAlias name="REACODE"  alias="bit60" /><!-- 自定义域 -->
+		<elementAlias name="ACCIDEN1"  alias="bit102" /><!-- 账户标识1 -->
+		<elementAlias name="ACCIDEN2"  alias="bit103" /><!-- 账户标识2 -->
+		<elementAlias name="MESAUTHCD"  alias="bit128" /><!-- MAC-->
+	</mapAlias>
+	
+	<mapAlias name="parse">
+	</mapAlias>
+
+</iso8583Packet>

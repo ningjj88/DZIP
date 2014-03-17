@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xiehai
+    date 2013-10-08
+-->
+<segment>
+	<xmlTag><String name="TransDate"/></xmlTag><!--交易日期-->
+</segment>

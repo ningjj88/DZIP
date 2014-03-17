@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xujin
+    date 2010-04-23
+-->
+<segment>
+	<xmlTag><String name="StartDate" /></xmlTag><!--开始日期  -->
+	<xmlTag><String name="StartTime" /></xmlTag><!--起始时间-->
+	<xmlTag><String name="EndDate" /></xmlTag><!--截止日期  -->
+	<xmlTag><String name="EndTime" /></xmlTag><!--截止时间-->
+	<xmlTag><String name="ExportYN" /></xmlTag><!--备份标记-->
+</segment>

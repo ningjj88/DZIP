@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-08-24
+-->
+<segment>
+ <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+				<xmlTag><String name="ChannName"></String></xmlTag><!-- 渠道名称 -->	
+			    <xmlTag><String name="ChannId"></String></xmlTag><!-- 渠道号 -->			
+				<xmlTag><String name="TranCd"></String></xmlTag><!-- 交易代码 -->
+				<xmlTag><String name="TranDesc"></String></xmlTag><!-- 交易描述-->
+				<xmlTag><String name="TranStat"></String></xmlTag><!-- 交易状态 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

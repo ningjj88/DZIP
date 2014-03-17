@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig  PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"  "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<!--
+
+	IBatis 配置文件
+	
+	by 张永庆	since:2010-05-20
+
+-->
+<sqlMapConfig>
+
+	<settings useStatementNamespaces="true" />
+	
+	<!--Common-->
+    <sqlMap resource="config/dzip/sql-mapping/common.xml" />
+    
+   <!--platformMan-->
+    <sqlMap resource="config/dzip/sql-mapping/platformAdmin/platformAdmin.xml" />
+    <!-- 对账配置 -->
+    <sqlMap resource="config/dzip/sql-mapping/platformAdmin/Audit.xml" />
+     <!-- 日切-->
+    <sqlMap resource="config/dzip/sql-mapping/platformAdmin/DaySwitch.xml" />
+    
+   <!-- 他代本交易的 配置 -->
+    <sqlMap resource="config/dzip/sql-mapping/pos/Dep_Wth.xml" />
+    <sqlMap resource="config/dzip/sql-mapping/pos/Acct_Info.xml" />
+    <sqlMap resource="config/dzip/sql-mapping/pos/Pre_Auth.xml" />
+    <sqlMap resource="config/dzip/sql-mapping/cupscheck/cupscheck.xml" />
+    
+    
+	<!--ATM-->
+    <sqlMap resource="config/dzip/sql-mapping/atm/ATM.xml" />
+
+
+</sqlMapConfig>

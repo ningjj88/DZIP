@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fields>
+	<field name="ACQU" /><!-- 收理机构标识码 -->
+	<field name="FORW" /><!-- 发送机构标识码 -->
+	<field name="TRAC" /><!--系统跟踪号  -->
+	<field name="TRDT" /><!-- 传输日期和时间-->
+	<field name="PAN" /><!--主帐号 -->
+	<field name="AMT" /><!-- 交易金额  -->
+	<field name="REAMT" /><!--  -->
+	<field name="FEE" /><!--交易费  -->
+	<field name="MESG" /><!--消息类型  -->
+	<field name="PROC" /><!-- 处理码 -->
+	<field name="MERC" /><!--商户类型-->
+	<field name="CATI" /><!--受卡方终端标识 -->
+	<field name="CAID" /><!--受卡方标识码  -->
+	<field name="RETR" /><!-- 索引参考号 -->
+	<field name="POSC" /><!--服务点条件码  -->
+	<field name="AUTH" /><!-- 授权码-->
+	<field name="DEST" /><!--接收机构标识  -->
+	<field name="YS_TRAC" /><!--原始流水号 -->
+	<field name="RESP" /><!--应答码  -->
+	<field name="POSE" /><!-- 服务点输入方式 -->
+	<field name="ACCID1" /><!--帐户标识1  -->
+	<field name="ACCID2" /><!--帐户标识2 -->
+	<field name="CACC" /><!--受理方编号  -->
+	<field name="ISS1" /><!--发卡行1编号 -->
+	<field name="ISS2" /><!--发卡行2编号  -->
+	<field name="PDG1" /><!-- 手续费支出,受理方收 -->
+	<field name="PDG2" /><!--手续费支出,对方行收  -->
+	<field name="PDG3" /><!--手续费支出,交换中心收 -->
+	<field name="PDG4" /><!--手续费支出银联总中心收  -->
+	<field name="PDG5" /><!--手续费收入  -->
+	<field name="FLG" /><!--标志  -->
+	<field name="CHKFLG" /><!-- 核对标志 -->
+</Fields>

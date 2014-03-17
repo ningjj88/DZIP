@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-08-23
+-->
+<segment>
+	<xmlTag>
+		<idxField name="RecordList">
+			<Group name="RecordMap">
+				<xmlTag><String name="PostDate"></String></xmlTag><!--交易日期-->
+				<xmlTag><String name="AuditType"></String></xmlTag><!--对账类型-->
+				<xmlTag><String name="FileName"></String></xmlTag><!--文件名称-->
+				<xmlTag><String name="Status"></String></xmlTag><!--装载状态-->
+				<xmlTag><String name="RowNo"></String></xmlTag><!--处理行号-->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

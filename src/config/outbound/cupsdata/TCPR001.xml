@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<config namespace="TCPR001" >
+
+	<bean name="TcpTransport" class="com.csii.pe.service.comm.tcp.TcpTransport">
+			<param name="headLength">${TCPR001.TcpTransport.headLength}</param>
+			<param name="offsetOfLengthField">${TCPR001.TcpTransport.offsetOfLengthField}</param>
+			<param name="type">${TCPR001.TcpTransport.type}</param>
+			<param name="encoding">8859_1</param>
+			<param name="headIncluded">${TCPR001.TcpTransport.headIncluded}</param>
+			<param name="host">${TCPR001.TcpTransport.host}</param>
+			<param name="port">${TCPR001.TcpTransport.port}</param>
+			<param name="timeout">${TCPR001.TcpTransport.timeout}</param>
+			<param name="uibs">true</param>
+	</bean>
+</config>

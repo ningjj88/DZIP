@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+
+<!--
+    add by xujin
+    date 2011-10-14
+-->
+<segment>
+  <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+			    <xmlTag><String name="RegionRangeFlag"></String></xmlTag><!-- 地区范围标识(1:境外,0:境内) -->
+			    <xmlTag><String name="RegionCd"></String></xmlTag><!-- 地区代码(0000:其他) -->
+			    <xmlTag><String name="BusTypDesc"></String></xmlTag><!-- 业务类型(01:现金及转账,02:助农取款,03:消费及预授权,06:有卡自助消费及预授权,07:无卡自助消费及预授权,08:账户服务) -->
+			    <xmlTag><String name="ChannelTypDesc"></String></xmlTag><!-- 渠道类型码(00:其他) -->
+				<xmlTag><String name="TranDesc"></String></xmlTag><!-- 交易编码-->
+				<xmlTag><String name="OpenYN"></String></xmlTag><!-- 开启标识(Y:开启) -->
+				<xmlTag><String name="TranLLimitAmt"></String></xmlTag><!-- 单笔交易限额-->
+				<xmlTag><String name="DailyTranLLimitAmt"></String></xmlTag><!-- 当日累计交易限额-->
+				<xmlTag><String name="DailyLimitTranCnt"></String></xmlTag><!-- 当日累计交易次数 -->
+				<xmlTag><String name="AcctSrcDailyLimittCnt"></String></xmlTag><!--账户服务锁定每日错误累计次数 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

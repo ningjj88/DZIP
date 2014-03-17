@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+<!-- 收到银联发来本带他ATM存款交易响应报文 -->
+<mapAlias name="parse">
+        <elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="SETAMT"  alias="bit5" /><!-- 清算金额 -->
+		<elementAlias name="CHDAMT"  alias="bit6" /><!-- 持卡人扣账金额 -->
+		<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+		<elementAlias name="TRANSFEE"  alias="bit28" /><!-- 交易手续费-->
+		<elementAlias name="ICCSYSRELDATA"  alias="bit55" /><!-- 基于PBOC借贷记标准的IC卡数据域-->
+		<elementAlias name="IDENNUMBE"  alias="bit61"/> <!--证件编号-->
+		<elementAlias name="RCVCODE"  alias="bit100" /><!--  接收方机构码-->
+	    <elementAlias name="NANSCRESERVE"  alias="bit121" /><!--  CUPS 保留-->
+	 	<elementAlias name="MESAUTHCD"  alias="bit128" /> <!--MAC-->
+</mapAlias>

@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue
+END
+QueueStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/QueueStream.java
+END
+QueueTransport.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/QueueTransport.java
+END
+QueueTcpServer.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/QueueTcpServer.java
+END
+AbstractQueueStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dzip/!svn/ver/204/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/AbstractQueueStream.java
+END
+AbstractQueueTransport.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/AbstractQueueTransport.java
+END
+TcpSocketBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/TcpSocketBean.java
+END
+LockUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/LockUtil.java
+END
+SingleTcpClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/SingleTcpClient.java
+END
+QueueTcpClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/QueueTcpClient.java
+END
+QueueServer.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/QueueServer.java
+END
+TcpServerSocketBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/TcpServerSocketBean.java
+END
+BeanQueueStreamLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/BeanQueueStreamLoader.java
+END
+QueueChannel.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/QueueChannel.java
+END
+QueueTransformTransport.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/QueueTransformTransport.java
+END

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!-- 销户登记发往银联数据的报文 -->
+<segment>
+	<fixString name="TrxType" length="4" /><!-- 交易代码 -->
+	<fixString name="ActCode" length="1" /><!-- 动作代码 -->
+	<fixString name="LgnType" length="1" /><!-- 登录身份类型 -->
+	<fixString name="Source" length="2" /><!-- 交易渠道 -->
+	<fixString name="LgnInstCode" length="8" /><!-- 登录机构代码 -->
+	<fixString name="TraceNo" length="15" /><!-- 系统跟踪号 -->
+	<fixNumber name="LgnMerchCode" length="15" /><!-- 登录网点代码 -->
+	<fixString name="LgnUserCode" length="20" /><!-- 登录操作员代码 -->
+	<fixString name="CardNo" length="19" /><!-- 卡号 -->
+	<fixString name="RtnWay" length="2" /><!-- 卡片余额退还方式 -->
+	<fixString name="NameFlag" length="1" /><!-- 是否验证客户信息 -->
+	<fixNumber name="PinFlag" length="1" /><!-- 是否验证密码 -->
+	<fixNumber name="RtnFlg" length="1" /><!-- 是否回收卡片 -->
+</segment>

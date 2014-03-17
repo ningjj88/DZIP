@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<iso8583Packet  >
+<!-- 达州商行本行卡ATM存款确认交易返回报文 -->
+	<bitMap defaultValue="2,3,4,7,11,12,13,14,15,18,25,32,33,37,39,41,42,43,44,49,54,60,100" />
+<include include="8583fields" ></include>
+<mapAlias name="format">
+</mapAlias>
+<mapAlias name="parse">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="CARDACCCODE"  alias="bit42"  /><!--受卡方标识码  -->
+		<elementAlias name="CURCODE"  alias="bit49" /><!-- 交易货币代码 -->
+		<elementAlias name="REACODE"  alias="bit60" /><!-- 自定义域 -->
+        <elementAlias name="RCVCODE"  alias="bit100" defaultValue="存款确认交易报文 " /><!--接收机构标识码 -->
+</mapAlias>
+
+</iso8583Packet>

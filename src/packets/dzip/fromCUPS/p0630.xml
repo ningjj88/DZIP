@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+<!-- 收到银联发来本带他ATM脚本处理结果响应报文 -->
+<mapAlias name="parse">
+		<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+	    <elementAlias name="ICCSYSRELDATA"  alias="bit55" /><!-- 基于PBOC借贷记标准的IC卡数据域-->
+        <elementAlias name="NET_MAN_INF_CODE"  alias="bit70" /><!-- 网络管理信息码-->
+	    <elementAlias name="RCVCODE"  alias="bit100" /><!--接收机构标识码 -->
+</mapAlias>

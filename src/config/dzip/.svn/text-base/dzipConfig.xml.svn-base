@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	author chenshq	since:2010-07-20
+
+-->
+<config namespace="dzip">
+	<bean id="DzipdataProcessor" class="csii.dzip.action.util.DzipDataProcessor">
+	</bean>
+
+	<bean id="XMLPacket4ProcedureParser" class="csii.dzip.core.XMLPacket4ProcedureParser">
+	</bean>
+
+	<bean id="FixedLength8583Processor" class="csii.dzip.core.FixedLength8583Processor">
+	</bean>
+
+	<bean id="DzipProcessTemplate" class="csii.dzip.action.util.DzipProcessTemplate">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+		<ref name="corebankAccess">corebankdb.jdbcAccessCoreBank</ref>
+		<param name="channID">${iudf.othercard.channID}</param>
+	</bean>
+
+	<bean id="DzipVirtualSegment" class="csii.dzip.core.DzipVirtualSegment">
+		<ref name="dzipProcessTemplate">DzipProcessTemplate</ref>
+	</bean>
+	<bean id="Encrypt" class="csii.dzip.core.Encrypt4Des3">
+	</bean>
+	<bean id="Decrypt" class="csii.dzip.core.Decrypt4Des">
+	</bean>
+	<bean id="csiiLog" class="csii.log.MyLog">
+		<param name="fileUrl">${csii.log.fileUrl}</param>
+	</bean>
+	<!-- ATM,POS等渠道交易处理类 -->
+	<bean id="UtilProcessor4Action" class="csii.dzip.action.util.ActionUtilProcessor">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+		<ref name="corebankAccess">corebankdb.jdbcAccessCoreBank</ref>
+		<ref name="xmlProcedureParser">dzip.XMLPacket4ProcedureParser</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</bean>
+	<!-- 生成银联对账文件处理类 -->
+	<bean id="CollectData" class="csii.dzip.action.util.CollectData">
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="ftpForCupsDetail">dzip.FtpForCupsDetail</ref>
+	</bean>
+	<!-- 渠道交易更新平台交易流水公用处理类 -->
+	<bean id="UpdateJoural" class="csii.dzip.action.util.UpdateJoural">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</bean>
+	<!-- 锦城卡前置转发 -->
+	<bean id="JinchengTransport" class="csii.dzip.core.DzipJinCheng2HostTransport">
+		<ref name="fixedLength8583Processor">FixedLength8583Processor</ref>
+		<ref name="utilProcessor">UtilProcessor4Action</ref>
+<!--		<ref name="singleTcpClient">TcpClientForJCK</ref>-->
+<!--	    <param name="timeout">${soketTimeout}</param>-->
+<!--		<param name="port">${jinchengServer.tcp.port}</param>-->
+<!--		<param name="host">${jincheng.tcp.host.ip}</param>					-->
+	</bean>
+	<!-- 银联前置转发 -->
+	<bean id="CupsTransport" class="csii.dzip.core.DzipToCUPSTransport">
+		<ref name="fixedLength8583Processor">FixedLength8583Processor</ref>
+		<ref name="utilProcessor">UtilProcessor4Action</ref>
+		<param name="path">/packets/dzip/fromCUPS</param>
+		<parm name="timeout">60000</parm>
+	</bean>
+	<!-- 对账功能处理 -->
+	<bean id="AuditProcessor" class="csii.dzip.action.util.AuditProcessor">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+		<ref name="corebankAccess">corebankdb.jdbcAccessCoreBank</ref>
+		<ref name="ftpForJck">dzip.FtpForJCK</ref>
+		<ref name="ftpForYlqz">dzip.FtpForYLQZ</ref>
+		<ref name="ftpForYlsj">dzip.FtpForYLSJ</ref>
+	</bean>
+	<!-- 锦城卡FTP连接配置 -->
+	<bean id="FtpForJCK" class="csii.dzip.action.util.ftp.Ftp">
+	    <param name="ftpServerIP">${audit.JCK.ftpServer.ip}</param>
+		<param name="fetpServerPort">${audit.JCK.ftpServer.port}</param>
+		<param name="userName">${audit.JCK.ftp.userName}</param>
+		<param name="passWord">${audit.JCK.ftp.passWord}</param>
+		<param name="localPath">${audit.JCK.loclal.path}</param>
+		<param name="remotePath">${audit.JCK.remote.path}</param>
+	</bean>
+	<!-- 银联前置FTP连接配置 -->
+	<bean id="FtpForYLQZ" class="csii.dzip.action.util.ftp.Ftp">
+	    <param name="ftpServerIP">${audit.YLQZ.ftpServer.ip}</param>
+		<param name="fetpServerPort">${audit.YLQZ.ftpServer.port}</param>
+		<param name="userName">${audit.YLQZ.ftp.userName}</param>
+		<param name="passWord">${audit.YLQZ.ftp.passWord}</param>
+		<param name="localPath">${audit.YLQZ.loclal.path}</param>
+		<param name="remotePath">${audit.YLQZ.remote.path}</param>
+	</bean>
+	<!-- 银联数据FTP连接配置 -->
+	<bean id="FtpForYLSJ" class="csii.dzip.action.util.ftp.FtpForYLSJ">
+	    <param name="ftpServerIP">${audit.YLSJ.ftpServer.ip}</param>
+		<param name="fetpServerPort">${audit.YLSJ.ftpServer.port}</param>
+		<param name="userName">${audit.YLSJ.ftp.userName}</param>
+		<param name="passWord">${audit.YLSJ.ftp.passWord}</param>
+		<param name="localPath">${audit.YLSJ.loclal.path}</param>
+		<param name="remotePath">${audit.YLSJ.remote.path}</param>
+	</bean>
+		<!--上传银联前置明细对账文件连接配置 -->
+	<bean id="FtpForCupsDetail" class="csii.dzip.action.util.ftp.Ftp">
+	    <param name="ftpServerIP">${CUPS8583.detailCheck.ftpHost}</param>
+		<param name="fetpServerPort">${CUPS8583.detailCheck.ftpPort}</param>
+		<param name="userName">${CUPS8583.detailCheck.ftpUserName}</param>
+		<param name="passWord">${CUPS8583.detailCheck.ftpPassWord}</param>
+		<param name="localPath">${CUPS8583.detailCheck.localFilePath}</param>
+		<param name="remotePath">${CUPS8583.detailCheck.remoteFilePath}</param>
+	</bean>
+  <bean id="pinSecurityModule" class="csii.dzip.action.util.PinSecurityModule">
+<!--	    <param name="ip">${common.pinSecurityModule.ip}</param>-->
+<!--	    <param name="port">${common.pinSecurityModule.port}</param>-->
+<!--	    <param name="macFields">${common.pinSecurityModule.macFields}</param>-->
+
+<!--	    <param name="productMode">${ProductMode}</param>-->
+<!---->
+<!--	    <param name="m">${common.pinSecurityModule.m}</param>-->
+<!--	    <param name="e">${common.pinSecurityModule.e}</param>-->
+<!---->
+<!--		<param name="devm">${common.pinSecurityModule.devm}</param>-->
+<!--		<param name="deve">${common.pinSecurityModule.deve}</param>-->
+<!---->
+<!--		<param name="HSM">${common.pinSecurityModule.HSM}</param>-->
+<!--		<param name="pinkey">${common.pinSecurityModule.pinkey}</param>-->
+		<param name="bankpinkey">${CUPS8583.pinSecurityModule.bankpinkey}</param>
+		<param name="mackey">${CUPS8583.pinSecurityModule.mackey}</param>
+	</bean>
+	<!-- 密码解密来自柜面交易的密码 -->
+	<bean id="pinSecurityModule4Onli" class="csii.dzip.action.util.PinSecurityModule">
+		<param name="bankpinkey">${onli.pinSecurityModule.bankpinkey}</param>
+		<param name="mackey">${onli.pinSecurityModule.mackey}</param>
+	</bean>
+	<!--加密机IP和端口配置参数-->
+	<bean id="secApiConf" class="csii.dzip.action.util.secapipackage.SecApiConf">
+	    <param name="csmp">${iudf.decryptSecApi.csmp}</param>
+	    <param name="port">${iudf.decryptSecApi.port}</param>
+	    <param name="clnt">${iudf.decryptSecApi.clnt}</param>
+	    <param name="timeout">${iudf.decryptSecApi.timeout}</param>
+		<param name="headlen">${iudf.decryptSecApi.headlen}</param>
+		<param name="taillen">${iudf.decryptSecApi.taillen}</param>
+		<param name="errlv">${iudf.decryptSecApi.errlv}</param>
+		<param name="logpath">${iudf.decryptSecApi.logpath}</param>
+	</bean>
+	<bean id="secApi" class="csii.dzip.action.util.secapipackage.SecApi">
+        <ref name="secApiConf">secApiConf</ref>
+	</bean>
+	<!--解密ATMP端传入的密文-->
+	 <bean id="decryptSecApi" class="csii.dzip.action.util.DecryptSecApi">
+	    <param name="pinforemat">${iudf.decryptSecApi.pinforemat}</param>
+	    <param name="pwdlen">${iudf.decryptSecApi.pwdlen}</param>
+	    <param name="piklen">${iudf.decryptSecApi.piklen}</param>
+	    <param name="keylen">${iudf.decryptSecApi.keylen}</param>
+	    <param name="bankpindex">${iudf.decryptSecApi.bankpindex}</param>
+		<param name="bankpinkey">${iudf.decryptSecApi.bankpinkey}</param>
+		<param name="pinkey">${iudf.decryptSecApi.pinkey}</param>
+		<param name="mackey">${iudf.decryptSecApi.mackey}</param>
+		<ref name="secApi">secApi</ref>
+	</bean>
+</config>

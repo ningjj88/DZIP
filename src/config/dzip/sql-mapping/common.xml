@@ -1,0 +1,1086 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+
+	DZIP系统公共配置文件
+
+	by 张永庆	since:2010-05-20
+
+-->
+<sqlMap namespace="common">
+
+	<!--========================别名设置=================================-->
+	<typeAlias alias="result" type="java.util.HashMap" />
+	<typeAlias alias="param" type="java.util.HashMap" />
+	<typeAlias alias="string" type="java.lang.String" />
+	<typeAlias alias="double" type="java.lang.Double" />
+
+	<!--========================查询渠道管理==============================-->
+	<resultMap id="channel" class="result">
+		<result property="trancd" column="TRANCD" />
+		<result property="channid" column="CHANNID" />
+		<result property="transtat" column="TRANSTAT" />
+	</resultMap>
+	<select id="queryChannel" resultMap="channel" parameterClass="param">
+		select CHANNID,TRANCD,TRANSTAT from t_channel
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="trancd">
+				 <![CDATA[ trancd=#trancd# ]]>
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<!--============================查询渠道状态==============================-->
+	<resultMap id="channStat" class="result">
+		<result property="channstat" column="CHANNSTAT" />
+	</resultMap>
+	<select id="querychannSat" resultMap="channStat" parameterClass="param">
+		select CHANNSTAT from t_channid where  CHANNID=#channid#
+	</select>
+	<!--============================查询交易状态==============================-->
+	<resultMap id="TranSat" class="result">
+		<result property="transtat" column="TRANSTAT" />
+		<result property="crdb" column="CRDB" />
+	</resultMap>
+	<select id="queryTranSat" resultMap="TranSat" parameterClass="param">
+		select TRANSTAT,CRDB
+		from t_channel
+		where  CHANNID=#channid#
+		  and  trancd=#TranCd#
+	</select>
+	<!--============================查询渠道状态和渠道交易状态==============================-->
+	<resultMap id="channTranSat" class="result">
+    	<result property="channstat" column="CHANNSTAT" />
+		<result property="transtat" column="TRANSTAT" />
+		<result property="crdb" column="CRDB" />
+		<result property="channeltypstat" column="CHANNELTYPSTAT" />
+	</resultMap>
+	<select id="querychannTranSat" resultMap="channTranSat" parameterClass="param">
+		select cd.CHANNSTAT,cl.TRANSTAT,cl.CRDB,
+		       NVL((select ChannelTypStat from t_ChannelTyp
+		         where  CHANNID=cd.CHANNID
+		         and ChannelTypCd=#in_ChannelTypCd#),'1') AS CHANNELTYPSTAT
+	    from   t_channid cd, t_channel cl
+	    where  cd.CHANNID=#channid#
+	    and    cd.CHANNID=cl.channid
+	    and    cl.trancd=#TranCd#
+	</select>
+	<!--============================查询系统跟踪号==============================-->
+	<resultMap id="getTraceNumResult" class="result">
+		<result property="SYSTRACENUM" column="SYSTRACENUM"/>
+	</resultMap>
+	<select id="queryTraceNum" resultMap="getTraceNumResult" parameterClass="string">
+		select SYSTRACENUM
+		       from t_journal
+		       where SYSSEQNO=#peJournalNO#
+		         and POSTDATE =(select MAX(POSTDATE)
+		                         from  t_journal
+		                         where SYSSEQNO=#peJournalNO#)
+	</select>
+	<!--==============================内外部交易的转换=====================-->
+	<resultMap id="instrancd" class="result">
+		<result property="insTrancd" column="INSTRANCD"/>
+		<result property="channid" column="CHANNID"/>
+	</resultMap>
+	<select id="queryInstrancd" resultMap="instrancd" parameterClass="string">
+		select INSTRANCD,CHANNID
+		       from t_outinttran
+		       where OUTTRANCD=#outTrancd#
+	</select>
+	<!--==============================获得配置参数值=====================-->
+	<resultMap id="getParamResult" class="result">
+		<result property="ParamCD" column="PARAMCD"/>
+		<result property="ParamValue" column="PARAMVALUE"/>
+		<result property="ParamDesc" column="PARAMDESC"/>
+	</resultMap>
+	<select id="queryParam" resultMap="getParamResult" parameterClass="string">
+		select PARAMCD,PARAMVALUE,PARAMDESC
+		       from t_commparam
+		       where PARAMNAME=#paramName#
+	</select>
+
+	<!--=============================查询平台账务日期===============================-->
+	<resultMap id="sysstat" class="result">
+		<result property="postdate" column="POSTDATE" />
+	</resultMap>
+	<select id="querySysstat" resultMap="sysstat" parameterClass="param">
+		select to_char(to_date(bankoptionvalue,'yyyy-MM-DD'),'yyyymmdd') POSTDATE
+		  from bankoption
+		 where bankoptioncd = 'PDAT'
+	</select>
+	<!--=============================查询平台账务日期===============================-->
+	<resultMap id="sysstatBatch" class="result">
+		<result property="postdate" column="POSTDATE" />
+	</resultMap>
+	<select id="querySysstatBatch" resultMap="sysstatBatch" parameterClass="param">
+		select to_char(to_date(bankoptionvalue,'yyyy-MM-DD'),'yyyymmdd') POSTDATE
+		  from bankoption
+		 where bankoptioncd = 'CDAT'
+	</select>
+	<!--=============================查询地区编码===============================-->
+	<select id="queryAreaRegion" resultClass="string" parameterClass="string">
+		SELECT AREAREGIONDES
+		FROM T_AREAREGION
+		WHERE AREAREGIONCD=#areaRegioncd#
+	</select>
+	<!--=============================查询核心主机状态===============================-->
+	<select id="queryHostStat" resultClass="string" parameterClass="param">
+		select bankoptionvalue
+		  from bankoption
+		 where bankoptioncd = 'UCOD'
+	</select>
+
+	<!--============================更改前置表中核心主机状态===============================-->
+	<update id="updateHostStat" parameterClass="string">
+		UPDATE t_sysstat set HOSTLOGSTAT=#hostLogStat#
+	</update>
+	<!--=========================用于记录交易流水操作================================-->
+	<insert id="insertJournal" parameterClass="param">
+		insert into t_journal
+			  (
+			   POSTDATE, SYSSEQNO, TRANSTAT, ACCTNO, TRANDATE,
+			   TRANTIME, CRDB, TRANAMT, CUSTFEE, AUTHCD, CURRCD, STLCURRCD,
+			   REQORGCD, FWDORGCD, REQCHANN, TRMCD, SYSTRACENUM, OUTTRANCD,
+			   MSGTYP, REFCD, MERTYPE,
+			   TRANDATETIME, SETTLMTDATE, PROCESSCODE, ACCPID,
+			   ACCPADDR, POSCONDCODE, RCVCODE, POSENTRYCODE,
+			   ACCTID1, ACCTID2, ORIGMSGTYP, ORIGTRACENUM,
+			   ORIGDATETIME, ORIGREQORGCD, ORIGFWDORGCD,HOSTCHKCD,PERSNBR,
+			   CASHBOXNBR,REACODE,RTXNCATCD,HSTRESPCD,ADDDATAPRI,SETAMT,COUNTRYCD
+			   )
+			values
+			  (
+			   #postdate#, #peJournalNO#, #transtat#, #acctno#, #trandate#,
+			   #trantime#, #crdb#, #tranamt#, #custfee#, #authcd#, #currcd#, #currcd#,
+			   #reqorgcd#, #fwdorgcd#, #reqchann#, #trmcd#, #systracenum#, #outtrancd#,
+			   #msgtyp#, #refcd#, #mertype#,
+			   #trandatetime#, #settlmtdate#, #processcode#, #accpid#,
+			   #accpaddr#, #poscondcode#, #rcvcode#, #posentrycode#,
+			   #acctid1#, #acctid2#,#origmsgtyp#, #origtracenum#,
+			   #origdatetime#, #origreqorgcd#, #origfwdorgcd#, #hostchkcd#,#persnbr#,
+			   #cashboxnbr#,#reacode#,#rtxncatcd#,#hstrespcd#,#adddatapri#,#setamt#,#countrycd#
+			   )
+	</insert>
+	<!--==============================查询内部处理码和返回消息类型=====================-->
+	<resultMap id="inprocd" class="result">
+		<result property="inprocd" column="INPROCD"/>
+		<result property="inmsgtyp" column="INMSGTYP"/>
+		<result property="respmsgtyp" column="RESPMSGTYP"/>
+<!--		<result property="channId" column="CHANNID"/>-->
+	</resultMap>
+	<select id="queryInprocd" resultMap="inprocd" parameterClass="param">
+		select INPROCD,INMSGTYP,RESPMSGTYP
+		       from t_outinprocd
+		       where PROCD=#ProcCode#
+		         and MSGTYP=#MsgType#
+		         and CHANNID= #reqchann#
+	</select>
+
+	<!--==============================查询机构号和科目号 =====================-->
+	<resultMap id="orgNbr" class="result">
+		<result property="TranSeqNo" column="TRANSEQNO"/>
+		<result property="RtxnTypCd" column="RTXNTYPCD"/>
+		<result property="OrgNbr" column="ORGNBR"/>
+		<result property="GlAcctTitlrNbr" column="GLACCTTITLENBR"/>
+	</resultMap>
+	<select id="query_orgNbr_glAcctTitlrNbr" resultMap="orgNbr" parameterClass="param">
+		select TRANSEQNO,trim(RTXNTYPCD) RTXNTYPCD,ORGNBR,GLACCTTITLENBR
+		from rtxnchalparam t
+		where RTXNSOURCECD=#RtxnSourceCd#
+		and RTXNCATCD=#RtxnCatCd#
+		and TRANCD= #TranCd#
+		order by TRANSEQNO ASC
+	</select>
+
+	<!--==============================查询内部帐户 =====================-->
+	<resultMap id="directPostAcctNbr" class="result">
+		<result property="directPostAcctNbr" column="DIRECTPOSTACCTNBR"/>
+	</resultMap>
+	<select id="query_directPostAcctNbr" resultMap="directPostAcctNbr" parameterClass="param">
+		SELECT DIRECTPOSTACCTNBR
+          FROM captdepacct
+        WHERE GLACCTTITLENBR = #GlAcctTitlrNbr#
+          AND BANKORGNBR = #OrgNbr#
+          and captdepaccttypcd='BEPS'
+	</select>
+	<!--==============================查询客户号 =====================-->
+	<select id="query_taxrptForPersNbr" resultClass="string" parameterClass="string">
+		SELECT TAXRPTFORPERSNBR
+		   FROM MEDIUMPAG
+		  WHERE MEDIUMID=#in_cardnbr#
+	</select>
+
+	<!--==============================查询客户号 =====================-->
+	<select id="queryTaxrptForPersNbr" resultClass="string" parameterClass="string">
+		SELECT TAXRPTFORPERSNBR
+		   FROM MEDIUMPAG
+		  WHERE MEDIUMID=#in_cardnbr#
+		  AND MEDSTAT = '0001'
+		  AND ROWNUM = 1
+	</select>
+
+	<!-- =======================交易结束后，更改交易状态 ========================-->
+	<update id="updateTranStatus" parameterClass="param">
+		UPDATE t_journal
+		<dynamic prepend = "set LASTUPDTIME=TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),">
+			<isNotNull prepend= "," property="rltseqno">
+				RLTSEQNO=#rltseqno#
+			</isNotNull>
+			<isNotNull prepend= "," property="rltacctno">
+				RLTACCTNO=#rltacctno#
+			</isNotNull>
+			<isNotNull prepend= "," property="transtat">
+				TRANSTAT=#transtat#
+			</isNotNull>
+			<isNotNull prepend= "," property="rtxncatcd">
+				RTXNCATCD=#rtxncatcd#
+			</isNotNull>
+			<isNotNull prepend= "," property="remainAmt">
+				TRANAMT=#remainAmt#
+			</isNotNull>
+			<isNotNull prepend= "," property="custfee">
+				CUSTFEE=#custfee#
+			</isNotNull>
+			<isNotNull prepend= "," property="hostseqno">
+				 HSTSEQNO=#hostseqno#
+			</isNotNull>
+			<isNotNull prepend= "," property="hstrespcd">
+				 HSTRESPCD=#hstrespcd#
+			</isNotNull>
+			<isNotNull prepend= "," property="optnbr">
+				 OPTNBR=#optnbr#
+			</isNotNull>
+			<isNotNull prepend= "," property="persnbr">
+				 PERSNBR=#persnbr#
+			</isNotNull>
+		    <isNotNull prepend= "," property="cashboxnbr">
+				 CASHBOXNBR=#cashboxnbr#
+			</isNotNull>
+			 <isNotNull prepend= "," property="crdb">
+				 CRDB=#crdb#
+			</isNotNull>
+			<isNotNull prepend= "," property="settlmtdate">
+				 SETTLMTDATE=#settlmtdate#
+			</isNotNull>
+			<isNotNull prepend= "," property="postdate">
+				 POSTDATE=#postdate#
+			</isNotNull>
+			<isNotNull prepend= "," property="tran_fee">
+				 TRANFEE=#tran_fee#
+			</isNotNull>
+			<isNotNull prepend= "," property="rtxnplatcd">
+				 RTXNPLATCD=#rtxnplatcd#
+			</isNotNull>
+		</dynamic>
+		where SYSSEQNO=#peJournalNO#
+          and POSTDATE =(select MAX(POSTDATE)
+		                         from  t_journal
+		                         where SYSSEQNO=#peJournalNO#)
+	 </update>
+	<!-- =============================密码验证 =================================-->
+	<parameterMap id="CheckPinParameters" class="param">
+		<parameter property="in_Pan" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_RTXNSOURCE" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_PIN" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TELLERNBR" jdbcType="INTEGER" javaType="integer" mode="IN" />
+		<parameter property="in_CASHBOXNBR" jdbcType="INTEGER" javaType="integer" mode="IN" />
+		<parameter property="out_Responce" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="CheckPin" parameterMap="CheckPinParameters" resultClass="result">
+	{ call PACKGEN_CARDZ.CheckPin(?,?,?,?,?,?,?,?)}
+	</procedure>
+
+	<!-- =====================获取核心交易流水号 =========================================-->
+ 	<resultMap id="getRtxnNbrMap" class="result">
+		<result property="out_RTXNNBR" column="HSTSEQNO"/>
+	</resultMap>
+	<select id="getRtxnNbr" resultMap="getRtxnNbrMap" parameterClass="string">
+		select NVL2(HSTSEQNO,HSTSEQNO,'') HSTSEQNO
+		       from t_journal
+		       where SYSSEQNO=#origSysTraNumber#
+		       and POSTDATE =(select MAX(POSTDATE)
+		                         from  t_journal
+		                         where SYSSEQNO=#origSysTraNumber#)
+	</select>
+	<!-- =====================验证冲正,撤销和退货交易是否已经发生==========================-->
+	<select id="verifyOrigDate" resultClass="string" parameterClass="param">
+		select COUNT(*) COUNT
+		       from t_journal
+		       where ORIGTRACENUM=#origSysTraNumber#
+		       and REQCHANN = #channelId#
+		       and ACCTNO = #pan#
+		       and ORIGREQORGCD = #origAcquInstituIdCd#
+		       and ORIGFWDORGCD = #origiForwInstituIdCd#
+		       and ORIGDATETIME = #origTranDateTime#
+		       and TRANSTAT = #transtat#
+	</select>
+	<!-- =====================验证冲正和撤销交易是否已经发生==========================-->
+	<select id="verifyNoPosRet" resultClass="string" parameterClass="param">
+		select COUNT(*) COUNT
+		       from t_journal
+		       where ORIGTRACENUM=#origSysTraNumber#
+		       and REQCHANN = #channelId#
+		       and ACCTNO = #pan#
+		       and OUTTRANCD != #outtrancd#
+		       and ORIGREQORGCD = #origAcquInstituIdCd#
+		       and ORIGFWDORGCD = #origiForwInstituIdCd#
+		       and ORIGDATETIME = #origTranDateTime#
+		       and TRANSTAT = #transtat#
+	</select>
+	<!-- =====================获得POS消费退货总金额==========================-->
+	<select id="getOrigPosRetSumAMT" resultClass="string" parameterClass="param">
+		select SUM(NVL(TRANAMT,0)) SUMAMT
+		       from t_journal T,DUAL X
+		       where NVL('X', X.DUMMY) = NVL('X', T.ROWID (+) )
+		       and T.ORIGTRACENUM(+)=#origSysTraNumber#
+		       and T.REQCHANN(+) = #channelId#
+		       and T.ACCTNO(+) = #pan#
+		       and T.ORIGREQORGCD(+) = #origAcquInstituIdCd#
+		       and T.ORIGFWDORGCD(+) = #origiForwInstituIdCd#
+		       and T.ORIGDATETIME(+) = #origTranDateTime#
+		       and T.TRANSTAT(+) = #transtat#
+	</select>
+	<!-- =====================获取平台流水号 =========================================-->
+ 	<resultMap id="getJournalNOMap" class="result">
+ 	   <result property="PostDate" column="POSTDATE"/>
+		<result property="JournalNO" column="SYSSEQNO"/>
+		<result property="hostseqno" column="HSTSEQNO"/>
+		<result property="TranStat" column="TRANSTAT"/>
+		<result property="tranamt" column="TRANAMT"/>
+		<result property="optnbr" column="OPTNBR"/>
+		<result property="rltseqno" column="RLTSEQNO"/>
+		<result property="rltpostdate" column="RLTPOSTDATE"/>
+		<result property="settlmtdate" column="SETTLMTDATE"/>
+		<result property="refcd" column="REFCD"/>
+	</resultMap>
+	<select id="getJournalNO" resultMap="getJournalNOMap" parameterClass="param">
+		select POSTDATE,SYSSEQNO,DECODE(HSTSEQNO,'0',null,HSTSEQNO) HSTSEQNO,
+		       TRANSTAT,TRANAMT,NVL(OPTNBR,'0') OPTNBR,RLTSEQNO,RLTPOSTDATE,SETTLMTDATE,REFCD
+		       from t_journal
+		       where SYSTRACENUM=#origSysTraNumber#
+		       and REQCHANN = #channelId#
+		       and ACCTNO = #pan#
+		       and REQORGCD = #origAcquInstituIdCd#
+		       and FWDORGCD = #origiForwInstituIdCd#
+		       and TRANDATETIME = #origTranDateTime#
+	</select>
+	<!-- =====================响应码对照=========================================-->
+	 <resultMap id="getRespMap" class="result">
+		<result property="ChannRespCD" column="CHANNRESPCD"/>
+		<result property="RespName" column="RESPNAME"/>
+	</resultMap>
+	<select id="getResp" resultMap="getRespMap" parameterClass="param">
+	    SELECT    NVL(A.CHANNRESPCD,'96') CHANNRESPCD,NVL(A.RESPNAME, '系统故障') RESPNAME
+	    FROM    t_respcdcomp A, DUAL X
+	    WHERE   NVL('X', X.DUMMY) = NVL('X', A.ROWID (+) )
+	    AND     A.RESPCD   (+) = #RespCD#
+	    AND     A.CHANNID  (+) = '06'
+    </select>
+    <!-- =====================获取90域原始数据=========================================-->
+	 <resultMap id="getOrgDataMap" class="result">
+		<result column="ORIGMSGTYP" property="origmsgtyp"/>
+		<result column="ORIGTRACENUM" property="origSysTraNumber"/>
+		<result column="ORIGDATETIME" property="origTranDateTime"/>
+		<result column="ORIGREQORGCD" property="origAcquInstituIdCd"/>
+		<result column="ORIGFWDORGCD" property="origiForwInstituIdCd"/>
+
+	</resultMap>
+	<select id="getOrgData" resultMap="getOrgDataMap" parameterClass="param">
+	   	select ORIGMSGTYP,ORIGTRACENUM,ORIGDATETIME,ORIGREQORGCD,ORIGFWDORGCD
+		  from t_journal
+		 where SYSSEQNO=#peJournalNO#
+		   and POSTDATE =(select MAX(POSTDATE)
+		                         from  t_journal
+		                         where SYSSEQNO=#peJournalNO#)
+    </select>
+      <!-- =====================获取每日ATM取款次数=========================================-->
+<!--	 <resultMap id="getwithDrawCountMap" class="result">-->
+<!--		<result column="COUNT" property="count"/>-->
+<!--	</resultMap>-->
+	<select id="getWithDrawCount" resultClass="string" parameterClass="param">
+	   select count(*) COUNT
+	   from t_journal t
+	   where t.transtat='0'
+	     and t.postdate =#postdate#
+	     and t.outtrancd ='020001'
+	     and t.acctno = #acctno#
+    </select>
+    <!-- =====================获取每日ATM取款金额=========================================-->
+	<select id="getDailyWithDrawAmt" resultClass="string" parameterClass="param">
+	    select SUM(NVL(TRANAMT,0)) SUMAMT
+	    from t_journal t ,DUAL X
+       where  NVL('X', X.DUMMY) = NVL('X', t.ROWID (+))
+         and t.transtat(+)='0'
+	     and t.postdate(+) =#postdate#
+	     and t.outtrancd(+) =#TranCd#
+	     and t.acctno(+) = #acctno#
+    </select>
+    <!-- ==================查询ATM本代他是终端号对应的钱箱，柜员，机构号==================-->
+	<parameterMap id="getNtwkNodeInfoParameters" class="param">
+	    <parameter property="in_PostDate" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TerminalCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="out_NtwkNodeNbr" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_OrgNbr" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_CashBoxNbr" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_PersNbr" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_RESPONCD" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="getNtwkNodeInfo" parameterMap="getNtwkNodeInfoParameters" resultClass="result">
+	{ call PACKGEN_CARDZ.getNtwkNodeInfo(?,?,?,?,?,?,?,?,?)}
+	</procedure>
+    <!-- ==================获得系统状态和帐务日期==================-->
+	<parameterMap id="getSysStatDateParameters" class="param">
+		<parameter property="out_PostDate" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_SystemStat" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_RESPONCD" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="getSysStatDate" parameterMap="getSysStatDateParameters" resultClass="result">
+	{ call PACKGEN_CARDZ.Proc_QZ_GetSysStatDate(?,?,?,?,?)}
+	</procedure>
+	<!-- ==================获得系统交易参数信息==================-->
+	<parameterMap id="getSysTranInfoParameters" class="param">
+	    <parameter property="in_ACCTNBR"    jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_TerminalCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_RtxnCatCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="out_PostDate" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_SystemStat" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_NtwkNodeNbr" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_OrgNbr" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_CashBoxNbr" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_PersNbr" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_CustomId" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_RESPONCD" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="getSysTranInfo" parameterMap="getSysTranInfoParameters" resultClass="result">
+	{ call PACKGEN_CARDZ.Proc_QZ_GetSysTranInfo(?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+
+   <!--==============================查询客户号 =====================-->
+	<select id="query_sysdate" resultClass="string" parameterClass="param">
+		SELECT TO_CHAR(sysdate,'YYYYMMDDHH24MISS')
+		  FROM dual
+	</select>
+
+	<!-- =======================交易结束后，更改交易状态 ========================-->
+	<update id="updateBatchExecYN" parameterClass="param">
+		UPDATE t_journal_bath
+		<dynamic prepend = "set">
+			<isNotNull prepend= "," property="execyn">
+				EXECYN=#execyn#
+			</isNotNull>
+			<isNotNull prepend= "," property="hstseqnonew">
+				HSTSEQNONEW=#hstseqnonew#
+			</isNotNull>
+			<isNotNull prepend= "," property="transtatnew">
+				TRANSTATNEW=#transtatnew#
+			</isNotNull>
+			<isNotNull prepend= "," property="optnbr">
+				OPTNBR=#optnbr#
+			</isNotNull>
+		</dynamic>
+		where SYSSEQNO =#peJournalNO#
+		   and POSTDATE =(select MAX(POSTDATE)
+		                         from  t_journal_bath
+		                         where SYSSEQNO=#peJournalNO#)
+	 </update>
+
+	 <!-- =====================获取交易流水信息 =========================================-->
+ 	<resultMap id="getJournalInfoMap" class="result">
+ 	    <result property="peJournalNO" column="SYSSEQNO"/>
+ 	    <result property="rtxncatcd" column="RTXNCATCD"/>
+		<result property="postdate" column="POSTDATE"/>
+		<result property="transtat" column="TRANSTAT"/>
+		<result property="acctno" column="ACCTNO"/>
+		<result property="crdb" column="CRDB"/>
+		<result property="tranamt" column="TRANAMT"/>
+		<result property="custfee" column="CUSTFEE"/>
+		<result property="authcd" column="AUTHCD"/>
+		<result property="reqorgcd" column="REQORGCD"/>
+		<result property="fwdorgcd" column="FWDORGCD"/>
+		<result property="reqchann" column="REQCHANN"/>
+		<result property="trmcd" column="TRMCD"/>
+		<result property="systracenum" column="SYSTRACENUM"/>
+		<result property="outtrancd" column="OUTTRANCD"/>
+		<result property="msgtyp" column="MSGTYP"/>
+		<result property="refcd" column="REFCD"/>
+		<result property="mertype" column="MERTYPE"/>
+		<result property="processcode" column="PROCESSCODE"/>
+		<result property="accpid" column="ACCPID"/>
+		<result property="accpaddr" column="ACCPADDR"/>
+		<result property="poscondcode" column="POSCONDCODE"/>
+		<result property="rcvcode" column="RCVCODE"/>
+		<result property="posentrycode" column="POSENTRYCODE"/>
+		<result property="acctid1" column="ACCTID1"/>
+		<result property="acctid2" column="ACCTID2"/>
+		<result property="rltseqno" column="RLTSEQNO"/>
+		<result property="reacode" column="REACODE"/>
+		<result property="origmsgtyp" column="ORIGMSGTYP"/>
+		<result property="origtracenum" column="ORIGTRACENUM"/>
+		<result property="origdatetime" column="ORIGDATETIME"/>
+		<result property="origreqorgcd" column="ORIGREQORGCD"/>
+		<result property="origfwdorgcd" column="ORIGFWDORGCD"/>
+		<result property="optnbr" column="OPTNBR"/>
+		<result property="tran_fee" column="TRANFEE"/>
+		<result property="hostseqno" column="HSTSEQNO"/>
+		<result property="cashboxnbr" column="CASHBOXNBR"/>
+		<result property="trandatetime" column="TRANDATETIME"/>
+	</resultMap>
+	<select id="getJournalInfo" resultMap="getJournalInfoMap" parameterClass="string">
+		 select SYSSEQNO,RTXNCATCD,POSTDATE,TRANSTAT,ACCTNO,CRDB, TRANAMT,CUSTFEE,AUTHCD,
+				REQORGCD, FWDORGCD, REQCHANN, TRMCD, SYSTRACENUM, OUTTRANCD,CASHBOXNBR,
+				MSGTYP, REFCD,MERTYPE,PROCESSCODE, ACCPID,
+				ACCPADDR, POSCONDCODE, RCVCODE, POSENTRYCODE,
+				ACCTID1, ACCTID2,RLTSEQNO,REACODE,ORIGMSGTYP,ORIGTRACENUM,
+			    ORIGDATETIME, ORIGREQORGCD, ORIGFWDORGCD,NVL(OPTNBR,'0') OPTNBR,TRANFEE,HSTSEQNO,TRANDATETIME
+		   from t_journal
+		  where SYSSEQNO =#journalNO#
+		     and POSTDATE =(select MAX(POSTDATE)
+		                         from  t_journal
+		                         where SYSSEQNO=#journalNO#)
+	</select>
+	<!-- 通过转入圈存冲正获得转账圈存冲正交易信息 -->
+	<resultMap id="getJournalInfoByTransferInReversalMap" class="result">
+ 	    <result property="peJournalNO" column="SYSSEQNO"/>
+ 	    <result property="rtxncatcd" column="RTXNCATCD"/>
+		<result property="postdate" column="POSTDATE"/>
+		<result property="transtat" column="TRANSTAT"/>
+		<result property="acctno" column="ACCTNO"/>
+		<result property="crdb" column="CRDB"/>
+		<result property="tranamt" column="TRANAMT"/>
+		<result property="custfee" column="CUSTFEE"/>
+		<result property="authcd" column="AUTHCD"/>
+		<result property="reqorgcd" column="REQORGCD"/>
+		<result property="fwdorgcd" column="FWDORGCD"/>
+		<result property="reqchann" column="REQCHANN"/>
+		<result property="trmcd" column="TRMCD"/>
+		<result property="systracenum" column="SYSTRACENUM"/>
+		<result property="outtrancd" column="OUTTRANCD"/>
+		<result property="msgtyp" column="MSGTYP"/>
+		<result property="refcd" column="REFCD"/>
+		<result property="mertype" column="MERTYPE"/>
+		<result property="processcode" column="PROCESSCODE"/>
+		<result property="accpid" column="ACCPID"/>
+		<result property="accpaddr" column="ACCPADDR"/>
+		<result property="poscondcode" column="POSCONDCODE"/>
+		<result property="rcvcode" column="RCVCODE"/>
+		<result property="posentrycode" column="POSENTRYCODE"/>
+		<result property="acctid1" column="ACCTID1"/>
+		<result property="acctid2" column="ACCTID2"/>
+		<result property="rltseqno" column="RLTSEQNO"/>
+		<result property="reacode" column="REACODE"/>
+		<result property="origmsgtyp" column="ORIGMSGTYP"/>
+		<result property="origtracenum" column="ORIGTRACENUM"/>
+		<result property="origdatetime" column="ORIGDATETIME"/>
+		<result property="origreqorgcd" column="ORIGREQORGCD"/>
+		<result property="origfwdorgcd" column="ORIGFWDORGCD"/>
+		<result property="optnbr" column="OPTNBR"/>
+		<result property="tran_fee" column="TRANFEE"/>
+		<result property="hostseqno" column="HSTSEQNO"/>
+		<result property="trandatetime" column="TRANDATETIME"/>
+	</resultMap>
+	<select id="getJournalInfoByTransferInReversal" resultMap="getJournalInfoByTransferInReversalMap" parameterClass="param">
+		 select SYSSEQNO,RTXNCATCD,POSTDATE,TRANSTAT,ACCTNO,CRDB, TRANAMT,CUSTFEE,AUTHCD,
+				REQORGCD, FWDORGCD, REQCHANN, TRMCD, SYSTRACENUM, OUTTRANCD,
+				MSGTYP, REFCD,MERTYPE,PROCESSCODE, ACCPID,
+				ACCPADDR, POSCONDCODE, RCVCODE, POSENTRYCODE,
+				ACCTID1, ACCTID2,RLTSEQNO,REACODE,ORIGMSGTYP,ORIGTRACENUM,
+			    ORIGDATETIME, ORIGREQORGCD, ORIGFWDORGCD,NVL(OPTNBR,'0') OPTNBR,TRANFEE,HSTSEQNO,TRANDATETIME
+		   from t_journal
+		  where TRMCD = #trmcd#
+		  AND	TRANDATETIME = #trandatetime#
+		  AND   OUTTRANCD = #outtrancd#
+	</select>
+
+    <!-- =====================验证批量交易流水是否已执行 =========================================-->
+	<select id="verifyJournalBatch" resultClass="string" parameterClass="string">
+	   select count(*) COUNT
+	   from t_journal_bath t
+	   where t.SYSSEQNO=#journalNO#
+	   and   t.EXECYN='Y'
+	   and   t.TRANSTATNEW='0'
+	   and POSTDATE =(select MAX(POSTDATE)
+                         from  t_journal_bath
+                         where SYSSEQNO=#journalNO#)
+    </select>
+    <!-- =====================验证批量交易流水是否已执行 =========================================-->
+	<select id="getUCTMValue" resultClass="string" parameterClass="string">
+	   select bankoptionvalue
+	   from bankoption
+	   where bankoptioncd ='UCTM'
+	   and   bankoptiononyn='Y'
+    </select>
+    <!-- =======================更新最大日期时间到bankoption表 ========================-->
+	<update id="UnloadChalTranMaxTime" parameterClass="string">
+		UPDATE bankoption SET bankoptionvalue=#maxdatetime# WHERE bankoptioncd ='UCTM'
+	 </update>
+
+	<!-- ==================获得手续费==================-->
+		<parameterMap id="calcTranFeeParameters" class="param">
+	    <parameter property="in_ACQINSTID" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_MerTypCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranAMT" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_FarmerFlag" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_RtxnCatCd" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	    <parameter property="in_PostDate" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_TranCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_OutsideFlag" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_ACCTNO" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+		<parameter property="out_FeeAMT" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_FeeYN" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="calcTranFee" parameterMap="calcTranFeeParameters" resultClass="result">
+	{ call PACKGEN_PE.CalcTranFee(?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+
+	<!-- ==================验证交易限制参数==================-->
+	<parameterMap id="valTranLimitParameters" class="param">
+		<parameter property="in_MerTypCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranAMT" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TranFee" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_RtxnCatCd" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	    <parameter property="in_PostDate" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_TranCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_OutsideFlag" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_FWDORGCD" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_BusiTyp" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_ChannelTypCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_TranLaunchWayCd" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_ACCTNO" jdbcType="VARCHAR"  javaType="string" mode="IN" />
+	    <parameter property="out_RESPONCD" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="valTranLimit" parameterMap="valTranLimitParameters" resultClass="result">
+	{ call PACKGEN_PE.ValTranLimit(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+
+   <!-- ==================记录欺诈交易信息==================-->
+	<parameterMap id="UpdFraudInfoParameters" class="param">
+		<parameter property="in_PostDate" jdbcType="VARCHAR" javaType="string" mode="IN" />
+	    <parameter property="in_ACCTNO" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TRACK2" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TRACK3" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_RESPONCD" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="out_RESPONCD" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="UpdFraudInfo" parameterMap="UpdFraudInfoParameters" resultClass="result">
+	{ call PACKGEN_PE.UpdFraudInfo(?,?,?,?,?,?,?,?)}
+	</procedure>
+
+	<!-- =====================获取批量流水表平台流水号 =========================================-->
+ 	<resultMap id="getBatchJournalNOMap" class="result">
+ 	   <result property="PostDate" column="POSTDATE"/>
+		<result property="JournalNO" column="SYSSEQNO"/>
+		<result property="hostseqno" column="HSTSEQNO"/>
+		<result property="TranStat" column="TRANSTAT"/>
+		<result property="tranamt" column="TRANAMT"/>
+		<result property="optnbr" column="OPTNBR"/>
+		<result property="rltseqno" column="RLTSEQNO"/>
+		<result property="rltpostdate" column="RLTPOSTDATE"/>
+	</resultMap>
+	<select id="getBatchJournalNO" resultMap="getBatchJournalNOMap" parameterClass="param">
+		select POSTDATE,SYSSEQNO,HSTSEQNO,TRANSTAT,TRANAMT,NVL(OPTNBR,'0') OPTNBR,RLTSEQNO,RLTPOSTDATE
+		       from t_journal
+		       where SYSTRACENUM=#origSysTraNumber#
+		       and REQCHANN = #channelId#
+		       and ACCTNO = #pan#
+		       and REQORGCD = #origAcquInstituIdCd#
+		       and FWDORGCD = #origiForwInstituIdCd#
+		       and TRANDATETIME = #origTranDateTime#
+	</select>
+
+	<!--********************************获得备份流水信息***************************************-->
+	<!-- ========结果集配置=========== -->
+	<resultMap id="BackupJournalParam" class="result">
+		<result property="postdate" column="POSTDATE" />
+		<result property="SysSeqNo" column="SYSSEQNO" />
+		<result property="rltacctno" column="RLTACCTNO" />
+		<result property="rltseqno" column="RLTSEQNO" />
+		<result property="HostSeqNo" column="HSTSEQNO" />
+		<result property="lastupdatetime" column="LASTUPDTIME" />
+		<result property="outtrancd" column="OUTTRANCD" />
+		<result property="msgtyp" column="MSGTYP"/>
+		<result property="rtxncatcd" column="RTXNCATCD"/>
+	</resultMap>
+	<!-- ========查询参数集配置=========== -->
+	<parameterMap id="GetBackupJournalParam" class="param">
+	    <parameter property="in_TRANDATETIME" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="BackupJournalParam" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+   <!--========================获得备份流水信息==============================-->
+	<procedure id="GetBackupJournal" parameterMap="GetBackupJournalParam">
+		 { call PackGen_PE.GetBackupJournal(?,?,?,?)}
+	</procedure>
+
+    <!--============================修改开通无卡自助状态===============================-->
+	<update id="updOpenNoCardSelf" parameterClass="param">
+		UPDATE T_OPENNOCARDSELFHELP set TRANSTAT=#transtat#,PHONENBR=#phonenbr# where ACCTNO=#acctno#
+	</update>
+	<!--=========================记录开通无卡自助信息================================-->
+	<insert id="insertOpenNoCardSelf" parameterClass="param">
+		insert into T_OPENNOCARDSELFHELP
+			  (
+			   POSTDATE, TRANSTAT, ACCTNO, PHONENBR
+			   )
+			values
+			  (
+			   #postdate#,#transtat#, #acctno#, #phonenbr#
+			   )
+	</insert>
+	<!--============================获得开通无卡自助状态===============================-->
+	<select id="getOpenNoCardSelf" resultClass="string" parameterClass="string">
+	   	select TRANSTAT
+		  from T_OPENNOCARDSELFHELP
+		 where ACCTNO=#acctno#
+    </select>
+    <!--============================获得开通无卡自助用户的电话===========================-->
+    <select id="getNoCardSelfPhonenbr" resultClass="string" parameterClass="string">
+	   	select PHONENBR
+		  from T_OPENNOCARDSELFHELP
+		 where ACCTNO=#acctno#
+    </select>
+
+    <!-- =====================查询失败的离线预授权完成交易===============================-->
+    <resultMap id="getOfflinePreAuthCompMap" class="result">
+ 	    <result property="peJournalNO" column="SYSSEQNO"/>
+ 	    <result property="rtxncatcd" column="RTXNCATCD"/>
+		<result property="postdate" column="POSTDATE"/>
+		<result property="transtat" column="TRANSTAT"/>
+		<result property="acctno" column="ACCTNO"/>
+		<result property="crdb" column="CRDB"/>
+		<result property="tranamt" column="TRANAMT"/>
+		<result property="custfee" column="CUSTFEE"/>
+		<result property="authcd" column="AUTHCD"/>
+		<result property="reqorgcd" column="REQORGCD"/>
+		<result property="fwdorgcd" column="FWDORGCD"/>
+		<result property="reqchann" column="REQCHANN"/>
+		<result property="trmcd" column="TRMCD"/>
+		<result property="systracenum" column="SYSTRACENUM"/>
+		<result property="outtrancd" column="OUTTRANCD"/>
+		<result property="msgtyp" column="MSGTYP"/>
+		<result property="refcd" column="REFCD"/>
+		<result property="mertype" column="MERTYPE"/>
+		<result property="processcode" column="PROCESSCODE"/>
+		<result property="accpid" column="ACCPID"/>
+		<result property="accpaddr" column="ACCPADDR"/>
+		<result property="poscondcode" column="POSCONDCODE"/>
+		<result property="rcvcode" column="RCVCODE"/>
+		<result property="posentrycode" column="POSENTRYCODE"/>
+		<result property="acctid1" column="ACCTID1"/>
+		<result property="acctid2" column="ACCTID2"/>
+		<result property="rltseqno" column="RLTSEQNO"/>
+		<result property="reacode" column="REACODE"/>
+		<result property="origmsgtyp" column="ORIGMSGTYP"/>
+		<result property="origtracenum" column="ORIGTRACENUM"/>
+		<result property="origdatetime" column="ORIGDATETIME"/>
+		<result property="origreqorgcd" column="ORIGREQORGCD"/>
+		<result property="origfwdorgcd" column="ORIGFWDORGCD"/>
+		<result property="optnbr" column="OPTNBR"/>
+	</resultMap>
+	<select id="getOfflinePreAuthComp" resultMap="getOfflinePreAuthCompMap" parameterClass="string">
+		 select SYSSEQNO,RTXNCATCD,POSTDATE,TRANSTAT,ACCTNO,CRDB, TRANAMT,CUSTFEE,AUTHCD,
+				REQORGCD, FWDORGCD, REQCHANN, TRMCD, SYSTRACENUM, OUTTRANCD,
+				MSGTYP, REFCD,MERTYPE,PROCESSCODE, ACCPID,
+				ACCPADDR, POSCONDCODE, RCVCODE, POSENTRYCODE,
+				ACCTID1, ACCTID2,RLTSEQNO,REACODE,ORIGMSGTYP,ORIGTRACENUM,
+			    ORIGDATETIME, ORIGREQORGCD, ORIGFWDORGCD,NVL(OPTNBR,'0') OPTNBR
+		   from t_journal
+		  where outtrancd='02200006'
+		    and transtat in ('Z','8')
+		   order by postdate,sysseqno
+	</select>
+	<!-- =====================查询银联数据记账交易流水===============================-->
+	<resultMap id="getICJournalMap" class="result">
+	    <result property="postdate" column="POSTDATE"/>
+	    <result property="peJournalNO" column="SYSSEQNO"/>
+	    <result property="hostseqno" column="HSTSEQNO"/>
+		<result property="reqorgcd" column="ACQINSTCODE"/>
+		<result property="systracenum" column="TRACENO"/>
+		<result property="trandate" column="TRANSDATE"/>
+		<result property="trantime" column="TRANSDATE"/>
+		<result property="acctno" column="ACCOUNT"/>
+		<result property="tranamt" column="AMT"/>
+		<result property="tran_fee" column="FEE"/>
+		<result property="msgtyp" column="MSGTYPE"/>
+		<result property="outtrancd" column="OUTTRANCD"/>
+		<result property="checkflag" column="CHECKFLAG"/>
+		<result property="RtxnCatCd" column="ISSINSTRESVD"/>
+		<result property="origtracenum" column="ORIGTRACENUM"/>
+		<result property="origdatetime" column="ORIGDATETIME"/>
+		<result property="fwdorgcd" column="FWDINSTCODE"/>
+	</resultMap>
+	<!-- 批量记账交易流水查询 -->
+	<select id="getICJournalByChargeFlag" resultMap="getICJournalMap" parameterClass="param">
+	  select POSTDATE,SYSSEQNO,HSTSEQNO,ACQINSTCODE,TRACENO,TRANSDATE,TRANSTIME,ACCOUNT,AMT,FEE,
+	         MSGTYPE,MSGTYPE||SUBSTR(PROCCODE,1,2) AS OUTTRANCD,CHECKFLAG,ISSINSTRESVD,
+	         ORIGTRACENUM,ORIGDATETIME,FWDINSTCODE
+		from T_ICJOURNAL
+		where CHECKDATE =#PostDate#
+		  and CHARGEFLAG in ('1','2')
+		  order by ACQINSTCODE,TRANSDATE,TRACENO
+	</select>
+	<!-- 单笔记账交易流水查询 -->
+	<select id="getSingleICJournal" resultMap="getICJournalMap" parameterClass="param">
+		SELECT POSTDATE,SYSSEQNO,HSTSEQNO,ACQINSTCODE,TRACENO,TRANSDATE,TRANSTIME,ACCOUNT,AMT,FEE,
+	           MSGTYPE,MSGTYPE||SUBSTR(PROCCODE,1,2) AS OUTTRANCD,CHECKFLAG,ISSINSTRESVD,
+	           ORIGTRACENUM,ORIGDATETIME,FWDINSTCODE
+	    FROM T_ICJOURNAL
+	    WHERE ACQINSTCODE = #AcqInstCode#
+	    AND   TRACENO = #TraceNo#
+	    AND   TRANSDATE = #TransDate#
+	</select>
+	<!-- =======================交易结束后，更改记账标识 ========================-->
+	<update id="updICJournal" parameterClass="param">
+		UPDATE T_ICJOURNAL
+		set   CHARGEFLAG=#chargeFlag#,
+		      POSTDATE=#postdate#,
+		      HSTSEQNO=#hostseqno#,
+		      HSTRESPCD=#hstrespcd#,
+		      ERRMSG=#errmsg#
+		where ACQINSTCODE=#reqorgcd#
+		  and TRACENO=#systracenum#
+		  and TRANSDATE=#trandate#
+          and ACCOUNT =#acctno#
+	 </update>
+	<!--============================指定帐号是否有电子钱包余额记录===============================-->
+	<resultMap class="result" id="electronicCashBal">
+		<result property="pan" column="PAN"/>
+		<result property="ewalletbalamt" column="EWALLETBALAMT"/>
+		<result property="totalldamt" column="TOTALLDAMT"/>
+		<result property="totalunldamt" column="TOTALUNLDAMT"/>
+		<result property="totalposamt" column="TOTALPOSAMT"/>
+		<result property="stat" column="STAT"/>
+		<result property="lastmaintdate" column="LASTMAINTDATE"/>
+	</resultMap>
+	<select id="getElectronicCashBalInfo" resultMap="electronicCashBal" parameterClass="string">
+	   	SELECT PAN, EWALLETBALAMT, TOTALLDAMT, TOTALUNLDAMT, TOTALPOSAMT, STAT, LASTMAINTDATE
+	   	FROM T_ICEWALLETCTL WHERE PAN = #pan#
+    </select>
+    <!--=========================插入电子钱包余额记录================================-->
+	<insert id="insertElectronicCashBal" parameterClass="param">
+		INSERT INTO T_ICEWALLETCTL
+		(
+			PAN,
+			EWALLETBALAMT,
+			TOTALLDAMT,
+			TOTALUNLDAMT,
+			TOTALPOSAMT,
+			STAT,
+			LASTMAINTDATE
+		)
+		VALUES
+		(
+			#pan#,
+			#ewalletbalamt#,
+			#totalldamt#,
+			#totalunldamt#,
+			#totalposamt#,
+			#stat#,
+			SYSDATE
+		)
+	</insert>
+	<!--============================更新电子钱包余额记录===============================-->
+	<update id="updateElectronicCashBal" parameterClass="param">
+		UPDATE T_ICEWALLETCTL SET EWALLETBALAMT=#ewalletbalamt#,
+								  TOTALLDAMT=#totalldamt#,
+								  TOTALUNLDAMT=#totalunldamt#,
+								  TOTALPOSAMT=#totalposamt#,
+								  STAT=#stat#,
+								  LASTMAINTDATE=SYSDATE
+						    WHERE PAN=#pan#
+
+	</update>
+
+	<!--=========================查询银联数据对账流水未对平的流水=============================-->
+	<resultMap class="result" id="getICJournalResultMap">
+		<result property="TransCode" column="TRANSCODE"/>
+		<result property="Account" column="ACCOUNT"/>
+		<result property="TraceNo" column="TRACENO"/>
+		<result property="SettleDate" column="SETTLEDATE"/>
+		<result property="TransDate" column="TRANSDATE"/>
+		<result property="TransTime" column="TRANSTIME"/>
+		<result property="Amt" column="AMT"/>
+		<result property="Fee" column="FEE"/>
+		<result property="ErrMsg" column="ERRMSG"/>
+		<result property="AcqInstCode" column="ACQINSTCODE"/>
+		<result property="HstAcct" column="HSTACCT"/>
+		<result property="ChargeFlag" column="CHARGEFLAG"/>
+		<result property="CheckFlag" column="CHECKFLAG"/>
+	</resultMap>
+	<select id="getICJournal" parameterClass="param" resultMap="getICJournalResultMap">
+		SELECT TRANSCODE,
+		       ACCOUNT,
+		       TRACENO,
+		       SETTLEDATE,
+		       TRANSDATE,
+		       TRANSTIME,
+		       AMT,
+		       FEE,
+		       ERRMSG,
+		       ACQINSTCODE,
+		       HSTACCT,
+		       CHARGEFLAG,
+		       CHECKFLAG
+		FROM T_ICJOURNAL
+		WHERE CHECKDATE = #TransDate#
+		<dynamic>
+			<isNotEmpty property="Account">
+				AND ACCOUNT = #Account#
+			</isNotEmpty>
+			<isNotEmpty property="Amt">
+				AND AMT = #Amt#
+			</isNotEmpty>
+			<isNotEmpty property="TransCode">
+				AND TRANSCODE = #TransCode#
+			</isNotEmpty>
+			<isNotNull property="ChargeFlag">
+				AND CHARGEFLAG IN
+				<iterate property="ChargeFlag" open="(" conjunction="," close=")">
+					#ChargeFlag[]#
+				</iterate>
+			</isNotNull>
+		ORDER BY TRANSCODE, CHECKFLAG
+		</dynamic>
+	</select>
+	<!-- 通过账号获取表cardmaking中的有效期字段 -->
+	<select id="getIcCardExpDate" parameterClass="string" resultClass="string">
+		SELECT ERPERIODDATE FROM CARDMAKINGDETAIL
+		WHERE CARDNO=#ACCTNO#
+	</select>
+	<!--=========================IC卡交易流水统计汇总=============================-->
+	<resultMap class="result" id="getICJournalStatisticMap">
+		<result property="CodeVal" column="CODEVAL"/>
+		<result property="CheckFlag" column="CHECKFLAG"/>
+		<result property="Count" column="COUNT"/>
+		<result property="SumAmt" column="SumAmt"/>
+		<result property="SumFee" column="SumFee"/>
+	</resultMap>
+	<select id="getICJournalStatistic" parameterClass="string" resultMap="getICJournalStatisticMap">
+		SELECT  '' codeval,
+        		'' checkflag,
+        		SUM(decode(t.transcode, '001', t.amt, '002', t.amt, '003', t.amt, '011', t.amt, '012', t.amt, '026', t.amt,
+        		'501', t.amt, '502', t.amt, '503', t.amt, '511', t.amt, '512', t.amt, '526', t.amt, 0))-
+        		SUM(decode(t.transcode, '004', t.amt, '005', t.amt, '006', t.amt, '009', t.amt, '010', t.amt, '025', t.amt,
+       		    '504', t.amt, '505', t.amt, '506', t.amt, '509', t.amt, '510', t.amt, '525', t.amt, 0)) COUNT,
+       			SUM(decode(t.transcode, '008', t.amt, '508', t.amt, 0)) sumamt,
+       			SUM(decode(t.transcode, '800', t.amt, '300', t.amt, 0))-SUM(decode(t.transcode, '880', t.amt, '330', t.amt, 0)) sumfee
+		FROM t_icjournal t
+		WHERE t.checkdate = #TransDate#
+		UNION
+		SELECT  tc.codeval codeval,
+		        DECODE(tc.codeval, 'IC脱机消费',
+		              DECODE(ti.checkflag,
+		              0, '未记账',
+		              1, '已记账',
+		              '记账失败'
+		              ),
+		              'IC脱机消费撤销',DECODE(ti.checkflag,
+		              0, '未记账',
+		              1, '已记账',
+		              '记账失败'
+		              ),
+		              DECODE(ti.Checkflag,
+		              0, '未记账',
+		              1, '(对平)',
+		              2, '(状态不一致)',
+		              3, '(金额不一致)',
+		              4, '(渠道多)',
+		              5, '(核心多)'
+		              )
+		             ) checkflag,
+      			 COUNT(ti.traceno) COUNT,
+      			 SUM(ti.amt) sumamt,
+       			 SUM(ti.fee) sumfee
+	   FROM t_icjournal ti, t_codetype tc
+	   WHERE
+			ti.checkdate = #TransDate#
+       AND  ti.transcode = tc.Minorcode
+	   AND  tc.majorcode = 'TRANCODE'
+	   GROUP BY ti.checkflag, tc.codeval
+	</select>
+
+	<!-- 通过转账圈存流水号找到转入圈存交易流水号及22# -->
+	<resultMap class="result" id="getJournalByRltseqnoMap">
+		<result property="SysSeqNo" column="SYSSEQNO"/>
+		<result property="systracenum" column="SYSTRACENUM"/>
+		<result property="posentrycode" column="POSENTRYCODE"/>
+	</resultMap>
+	<select id="getSysseqByRltseqno" parameterClass="param" resultMap="getJournalByRltseqnoMap">
+		SELECT SYSSEQNO,POSENTRYCODE,SYSTRACENUM
+		  FROM T_JOURNAL
+		 WHERE RLTSEQNO = #rltseqno#
+		   AND OUTTRANCD = #outtrancd#
+	</select>
+	<!-- 销户登记或销户清算时,更新或插入表T_ICCLOSINGPAY记录 -->
+	<parameterMap id="insertOrUpdateClosingPayMap" class="param">
+		<parameter property="in_CARD_No" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TrxType" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_ActCode" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="iN_LgnType" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_Source" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_LgnInstCode" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_TraceNo" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_LgnMerchCode" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_LgnUserCode" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_RtnWay" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_NameFlag" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_Id_Type" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_Id_Code" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_PinFlag" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_RtnFlg" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" javaType="integer" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="insertOrUpdateClosingPay" parameterMap="insertOrUpdateClosingPayMap" resultClass="result">
+	{ call PACKGEN_PE.INSERTORUPDATEICCLOSIONGPAY(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+	</procedure>
+	<!--============================更新IC卡销户登记表===============================-->
+	<update id="updateIcClosingPay" parameterClass="param">
+		UPDATE T_ICCLOSINGPAY
+		   SET TRXTYPE      = #TrxType#,
+		       LGNTYPE      = #LgnType#,
+		       RETCODE      = #RetCode#,
+		       LGNINSTCODE  = #LgnInstCode#,
+		       TRACENO      = #TraceNo#,
+		       LGNMERCHCODE = #LgnMerchCode#,
+		       LGNUSERCODE  = #LgnUserCode#,
+		       FIR_CUR      = #Fir_Cur#,
+		       FIR_AMOUNT   = #Fir_Amount#,
+		       SEC_CUR      = #Sec_Cur#,
+		       SEC_AMOUNT   = #Sec_Amount#,
+		       TXN_DATE     = #Txn_Date#,
+		       TRANNO       = #TranNo#
+		 WHERE CARD_NO = #Card_No#
+	</update>
+	<!-- 获得柜面可用的电子现金交易名 -->
+	<resultMap class="param" id="getActiveIcTran4OnliMap">
+		<result property="MINORCODE" column="MINORCODE"/>
+		<result property="CODEVAL" column="CODEVAL"/>
+	</resultMap>
+	<select id="getActiveIcTran4Onli" resultMap="getActiveIcTran4OnliMap">
+		SELECT MINORCODE, CODEVAL FROM T_CODETYPE WHERE MAJORCODE = 'ICTRANTP' AND ACTIVEYN = 'Y'
+	</select>
+	<!-- 获得圈存金额上限返回给柜面 -->
+	<select id="getCredit4LoadLimit" parameterClass="string" resultClass="string">
+		SELECT TRANLLIMITAMT FROM T_CHANNELTYPTRAN
+		WHERE TRANCD = '020060'
+	</select>
+	<!-- 通过现金箱号获得现金箱所在的机构号 -->
+	<select id="getOrgNbrByCashboxnbr" parameterClass="string" resultClass="string">
+		SELECT LOCORGNBR FROM CASHBOX WHERE CASHBOXNBR = #cashboxnbr#
+	</select>
+</sqlMap>

@@ -1,0 +1,43 @@
+8
+
+dir
+308
+https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src/csii/log
+https://192.168.20.210:8443/svn/dzip
+
+
+
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0e52adb7-1c73-714e-b5c1-db04d86b8944
+
+MyLog.java
+file
+
+
+
+
+2013-10-14T06:49:44.000000Z
+8f0d9218d779fe13f772b9b4b9f61b70
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+customlog
+dir
+

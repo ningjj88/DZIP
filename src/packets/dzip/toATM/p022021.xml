@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+
+<!-- 达州商行ATM存款确认交易报文 -->
+<mapAlias name="parse">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+		<elementAlias name="ICCSYSRELDATA"  alias="bit55" /><!-- 基于PBOC借贷记标准的IC卡数据域-->
+		<elementAlias name="ORGDATA"  alias="bit90" /><!-- 原始数据元-->
+	    <elementAlias name="MESAUTHCD"  alias="bit128" />  <!--MAC-->
+</mapAlias>

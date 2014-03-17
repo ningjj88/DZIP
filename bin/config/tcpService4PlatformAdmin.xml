@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	系统接入渠道定义  XML格式报文
+
+	by 张永庆	since:2010-05-20
+
+-->
+<config namespace="platformAdmin">
+
+	<bean id="TcpServer" class="com.csii.pe.service.comm.tcp.TcpServer">
+		<param name="id">${platformAdmin.tcp.id}</param>
+		<param name="name">${platformAdmin.tcp.name}</param>
+		<param name="port">${platformAdmin.tcp.port}</param>
+		<param name="socketTimeout">0</param>
+		<param name="reuseAddress">true</param>
+		<ref name="executor">threadPool</ref>
+		<ref name="handlerMapping">handlerMapping</ref>
+		<param name="period">1000</param>
+		<param name="eventId">20001</param>
+	</bean>
+
+	<executor id="threadPool">
+		<param name="name">${platformAdmin.threadPool.name}</param>
+		<param name="initSize">${platformAdmin.threadPool.initSize}</param>
+		<param name="maxSize">${platformAdmin.threadPool.maxSize}</param>
+		<param name="minSize">${platformAdmin.threadPool.minSize}</param>
+		<param name="queueSize">${platformAdmin.threadPool.queueSize}</param>
+		<param name="keepAliveTime">${platformAdmin.threadPool.keepAliveTime}</param>
+	</executor>
+
+	<handlerMapping id="handlerMapping" class="csii.pe.service.comm.SimpleHandlerMapping">
+		<handlers>
+			<ref name="*">serverHandler</ref>
+		</handlers>
+	</handlerMapping>
+
+	<!--  XML Handler  -->
+	<handler id="serverHandler" class="com.csii.pe.channel.stream.tcp.SimpleXMLHandler">
+		<ref name="transformerFactory">TransformerFactory</ref>
+		<ref name="coreController">.coreController</ref>
+		<ref name="identityResolver">transactionIdResolver</ref>
+		<ref name="parserResolver">parserResolver</ref>
+		<param name="defaultFormat">InboundPacketRes</param>
+		<param name="defaultErrorFormat">InboundPacketResError</param>
+		<ref name="messageCodeMapping">dzip.messageCodeMapping</ref>
+		<param name="maxErrorMessageLength">${platformAdmin.serverHandler.maxErrorMessageLength}</param>
+		<param name="errorMessageEncoding">${platformAdmin.serverHandler.errorMessageEncoding}</param>
+		<param name="defaultMappingCode">${platformAdmin.serverHandler.defaultMappingCode}</param>
+		<param name="debug">${platformAdmin.serverHandler.debug}</param>
+		<param name="dumpPath">${platformAdmin.serverHandler.dumpPath}</param>
+		<param name="endTagName">${platformAdmin.serverHandler.endTagName}</param>
+	</handler>
+
+	<bean id="transactionIdResolver" class="com.csii.pe.channel.stream.MappingTrsIdResolver">
+		<param name="idParameterName">_TransactionId</param>
+		<map name="mapping">
+	        <!--=========实时监控===================-->
+			<param name="platformAdmin.Monitor">platformAdmin.Monitor</param>
+
+			<!--=========查询渠道信息================-->
+			<param name="platformAdmin.GetChannel">platformAdmin.GetChannel</param>
+
+			<!--=========更改渠道状态================-->
+			<param name="platformAdmin.UpdChannel">platformAdmin.UpdChannel</param>
+
+			<!--=========查询渠道交易关系============-->
+			<param name="platformAdmin.GetChannelTran">platformAdmin.GetChannelTran</param>
+
+			<!--=========更改渠道交易关系============-->
+			<param name="platformAdmin.UpdChannelTran">platformAdmin.UpdChannelTran</param>
+
+			<!--=========流水信息当日查询============-->
+			<param name="platformAdmin.InqJournalInfo">platformAdmin.InqJournalInfo</param>
+
+			<!--=========流水信息历史查询============-->
+			<param name="platformAdmin.InqJournalHistInfo">platformAdmin.InqJournalHistInfo</param>
+
+			<!--=========获得当前账务日期=======================-->
+			<param name="platformAdmin.GetCurrentPostDate">platformAdmin.GetCurrentPostDate</param>
+
+			<!--=========日切=======================-->
+			<param name="platformAdmin.DaySwicth">platformAdmin.DaySwicth</param>
+
+			<!--=========联机数据清理=======================-->
+			<param name="platformAdmin.ClearDataOnLine">platformAdmin.ClearDataOnLine</param>
+
+			<!--=========历史数据清理=======================-->
+			<param name="platformAdmin.ClearDataHistory">platformAdmin.ClearDataHistory</param>
+
+			<!-- **************add since 2010.09.07******************** -->
+
+			<!--=========装载任务列表=====================-->
+			<param name="platformAdmin.ImportTaskList">platformAdmin.ImportTaskList</param>
+
+			<!--=========综合对账=======================-->
+			<param name="platformAdmin.generalAudit">platformAdmin.generalAudit</param>
+
+			<!--=========下载对账文件=====================-->
+			<param name="platformAdmin.DownLoadFtpFile">platformAdmin.DownLoadFtpFile</param>
+
+			<!--=========装载对账文件=====================-->
+			<param name="platformAdmin.ImportFtpFile">platformAdmin.ImportFtpFile</param>
+
+			<!--=========对账============================-->
+			<param name="platformAdmin.AuditExcute">platformAdmin.AuditExcute</param>
+
+			<!--=========查询任务状态==================-->
+			<param name="platformAdmin.QueryTaskStatus">platformAdmin.QueryTaskStatus</param>
+
+			<!--=========查询对账文件信息==============-->
+			<param name="platformAdmin.QueryFileInfo">platformAdmin.QueryFileInfo</param>
+
+			<!--=========查询装载文件信息==============-->
+			<param name="platformAdmin.QueryImportFileInfo">platformAdmin.QueryImportFileInfo</param>
+
+			<!--=========查询对账信息=======================-->
+			<param name="platformAdmin.QueryAudit">platformAdmin.QueryAudit</param>
+
+			<!--=========导出到临时表=======================-->
+			<param name="platformAdmin.ImportJournalBatch">platformAdmin.ImportJournalBatch</param>
+
+			<!--=========查询临时表=======================-->
+			<param name="platformAdmin.QueryJournalBatch">platformAdmin.QueryJournalBatch</param>
+
+			<!--=========读取t_journal的数据，对核心数据库记账=======================-->
+            <param name="platformAdmin.TranJournalBatch">platformAdmin.TranJournalBatch</param>
+
+		    <!--=========通存通兑流水=======================-->
+			<param name="platformAdmin.InqDepAndWthJournal">platformAdmin.InqDepAndWthJournal</param>
+
+			  <!--=========查询成商银联卡对帐明细表=======================-->
+			<param name="platformAdmin.InqJCKAuditDetail">platformAdmin.InqJCKAuditDetail</param>
+
+		    <!--=========查询手续费规则信息=======================-->
+			<param name="platformAdmin.GetFeeCodex">platformAdmin.GetFeeCodex</param>
+			<!--=========手续费规则管理=======================-->
+			<param name="platformAdmin.ManagementFeeCodex">platformAdmin.ManagementFeeCodex</param>
+
+			  <!--=========查询银联品牌服务费=======================-->
+			<param name="platformAdmin.InqBrandSvChDetail">platformAdmin.BrandSvChDetail</param>
+
+			<!--=========补入离线预授权完成处理=======================-->
+			<param name="platformAdmin.DoOffLinePreAuthComp">platformAdmin.DoOffLinePreAuthComp</param>
+			<!--=========获得渠道类型交易=======================-->
+			<param name="platformAdmin.GetChannelTypTran">platformAdmin.GetChannelTypTran</param>
+			<!--=========更新渠道类型交易=======================-->
+			<param name="platformAdmin.UpdChannelTypTran">platformAdmin.UpdChannelTypTran</param>
+			<!--=========更新渠道类型=======================-->
+			<param name="platformAdmin.UpdChannelTyp">platformAdmin.UpdChannelTyp</param>
+			<!--=========获得渠道类型=======================-->
+			<param name="platformAdmin.GetChannelTyp">platformAdmin.GetChannelTyp</param>
+			<!--=========IC卡交易流水差错批量记账=======================-->
+			<param name="platformAdmin.DoICJournalCharge">platformAdmin.DoICJournalCharge</param>
+			<!--=========IC卡交易流水差错单笔记账=======================-->
+			<param name="platformAdmin.DoSingleICJournalCharge">platformAdmin.DoSingleICJournalCharge</param>
+			<!--=========IC卡未对平交易流水=======================-->
+			<param name="platformAdmin.GetICJournal4Charge">platformAdmin.GetICJournal4Charge</param>
+			<!--=========IC卡根据条件查询交易流水打印===============-->
+			<param name="platformAdmin.GetICJournal4Print">platformAdmin.GetICJournal4Print</param>
+			<!--=========IC卡圈存圈提差错记账===============-->
+			<param name="platformAdmin.DoICErrorHandle">platformAdmin.DoICErrorHandle</param>
+			<!--=========IC卡电子钱包余额查询===============-->
+			<param name="platformAdmin.QueryICEwalletctl">platformAdmin.QueryICEwalletctl</param>
+			<!--=========IC卡交易流水统计汇总===============-->
+			<param name="platformAdmin.DoICJournalStatistics">platformAdmin.DoICJournalStatistics</param>
+			<!--=========IC卡柜面交易前获得数据===============-->
+			<param name="platformAdmin.GetOnliIcCardTranInfo">platformAdmin.GetOnliIcCardTranInfo</param>
+		</map>
+	</bean>
+
+	<bean id="parserResolver" class="com.csii.pe.channel.stream.ChannelAttributeParserResolver">
+		<param name="key">tcpchannel.localport</param>
+		<param name="defaultParser">xmlPacketParser</param>
+		<map name="mapping">
+
+		</map>
+	</bean>
+
+ 	<!-- xml transformer -->
+	<bean name="TransformerFactory" class="com.csii.pe.transform.XmlTransformerFactory">
+		<param name="path">/packets/dzip/toplatformAdmin</param>
+		<param name="debug">${platformAdmin.TransformerFactory.debug}</param>
+		<param name="cacheEnable">${platformAdmin.TransformerFactory.cacheEnable}</param>
+		<map name="parsers">
+			<ref name="xmlPacketParser">XmlPacketParser</ref>
+		</map>
+	</bean>
+
+	<!--xml parser -->
+	<bean name="XmlPacketParser" class="com.csii.pe.transform.stream.xml.XmlStreamParser">
+		<param name="debug">${platformAdmin.XmlPacketParser.debug}</param>
+		<param name="tagClassMapping">/packets/dzip/toplatformAdmin/xmltagmapping.properties</param>
+		<param name="tagAliasMapping">/packets/dzip/toplatformAdmin/xmlaliasmapping.properties</param>
+	</bean>
+
+
+	<sharedMap id="messageCodeMapping">
+		<map name="sourceMap">
+			<!--
+				for mapping beps errorMassage to error code, you must config them
+				here
+			-->
+			<param name="audit_has_occured">0001</param>
+			<!--
+				for mapping beps errorMassage to error code, you must config them
+				here
+			-->
+		</map>
+	</sharedMap>
+</config>

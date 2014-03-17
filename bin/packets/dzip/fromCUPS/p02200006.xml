@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+
+<!-- 预授权完成交易报文 （离线）-->
+<mapAlias name="parse">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="SETAMT"  alias="bit5" /><!-- 清算金额 -->
+		<elementAlias name="CHDAMT"  alias="bit6" /><!-- 持卡人扣账金额 -->
+		<elementAlias name="SETDATE"  alias="bit15" /><!-- 清算日期 -->
+		<elementAlias name="SERCAPCODE"  alias="bit26" /><!--服务点PIN获取码  -->
+		<elementAlias name="ACQCODE"  alias="bit32" /><!-- 受理机构标识 -->
+		<elementAlias name="FORWARDCODE"  alias="bit33" /><!--发送机构标识码  -->
+		<elementAlias name="TRACK2DATA"  alias="bit35" /><!-- 第二磁道数据 -->
+		<elementAlias name="TRACK3DATA"  alias="bit36" /> <!--第 三磁道数据  -->
+		<elementAlias name="RTVREFNUM"  alias="bit37" /><!-- 检索参考号 -->
+		<elementAlias name="AUTRESCOD"  alias="bit38" /><!-- 预授权码 -->
+		<elementAlias name="CARDACCCODE"  alias="bit42" /><!--受卡方标识码  -->
+		<elementAlias name="ADDDATAPRI"  alias="bit48"  /><!--附加数据－私有  -->
+		<elementAlias name="PINDATA"  alias="bit52" /><!-- 个人标识码数据 -->
+		<elementAlias name="SECURCONTRINFO"  alias="bit53" /><!--  安全控制信息-->
+		<elementAlias name="REACODE"  alias="bit60" /><!--  自定义域-->
+		<elementAlias name="IDENNUMBE"  alias="bit61" /><!--  持卡人身份认证信息-->
+		<elementAlias name="RCVCODE"  alias="bit100" /> <!-- 接收方机构码-->
+		<elementAlias name="NANSCRESERVE"  alias="bit121" /><!--  CUPS 保留-->
+		<elementAlias name="MESAUTHCD"  alias="bit128" /><!-- MAC-->
+</mapAlias>

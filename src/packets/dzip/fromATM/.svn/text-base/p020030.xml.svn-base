@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 达州商行本行卡ATM查询交易返回报文 -->
+<iso8583Packet>
+	<bitMap defaultValue="2,3,7,11,12,13,14,15,18,25,32,33,37,39,41,42,43,44,49,54,100" />
+	<include include="8583fields"></include>
+	<mapAlias name="parse">
+		<elementAlias name="EXPDAT"  alias="bit14" defaultValue="9999" /><!--卡有效期  -->
+		<elementAlias name="CARDACCCODE"  alias="bit42"  /><!--受卡方标识码  -->
+		<elementAlias name="CURCODE"  alias="bit49" /><!-- 交易货币代码 -->
+	    <elementAlias name="BALAMT"  alias="bit54"  /><!-- 实际余额 -->
+	    <elementAlias name="RCVCODE"  alias="bit100" /><!--接收机构标识码 -->
+	</mapAlias>
+</iso8583Packet>

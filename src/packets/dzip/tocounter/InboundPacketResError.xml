@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Group SYSTEM "packetutf8.dtd">
+<Group name="Message" xmlHead="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;">
+	<Group name="Head">
+		<xmlTag tagName="_RejCode" >
+			<String name="MessageCode" ></String>
+		</xmlTag>
+		<xmlTag tagName="_RejMsg" >
+			<String name="ErrorMessage" ></String>
+		</xmlTag>
+		<xmlTag>
+			<String name="_SessionId" ></String>
+		</xmlTag>
+	</Group>
+</Group>

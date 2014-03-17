@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+	调用存储过程的XML格式报文的定义
+	
+	by 张永庆	since:2010-06-10
+
+-->
+<ATMRequest>
+	<OutputTheXML/>
+	<Header_ATM/>
+	<SystemTraceNumber/>
+	<MsgType/>
+	<ProcCode/>
+	<ContCtrl/>
+	<TransacPan/>
+	<NetworkData/>
+	<TransacAmount/>
+	<TransacFeeAmount/>
+	<TransacReversalAmount/>
+	<TransacSwitchDate/>
+	<TransacLocalDate/>
+	<TransacAuditTrace/>
+	<TransacLocalDateTime/>
+	<TransacManageCD/>
+	<TransacManageData/>
+	<TransacAcquirerIDCode/>
+	<TransacTrack2Data/>
+	<TransacRetrievalRefNum/>
+	<TransacTerminalID/>
+	<TransacLocationStreetAddress/>
+	<TransacLocationCity/>
+	<TransacLocationState/>
+	<TransacISOAlphaCountryCode/>
+	<TransacInstitutionMerchantName/>
+	<TransacAccntFrom/>
+	<TransacAccntTo/>
+	<TransacStatementType/>
+	<TransacRsnCode/>
+	<CardAcceptorIDCode/>
+	<TransacCardSeqNum/>
+	<FileUpdateCode/>
+	<SICCode/>
+	<SICSUBCode/>
+	<NAICSCode/>
+	<PinnedYN/>
+	<SettleDate/>
+	<TransacPin/><!-- 取款、查询、转账需要密码检验-->
+	<Track2YN/>
+</ATMRequest>

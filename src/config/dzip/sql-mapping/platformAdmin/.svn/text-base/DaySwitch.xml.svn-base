@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+
+	DZIP 综合前置平台管理配置
+	
+	add by chendshaoqi
+	
+	date 2010-08-23
+
+-->
+<sqlMap namespace="DaySwitch">
+	<!--别名设置-->
+	<typeAlias alias="result" type="java.util.HashMap" />
+	<typeAlias alias="param" type="java.util.HashMap" />
+	<typeAlias alias="integer" type="java.lang.Integer" />
+	<typeAlias alias="string" type="java.lang.String" />
+	<typeAlias alias="date" type="java.util.Date" />
+	
+	<!--===============获得核心的账务日期=======================-->
+	<parameterMap id="GetPostDateParam" class="param">
+		<parameter property="out_PostDate" jdbcType="VARCHAR" mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="getCorePostDate" parameterMap="GetPostDateParam">
+	 { call	packgen_Cardz.GetPostDate(?,?,?)} </procedure>	
+	 
+	 <!--=============日切=======================-->
+	<parameterMap id="DayEndTaskParam" class="param">
+		<parameter property="in_OldPostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_NewPostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_TaskName" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="dayEndTask" parameterMap="DayEndTaskParam">
+	 { call	PACKGEN_PE.DayEndTask(?,?,?,?,?)} </procedure>	
+	 
+	<!--===============查询平台账务日期===============-->
+	<resultMap id="sysstat" class="result">
+		<result property="PostDate" column="POSTDATE" />
+	</resultMap>
+	<select id="querySysstat" resultMap="sysstat" parameterClass="param">
+		select POSTDATE from t_sysstat
+	</select>
+	
+	<!--===============联机数据清理=======================-->
+	<parameterMap id="Clear_Online_Journal_Param" class="param">
+		<parameter property="in_PostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_TaskName" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="clear_Online_Journal" parameterMap="Clear_Online_Journal_Param">
+	 { call	PACKGEN_PE.clearOnlineJournal(?,?,?,?)} </procedure>	
+	 
+	 	<!--===============历史数据清理=======================-->
+	<parameterMap id="clear_History_Journal_Param" class="param">
+		<parameter property="in_PostDate" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_TaskName" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="in_MaxDateRange" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+	<procedure id="clear_History_Journal" parameterMap="clear_History_Journal_Param">
+	 { call	PACKGEN_PE.clearHistoryJournal(?,?,?,?,?)} </procedure>	
+</sqlMap>

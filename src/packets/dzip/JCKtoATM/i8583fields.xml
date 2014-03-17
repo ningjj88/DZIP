@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Fields SYSTEM "packet.dtd">
+<!--
+
+	by 张永庆	since:2010-06-10
+
+-->
+<iso8583Fields bitMap="2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,22,25,26,28,32,33,35,36,37,38,39,41,42,43,44,48,49,50,51,52,53,54,57,59,60,61,62,66,70,74,75,76,77,78,79,80,81,82,84,86,87,88,89,90,95,96,97,99,100,102,103,121,122,123,128">
+<varString name="bit2" type="LL" /><!-- 变长： 主账号  -->
+<fixString name="bit3" length="6" /><!-- 定长数字字符： （交易）处理码  --><!-- 是否适用？ -->
+<fixNumberString name="bit4" length="12"  /><!-- 定长： 交易金额(清算金额)  -->
+<fixNumberString name="bit5" length="12" /><!-- 定长：清算金额 -->
+<fixNumberString name="bit6" length="12" /><!-- 定长：持卡人扣账金额 -->
+<fixNumberString name="bit7" length="10" /><!-- 定长： （交易）传输日期  pattern="MMddHHmmss"-->
+<fixNumberString name="bit9" length="8" /><!-- 定长：清算汇率 -->
+<fixNumberString name="bit10" length="8" /><!-- 定长：持卡人扣账汇率 -->
+<fixNumberString name="bit11" length="6" /><!-- 定长： 跟踪号 -->
+<fixNumberString name="bit12" length="6" /><!-- 定长： 交易时间  -->
+<fixNumberString name="bit13"  length="4" /><!-- 定长： 交易日期  -->
+<fixNumberString name="bit14"  length="4" /><!-- 定长： 卡有效期  -->
+<fixNumberString name="bit15" length="4" /><!-- 定长： 清算日期  -->
+<fixNumberString name="bit16"  length="4" /><!-- 定长: 兑换日期  DateConversion-->
+<fixString name="bit18" length="4" /><!-- 定长： 商户类型  -->
+<fixString name="bit19" length="3" /><!-- 定长： 受理机构国家代码 -->
+<fixString name="bit22" length="3" /><!-- 变长： 服务点输入方式码  -->
+<fixString name="bit25" length="2" /><!-- 变长:  服务点条件码  -->
+<fixString name="bit26" length="2" /><!-- 定长:  服务点PIN获取码  -->
+<fixString name="bit28" length="9" /><!-- 定长:  交易费? -->
+<varString name="bit32" type="LL" /><!-- 变长： 代理机构标识码  -->
+<varString name="bit33" type="LL" /><!-- 变长： 发送机构标识码  -->
+<varString name="bit35" type="LL" /><!-- 变长： 2磁道数据  -->
+<varString name="bit36" type="LLL" /><!-- 变长： 3磁道数据  -->
+<fixString name="bit37" length="12" /><!-- 定长： 检索参考号  -->
+<fixString name="bit38" length="6" /><!-- 定长： 授权码  -->
+<fixString name="bit39" length="2" /><!-- 定长： 应答码 -->
+<fixString name="bit41" length="8" /><!-- 定长： 受卡方终端标识  -->
+<fixString name="bit42" length="15" /><!-- 定长： 受卡方标识码  -->
+<fixString name="bit43" length="40" /><!--定长： 受卡方名称地址  -->
+<varString name="bit44" type="LL" /><!-- 变长： 附加应答码 -->
+<varString name="bit48" type="LLL" encoding="iso8859-1" trim="false"/><!-- 变长： 附加应数据  -->
+<fixString name="bit49" length="3" /><!-- 定长： 交易货币代码 -->
+<fixString name="bit50" length="3" /><!-- 变长： 清算货币代码  -->
+<fixString name="bit51" length="3" /><!-- 定长：持卡人账户货币代码 -->
+<!--<fixString name="bit52" length="16" encoding="iso8859-1" trim="false"/> 变长： 个人标识码数据  64bit二进制数-->
+<fixString name="bit52" length="8" encoding="iso8859-1" trim="false"/><!-- 变长： 个人标识码数据  64bit二进制数-->
+<fixNumberString name="bit53" length="16" /><!-- 定长： 安全控制信息  -->
+<varString name="bit54" type="LLL"  /><!-- 变长：  实际余额  -->
+<varString name="bit57" type="LLL" /><!-- 变长： 附加交易信息-->
+<varString name="bit59" type="LLL" /><!-- 变长： 明细查询数据-->
+<varString name="bit60" type="LLL" /><!-- 变长：自定义域 -->
+<varString name="bit61" type="LLL" encoding="iso8859-1" trim="false"/><!-- 变长：持卡人身份认证信息  -->
+<varString name="bit62" type="LLL" /><!-- 变长：交换中心数据 SwitchingData -->
+<fixString name="bit66" length="1" /><!-- 定长： 清算代码  -->
+<fixString name="bit70" length="3" /><!-- 定长： 网络管理信息码  -->
+<fixNumberString name="bit74" length="10" /><!-- 定长： 贷记交易笔数  -->
+<fixNumberString name="bit75" length="10" /><!-- 定长： 冲正贷记笔数  -->
+<fixNumberString name="bit76" length="10" /><!-- 定长： 借记交易笔数  -->
+<fixNumberString name="bit77" length="10" /><!-- 定长： 冲正借记笔数  -->
+<fixNumberString name="bit78" length="10" /><!-- 定长： 转帐笔数  -->
+<fixNumberString name="bit79" length="10" /><!-- 定长： 冲正转帐笔数  -->
+<fixNumberString name="bit80" length="10" /><!-- 定长： 查询笔数  -->
+<fixNumberString name="bit81" length="10" /><!-- 定长： 授权笔数  -->
+<fixNumberString name="bit82" length="12" /><!-- 定长： 贷记服务费金额  -->
+<fixNumberString name="bit84" length="12" /><!-- 定长： 借记服务费金额  -->
+<fixNumberString name="bit86" length="16" /><!-- 定长： 贷记交易金额  -->
+<fixNumberString name="bit87" length="16" /><!-- 定长： 冲正贷记金额  -->
+<fixNumberString name="bit88" length="16" /><!-- 定长： 借记交易金额  -->
+<fixNumberString name="bit89" length="16" /><!-- 定长： 冲正借记金额 -->
+<fixNumberString name="bit90" length="42" /><!-- 定长：原始数据元 -->
+<fixString name="bit95" length="42" /><!-- 定长：替换金额  -->
+<fixString name="bit96" length="8" encoding="iso8859-1" trim="false"/><!-- 定长：报文安全码  -->
+<fixString name="bit97" length="17" /><!-- 定长：净清算额  -->
+<varString name="bit99" type="LL" /><!-- 定长：清算机构代码  -->
+<varString name="bit100" type="LL" /><!-- 变长： 接收机构标识码  -->
+<varString name="bit102" type="LL" /><!-- 变长： 账户标识1  -->
+<varString name="bit103" type="LL" /><!-- 变长： 账户标识2  -->
+<varString name="bit121" type="LLL" /><!-- 变长： CUPS保留  -->
+<varString name="bit122" type="LLL" /><!-- 变长： 受理方保留  -->
+<varString name="bit123" type="LLL" /><!-- 变长： 发卡方保留  -->
+<fixString name="bit128" length="8" encoding="iso8859-1" trim="false"/><!--定长： MAC（报文鉴别码） 64bit  -->
+</iso8583Fields>
+

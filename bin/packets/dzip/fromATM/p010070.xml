@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 达州商行本行卡ATM修改密码返回报文-->
+
+<iso8583Packet  >
+
+	<bitMap defaultValue="2,3,7,11,12,13,14,15,18,25,32,33,37,39,41,43,44,48,52" />
+
+<include include="8583fields" ></include>
+
+<mapAlias name="format">
+</mapAlias>
+
+<mapAlias name="parse">
+		<elementAlias name="EXPDAT"  alias="bit14" defaultValue="9999" /><!-- 卡有效期 -->
+		<elementAlias name="ADDDATAPRI"  alias="bit48"  /><!--附加数据－私有  -->
+		<elementAlias name="PINDATA"  alias="bit52" /><!-- 个人标识码数据 -->
+</mapAlias>
+
+</iso8583Packet>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+	柜面指定账户圈提返回报文
+	add by xiehai
+    date 2014-01-14
+-->
+<segment>
+	<xmlTag><String name="ACCTNO"/></xmlTag><!--交易帐号-->
+	<xmlTag><String name="RESCODE"/></xmlTag><!--交易返回码-->
+	<xmlTag><String name="ADDDATA"/></xmlTag><!--附加交易返回数据-->
+	<xmlTag><String name="ICCSYSRELDATA"/></xmlTag><!--基于PBOC借贷记标准的IC卡数据-->
+</segment>

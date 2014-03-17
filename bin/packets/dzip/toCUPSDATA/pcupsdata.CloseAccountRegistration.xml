@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!-- 销户登记发往前台的报文 -->
+<segment>
+	<fixString name="RetCode" length="2" /><!-- 响应码 -->
+</segment>

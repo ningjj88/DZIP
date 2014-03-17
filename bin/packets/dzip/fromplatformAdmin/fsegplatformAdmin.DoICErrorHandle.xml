@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by longt
+    date 2013-10-09
+    function IC卡对账差错记账处理
+-->
+<segment>
+	<xmlTag><String name="OrgNbr" /></xmlTag><!-- 机构号 -->
+	<xmlTag><String name="RtxnTypCd" /></xmlTag><!-- 交易类型-->
+	<xmlTag><String name="AcctNo" /></xmlTag><!-- 卡号-->
+	<xmlTag><String name="TranAmt" /></xmlTag><!-- 交易金额-->
+</segment>

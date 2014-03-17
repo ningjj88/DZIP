@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 银联中心对账-->
+<iso8583Packet  >
+	<bitMap defaultValue="7,11,15,50,66,70,74,75,76,77,78,79,80,81,82,84,86,87,88,89,97,99,128" />
+	<include include="i8583fields" ></include>
+		<mapAlias name="format">	
+			<elementAlias name="CURCODE_SETTLE"  alias="bit50" /><!-- 清算 币种 -->
+			<elementAlias name="SETTLE_CODE"  alias="bit66" /><!--清算代码 -->
+			<elementAlias name="NET_MAN_INF_CODE"  alias="bit70" /><!-- 网络管理信息码 -->
+			<elementAlias name="CREDITS_NUM"  alias="bit74" /><!--贷记交易笔数  -->
+			<elementAlias name="CREDITS_REV_NUM"  alias="bit75"  /><!-- 冲正贷记笔数-->
+			<elementAlias name="DEBITS_NUM"  alias="bit76"  /><!-- 借记交易笔数-->
+			<elementAlias name="DEBITS_REV_NUM"  alias="bit77" /><!--冲正借记笔数-->
+			<elementAlias name="TRANSFER_NUM"  alias="bit78" /><!-- 转账笔数-->
+			<elementAlias name="TRANSFER_REV_NUM"  alias="bit79" /> <!-- 接收方机构码-->
+			<elementAlias name="INQUERIES_NUM"  alias="bit80" /><!-- 查询笔数-->
+			<elementAlias name="AUTHOR_NUM"  alias="bit81" /> <!-- 授权笔数-->
+			<elementAlias name="FEE_AMOUNT_CREDITS"  alias="bit82" /><!-- 贷记服务费金额-->
+			<elementAlias name="FEE_AMOUNT_DEBITS"  alias="bit84" /> <!-- 借记服务费金额-->
+			<elementAlias name="CREDITS_AMOUNT"  alias="bit86" /><!-- 贷记金额-->
+			<elementAlias name="CREDITS_REV_AMOUNT"  alias="bit87" /> <!-- 冲正贷记金额-->
+			<elementAlias name="DEBITS_AMOUNT"  alias="bit88" /><!-- 借记金额-->
+			<elementAlias name="DEBITS_REV_AMOUNT"  alias="bit89" /> <!-- 冲正借记金额-->
+			<elementAlias name="AMOUNT_NET_SETTLE"  alias="bit97" /> <!-- 净清算额-->
+			<elementAlias name="SET_INST_IDCODE"  alias="bit99" /><!-- 清算机构代码-->
+			<elementAlias name="MESAUTHCD"  alias="bit128" /> <!-- MAC-->
+		</mapAlias>
+</iso8583Packet>

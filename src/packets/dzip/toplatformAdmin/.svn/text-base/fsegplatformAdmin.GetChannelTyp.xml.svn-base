@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+
+<!--
+    add by xujin
+    date 2011-10-14
+-->
+<segment>
+  <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+			    <xmlTag><String name="ChannId"></String></xmlTag><!-- 渠道ID -->
+			    <xmlTag><String name="ChannName"></String></xmlTag><!-- 渠道名称 -->
+			    <xmlTag><String name="ChannelTypCd"></String></xmlTag><!-- 渠道类型码(00:其他)-->
+			    <xmlTag><String name="ChannelTypDesc"></String></xmlTag><!-- 渠道类型描述-->
+				<xmlTag><String name="ChannelTypStat"></String></xmlTag><!-- 渠道类型状态-->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

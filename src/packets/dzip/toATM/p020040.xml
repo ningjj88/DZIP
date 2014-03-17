@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapAlias SYSTEM "packet.dtd">
+
+<!--达州商行ATM 转账交易报文 -->
+<mapAlias name="parse">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+		<elementAlias name="SERCAPCODE"  alias="bit26" /><!--服务点PIN获取码  -->
+		<elementAlias name="TRACK2DATA"  alias="bit35" /><!-- 第二磁道数据 -->
+		<elementAlias name="PINDATA"  alias="bit52" /><!-- 个人标识码数据 -->
+		<elementAlias name="SECURCONTRINFO"  alias="bit53" /><!--  安全控制信息-->
+		<elementAlias name="ICCSYSRELDATA"  alias="bit55" /><!-- 基于PBOC借贷记标准的IC卡数据域-->
+		<elementAlias name="ACCIDEN1"  alias="bit102" /><!-- 账户标识1 -->
+		<elementAlias name="ACCIDEN2"  alias="bit103" /><!-- 账户标识2 -->
+</mapAlias>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	银联系统接入渠道定义  定长8583格式报文
+	
+	by chenshq	since:2010-08-16
+
+-->
+<config namespace="cups">
+
+	<bean id="TcpServer" class="com.csii.pe.service.comm.tcp.TcpServer">
+		<param name="id">${cups.tcp.id}</param>
+		<param name="name">${cups.tcp.name}</param>
+		<param name="port">${cupsServer.tcp.port}</param>
+		<param name="socketTimeout">${cups.tcp.socketTimeout}</param>
+		<param name="reuseAddress">true</param>
+		<ref name="executor">threadPool</ref>
+		<ref name="handlerMapping">handlerMapping</ref>
+		<param name="period">1000</param>
+		<param name="eventId">20001</param>
+	</bean>
+	
+	<executor id="threadPool">
+		<param name="name">${cups.threadPool.name}</param>
+		<param name="initSize">${cups.threadPool.initSize}</param>
+		<param name="maxSize">${cups.threadPool.maxSize}</param>
+		<param name="minSize">${cups.threadPool.minSize}</param>
+		<param name="queueSize">${cups.threadPool.queueSize}</param>
+		<param name="keepAliveTime">${cups.threadPool.keepAliveTime}</param>
+	</executor>
+	
+	<handlerMapping id="handlerMapping" class="csii.pe.service.comm.SimpleHandlerMapping">
+		<handlers>
+			<ref name="*">serverHandler</ref>
+		</handlers>
+	</handlerMapping>	
+	
+	<handler id="serverHandler" class="csii.dzip.core.CUPSHandler">
+		<ref name="coreController">.coreController</ref>
+		<ref name="identityResolver">transactionIdResolver</ref>
+		<param name="debug">${cups.serverHandler.debug}</param>
+		<param name="dumpPath">${cups.serverHandler.dumpPath}</param>
+		<param name="headLength">${cups.serverHandler.headLength}</param>
+		<param name="offsetOfLengthField">${cups.serverHandler.offsetOfLengthField}</param>
+		<param name="type">${cups.serverHandler.type}</param>
+		<param name="headIncluded">${cups.serverHandler.headIncluded}</param>
+	    <param name="encoding">8859_1</param>
+	    <ref name="fixedLength8583Processor">dzip.FixedLength8583Processor</ref>
+	    <ref name="peCupsNOIdFactory">dzipService.peCupsNO</ref>
+	   	<ref name="peJournalNOIdFactory">dzipService.peJournalNO</ref>
+	    <ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	    <ref name="updateJoural">dzip.UpdateJoural</ref>
+	</handler>
+	<bean id="transactionIdResolver" class="com.csii.pe.channel.stream.MappingTrsIdResolver">
+		<param name="idParameterName">_TransactionId</param>
+		<map name="mapping">    
+		<!--****************************POS交易************************-->
+    
+		    <!--=============== 他行POS消费 ===============-->
+			<param name="020000">jck.PosConsume</param>
+			
+			<!--=============== 他行POS消费冲正 ===============-->
+			<param name="042000">jck.PosConsumeReversal</param>
+			
+			<!--=============== 他行POS消费撤销 ===============-->
+			<param name="020020">jck.PosConsumeCancel</param>
+			
+			<!-- ============== 他行POS消费撤销冲正=============-->
+			<param name="042020">jck.PosConsumeCancelReversal</param>
+			
+			<!-- ============== 他行POS消费 退货=============-->
+			<param name="022020">jck.PosPurchaseReturn</param>
+	
+		<!--***************************公共交易************************-->
+					
+			<!--=============== 他行余额查询：POS，ATM，CDM===============-->
+			<param name="020030">jck.Query</param>
+			
+			<!--=============== 他行明细查询 ATM==============-->
+			<param name="020039">jck.QueryDetail</param>
+			
+			<!-- ==============他行转出记账：ATM，CDM=================-->
+			<param name="020046">jck.TransferOut</param>
+			
+			<!-- ==============他行转出记账冲正：ATM，CDM=================-->
+			<param name="042046">jck.TransferOutReversal</param>
+			
+			<!-- ==============他行转入记账：ATM，CDM=================-->
+			<param name="020047">jck.TransferIn</param>
+			
+			<!-- ==============他行转入记账确认：ATM，CDM=================-->
+			<param name="022047">jck.TransferInComfirm</param>
+			
+		<!--***************************ATM/CDM交易************************-->	
+			
+	    	<!--=============== 他行ATM现金取款 ===============-->
+			<param name="020001">jck.WithdrawAtATM</param>
+			
+			<!-- ===============他行ATM现金取款冲正==============-->
+			<param name="042001">jck.ReversalAtATM</param>
+			
+			<!-- ==============他行CDM存款=================-->
+			<param name="020021">jck.DepositATCDM</param>
+			
+			<!-- ==============他行CDM存款确认=================-->
+			<param name="022021">jck.DepositATCDMComfirm</param>
+			
+		<!--***************************预授权交易************************-->	
+		
+		    <!--=============== POS预授权 ===============-->
+			<param name="01000306">jck.PreAuth</param>
+			
+			<!--=============== POS预授权冲正 ===============-->
+			<param name="04200306">jck.PreAuthReversal</param>
+			
+			<!--=============== POS预授权撤销 ===============-->
+			<param name="01002006">jck.PreAuthCancel</param>
+			
+			<!--=============== POS预授权完成 ===============-->
+			<param name="02000006">jck.PreAuthComplete</param>
+			
+			<!--=============== POS预授权完成冲正 ===============-->
+			<param name="04200006">jck.PreAuthCompReversal</param>
+			
+			<!--=============== POS预授权完成撤销 ===============-->
+			<param name="02002006">jck.PreAuthCompCancel</param>
+			
+			<!-- ============== POS预授权撤销（完成）冲正=============-->
+			<param name="04202006">jck.PreAuthCompCancelReversal</param>
+			
+			<!--=============== POS预授权追加 ===============-->
+			<param name="01000360">jck.PreAuthAdd</param>
+			
+			<!-- ==============  POS预授权追加 冲正=============-->
+			<param name="04200360">jck.PreAuthAddReversal</param>
+
+		</map>
+	</bean>
+</config>

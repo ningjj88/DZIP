@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 他行卡ATM存款确认交易报文 -->
+<iso8583Packet  >
+	<bitMap defaultValue="2,3,4,7,11,12,13,18,22,23,25,32,33,37,41,42,43,48,49,55,60,90,122,128" />
+	<include include="i8583fields" ></include>
+	<mapAlias name="format">	
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+		<elementAlias name="ADDDATAPRI"  alias="bit48"  /><!--附加数据－私有  -->
+		<elementAlias name="ICCSYSRELDATA"  alias="bit55" /><!-- 基于PBOC借贷记标准的IC卡数据域-->
+		<elementAlias name="ORGDATA"  alias="bit90" /><!-- 原始数据元 -->
+	    <elementAlias name="ACQRESERVE"  alias="bit122" />  <!--CUPS 保留  -->
+        <elementAlias name="MESAUTHCD"  alias="bit128" />  <!-- MAC-->
+	</mapAlias>
+</iso8583Packet>

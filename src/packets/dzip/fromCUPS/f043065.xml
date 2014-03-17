@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 本代他转入圈存冲正返回报文-->
+<iso8583Packet  >
+	<bitMap defaultValue="2,3,4,7,11,12,13,14,15,18,23,25,32,33,37,39,41,42,49,55,60,100,102,103,121,128" />
+	<include include="i8583fields" ></include>
+	<mapAlias name="format">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="EXPDAT"  alias="bit14" /><!-- 卡有效期 -->
+		<elementAlias name="SETDATE"  alias="bit15" /><!-- 清算日期 -->
+		<elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
+		<elementAlias name="ICCSYSRELDATA" alias="bit55" /><!-- 55# 基于PBOC借贷记标准的IC卡数据域 -->
+		<elementAlias name="RCVCODE"  alias="bit100" /> <!-- 接收方机构码-->
+		<elementAlias name="ACCIDEN1"  alias="bit102" /> <!--账户标识1 -->
+		<elementAlias name="ACCIDEN2"  alias="bit103" /><!-- 账户标识2 -->
+		<elementAlias name="NANSCRESERVE"  alias="bit121" /><!--  CUPS 保留-->
+		<elementAlias name="MESAUTHCD"  alias="bit128" /><!-- MAC-->
+	</mapAlias>
+</iso8583Packet>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="cups">
+
+	<!--========================别名设置=================================-->
+	<typeAlias alias="result" type="java.util.HashMap" />
+	<typeAlias alias="linked" type="java.util.LinkedHashMap" />
+	<typeAlias alias="param" type="java.util.HashMap" />
+	<typeAlias alias="string" type="java.lang.String" />
+
+	<!--=========================添加银联对账表================================-->
+	<insert id="insertCupsCheck" parameterClass="param"> 
+		insert into T_CUPSCHCK 
+				(
+				MSGTYP, TRANSMSN_DATE_TIME, SYS_TRACE_AUDIT_NUM, 
+				DATE_SETTLMT, CURRCY_CODE_SETTLMT, SETTLMT_CODE, 
+				NETWK_MGMT_INFO_CODE, CREDITS_NUM, CREDITS_REVSAL_NUM, 
+				DEBITS_NUM, DEBITS_REVSAL_NUM, TRANSFER_NUM, TRANSFER_REVSAL_NUM, 
+				INQURY_NUM, AUTHR_NUM, CREDITS_PROCES_FEE_AMT, DEBITS_PROCES_FEE_AMT, 
+				CREDITS_AMT, CREDITS_REVSAL_AMT, DEBITS_AMT, DEBITS_REVSAL_AMT, AMT_NET_SETTLMT, 
+				SETTLMT_INST_ID_CODE, MSG_AUTHN_CODE
+				)
+			values
+			  (
+			   #HeadTxType#, #TRANSDTTIME#, #SYSTRACENUM#, 
+			   #SETDATE#, #CURCODE_SETTLE#, #SETTLE_CODE#, 
+			   #NET_MAN_INF_CODE#, #CREDITS_NUM#, #CREDITS_REV_NUM#, 
+			   #DEBITS_NUM#, #DEBITS_REV_NUM#, #TRANSFER_NUM#, #TRANSFER_REV_NUM#, 
+			   #INQUERIES_NUM#, #AUTHOR_NUM#, #FEE_AMOUNT_CREDITS#, #FEE_AMOUNT_DEBITS#, 
+			   #CREDITS_AMOUNT#, #CREDITS_REV_AMOUNT#, #DEBITS_AMOUNT#, #DEBITS_REV_AMOUNT#, 
+			   #AMOUNT_NET_SETTLE#, #SET_INST_IDCODE#, #MESAUTHCD#
+			   )
+	</insert>
+	<!-- ===========================执行银联对账==========================-->
+	<parameterMap id="cupsCheckMap" class="param">
+		<parameter property="in_SysTraceNum" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="in_SettlmtDate" jdbcType="VARCHAR"  mode="IN" />
+		<parameter property="out_SettlmtCd" jdbcType="VARCHAR"   mode="OUT" />
+		<parameter property="out_ErrorNbr" jdbcType="NUMERIC"   mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR"   mode="OUT" />	
+	</parameterMap>
+	<procedure id="cupsCheck" parameterMap="cupsCheckMap" resultClass="result">
+	{ call packgen_pe. YLZQ_CheckDtl(?,?,?,?,?)}
+	</procedure>
+	<!-- ===========================执行银联对账==========================-->
+	<resultMap id="backMapCheckDetail" class="linked">
+		<result property="ACQCODE" column="ACQCODE" />
+		<result property="FWDCODE" column="FWDCODE" />
+		<result property="TRACENUM" column="TRACENUM" />
+		<result property="TRANDATETIME" column="TRANDATETIME" />
+		<result property="PRIMARYACCT" column="PRIMARYACCT" />
+		<result property="TRANAMT" column="TRANAMT" />
+		<result property="TRANCURCODE" column="TRANCURCODE" />
+		<result property="TRANDATE" column="TRANDATE" />
+		<result property="TRANTIME" column="TRANTIME" />
+		<result property="SETTLMTDATE" column="SETTLMTDATE" />
+		<result property="SETTLMTCURCODE" column="SETTLMTCURCODE" />
+		<result property="CDHLDRCURCODE" column="CDHLDRCURCODE" />
+		<result property="TRANFEEAMT" column="TRANFEEAMT" />
+		<result property="MESSAGETYPE" column="MESSAGETYPE" />
+		<result property="PROCESSCODE" column="PROCESSCODE" />
+		<result property="MERCHTYPE" column="MERCHTYPE" />
+		<result property="ACCPTERMID" column="ACCPTERMID" />
+		<result property="ACCPID" column="ACCPID" />
+		<result property="ACCPADDR" column="ACCPADDR" />
+		<result property="CERTKIND" column="CERTKIND" />
+		<result property="CERTNUM" column="CERTNUM" />
+		<result property="SERIALNUM" column="SERIALNUM" />
+		<result property="RETRREFNUM" column="RETRREFNUM" />
+		<result property="POSCONDCODE" column="POSCONDCODE" />
+		<result property="AUTHRESP" column="AUTHRESP" />
+		<result property="RCVCODE" column="RCVCODE" />
+		<result property="RESPCODE" column="RESPCODE" />
+		<result property="POSENTRYCODE" column="POSENTRYCODE" />
+		<result property="RECEIVEFEE" column="RECEIVEFEE" />
+		<result property="PAYFEE" column="PAYFEE" />
+		<result property="ACCTID1" column="ACCTID1" />
+		<result property="ACCTID2" column="ACCTID2" />
+		<result property="ORIGTRACENUM" column="ORIGTRACENUM" />
+		<result property="ORIGDATETIME" column="ORIGDATETIME" />
+	</resultMap>
+	<parameterMap id="getCheckDetailParam" class="param">
+		<parameter property="in_PostDate" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="refcursor" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="backMapCheckDetail" />
+		<parameter property="out_ErrorNbr" jdbcType="INTEGER"  javaType="integer"  mode="OUT" />
+		<parameter property="out_ErrorMsg" jdbcType="VARCHAR" javaType="string" mode="OUT" />
+	</parameterMap>
+	<procedure id="getCheckDetail" parameterMap="getCheckDetailParam"> 
+		 { call packgen_pe.GetCheckDetail(?,?,?,?)} 
+	</procedure>
+	
+</sqlMap>

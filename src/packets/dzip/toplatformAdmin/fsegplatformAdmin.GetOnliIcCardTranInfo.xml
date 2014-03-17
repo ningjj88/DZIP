@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xiehai
+    date 2014-02-25
+-->
+<segment>
+	 <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+				<xmlTag><String name="MINORCODE"></String></xmlTag><!-- 交易代码 -->
+				<xmlTag><String name="CODEVAL"></String></xmlTag><!-- 交易名称 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+	<xmlTag><String name="TranLLimitAmt"></String></xmlTag><!-- 圈存金额上限 -->
+	<xmlTag><String name="ACQCODE"></String></xmlTag><!-- 受理机构代码 -->
+	<xmlTag><String name="FORWARDCODE"></String></xmlTag><!-- 发送机构代码 -->
+</segment>

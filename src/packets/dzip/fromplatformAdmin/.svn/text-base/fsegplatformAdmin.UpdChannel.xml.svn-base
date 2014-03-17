@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by chenshaoqi
+    date 2010-08-24
+-->
+<segment>
+	<xmlTag><String name="ChannId" /></xmlTag><!--渠道号  -->
+	<xmlTag><String name="ChannName" /></xmlTag><!-- 渠道名称 -->
+	<xmlTag><String name="ChannStat" /></xmlTag><!-- 渠道状态 -->
+</segment>

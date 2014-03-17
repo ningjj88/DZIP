@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/jck/common
+END
+QueryAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/jck/common/QueryAction.java
+END
+QueryDetailAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/jck/common/QueryDetailAction.java
+END
+TransferInComfirmAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/jck/common/TransferInComfirmAction.java
+END
+TransferInAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/jck/common/TransferInAction.java
+END
+TransferOutAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/jck/common/TransferOutAction.java
+END
+TransferOutReversalAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/action/jck/common/TransferOutReversalAction.java
+END

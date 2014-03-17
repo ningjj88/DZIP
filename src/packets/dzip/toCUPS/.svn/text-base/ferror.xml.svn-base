@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+<!--
+
+	by 张永庆	since:2010-06-10
+
+-->
+<iso8583Packet  >
+	<bitMap defaultValue="39" />
+	<include include="i8583fields" ></include>
+		<elementAlias name="RESCODE"  alias="bit39" defaultValue="10"/><!-- 应答码-->
+	<mapAlias name="format">	
+	</mapAlias>	
+</iso8583Packet>

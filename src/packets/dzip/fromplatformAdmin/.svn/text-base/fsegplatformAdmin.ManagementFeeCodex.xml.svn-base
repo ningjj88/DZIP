@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+
+	add by xujin
+    date 2011-10-14
+-->
+<segment>
+	<xmlTag><String name="in_BusiCd" /></xmlTag><!--业务编码  -->
+	<xmlTag><String name="in_BusiTyp" /></xmlTag><!-- 业务类型 -->
+	<xmlTag><String name="in_BusiDesc" /></xmlTag><!-- 业务描述 -->
+    <xmlTag><String name="in_Decdigit" /></xmlTag><!--小数位数  -->
+	<xmlTag><String name="in_DownLine" /></xmlTag><!-- 最小值 -->
+	<xmlTag><String name="in_UpLine" /></xmlTag><!-- 最大值 -->
+	<xmlTag><String name="in_Arithmetic" /></xmlTag><!-- 算法 -->
+	<xmlTag><String name="in_Flag" /></xmlTag><!-- 编辑标记 -->
+</segment>

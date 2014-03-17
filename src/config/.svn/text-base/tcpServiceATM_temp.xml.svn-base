@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	系统接入渠道定义  ISO8583格式报文
+	
+	by chenshq	since:2010-08-10
+
+-->
+<config namespace="iudf" >
+
+	<bean id="TcpServer" class="com.csii.pe.service.comm.tcp.TcpServer">
+		<param name="id">${iudf.tcp.id}</param>
+		<param name="name">${iudf.queueTcpServer.name}</param>
+		<param name="port">${iudf.tcp.port_bak}</param>
+		<param name="socketTimeout">0</param>
+		<param name="reuseAddress">true</param>
+		<ref name="executor">threadPool</ref>
+		<ref name="handlerMapping">handlerMapping</ref>
+		<param name="period">1000</param>
+		<param name="eventId">20001</param>
+	</bean>
+	
+	<executor id="threadPool">
+		<param name="name">${iudf.threadPool.name}</param>
+		<param name="initSize">${iudf.threadPool.initSize}</param>
+		<param name="maxSize">${iudf.threadPool.maxSize}</param>
+		<param name="minSize">${iudf.threadPool.minSize}</param>
+		<param name="queueSize">${iudf.threadPool.queueSize}</param>
+		<param name="keepAliveTime">${iudf.threadPool.keepAliveTime}</param>
+	</executor>
+
+	<handlerMapping id="handlerMapping">
+		<handlers>
+			<ref name="*">serverHandler</ref>
+		</handlers>
+	</handlerMapping>
+
+	<!--  UDF Handler  -->
+	<handler id="serverHandler" class="csii.dzip.core.ISO8583Handler_temp">
+		<ref name="transformerFactory">TransformerFactory</ref>
+		<ref name="coreController">.coreController</ref>
+		<ref name="identityResolver">transactionIdResolver</ref>
+		<ref name="parserResolver">parserResolver</ref>
+     	<param name="defaultFormat">InboundPacketRes</param>
+		<param name="defaultErrorFormat">InboundPacketResError</param>
+	    <param name="debug">${iudf.serverHandler.debug}</param>
+		<param name="dumpPath">${iudf.serverHandler.dumpPath}</param>
+		<ref name="messageCodeMapping">messageCodeMapping</ref>
+
+		<param name="maxErrorMessageLength">${iudf.serverHandler.maxErrorMessageLength}</param>
+		<param name="errorMessageEncoding">${iudf.serverHandler.errorMessageEncoding}</param>
+		<param name="defaultMappingCode">${iudf.serverHandler.defaultMappingCode}</param>
+
+  	    <param name="headLength">${iudf.serverHandler.headLength}</param>
+  	    <param name="offsetOfLengthField">${iudf.serverHandler.offsetOfLengthField}</param>
+  	    <param name="type">${iudf.serverHandler.type}</param>
+  	    <param name="encoding">8859_1</param>
+  	    <param name="headIncluded">${iudf.serverHandler.headIncluded}</param>
+		<ref name="incomeObjectTransformer">incomeMapFilter</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="dzipVirtualSegment">dzip.DzipVirtualSegment</ref>
+		<ref name="peJournalNOIdFactory">dzipService.peJournalNO</ref>
+		<ref name="fixedLength8583Processor">dzip.FixedLength8583Processor</ref>
+		<ref name="jinchengTransport">dzip.JinchengTransport</ref>
+		<ref name="cupsTransport">dzip.CupsTransport</ref>
+		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+		<ref name="pinSecurityModule">dzip.pinSecurityModule</ref>
+		<ref name="decryptSecApi">dzip.decryptSecApi</ref>
+	</handler>
+
+	<bean id="incomeMapFilter" class="com.csii.pe.channel.stream.IncomeMapFilter">
+	   <list name="blockFields">
+	   	<param>BITMAP</param>
+	   </list>
+	</bean>
+
+	<sharedMap id="messageCodeMapping">
+		<map name="sourceMap">
+			<param name="validation.userId.exist">1027</param>
+			<param name="DataIntegrityViolation">9999</param>
+			<param name="AbstractHandler.parse_or_handle_fail">9999</param>
+			<param name="validation.invalid_password">9999</param>
+			<param name="role.invalid_user">9999</param>
+			<param name="ibs.no_records_found">9999</param>
+		</map>
+	</sharedMap>
+
+ 	<!--udf transformer -->
+	<bean name="TransformerFactory" class="com.csii.pe.transform.TransformerFactory">
+		<param name="path">/packets/dzip/toATM</param>
+		<param name="debug">${iudf.TransformerFactory.debug}</param>
+		<param name="cacheEnable">${iudf.TransformerFactory.cacheEnable}</param>
+	</bean>
+
+	<bean id="transactionIdResolver" class="com.csii.pe.channel.stream.MappingTrsIdResolver">
+     	<param name="idParameterName">_TransactionId</param>
+     	<map name="mapping">
+     		
+     		<!--============== ATM 查询交易 ===============-->
+     		<param name="020030">dzipATM.Query</param>
+     		
+     		<!--============== ATM 取款交易 ===============-->
+     		<param name="020001">dzipATM.Withdrawal</param>
+     		
+     		<!--============== ATM 冲正交易 ===============-->
+     		<param name="042001">dzipATM.Reversal</param>
+     		
+     		<!--============== ATM 存款交易===============-->
+     		<param name="020021">dzipATM.Deposit</param>
+     		
+     		<!--============= ATM存款确认交易===========-->
+     		<param name="022021">dzipATM.DepositConfirm</param>
+     		
+     		<!--============= ATM 修改密码交易=========== -->
+     		<param name="010070">dzipATM.ModifyPwd</param>
+     		
+     		<!--============= ATM 转账交易 ===============-->
+     		<param name="020040">dzipATM.Transfer</param>
+     		  		<!--============= ATM户名查询交易 ===============-->
+     		<param name="020041">dzipATM.PersNameQuery</param>
+     		<!--============= ATM无卡存款交易 ===============-->
+     		<param name="020022">dzipATM.NoCardDeposit</param>
+     	</map>
+	</bean>
+
+	<bean id="parserResolver" class="com.csii.pe.channel.stream.ChannelAttributeParserResolver">
+     	<param name="key">tcpchannel.localport</param>
+     	<param name="defaultParser">InboundPacket</param>
+     	<map name="mapping">
+     	
+     	</map>
+	</bean>
+
+</config>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	锦城卡系统接入渠道定义  定长8583格式报文
+	
+	by chenshq	since:2010-08-16
+
+-->
+<config namespace="fix8583">
+
+	<bean id="TcpServer" class="com.csii.pe.service.comm.tcp.TcpServer">
+		<param name="id">${fix8583.tcp.id}</param>
+		<param name="name">${fix8583.tcp.name}</param>
+		<param name="port">${fix8583.tcp.port}</param>
+		<param name="socketTimeout">${fix8583.tcp.socketTimeout}</param>
+		<param name="reuseAddress">true</param>
+		<ref name="executor">threadPool</ref>
+		<ref name="handlerMapping">handlerMapping</ref>
+		<param name="period">1000</param>
+		<param name="eventId">20001</param>
+	</bean>
+	
+	<executor id="threadPool">
+		<param name="name">${fix8583.threadPool.name}</param>
+		<param name="initSize">${fix8583.threadPool.initSize}</param>
+		<param name="maxSize">${fix8583.threadPool.maxSize}</param>
+		<param name="minSize">${fix8583.threadPool.minSize}</param>
+		<param name="queueSize">${fix8583.threadPool.queueSize}</param>
+		<param name="keepAliveTime">${fix8583.threadPool.keepAliveTime}</param>
+	</executor>
+	
+	<handlerMapping id="handlerMapping" class="csii.pe.service.comm.SimpleHandlerMapping">
+		<handlers>
+			<ref name="*">serverHandler</ref>
+		</handlers>
+	</handlerMapping>	
+	
+	<handler id="serverHandler" class="csii.dzip.core.FixedLength8583Handler">
+		<ref name="coreController">.coreController</ref>
+		<param name="debug">${fix8583.serverHandler.debug}</param>
+		<param name="dumpPath">${fix8583.serverHandler.dumpPath}</param>
+		<param name="headLength">${fix8583.serverHandler.headLength}</param>
+		<param name="offsetOfLengthField">${fix8583.serverHandler.offsetOfLengthField}</param>
+		<param name="type">${fix8583.serverHandler.type}</param>
+		<param name="headIncluded">${fix8583.serverHandler.headIncluded}</param>
+	    <param name="encoding">8859_1</param>
+	    <ref name="fixedLength8583Processor">dzip.FixedLength8583Processor</ref>
+	</handler>
+	
+</config>

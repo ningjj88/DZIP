@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+<!--
+
+	时间表处理
+	
+	author:张永庆	since:2011-03-2
+
+-->
+<config>
+	<server id="eventDispatcher" class="com.csii.pe.service.event.EventDispatcherImpl"
+		init-method="start" destroy-method="shutdown">
+		<param name="name">eventDispatcher</param>
+		<ref name="executor">eventThreadPool</ref>
+	</server>
+	<executor id="eventThreadPool">
+		<param name="name">Event-ThreadPool</param>
+		<param name="initSize">2</param>
+		<param name="maxSize">2</param>
+		<param name="minSize">2</param>
+		<param name="queueSize">500</param>
+		<param name="keepAliveTime">300</param>
+	</executor>
+	<executor id="threadPool">
+		<param name="name">ThreadPool</param>
+		<param name="initSize">1</param>
+		<param name="maxSize">1</param>
+		<param name="minSize">1</param>
+		<param name="queueSize">50</param>
+		<param name="keepAliveTime">300</param>
+	</executor>
+	<bean id="checkAlarmServer" class="com.csii.pe.service.schedule.AlarmServer"
+		init-method="start">
+		<param name="name">cronScheduler</param>
+		<param name="transCodeFieldName">transCode</param>
+		<ref name="coreController">coreController</ref>
+		<ref name="executor">threadPool</ref>
+		<param name="cronOfLoader">0 0 0 * * * *</param>
+		<ref name="alarmLoader">jobLoader</ref>
+		<ref name="alarmListener">jobListener</ref>
+	</bean>
+	<bean id="jobListener" class="com.csii.pe.service.schedule.DefaultAlarmListener">
+		<!-- no other config, because no alarm table -->
+	</bean>
+	<bean id="jobLoader" class="com.csii.pe.service.schedule.BeanAlarmLoader">
+		<list name="entries">
+			<bean class="com.csii.pe.service.schedule.AlarmRecord">
+				<param name="key">scheduler.Scheduler</param>
+				<param name="mode">0</param>
+				<param name="rule">0 00 05 * * * *</param>
+			</bean>
+			<bean class="com.csii.pe.service.schedule.AlarmRecord">
+				<param name="key">platformAdmin.ClearDataHistory</param>
+				<param name="mode">0</param>
+				<param name="rule">0 16 05 * * * *</param>
+			</bean>
+		</list>
+	</bean>
+</config>

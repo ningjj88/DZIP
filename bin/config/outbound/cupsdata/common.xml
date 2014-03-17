@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config PUBLIC "-//PE//DTD BEAN//EN" "http://www.csii.com.cn/dtd/pe-config.dtd">
+
+<config namespace="cupsdata" >
+
+    <action id="BaseQueryAction" class="com.csii.ibs.action.IbsQueryAction" >
+	    <ref name="trsCodeResolver">hostTrsCodeResolver</ref>
+	    <ref name="returnCodeValidator">hostReturnCodeValidator</ref>
+	    <param name="idFactoryName">${cupsdata.BaseQueryAction.IdFactoryName}</param>
+		<ref name="transportBean">TransformerTransport</ref>
+	</action>
+
+	<action id="BaseTwoPhaseAction" class="com.csii.ibs.action.IbsTwoPhaseAction" >
+	    <ref name="trsCodeResolver">hostTrsCodeResolver</ref>
+	    <ref name="returnCodeValidator">hostReturnCodeValidator</ref>
+	    <param name="idFactoryName">${cupsdata.BaseTwoPhaseAction.IdFactoryName}</param>
+		<ref name="transportBean">TransformerTransport</ref>
+	</action>
+</config>

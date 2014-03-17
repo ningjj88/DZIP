@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<!ELEMENT field (group*)>
+<!-- 
+name 字段名称
+length  字段长度,对设置了数据字段分隔符的文件无效
+decimal 小数位长度
+type 数据类型
+pattern 数据格式,对日期型字段有效
+formater 格式化方法
+parser 解析方法
+formula 公式,表示该字段的值由其它字段的值计算得来
+desert 是否丢弃该域
+defaultValue 默认值
+-->
+<!ATTLIST field
+	name CDATA #REQUIRED
+	length CDATA #IMPLIED
+	decimal CDATA #IMPLIED
+	type (string | date | datetime | amount | number | group) #IMPLIED
+	formater CDATA #IMPLIED
+	parser CDATA #IMPLIED
+	pattern CDATA #IMPLIED
+	formula CDATA #IMPLIED
+	desert (true | false) #IMPLIED
+	defaultValue CDATA #IMPLIED
+>
+<!ELEMENT group (rule, field+)>
+<!ATTLIST group
+	name CDATA #REQUIRED
+>
+<!ELEMENT rule (#PCDATA)>
+<!ELEMENT file (line*, field*)>
+<!-- 
+delimiter 数据字段分隔符
+encoding 数据文件编码
+stringSymbol 字符串前后标志符,该属性只对设置了数据字段分隔符的文件有效
+skipLine 读数据文件时需跳过的行数 该属性只对设置了数据字段分隔符的文件有效
+noDot 在数据类型在amount时是否不带小数点
+prefix 文件名的前缀
+suffic 文件名的后缀
+branch 是否按不同分行输入或输出文件
+lineSeparator 行分隔符
+-->
+<!ATTLIST file
+	id CDATA #REQUIRED
+	delimiter CDATA #REQUIRED
+	encoding CDATA #IMPLIED
+	stringSymbol CDATA #IMPLIED
+	skipLine CDATA #IMPLIED
+	noDot (true | false) #IMPLIED
+	prefix CDATA #REQUIRED
+	suffix CDATA #REQUIRED
+	branch (true | false) #IMPLIED
+	lineSeparator CDATA #IMPLIED
+>
+<!ELEMENT files (file*)>
+<!ELEMENT line (field*)>

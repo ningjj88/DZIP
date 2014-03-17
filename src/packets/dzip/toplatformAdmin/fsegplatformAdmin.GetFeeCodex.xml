@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+
+<!--
+    add by xujin
+    date 2011-10-14
+-->
+<segment>
+  <xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+			    <xmlTag><String name="BusiCd"></String></xmlTag><!-- 业务编码 -->
+			    <xmlTag><String name="BusiTyp"></String></xmlTag><!-- 业务类型 -->
+			    <xmlTag><String name="BusiDesc"></String></xmlTag><!-- 交易描述 -->
+			    <xmlTag><String name="Decdigit"></String></xmlTag><!-- 小数位数 -->
+				<xmlTag><String name="DownLine"></String></xmlTag><!-- 最小值-->
+				<xmlTag><String name="UpLine"></String></xmlTag><!-- 最大值 -->
+				<xmlTag><String name="Arithmetic"></String></xmlTag><!-- 算法 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

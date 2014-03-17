@@ -1,0 +1,49 @@
+ @author 张永庆
+ @version 1.0.11
+ @since 2010-06-04
+ @update 2010-07-22
+ 
+ @version 1.0.11
+ @update 2010-07-22
+ ATM存款、取款、查询完成
+  
+ @version 1.0.10
+ @update 2010-07-20
+   解决内外交易码问题
+  
+ @version 1.0.9
+ @update 2010-07-14
+  完成模拟的柜面通到综合前置，综合前置到锦城卡前置的通信与报文转换
+  
+ @version 1.0.8
+ @update 2010-07-07
+  经整理解析定长8583报文
+  
+ @version 1.0.7
+ @update 2010-06-28
+  完成模拟的柜面通到综合前置的通信与报文转换
+ 
+ @version 1.0.6
+ @update 2010-06-11
+  成功配置ATM的标准8583格式的来回报文
+ 
+ @version 1.0.5
+ @update 2010-06-07
+  可以查询channel和插入journal
+ 
+ @version 1.0.4
+ @update 2010-06-07
+   配置了一个withdrawal for ATM 
+ 
+ @version 1.0.3
+ @update 2010-06-07
+   完善Util.java文件 
+ 
+ @version 1.0.2
+ @update 2010-06-04
+   调整文件夹结构并删除早期不规范的测试文档。
+ 
+ @version 1.0.1
+ @update 2010-06-4
+   由PEDemo修改后的第一版本，可正常运行增删改查交易的操作。
+ 

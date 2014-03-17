@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE iso8583Packet SYSTEM "packet.dtd">
+
+<!-- 达州商行本行卡ATM无卡存款报文 -->
+
+<iso8583Packet>
+	<bitMap defaultValue="2,3,4,7,11,12,13,22,26,41,43,49" />
+	<include include="8583fields" ></include>
+	
+	<mapAlias name="format">
+        <elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
+		<elementAlias name="SERCAPCODE"  alias="bit26" /><!--服务点PIN获取码  -->
+		<elementAlias name="CURCODE"  alias="bit49" /> <!--交易货币代码  -->
+	</mapAlias>
+	<mapAlias name="parse">
+	</mapAlias>
+
+</iso8583Packet>

@@ -1,0 +1,34 @@
+8
+
+dir
+308
+https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src/csii/pe/service
+https://192.168.20.210:8443/svn/dzip
+
+
+
+2014-03-10T06:34:44.022625Z
+308
+zengli
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0e52adb7-1c73-714e-b5c1-db04d86b8944
+
+comm
+dir
+
+schedule
+dir
+

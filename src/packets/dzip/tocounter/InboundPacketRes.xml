@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Group SYSTEM "packetutf8.dtd">
+<!--
+
+	by 张永庆	since:2010-06-20
+	响应柜面交易
+-->
+<Group name="ROOT" xmlHead="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;">
+	<Group name="SYSHEAD">
+		<xmlTag tagName="MESGLEN" >
+			<String name="_MesgLen" ></String>
+		</xmlTag>
+		<xmlTag tagName="TRMCODE" >
+			<String name="_TrmCode" ></String>
+		</xmlTag>
+		<xmlTag tagName="INSTCODE">
+		    <String name="_InstCode" ></String>
+		</xmlTag>
+        <xmlTag tagName="TLRNO">
+		    <String name="_TlrNo" ></String>
+		</xmlTag>
+		<xmlTag tagName="DESTADDR">
+		    <String name="_DestAddr" ></String>
+		</xmlTag>
+		<xmlTag tagName="STARTADDR">
+		    <String name="_StartAddr" ></String>
+		</xmlTag>
+		<xmlTag tagName="RESERVE">
+		    <String name="_Reserve" ></String>
+		</xmlTag>
+	</Group>
+	<Group name="BUSIHEAD">
+		<xmlTag tagName="_TransactionId" >
+			<String name="_TransactionId" ></String>
+		</xmlTag>
+		<xmlTag tagName="TRANCODECHILD">
+		    <String name="_TranCodeChild" ></String>
+		</xmlTag>
+		<xmlTag tagName="TRANSEQ">
+		    <String name="_TranSeq" ></String>
+		</xmlTag>
+		<xmlTag tagName="CHANNELCODE">
+		    <String name="_TranSeq" ></String>
+		</xmlTag>
+		<xmlTag tagName="TRMSEQNUM">
+		    <String name="_TrmSeqNum" ></String>
+		</xmlTag>
+		<xmlTag tagName="TRMSEQDATE">
+		    <String name="_TrmSeqDate" ></String>
+		</xmlTag>
+		<xmlTag tagName="TRMSEQTIME">
+		    <String name="_TrmSeqTime" ></String>
+		</xmlTag>
+		<xmlTag tagName="TRANDATE">
+		    <String name="_TranDate" ></String>
+		</xmlTag>
+		<xmlTag tagName="TRANTIME">
+		    <String name="_TranTime" ></String>
+		</xmlTag>
+		<xmlTag tagName="SYSSEQNUM">
+		    <String name="_SysSeqNum" ></String>
+		</xmlTag>
+		<xmlTag tagName="HOSTDATE">
+		    <String name="_HostDate" ></String>
+		</xmlTag>
+		<xmlTag tagName="HOSTTIME">
+		    <String name="_HostTime" ></String>
+		</xmlTag>
+		<xmlTag tagName="HOSTNUM">
+		    <String name="_HostNum" ></String>
+		</xmlTag>
+		<xmlTag tagName="ANSCODE">
+		    <String name="_AnsCode" ></String>
+		</xmlTag>
+		<xmlTag tagName="ANSCODEBEWR">
+		    <String name="_AnsCodeBewr" ></String>
+		</xmlTag>
+	</Group>
+	<Group name="BUSIBODY">
+		<xmlTag><String name="BANKID"></String></xmlTag>
+		<xmlTag><String name="MESG"></String></xmlTag>
+		<xmlTag><String name="PAN"></String></xmlTag>
+		<xmlTag><String name="PROC"></String></xmlTag>
+		<xmlTag><String name="AMT"></String></xmlTag>
+		<xmlTag><String name="TRDT"></String></xmlTag>
+		<xmlTag><String name="TRAC"></String></xmlTag>
+		<xmlTag><String name="LOCT"></String></xmlTag>
+		<xmlTag><String name="LOCD"></String></xmlTag>
+		<xmlTag><String name="EXPI"></String></xmlTag>
+		<xmlTag><String name="SETT"></String></xmlTag>
+		<xmlTag><String name="MERC"></String></xmlTag>
+		<xmlTag><String name="POSE"></String></xmlTag>
+		<xmlTag><String name="POSC"></String></xmlTag>
+		<xmlTag><String name="POSP"></String></xmlTag>
+		<xmlTag><String name="FEE"></String></xmlTag>
+		<xmlTag><String name="ACQU"></String></xmlTag>
+		<xmlTag><String name="FORW"></String></xmlTag>
+		<xmlTag><String name="TRACK2"></String></xmlTag>
+		<xmlTag><String name="TRACK3"></String></xmlTag>
+		<xmlTag><String name="RETR"></String></xmlTag>
+		<xmlTag><String name="AUTH"></String></xmlTag>
+		<xmlTag><String name="RESP"></String></xmlTag>
+		<xmlTag><String name="CATI"></String></xmlTag>
+		<xmlTag><String name="CAID"></String></xmlTag>
+		<xmlTag><String name="CANL"></String></xmlTag>
+		<xmlTag><String name="ADDI"></String></xmlTag>
+		<xmlTag><String name="TRCU"></String></xmlTag>
+		<xmlTag><String name="PIN"></String></xmlTag>
+		<xmlTag><String name="SECU"></String></xmlTag>
+		<xmlTag><String name="RETU"></String></xmlTag>
+		<xmlTag><String name="RESE"></String></xmlTag>
+		<xmlTag><String name="IDEN"></String></xmlTag>
+		<xmlTag><String name="ORIG"></String></xmlTag>
+		<xmlTag><String name="DEST"></String></xmlTag>
+		<xmlTag><String name="ACCID1"></String></xmlTag>
+		<xmlTag><String name="ACCID2"></String></xmlTag>
+		<xmlTag><String name="NAIT_RESE"></String></xmlTag>
+		<xmlTag><String name="ACQU_RESE"></String></xmlTag>
+		<xmlTag><String name="DEST_RESE"></String></xmlTag>
+		<xmlTag><String name="MAC"></String></xmlTag>
+		<xmlTag><String name="CACC"></String></xmlTag>
+		<xmlTag><String name="ISS1"></String></xmlTag>
+		<xmlTag><String name="ISS2"></String></xmlTag>
+	</Group>
+	<Group name="MACTRAI">
+		<xmlTag tagName="MAC">
+		    <String name="_MAC" ></String>
+		</xmlTag>
+	</Group>
+</Group>
