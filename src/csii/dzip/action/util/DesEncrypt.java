@@ -189,21 +189,17 @@ public class DesEncrypt {
 	public static void main(String args[]) {
 		String Str;
 		String data;
-		String dataHex="87343973C2299BDF";
-		String StrHex="87343973C2299BDF";
-		System.out.println(StrHex.substring(0, 6));
-		Str="15：09：13";
+		String dataHex="0123456789ABCDE7";
+		String StrHex="1AFEAD0492191ACD";
+
+		Str=StringChange.HexToString(StrHex);
+		//Str="11111111";
 		DesEncrypt Des = new DesEncrypt(Str);
 
-		data = Des.Encrypt(StrHex);
-		System.out.println("data = " + StringChange.StringToHex(data) + ", data length = " + data.length());
-		data = Des.Decrypt(data);
-		System.out.println(data);
-//		System.out.println("data = " + StringChange.HexToString(data) + ", data length = " + data.length());
-//		data=StringChange.StringToHex(StrHex);
-//		data="0210 166223880000000607 304000 0908160818 538594 6011 02 0804053910 0804053910 A0 12344321 1234567812345";
-//		data = "1F0DAF188996FD8278B2D03FF9FB70D2";
-//		data = Des.Decrypt(data);
+		data=StringChange.HexToString(dataHex);
+		data="0210 166223880000000607 304000 0908160818 538594 6011 02 0804053910 0804053910 A0 12344321 1234567812345";
+
+//		data = Des.Encrypt(data);
 //		System.out.println("Encrypt Data="+data+" Len="+data.length());
 //		dataHex=StringChange.StringToHex(data);
 //		System.out.println("Encrypt DataHex="+dataHex);
@@ -211,11 +207,12 @@ public class DesEncrypt {
 //		System.out.println("Decrypt Data="+data);
 //		dataHex=StringChange.StringToHex(data);
 //		System.out.println("Decrypt DataHex="+dataHex);
-//
-//		data = Des.MAC(data);
-//		System.out.println("MAC Data="+data);
-//		dataHex=StringChange.StringToHex(data);
-//		System.out.println("Encrypt DataHex="+dataHex);
+
+		data = Des.MAC(data);
+		System.out.println("MAC Data="+data);
+		dataHex=StringChange.StringToHex(data);
+		System.out.println("Encrypt DataHex="+dataHex);
+
 	}
 
 }

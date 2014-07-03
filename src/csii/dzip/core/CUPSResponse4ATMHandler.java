@@ -104,32 +104,34 @@ public class CUPSResponse4ATMHandler extends DefaultHandler {
 			try {
 				String peJournalNO =context.getString(Constants.ISO8583_SYSTRACENUM);  //转发报文中的系统跟踪号是平台流水号。
 				Map resultMap=utilProcessor.getJournalInfo(peJournalNO);//通过平台流水号查询交易流水。
-				context.setData(Constants.PE_OUT_TRANCD,resultMap.get(Constants.PE_OUT_TRANCD));
+				context.setData(Constants.PE_OUT_TRANCD, resultMap.get(Constants.PE_OUT_TRANCD));
 				context.setData(Constants.PE_SETTLMTDATE, context.getData(Constants.ISO8583_SETDATE)); // 银联返回的清算日期
-				context.setData(Constants.PE_HOST_RESP_CD,context.getData(Constants.ISO8583_RESCODE));   //银联返回的响应码
-				context.setData(Constants.RTXNCATCD,Constants.RTXNCATCD_02);			 //业务性质 ；本代他
-				context.setData(Constants.ISO8583_SYSTRACENUM,resultMap.get(Constants.PE_SYS_TRACE_NUM));//将系统跟踪号还原
+				context.setData(Constants.PE_HOST_RESP_CD, context.getData(Constants.ISO8583_RESCODE));   //银联返回的响应码
+				context.setData(Constants.RTXNCATCD, Constants.RTXNCATCD_02);			 //业务性质 ；本代他
+				context.setData(Constants.ISO8583_SYSTRACENUM, resultMap.get(Constants.PE_SYS_TRACE_NUM));//将系统跟踪号还原
 			//	context.setData(Constants.ISO8583_RCVCODE,InitData4Dzip.getRcvgCd());    //接收方机构码
-				context.setData(Constants.PE_JOURNAL_NO,peJournalNO);					 //平台流水号
-				context.setData(Constants.PE_REQ_CHANN, Constants.PE_ATMP);  			 //通信渠道
+				context.setData(Constants.PE_JOURNAL_NO, peJournalNO);					 //平台流水号
+				context.setData(Constants.PE_REQ_CHANN, resultMap.get(Constants.PE_REQ_CHANN));  			 //通信渠道
 				context.setData(Constants.IN_AVAILMETHCD, Constants.AVAILMETHCD);        // 填充可用方式
 				context.setData(Constants.PRI_SOURCE, Constants.PRI_SOURCE_YLQZ_VALUE);  //填充交易来源前缀
 				if(isOnliTransaction){//如果是柜面交易,填充交易信息
 					try {
 						context.setData(Constants.PE_POST_DATE, dzipProcessTemplate.queryPostDate());//账务日期
 						context.setData(Constants.PE_HOSTCHKCD, Constants.PE_ONE);//主机对账标识
-						context.setData(Constants.TAXRPTFORPERSNBR,
-								dzipProcessTemplate.queryTaxrptForPersNbr(context, Constants.ISO8583));//客户号
-						String cashboxnbr = String.valueOf(resultMap.get(Constants.PE_CASHBOXNBR));
-						context.setData(Constants.IN_CASHBOXNBR, cashboxnbr);//现金箱号
-						String orgnbr = dzipProcessTemplate.getOrgNbrByCashboxnbr(cashboxnbr);
-						context.setData(Constants.IN_ORGNBR, orgnbr);//机构号
+						if(!Constants.TRANCD_0630.equals(context.getData(Constants.TransactionId))){//脚本通知不需要以下信息
+							context.setData(Constants.TAXRPTFORPERSNBR,
+									dzipProcessTemplate.queryTaxrptForPersNbr(context, Constants.ISO8583));//客户号
+							String cashboxnbr = String.valueOf(resultMap.get(Constants.PE_CASHBOXNBR));
+							context.setData(Constants.IN_CASHBOXNBR, cashboxnbr);//现金箱号
+							String orgnbr = dzipProcessTemplate.getOrgNbrByCashboxnbr(cashboxnbr);
+							context.setData(Constants.IN_ORGNBR, orgnbr);//机构号
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 						log.error("获取交易信息出错(CUPSResponse4ATMHandler)!" + e.getMessage());
 					}
 				}
-				if(context.getData(Constants.ISO8583_TRANAMT) ==null||
+				if(context.getData(Constants.ISO8583_TRANAMT) == null||
 						Constants.PE_NULL.equals(context.getString(Constants.ISO8583_TRANAMT).trim())){
 					context.setData(Constants.ISO8583_TRANAMT,Constants.TRANAMT_DEFAULT); //防止交易金额取空，发生异常
 				}

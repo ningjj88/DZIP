@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--柜面IC卡差错处理应答报文-->
+<segment>
+	<xmlTag><String name="postdate"/></xmlTag><!--记账日期-->
+	<xmlTag><String name="acctno"/></xmlTag><!--帐号-->
+	<xmlTag><String name="out_RTXNNBR" /></xmlTag><!--核心流水-->
+	<xmlTag><String name="RESCODE" /></xmlTag><!--记账响应码-->
+</segment>

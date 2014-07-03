@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/config
+/svn/dzip/!svn/ver/336/DZIP_NEWDEDV/src/config
 END
 event.xml
 K 25
@@ -24,8 +24,8 @@ END
 sqlMapConfig.xml
 K 25
 svn:wc:ra_dav:version-url
-V 61
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/config/sqlMapConfig.xml
+V 63
+/svn/dzip/!svn/ver/362/DZIP_NEWDEDV/src/config/sqlMapConfig.xml
 END
 initializer.xml
 K 25
@@ -49,7 +49,7 @@ peconfigdev.properties
 K 25
 svn:wc:ra_dav:version-url
 V 69
-/svn/dzip/!svn/ver/186/DZIP_NEWDEDV/src/config/peconfigdev.properties
+/svn/dzip/!svn/ver/309/DZIP_NEWDEDV/src/config/peconfigdev.properties
 END
 tcpService4CUPS.xml
 K 25
@@ -61,7 +61,7 @@ dzipService.xml
 K 25
 svn:wc:ra_dav:version-url
 V 62
-/svn/dzip/!svn/ver/276/DZIP_NEWDEDV/src/config/dzipService.xml
+/svn/dzip/!svn/ver/309/DZIP_NEWDEDV/src/config/dzipService.xml
 END
 core.xml
 K 25
@@ -133,7 +133,7 @@ tcpService4PlatformAdmin.xml
 K 25
 svn:wc:ra_dav:version-url
 V 75
-/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/config/tcpService4PlatformAdmin.xml
+/svn/dzip/!svn/ver/362/DZIP_NEWDEDV/src/config/tcpService4PlatformAdmin.xml
 END
 svc_localdb.xml
 K 25
@@ -151,7 +151,7 @@ tcpService4ONLI.xml
 K 25
 svn:wc:ra_dav:version-url
 V 66
-/svn/dzip/!svn/ver/276/DZIP_NEWDEDV/src/config/tcpService4ONLI.xml
+/svn/dzip/!svn/ver/309/DZIP_NEWDEDV/src/config/tcpService4ONLI.xml
 END
 scheduler.xml
 K 25

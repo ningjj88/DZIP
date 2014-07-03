@@ -2,6 +2,7 @@
 <!DOCTYPE mapAlias SYSTEM "packet.dtd">
 <!--收到银联发来本带他转账交易交易响应报文 -->
 <mapAlias name="parse">
+		<elementAlias name="TRANAMT"  alias="bit4" /><!-- 交易金额 -->
         <elementAlias name="CARDSEQNBR"  alias="bit23" /><!--卡序列号  -->
         <elementAlias name="TRANSFEE"  alias="bit28" /><!-- 交易手续费-->
 		<elementAlias name="BALAMT"  alias="bit54" /><!-- 实际余额 -->

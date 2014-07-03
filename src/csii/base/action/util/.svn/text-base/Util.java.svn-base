@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import com.csii.pe.common.util.CsiiUtils;
+import com.sun.org.apache.bcel.internal.generic.DDIV;
 
 import csii.base.constant.Constants;
 import csii.dzip.core.Decrypt4Des;
@@ -433,49 +434,61 @@ public class Util {
 				return "C";
 			else
 				return "D";
-			
+
 	}
-	/**  
+	/**
 	 * 转换字符串123.50为Money类型
 	 */
 	public static BigDecimal getAmount(String amountText){
 		if(amountText==null || amountText.trim().isEmpty())
 			return BigDecimal.ZERO;
-		else			
+		else
 			return new BigDecimal(amountText);
 	}
 
+	/**
+	 * 将交易金额格式化成8583#3格式
+	 * @param amt
+	 * @return
+	 */
+	public static String getAmt(String amt){
+		BigDecimal bdAmt = new BigDecimal(amt);
+		bdAmt = bdAmt.multiply(new BigDecimal(100));
+
+		return fill(String.valueOf(bdAmt.intValue()), 12, Constants.LEFT, Constants.PE_ZERO);
+	}
+
 	public static void main(String[] arg) throws ParseException {
-		SimpleDateFormat simpledateformat= new SimpleDateFormat("MMdd");
+//		SimpleDateFormat simpledateformat= new SimpleDateFormat("MMdd");
 //		Date date=  simpledateformat.parse("0208");
-		Date date = getDate("20110114", "yyyyMMdd");
-		System.out.println(date);
-		System.out.println(Util.getFormatString("1124" ,"MMdd"));
+//		Date date = getDate("20110114", "yyyyMMdd");
+//		System.out.println(date);
+//		System.out.println(Util.getFormatString("1124" ,"MMdd"));
 //			System.out.println(Util.getDateString("yyyy"));
 //			System.out.println(Util.getDateString("MM-dd"));
 //			System.out.println(Util.getDateString("HH:mm:ss"));
-		System.out.println(Util.getDateString("yyyyMMddHHmmss"));
+//		System.out.println(Util.getDateString("yyyyMMddHHmmss"));
 	//	System.out.println(Util.StringToHex("111111111"));
-		System.out.println(CsiiStringUtils.formatString("的", 20));
-		System.out.println("1323===="+(0.0==0));
-		StringBuffer subKeyValue  =new StringBuffer("");
-		String prefixName ="";
-		System.out.println("=====>"+prefixName+subKeyValue.toString());
-		String strValue=HexToString("A20A636739937B95");
-		System.out.println("StringToHex=====>"+StringToHex("¢\ncg9{ "));//¢\ncg9{
-		System.out.println("HexToString=====>"+HexToString("A20A636739937B95"));
-
-		String acqOrgCd="05576750";
-		int beginIndex=0;
-		int endIndex=(beginIndex+8)>acqOrgCd.length()?acqOrgCd.length():beginIndex+8;
-		String value =acqOrgCd.substring(beginIndex, endIndex);//在报文中取出
-		value = value.trim();
-		beginIndex = endIndex; 
-		System.out.println("value1=====>"+value);
-		endIndex=(beginIndex+8)>acqOrgCd.length()?acqOrgCd.length():beginIndex+8;
-		value =acqOrgCd.substring(beginIndex, endIndex);//在报文中取出
-		value = value.trim();
-		beginIndex = endIndex; 
-
+//		System.out.println(CsiiStringUtils.formatString("的", 20));
+//		System.out.println("1323===="+(0.0==0));
+//		StringBuffer subKeyValue  =new StringBuffer("");
+//		String prefixName ="";
+//		System.out.println("=====>"+prefixName+subKeyValue.toString());
+//		String strValue=HexToString("A20A636739937B95");
+//		System.out.println("StringToHex=====>"+StringToHex("¢\ncg9{ "));//¢\ncg9{
+//		System.out.println("HexToString=====>"+HexToString("A20A636739937B95"));
+//
+//		String acqOrgCd="05576750";
+//		int beginIndex=0;
+//		int endIndex=(beginIndex+8)>acqOrgCd.length()?acqOrgCd.length():beginIndex+8;
+//		String value =acqOrgCd.substring(beginIndex, endIndex);//在报文中取出
+//		value = value.trim();
+//		beginIndex = endIndex;
+//		System.out.println("value1=====>"+value);
+//		endIndex=(beginIndex+8)>acqOrgCd.length()?acqOrgCd.length():beginIndex+8;
+//		value =acqOrgCd.substring(beginIndex, endIndex);//在报文中取出
+//		value = value.trim();
+//		beginIndex = endIndex;
+		System.out.println(getAmt("10"));
 	}
 }

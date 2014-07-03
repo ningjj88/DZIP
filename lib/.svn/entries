@@ -1,7 +1,7 @@
 8
 
 dir
-308
+341
 https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/lib
 https://192.168.20.210:8443/svn/dzip
 
@@ -665,15 +665,15 @@ has-props
 
 pe-lc.jar
 file
+355
 
 
 
-
-2013-10-14T06:49:42.000000Z
-26b9aa3a9b710bc0b1ddc240afafd0e7
-2013-05-07T07:15:09.421875Z
-2
-longtun
+2014-06-09T07:45:56.000000Z
+d00b2c8e706ba9fa97f925d1c4fcf350
+2014-06-09T08:28:05.277250Z
+355
+xiehai
 has-props
 
 jcraft_jzlib.jar

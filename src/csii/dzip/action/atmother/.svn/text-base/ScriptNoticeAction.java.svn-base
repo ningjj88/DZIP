@@ -19,6 +19,7 @@ public class ScriptNoticeAction extends DzipBaseAction {
 	private DzipProcessTemplate dzipProcessTemplate;
 	public void execute(Context ctx) throws PeException {
 		if(dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ).equals(ctx.getData(Constants.ISO8583_SOURID))){//本代本
+//		if("00010000".equals(ctx.getData(Constants.ISO8583_SOURID))){
 			logger.info("ScriptNoticeAction(本代本脚本通知)===================>Start");
 			ctx.setData(Constants.RTXNCATCD, Constants.RTXNCATCD_0);//设置为本代本交易
 		}else {

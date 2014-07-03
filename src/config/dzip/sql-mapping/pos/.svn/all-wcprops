@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 67
-/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/config/dzip/sql-mapping/pos
+/svn/dzip/!svn/ver/336/DZIP_NEWDEDV/src/config/dzip/sql-mapping/pos
 END
 Acct_Info.xml
 K 25
@@ -19,5 +19,5 @@ Dep_Wth.xml
 K 25
 svn:wc:ra_dav:version-url
 V 79
-/svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/config/dzip/sql-mapping/pos/Dep_Wth.xml
+/svn/dzip/!svn/ver/336/DZIP_NEWDEDV/src/config/dzip/sql-mapping/pos/Dep_Wth.xml
 END

@@ -1,6 +1,5 @@
 package csii.dzip.action.util;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import csii.base.action.util.FileUtils;
 import csii.base.action.util.Util;
 import csii.base.constant.Constants;
 import csii.base.constant.SqlMaps;
+import csii.dzip.core.Dict;
 import csii.dzip.core.Errors;
 import csii.dzip.core.InitData4Dzip;
 import csii.dzip.core.XMLPacket4ProcedureParser;
@@ -291,7 +291,7 @@ public  class ActionUtilProcessor {
 							String num =String.valueOf(resultlist.size());//分录个数
 							for(Iterator it = resultlist.iterator();it.hasNext();){
 								map = (Map)it.next();
-								getTranTyp(ctx, map,type8583);												//根据分录顺序判断传入参数
+								getTranTyp(ctx, map, type8583);												//根据分录顺序判断传入参数
 								ctx.setData(Constants.IN_RTXNTYPCD, map.get(Constants.RTXNTYPCD)); 			// 交易类型
 								procedureMap = Init.initDeposittxn(ctx, procedureMap,type8583);				//填充调用核心存/取款验证存储过程参
 								logger.info("====================>Start procedure pos.deposittxn:"+ctx.getData(Constants.PE_JOURNAL_NO));
@@ -360,14 +360,22 @@ public  class ActionUtilProcessor {
 									Constants.TRANCD_042063,//他行ATM现金充值圈存冲正
 									Constants.TRANCD_02001791,//他行ATM现金充值圈存撤销
 									Constants.TRANCD_04201791,//他行ATM现金充值圈存撤销冲正
-									Constants.TRANCD_021060,//本行ATM指定账户圈存
-									Constants.TRANCD_043060,//本行ATM指定账户圈冲正
-									Constants.TRANCD_021063,//本行ATM现金充值圈存
-									Constants.TRANCD_043063,//本行ATM现金充值圈存冲正
-									Constants.TRANCD_02101791,//本行ATM现金充值圈存撤销
-									Constants.TRANCD_021061,//本行ATM圈提确认
-									Constants.TRANCD_021062,//本行ATM本代本转账圈存
-									Constants.TRANCD_043062//本行ATM本代本转账圈存冲正
+									Constants.TRANCD_04301791,//本行ATM/柜面现金充值圈存撤销冲正
+									Constants.TRANCD_021060,//本行ATM/柜面指定账户圈存
+									Constants.TRANCD_043060,//本行ATM/柜面指定账户圈冲正
+									Constants.TRANCD_021063,//本行ATM/柜面现金充值圈存
+									Constants.TRANCD_043063,//本行ATM/柜面现金充值圈存冲正
+									Constants.TRANCD_02101791,//本行ATM/柜面现金充值圈存撤销
+									Constants.TRANCD_021061,//本行ATM/柜面圈提确认
+									Constants.TRANCD_021062,//本行ATM/柜面本代本转账圈存
+									Constants.TRANCD_043062,//本行ATM/柜面本代本转账圈存冲正
+									Constants.TRANCD_02006031,//柜面IC卡销户结清
+									Constants.TRANCD_02006032,//柜面IC销户结清(换卡)
+									Constants.TRANCD_04206031,//柜面IC卡销户结清冲正
+									Constants.TRANCD_04206032,//柜面IC卡销户结清(换卡)冲正
+									Constants.TRANCD_02106001,//柜面IC卡补登圈存
+									Constants.TRANCD_04306001,//柜面IC卡补登圈存冲正
+									Constants.TRANCD_02106101//柜面转待补登圈提确认
 									);
 							String tranCd = ctx.getString(Constants.TransactionId);//交易码
 							if((!Constants.RTXNCATCD_02.equals(ctx.getData(Constants.RTXNCATCD)))//如果是本代本或本代他电子现金交易
@@ -380,6 +388,10 @@ public  class ActionUtilProcessor {
 								}
 								if(tranCd.equals(Constants.TRANCD_021062)){
 									procMap.put(Constants.IN_MEDIUMID, ctx.getData(Constants.ISO8583_ACCIDE_N2));
+								}
+								if(tranCd.equals(Constants.TRANCD_02106001) || tranCd.equals(Constants.TRANCD_04306001)){
+									procMap.put(Constants.IN_MEDIUMID, ctx.getData(Constants.ISO8583_ACCIDE_N1));//旧卡
+									procMap.put(Constants.IN_MEDIUMID2, ctx.getData(Constants.ISO8583_ACCTNO));//新卡
 								}
 								procMap.put(Constants.IN_TRANCD, tranCd);
 								procMap.put(Constants.IN_AMT, ctx.getData(Constants.PE_TRAN_AMT));
@@ -399,7 +411,7 @@ public  class ActionUtilProcessor {
 								}
 							}
 						}
-					} catch (PeException e) {
+					} catch (Exception e) {
 							logger.error("deductTranAMT method Error,syseqno:"+ctx.getData(Constants.PE_JOURNAL_NO)+"====>"+e.getMessage());
 //							transactionTemplate.getTransactionManager().rollback(amtTransaction);
 							ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);           //交易状态：失败
@@ -969,6 +981,120 @@ public  class ActionUtilProcessor {
 	}
 
 	/**
+	 * 柜面IC卡差错处理
+	 * @param ctx
+	 * @throws PeException
+	 */
+	@SuppressWarnings("unchecked")
+	public void doIcErrorHandle(final Context ctx) throws PeException{
+		final TransactionTemplate transactionTemplate =corebankAccess.getTransactionTemplate();
+			transactionTemplate.execute(new TransactionCallback() {
+				public Object doInTransaction(TransactionStatus amtTransaction) {
+					Map map = new HashMap();
+					Map procedureMap = new HashMap();
+					Map rtxnchalparam =  new HashMap();
+					rtxnchalparam.put(Constants.RTXNSOURCECD, Constants.CCPT);//交易来源 差错凭条
+					rtxnchalparam.put(Constants.RTXNCATCD, Constants.RTXNCATCD_0);	//交易性质 本代本
+					rtxnchalparam.put(Constants.TRANCD, ctx.getData(Constants.TRANCD));//交易码 柜面
+					List resultlist = new ArrayList();
+					boolean icDeduct = true;	//更新电子钱包余额标志
+					boolean isGlacct = true;	//是否是都为内部帐差错处理
+					try {
+						resultlist = dzipProcessTemplate.query_OrgNbr_GlAcctTitleNbr(rtxnchalparam);   //取出记账分录顺序
+//						String num =String.valueOf(resultlist.size());//分录个数
+						for(Iterator it = resultlist.iterator();it.hasNext();){
+							map = (Map)it.next();
+							getTranTyp(ctx, map);	//根据分录顺序判断传入参数
+							ctx.setData(Constants.IN_RTXNTYPCD, map.get(Constants.RTXNTYPCD)); 			// 交易类型
+							procedureMap = Init.initDeposittxn(ctx, procedureMap, Constants.ISO8583);	//填充调用核心存/取款验证存储过程参
+							logger.info("柜面IC卡交易差错记账===============>Start procedure pos.deposittxn,paramers:"+procedureMap);
+							corebankAccess.getSqlMap().update("pos.deposittxn", procedureMap); // 调用取款核心存储过程。
+							logger.info("柜面IC卡交易差错记账===================>End  pos.deposittxn");
+							//输出存储过程响应的信息
+							logger.info(Constants.OUT_ERRORNBR + "===========>" + procedureMap.get(Constants.OUT_ERRORNBR));//异常信息码
+							logger.info(Constants.OUT_ERRORMSG + "===========>" + procedureMap.get(Constants.OUT_ERRORMSG));//异常信息
+							logger.info(Constants.OUT_ORAERRORMSG  + "===========>" + procedureMap.get(Constants.OUT_ORAERRORMSG));//数据库异常信息
+							logger.info(Constants.OUT_RTXNNBR  + "===========>" + procedureMap.get(Constants.OUT_RTXNNBR));//核心交易号
+							logger.info(Constants.OUT_ACCTNO  + "===========>" + procedureMap.get(Constants.OUT_ACCTNO));//核心账号
+							//输出完毕
+							 if (Constants.PE_ZERO.equals(String.valueOf(procedureMap.get(Constants.OUT_ERRORNBR)))){
+								ctx.setData(Constants.PE_HOST_RESP_CD, Constants.PE_OK);//响应码
+								if(Constants.PE_ONE.equals(map.get(Constants.TRANSEQNO))){
+									ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_ZERO); //交易状态：成功
+									ctx.setData(Constants.PE_HOST_SEQ_NO,procedureMap.get(Constants.OUT_RTXNNBR)); //主机交易流水号
+									ctx.setData(Constants.IN_PARENTACCTNBR, procedureMap.get(Constants.OUT_ACCTNO));  	//父账号:多笔分录交易和冲正交易，必填
+									ctx.setData(Constants.IN_PARENTRTXNNBR, procedureMap.get(Constants.OUT_RTXNNBR));    //父交易号:多笔分录交易和冲正交易，必填
+								}
+								if(Constants.TRS_TYPE_DEP.equals(map.get(Constants.RTXNTYPCD))
+										|| Constants.TRS_TYPE_WTH.equals(map.get(Constants.RTXNTYPCD))){//如果存在客户帐
+									ctx.setData(Constants.OUT_RTXNNBR, procedureMap.get(Constants.OUT_RTXNNBR));//凭证打印客户帐的流水
+									isGlacct = false;
+								}
+								if(isGlacct && Constants.TRS_TYPE_GLD.equals(map.get(Constants.RTXNTYPCD))){
+									ctx.setData(Constants.OUT_RTXNNBR, procedureMap.get(Constants.OUT_RTXNNBR));
+								}
+								map.clear();
+							 }else if(Constants.Error_1001.equals(String.valueOf(procedureMap.get(Constants.OUT_ERROR_NBR)))){
+								 //核心已经记账
+								 ctx.setData(Constants.PE_HOST_RESP_CD, Constants.PE_OK);//响应码
+								 ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_ZERO); //交易状态：成功
+								 icDeduct = false;
+								 break;
+					    	 }else{
+								 icDeduct = false;
+								 ctx.setData(Constants.PE_HOST_RESP_CD, Constants.PE_SYSTEM_ERROR);    //响应码
+								 throw new PeException((String)procedureMap.get(Constants.OUT_ERRORMSG));
+							 }
+						}
+						if(icDeduct) {	//更新电子钱包余额
+							Map procMap = new HashMap();
+							if(Dict.GLACCT_6601013817.equals(ctx.getData(Dict.C_GLACCT))
+									&& Dict.GLACCT_6601013837.equals(ctx.getData(Dict.D_GLACCT))){//贷：借记IC卡电子钱包存款 借：IC卡待补登余额 相当于补登圈存
+								procMap.put(Constants.IN_TRANCD, Constants.TRANCD_02106001);
+								procMap.put(Constants.IN_MEDIUMID, ctx.getData(Dict.D_ACCTNO));
+								procMap.put(Constants.IN_MEDIUMID2, ctx.getData(Dict.C_ACCTNO));
+							}else if(Dict.GLACCT_6601013817.equals(ctx.getData(Dict.D_GLACCT))
+									&& Dict.GLACCT_6601013837.equals(ctx.getData(Dict.C_GLACCT))) {//贷：IC卡待补登余额 借：借记IC卡电子钱包存款 相当于补登圈存冲正
+								procMap.put(Constants.IN_TRANCD, Constants.TRANCD_04306001);
+								procMap.put(Constants.IN_MEDIUMID, ctx.getData(Dict.C_ACCTNO));
+								procMap.put(Constants.IN_MEDIUMID2, ctx.getData(Dict.D_ACCTNO));
+							}else if(Constants.PE_NULL.equals(ctx.getData(Dict.C_GLACCT))
+									&& Dict.GLACCT_6601013817.equals(ctx.getData(Dict.D_GLACCT))){//客户帐为贷方 此时内部帐借方：借记IC卡电子钱包存款 相当于圈提确认
+								procMap.put(Constants.IN_TRANCD, Constants.TRANCD_020061);
+								procMap.put(Constants.IN_MEDIUMID, ctx.getData(Dict.C_ACCTNO));//贷方卡号
+							}else if(Constants.PE_NULL.equals(ctx.getData(Dict.D_GLACCT))
+									&& Dict.GLACCT_6601013817.equals(ctx.getData(Dict.C_GLACCT))){//客户帐为借方 此时内部帐贷方：借记IC卡电子钱包存款 相当于圈存
+								procMap.put(Constants.IN_TRANCD, Constants.TRANCD_020060);
+								procMap.put(Constants.IN_MEDIUMID, ctx.getData(Dict.D_ACCTNO));//借方卡号
+							}
+							//TODO:
+							procMap.put(Constants.IN_AMT, ctx.getData(Constants.PE_TRAN_AMT));
+							logger.info("====================>Start procedure pos.updICEWALLETCTL:"+ctx.getData(Constants.PE_JOURNAL_NO));
+							logger.info("====================>pos.updICEWALLETCTL Paramer:" + procMap);
+							corebankAccess.getSqlMap().update("pos.updICEWALLETCTL", procMap); // 调用核心更新电子钱包余额存储过程
+							logger.info("====================>End procedure pos.updICEWALLETCTL:"+ctx.getData(Constants.PE_JOURNAL_NO));
+							//输出存储过程响应的信息
+							logger.info(Constants.OUT_RESPONCD + "===========>" + procMap.get(Constants.OUT_RESPONCD));  //核心响应码
+							logger.info(Constants.OUT_ERRORNBR + "===========>" + procMap.get(Constants.OUT_ERRORNBR));//异常信息码
+							logger.info(Constants.OUT_ERRORMSG + "===========>" + procMap.get(Constants.OUT_ERRORMSG));//异常信息
+							ctx.setData(Constants.PE_HOST_RESP_CD, procMap.get(Constants.OUT_RESPONCD)); //响应码
+							if (!(Constants.PE_OK.equals(procMap.get(Constants.OUT_RESPONCD))
+									&& Constants.PE_ZERO.equals(String.valueOf(procMap.get(Constants.OUT_ERRORNBR))))){
+								throw new PeException("更新电子钱包余额失败:" + procMap.get(Constants.OUT_ERRORMSG));
+							}
+						}
+					} catch (PeException e) {
+							logger.error("DoICJournalCharge method Error====>"+e.getMessage());
+							ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_TWO);           //交易状态：失败
+							ctx.setData(Constants.PE_HOST_RESP_CD, ctx.getData(Constants.PE_HOST_RESP_CD));    //响应码
+							throw new PeRuntimeException(e.getMessage());
+					}
+				    return null;
+				}
+			});
+	}
+
+	/**
 	 * @desc 查询电子钱包余额
 	 *@author longt
 	 *@date 2013.10.11
@@ -1437,6 +1563,45 @@ public  class ActionUtilProcessor {
 			}
 		}
 	}
+
+	/**
+	 * 根据数据库获得交易类型确定交易的参数
+	 * @param ctx
+	 * @param map
+	 * @throws PeException
+	 */
+	@SuppressWarnings("unchecked")
+	public void getTranTyp(final Context ctx, Map map) throws PeException {
+		if(map.get(Constants.ORGNBR) == null || map.get(Constants.GLACCTTITLENBR) == null ){  //若无机构号和科目号则记客户帐
+			String rtxntypcd = String.valueOf(map.get(Constants.RTXNTYPCD));
+			if(Constants.TRS_TYPE_DEP.equals(rtxntypcd)
+					|| Constants.TRS_TYPE_WTH.equals(rtxntypcd)){//记客户帐
+				ctx.setData(Constants.MEDIUM_TYPE, Constants.CARD_ACCT_FLAG_2); 	  //介质号：2 卡号
+				ctx.setData(Constants.IN_ACCTNBR, ctx.getData(Constants.ISO8583_ACCTNO));//用户卡
+				ctx.setData(Constants.IN_INITIALCARDNBR, ctx.getData(Constants.IN_ACCTNBR));//用户卡号
+				//boolean = false;
+			}else if (Constants.TRS_TYPE_GLD.equals(rtxntypcd)
+					|| Constants.TRS_TYPE_GLR.equals(rtxntypcd)){
+				ctx.setData(Constants.MEDIUM_TYPE, Constants.CARD_ACCT_FLAG_1);//介质号： 1  帐号
+				if(Constants.TRS_TYPE_GLD.equals(rtxntypcd)){
+					map.put(Constants.ORGNBR, ctx.getData(Dict.D_ORGNBR));//科目所在机构
+					map.put(Constants.GLACCTTITLENBR, ctx.getData(Dict.D_GLACCT));//科目号
+				}else if(Constants.TRS_TYPE_GLR.equals(rtxntypcd)){
+					map.put(Constants.ORGNBR, ctx.getData(Dict.C_ORGNBR));//科目所在机构
+					map.put(Constants.GLACCTTITLENBR, ctx.getData(Dict.C_GLACCT));//科目号
+				}
+				String directPostAcctNbr = dzipProcessTemplate.query_directPostAcctNbr(map);
+				if (directPostAcctNbr != null) {  //记内部帐之前获取内部帐户
+					ctx.setData(Constants.IN_ACCTNBR, directPostAcctNbr);         // 内部帐号
+					ctx.setData(Constants.IN_INITIALCARDNBR, Constants.PE_NULL);  //空值
+				} else{
+					ctx.setData(Constants.PE_HOST_RESP_CD,Constants.PE_SYSTEM_ERROR );    //响应码
+					throw new PeException("IC柜面差错记账找不到内帐户,参数:" + map);
+				}
+			}
+		}
+	}
+
 	/**
 	 * 根据数据库获得交易类型确定交易的参数
 	 * @param ctx

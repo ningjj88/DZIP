@@ -7,6 +7,7 @@ import csii.base.constant.Constants;
 import csii.dzip.action.DzipBaseAction;
 import csii.dzip.action.util.ActionUtilProcessor;
 import csii.dzip.action.util.DzipProcessTemplate;
+import csii.dzip.action.util.Init;
 import csii.dzip.action.util.UpdateJoural;
 
 /**
@@ -20,12 +21,19 @@ public class CashRecharge4CreditForLoadAction extends DzipBaseAction {
 	private DzipProcessTemplate dzipProcessTemplate;
 	@Override
 	public void execute(Context ctx) throws PeException {
-		if(dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ).equals(ctx.getData(Constants.ISO8583_SOURID))){//本代本
+//		if(dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ).equals(ctx.getData(Constants.ISO8583_SOURID))){//本代本
+		if("00010000".equals(ctx.getData(Constants.ISO8583_SOURID))){
 			logger.debug("CashRecharge4CreditForLoadAction(本行现金充值圈存交易)====================>Start!");
 			ctx.setData(Constants.IN_BUSITYP, Constants.PE_01); 	//业务类型:01_现金及转账
 			ctx.setData(Constants.RTXNCATCD, Constants.RTXNCATCD_0);//设置为本代本交易
 			if(Constants.PE_OK.equals(ctx.getData(Constants.PE_HOST_RESP_CD))){	//若银联数据卡验证响应码为：成功
-				String responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+				String responcd = Constants.PE_OK;
+				if(!Init.isTransactionFromOnli(ctx)){//交易来自atm
+					responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+				}else{//交易来自柜面
+					//设置柜面站点号
+					ctx.setData(Constants.IN_ORIGNTWKNODENBR, ctx.getData(Constants.ISO8583_CARDACCID));
+				}
 				if(Constants.PE_OK.equals(responcd)){
 					//设置卡的有效期
 					dzipProcessTemplate.getIcCardExpDate(ctx);
@@ -37,8 +45,11 @@ public class CashRecharge4CreditForLoadAction extends DzipBaseAction {
 					utilProcessor.deductTranAMT(ctx,Constants.ISO8583);					//执行数据库操作
 					ctx.setData(Constants.ISO8583_RESCODE, ctx.getData(Constants.PE_HOST_RESP_CD)); //响应码
 					ctx.setData(Constants.ISO8583_SETDATE, ctx.getString(Constants.PE_POST_DATE).substring(4, 8));//获得清算日期
+				}else{
+					ctx.setData(Constants.ISO8583_RESCODE, responcd);
 				}
 			}else{
+				ctx.setData(Constants.ISO8583_RESCODE, ctx.getData(Constants.PE_HOST_RESP_CD)); //响应码
 				ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);               //交易状态：失败
 			}
 			updateJoural.execute(ctx); // 修改流水交易状态

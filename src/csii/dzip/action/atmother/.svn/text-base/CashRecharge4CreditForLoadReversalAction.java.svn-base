@@ -10,6 +10,7 @@ import csii.base.constant.Constants;
 import csii.dzip.action.DzipBaseAction;
 import csii.dzip.action.util.ActionUtilProcessor;
 import csii.dzip.action.util.DzipProcessTemplate;
+import csii.dzip.action.util.Init;
 import csii.dzip.action.util.UpdateJoural;
 
 /**
@@ -24,7 +25,8 @@ public class CashRecharge4CreditForLoadReversalAction extends DzipBaseAction {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void execute(Context ctx) throws PeException {
-		if(dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ).equals(ctx.getData(Constants.ISO8583_SOURID))){//本代本
+//		if(dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ).equals(ctx.getData(Constants.ISO8583_SOURID))){//本代本
+		if("00010000".equals(ctx.getData(Constants.ISO8583_SOURID))){
 			logger.info("CashRecharge4CreditForLoadReversalAction(本行现金充值圈存冲正)=======================>Start");
 			ctx.setData(Constants.IN_BUSITYP, Constants.PE_01); 	//业务类型:01_现金及转账
 			ctx.setData(Constants.RTXNCATCD, Constants.RTXNCATCD_0);//设置为本代本交易
@@ -40,7 +42,13 @@ public class CashRecharge4CreditForLoadReversalAction extends DzipBaseAction {
 						ctx.setData(Constants.ISO8583_RESCODE, Constants.PE_22);          //响应码:已冲正
 						ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);        //交易状态：异常
 					}else{
-						String responcd = utilProcessor.getTranParamInfo(ctx,Constants.ISO8583); //获得交易参数信息
+						String responcd = Constants.PE_OK;
+						if(!Init.isTransactionFromOnli(ctx)){//交易来自atm
+							responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+						}else{//交易来自柜面
+							//设置柜面站点号
+							ctx.setData(Constants.IN_ORIGNTWKNODENBR, ctx.getData(Constants.ISO8583_CARDACCID));
+						}
 						if(Constants.PE_OK.equals(responcd)){
 							Map resultMap = utilProcessor.getJournalNO(orgDataMap);
 							logger.info("本行现金充值圈存冲正上笔交易信息(resultMap)==================>"+resultMap);
@@ -66,6 +74,8 @@ public class CashRecharge4CreditForLoadReversalAction extends DzipBaseAction {
 								ctx.setData(Constants.ISO8583_RESCODE, Constants.PE_OK);          //响应码
 								ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);        //交易状态：异常
 							}
+						}else{
+							ctx.setData(Constants.ISO8583_RESCODE, responcd);
 						}
 					}
 				}else{
@@ -73,6 +83,7 @@ public class CashRecharge4CreditForLoadReversalAction extends DzipBaseAction {
 					ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);     	//交易状态：失败
 				}
 			}else{
+				ctx.setData(Constants.ISO8583_RESCODE, ctx.getData(Constants.PE_HOST_RESP_CD)); //响应码
 				ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT); //交易状态：失败
 			}
 			updateJoural.execute(ctx, procedureMap);					// 修改流水交易状态;

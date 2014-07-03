@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!-- 柜面销户登记查询应答报文 -->
+<segment>
+	<xmlTag><String name="PAN"/></xmlTag><!--卡号-->
+	<xmlTag><String name="RegDate"/></xmlTag><!--销户登记日期-->
+	<xmlTag><String name="LgnType"/></xmlTag><!--登录类型-->
+	<xmlTag><String name="LgnInstCode"/></xmlTag><!--登录机构代码-->
+	<xmlTag><String name="TraceNo"/></xmlTag><!--系统跟踪号-->
+	<xmlTag><String name="LgnMerchCode"/></xmlTag><!--登录网点代码-->
+	<xmlTag><String name="LgnUserCode"/></xmlTag><!--登录柜员号-->
+	<xmlTag><String name="Id_Type"/></xmlTag><!--证件类型-->
+	<xmlTag><String name="Id_Code"/></xmlTag><!--证件号码-->
+	<xmlTag><String name="RtnFlag"/></xmlTag><!--是否回收卡片-->
+</segment>

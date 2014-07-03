@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+	柜面获得个人当日现金充值交易流水
+	返回柜面报文
+	2014-03-20
+	谢海
+ -->
+<segment>
+	<xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+				<xmlTag><String name="acctno"></String></xmlTag><!-- 卡号 -->
+				<xmlTag><String name="systracenum"></String></xmlTag><!-- 主机系统跟踪号 -->
+			    <xmlTag><String name="msgtyp"></String></xmlTag><!-- 消息类型 -->
+			    <xmlTag><String name="rtxncatcd"></String></xmlTag><!-- 交易性质 -->
+			    <xmlTag><String name="trandatetime"></String></xmlTag><!-- 交易日期时间 -->
+				<xmlTag><String name="reqorgcd"></String></xmlTag><!-- 接收机构 -->
+				<xmlTag><String name="fwdorgcd"></String></xmlTag><!-- 发送机构 -->
+				<xmlTag><String name="tranamt"></String></xmlTag><!-- 交易金额-->
+				<xmlTag><String name="persnbr"></String></xmlTag><!-- 柜员号 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

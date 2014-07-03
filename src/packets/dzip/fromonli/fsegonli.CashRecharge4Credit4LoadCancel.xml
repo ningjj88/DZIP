@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE segment SYSTEM "packetutf8.dtd">
 <!--
-	柜面现金充值圈存冲正测试报文
+	柜面现金充值圈存撤销测试报文
 	add by xiehai
     date 2014-01-14
 -->
 <segment>
+	<xmlTag><String name="HeadTxType"/></xmlTag><!--报文类型-->
 	<xmlTag><String name="ACCTNO"/></xmlTag><!--交易帐号-->
+	<xmlTag><String name="PROCODE"/></xmlTag><!--交易处理码-->
 	<xmlTag><String name="TRANAMT"/></xmlTag><!--交易金额-->
 	<xmlTag><String name="TRANSDTTIME"/></xmlTag><!--主机系统时间-->
 	<xmlTag><String name="SYSTRACENUM"/></xmlTag><!--终端系统跟踪号-->

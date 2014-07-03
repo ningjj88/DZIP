@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--IC卡柜面待补登金额查询-->
+<segment>
+	<idxField name="RecordList" >
+		<Group name="RecordMap">
+		    <xmlTag><String name="PAN"/></xmlTag><!--卡号-->
+			<xmlTag><String name="AMT"/></xmlTag><!--待补登金额-->
+		</Group>
+	</idxField>
+</segment>

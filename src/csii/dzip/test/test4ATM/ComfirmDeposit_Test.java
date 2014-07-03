@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package csii.dzip.test.test4ATM;
 
@@ -22,10 +22,10 @@ public class ComfirmDeposit_Test extends Abstract4Test8583ToHost  implements Run
 	@Override
 	protected Map prepare() {
 		Map map=new HashMap();
-	    map.put(Constants.ISO8583_TRANSACTION_ID,"022021");                                       
+	    map.put(Constants.ISO8583_TRANSACTION_ID,"022021");
 	    map.put(Constants.ISO8583_HEAD_TX_TYPE, "0220");
 	    map.put(Constants.ISO8583_ACCTNO,"9400276112339876545");                                /* 2#  n..19 LLVAR */
-	    map.put(Constants.ISO8583_PRO_CODE,"210000");                                     		/* 3# n6 */    
+	    map.put(Constants.ISO8583_PRO_CODE,"210000");                                     		/* 3# n6 */
 	    map.put(Constants.ISO8583_TRANAMT,"10");                                               /* 4# n12 */
 	    map.put(Constants.ISO8583_TRANSDTTIME, Util.getDateString(Constants.PE_MDHMS));         /* 7# n10(MMDDhhmmss)*/
 	    map.put(Constants.ISO8583_SYSTRACENUM, Util.getDateString("HHmmss"));                   /*11# n6 */
@@ -41,7 +41,7 @@ public class ComfirmDeposit_Test extends Abstract4Test8583ToHost  implements Run
 	    map.put(Constants.ISO8583_CARDACCID,"002001");                                          /*41# ans8*/
 	    map.put(Constants.ISO8583_CARDACCCODE,"000129000000000");                               /*42# ans15*/
 	    map.put(Constants.ISO8583_CARDACCNAME,"_CHNGDGZSGRGBANKING_北京朝阳门");                 /*43# ans40*/
-	    map.put(Constants.ISO8583_CURCODE,"156");                                               /*49# an3*/	    
+	    map.put(Constants.ISO8583_CURCODE,"156");                                               /*49# an3*/
 	    map.put(Constants.ISO8583_REACODE,"1234567890");                                        /*60# LLL*/
 	    map.put(Constants.ISO8583_ORGDATA,"020010780610261400580000004221000000012210");        /*90# LLL*/
 		return map;
@@ -65,7 +65,7 @@ public class ComfirmDeposit_Test extends Abstract4Test8583ToHost  implements Run
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

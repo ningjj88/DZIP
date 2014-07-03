@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--
+	柜面获得个人当日现金充值交易流水
+	2014-03-20
+	谢海
+ -->
+<segment>
+	<xmlTag><String name="acctno" /></xmlTag><!--卡号-->
+	<xmlTag><String name="tranamt" /></xmlTag><!-- 交易金额-->
+	<xmlTag><String name="postdate" /></xmlTag><!-- 交易日期-->
+	<xmlTag><String name="isTransFromPers" /></xmlTag><!-- 是否查询本柜员-->
+	<xmlTag><String name="persnbr" /></xmlTag><!-- 柜员号-->
+</segment>

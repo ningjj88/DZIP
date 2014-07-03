@@ -9,7 +9,7 @@
 <Group name="Message" xmlHead="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;">
 	<Group name="Head">
 		<xmlTag tagName="_TransactionId" >
-			<String name="_TransactionCode" ></String>
+			<String name="_TransactionId" ></String>
 		</xmlTag>
 
 		<xmlTag tagName="IBSTrsTimestamp" >
@@ -17,6 +17,6 @@
 		</xmlTag>
 	</Group>
 	<Group name="Body">
-		<include keyName="_TransactionCode"></include>
+		<include keyName="_TransactionId"></include>
 	</Group>
 </Group>

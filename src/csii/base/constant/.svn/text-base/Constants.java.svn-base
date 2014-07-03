@@ -155,6 +155,7 @@ public class Constants {
     public static final String FREEZE="0" ;        					//冻结
     public static final String UNFREEZE="1" ;        				//解冻
     public static final String IN_MEDIUMID="in_mediumId" ;        	//介质号:卡号
+    public static final String IN_MEDIUMID2="in_mediumId2" ;        	//介质号:卡号
     public static final String IN_EFFDATETIME="in_effDate" ;        //冻结交易发生日期
     public static final String IN_OPTNBR="in_optNbr" ;       		//in_holdFlag标识判断是否必输项
     public static final String IN_AMT="in_amt" ;       				//冻结金额
@@ -470,6 +471,7 @@ public class Constants {
     public static final String PE_CUPS_NO="peCupsNO";          //CUPS流水号
     public static final String PE_CARD_TYPE="cardType";        //PE卡类型
     public static final String PE_IS_ICCARD_TRANS = "isIcCardTrans";//是否是电子现金交易
+    public static final String PE_IS_TRANS_FROM_PERS = "isTransFromPers"; //交易是否由当前柜员完成 用于柜面电子现金交易
     public static final String PE_YYMDHMS="yyyyMMddHHmmss";    //PE日期格式
     public static final String PE_MDHMS="MMddHHmmss";          //PE日期格式
     public static final String PE_MMDD="MMdd";                 //PE日期格式
@@ -727,6 +729,7 @@ public class Constants {
  /***************************************************************************************/
     public static final String ISO8583="ISO8583";              //8583编码格式
     public static final String FIX8583="FIX8583";              //8583编码格式
+    public static final String XML = "xml";
     public static final String CHARSET_GBK="GBK";              //GBK编码格式
     public static final String CHARSET_ISO_8859_1="ISO-8859-1";//ISO-8859-1编码格式
     public static final String CHARSET_UTF8="UTF-8";           //UTF-8编码格式
@@ -1059,6 +1062,20 @@ public class Constants {
     public static final String TRANCD_0620 = "0620";
     /**脚本处理通知*/
     public static final String TRANCD_0630 = "0630";
+    /**柜面IC卡销户结清*/
+    public static final String TRANCD_02006031 = "02006031";
+    /**销卡结清(换卡)*/
+    public static final String TRANCD_02006032 = "02006032";
+    /**柜面IC卡补登圈存*/
+    public static final String TRANCD_02106001 = "02106001";
+    /**柜面IC卡转待补登圈提确认*/
+    public static final String TRANCD_02106101 = "02106101";
+    /**柜面IC卡销户结清冲正*/
+    public static final String TRANCD_04206031 = "04206031";
+    /**柜面IC卡销卡结清(换卡)冲正*/
+    public static final String TRANCD_04206032 = "04206032";
+    /**柜面IC卡补登圈存冲正*/
+    public static final String TRANCD_04306001 = "04306001";
     public static final String TRANCD_020001="020001";             //取款交易
     public static final String TRANCD_020021="020021";             //存款交易
     public static final String TRANCD_020046="020046";             //转出交易
@@ -1083,6 +1100,7 @@ public class Constants {
     public static final String PROCODE_620000 = "620000";
     public static final String PROCODE_630000 = "630000";
     public static final String PROCODE_650000 = "650000";
+    public static final String PROCODE_6031 = "6031";
 
     /******************************其他**********************************************/
     public static final String DzipJinCheng2HostTransport="DzipJinCheng2HostTransport";

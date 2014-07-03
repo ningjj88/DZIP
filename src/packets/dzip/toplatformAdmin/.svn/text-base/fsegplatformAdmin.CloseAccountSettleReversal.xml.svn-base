@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!-- 销户结清冲正应答柜面报文 -->
+<segment>
+	<xmlTag><String name="TrxType" /></xmlTag><!--交易代码-->
+	<xmlTag><String name="LgnType" /></xmlTag><!--登录身份类型-->
+	<xmlTag><String name="RetCode" /></xmlTag><!--响应码-->
+	<xmlTag><String name="LgnInstCode" /></xmlTag><!--登录机构代码-->
+	<xmlTag><String name="TraceNo" /></xmlTag><!--系统跟踪号-->
+	<xmlTag><String name="LgnMerchCode" /></xmlTag><!--登录网点代码-->
+	<xmlTag><String name="LgnUserCode" /></xmlTag><!--登录操作员代码-->
+	<xmlTag><String name="Card_No"/></xmlTag><!--卡号-->
+	<xmlTag><String name="Fir_Cur" /></xmlTag><!--主币种-->
+	<xmlTag><String name="Fir_Amount" /></xmlTag><!--主币种账户返回金额-->
+	<xmlTag><String name="Sec_Cur" /></xmlTag><!--次币种-->
+	<xmlTag><String name="Sec_Amount" /></xmlTag><!--次币种账户返回金额-->
+	<xmlTag><String name="TXN_DATE" /></xmlTag><!--清算日期-->
+	<xmlTag><String name="TranNo" /></xmlTag><!--交易流水号-->
+</segment>

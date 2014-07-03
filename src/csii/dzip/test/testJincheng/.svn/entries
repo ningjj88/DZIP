@@ -1,7 +1,7 @@
 8
 
 dir
-308
+341
 https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src/csii/dzip/test/testJincheng
 https://192.168.20.210:8443/svn/dzip
 
@@ -38,18 +38,6 @@ file
 2
 longtun
 
-Query_test.java
-file
-
-
-
-
-2013-10-14T06:49:46.000000Z
-1b39751661c07117e5eba80b4658e1f2
-2013-05-07T07:15:09.421875Z
-2
-longtun
-
 PosConsumeCancelReversal_test.java
 file
 
@@ -58,6 +46,18 @@ file
 
 2013-10-14T06:49:46.000000Z
 8f728207acb586d148ad6a0e6ac4a159
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+Query_test.java
+file
+
+
+
+
+2013-10-14T06:49:46.000000Z
+1b39751661c07117e5eba80b4658e1f2
 2013-05-07T07:15:09.421875Z
 2
 longtun
@@ -110,14 +110,14 @@ file
 2
 longtun
 
-WithdrawAtATM_test.java
+DepositATCDM_test.java
 file
 
 
 
 
 2013-10-14T06:49:46.000000Z
-e86caa4d9b4214110288cc498604b57d
+33d48c0070911d06c35ec3af46884345
 2013-05-07T07:15:09.421875Z
 2
 longtun
@@ -134,26 +134,14 @@ file
 2
 longtun
 
-DepositATCDM_test.java
+WithdrawAtATM_test.java
 file
 
 
 
 
 2013-10-14T06:49:46.000000Z
-33d48c0070911d06c35ec3af46884345
-2013-05-07T07:15:09.421875Z
-2
-longtun
-
-TransferInComfirm_test.java
-file
-
-
-
-
-2013-10-14T06:49:46.000000Z
-cce314e664332983b668766fa5ec4654
+e86caa4d9b4214110288cc498604b57d
 2013-05-07T07:15:09.421875Z
 2
 longtun
@@ -166,6 +154,18 @@ file
 
 2013-10-14T06:49:46.000000Z
 4185caabbf6c8440cf0318e4b3a1375a
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+TransferInComfirm_test.java
+file
+
+
+
+
+2013-10-14T06:49:46.000000Z
+cce314e664332983b668766fa5ec4654
 2013-05-07T07:15:09.421875Z
 2
 longtun

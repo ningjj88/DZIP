@@ -65,12 +65,6 @@
 		<param name="sql" >select PEONLINO.NEXTVAL FROM DUAL</param>
 	</idFactory>
 
-	<!--柜面电子现金交易系统跟踪号-->
-	<idFactory id="onliSystraceNum" class="com.csii.pe.service.id.RawSequenceIdFactory">
-	  	<ref name="dataSource">localdb.ibsdbDataSource</ref>
-		<param name="sql" >select ONLISYSTRACENUM.NEXTVAL FROM DUAL</param>
-	</idFactory>
-
 	<!-- Validator -->
 	<validator id="optionValidator" class="com.csii.pe.validation.style.support.Required">
 		<param name="messageKey">validation.required</param>

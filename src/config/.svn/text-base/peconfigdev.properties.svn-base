@@ -2,7 +2,7 @@
 #	system&app parameters definition.
 #
 #   产品系统配置
-#  
+#
 #   张永庆  2010-05-19
 #
 # **********************************************************
@@ -12,14 +12,14 @@
 
 #=============================前置数据库的配置=============================#
 ibsdbDataSource.driverClassName = oracle.jdbc.OracleDriver
-ibsdbDataSource.url = jdbc:oracle:thin:@192.168.20.6:1521:DEVDB
+ibsdbDataSource.url = jdbc:oracle:thin:@192.168.20.6:1521:DEVDB2
 ibsdbDataSource.username = dzip
 ibsdbDataSource.password=8ffe7566be6557dcf65361b0d165314d9144d744a42919989af598409d6e6190e7cfb720f05e4a27ac16ad4e2091fc49efef3fd56612025688db3fbe0f794d2179422d810f14f45a09c008c1ec7d1d242060a008017fd48b2cd2831f2133cfb8f78782bfc275966e35c058f66179a5b4ca1b92a19075c78a93ddcf336c0802a1
 ibsdbDataSource.maxActive = 24
 
 #=============================核心数据库的配置=============================#
 corebankdbDataSource.driverClassName = oracle.jdbc.OracleDriver
-corebankdbDataSource.url = jdbc:oracle:thin:@192.168.20.6:1521:DEVDB
+corebankdbDataSource.url = jdbc:oracle:thin:@192.168.20.6:1521:DEVDB2
 corebankdbDataSource.username = osibank
 corebankdbDataSource.password=49e7801ecc7d3336e7b353457774c5afa70abc999f01cfebea77688eac00b7f15a1ca425ca738afdfc506625340d084bfc120555d4922a8b844ee150adf1b556fae23d664b751a1eaa9fc5a301bc05334cafa454f282acc6ca1e35fb9881e7e76323438009932e59133e70c0611a6ef15968a83e88865413ff5fe3445aea1e78
 corebankdbDataSource.readtimeout = 60000
@@ -54,6 +54,33 @@ platformAdmin.serverHandler.defaultMappingCode = 9999
 platformAdmin.clearHistoryMaxDateRange=30
 platformAdmin.clearHistoryDay=01
 
+#=========================柜面接入渠道定义===========================#
+onli.tcp.id = ONLI
+onli.tcp.name = ONLI-Server
+onli.tcp.port = 20001
+onli.tcp.socketTimeout = 0
+
+onli.threadPool.name = ONLI-APP-ThreadPool
+onli.threadPool.initSize = 40
+onli.threadPool.maxSize = 80
+onli.threadPool.minSize = 20
+onli.threadPool.queueSize = 80
+onli.threadPool.keepAliveTime = 300
+
+onli.TransformerFactory.debug = true
+onli.TransformerFactory.cacheEnable = true
+onli.XmlPacketParser.debug = true
+
+onli.serverHandler.debug = true
+onli.serverHandler.dumpPath = C:\\tmpOnli\\
+
+onli.serverHandler.endTagName = Message
+
+onli.serverHandler.maxErrorMessageLength = 200
+onli.serverHandler.errorMessageEncoding = UTF-8
+onli.serverHandler.defaultMappingCode = 9999
+onli.clearHistoryMaxDateRange=30
+onli.clearHistoryDay=01
 #==========================银联前置接入渠道定义（变长8583）===========================#
 CUPS8583.tcp.soketTimeout = 0
 CUPS8583.tcp.name = Inbound-CUPS8583-Server
@@ -261,7 +288,7 @@ audit.JCK.ftpServer.ip= 192.168.0.11
 audit.JCK.ftpServer.port=21
 audit.JCK.ftp.userName = limingyang
 audit.JCK.ftp.passWord = limingyang
-audit.JCK.remote.path= 
+audit.JCK.remote.path=
 audit.JCK.loclal.path= C:\\FTP_Audit\\JCK\\
 #==========================对账功能设置（银联前置）========================#
 audit.YLQZ.ftpServer.ip=192.168.20.229

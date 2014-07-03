@@ -186,6 +186,7 @@ public class ISO8583Handler extends DefaultHandler {
 					if(listCode.contains(context.getData(Constants.TransactionId)) && listPinInputType.contains(pinInputType)){
 						//设置接受机构码 报文头目标地址发往银联数据
 						context.setData(Constants.ISO8583_DESTID, dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ));
+						context.setData(Constants.ISO8583_RCVCODE, context.getData(Constants.ISO8583_DESTID)); //接收方机构码
 						context.setData(Constants.PE_IS_ICCARD_TRANS, Constants.OUR_IC_CARD);//设置为IC卡电子现金交易
 					}
 				}
@@ -217,7 +218,7 @@ public class ISO8583Handler extends DefaultHandler {
 					return exceptionProcessor(errorFormatName, outtranid, context, "不能交易当前响应吗为"+responcd);// 异常处理
 				}
 				//测试不验密码
-//				context.setData(Constants.CHECK_PIN, Constants.PE_N);
+				context.setData(Constants.CHECK_PIN, Constants.PE_N);
 				if(Constants.PE_Y.equals(context.getString(Constants.CHECK_PIN))){//有密码交易
 					String pan = (String) context.getData(Constants.ISO8583_ACCTNO);
 					pin=decryptSecApi.HSMAPIDecryptPIN(context.getString(Constants.ISO8583_PINDATA), pan); //解密ATM发来的密码
@@ -233,6 +234,20 @@ public class ISO8583Handler extends DefaultHandler {
 						return exceptionProcessor(errorFormatName, outtranid, context, "解密出错");// 异常处理
 					}
 					context.setData(Constants.IN_PIN,pin);  //解密后的密码放入context中
+				}
+				if(Constants.OUR_IC_CARD.equals(cardType)) {//如果是本行IC卡电子现金交易,验证密码及账户状态
+					//账户验证
+					context.setData(Constants.PE_ACC_NO, context.getData(Constants.ISO8583_ACCTNO));
+					context.setData(Constants.IN_CASHBOXNBR, InitData4Dzip.getYLCashBoxNbr());
+					log.info("==========================>check the card info!");
+					Map<String, Object> resultMap = utilProcessor.selectAcctInfo(context, Constants.ISO8583);
+					if(!Constants.PE_OK.equals(String.valueOf(resultMap.get(Constants.OUT_RESPONCD)))){//若密码验证不通过,直接返回前台
+						log.error("==========================>check pin error and the respondcd is " + resultMap.get(Constants.OUT_RESPONCD));
+						Map<String, Object> resMap = dzipProcessTemplate.getResp(String.valueOf(resultMap.get(Constants.OUT_RESPONCD)));
+						String errorMsg = new String(String.valueOf(resMap.get(Constants.RESPNAME)));
+						return exceptionProcessor(errorFormatName, outtranid, context, errorMsg);
+					}
+					log.info("==========================>check card is ok!");
 				}
 				return handleTransaction(errorFormatName,outtranid,context,paramsMap);
 		    } else {
@@ -416,6 +431,7 @@ public class ISO8583Handler extends DefaultHandler {
 						String service = field48.substring(index+2, index+2+3);
 						context.setData(Constants.ISO8583_SERENTRYMODE, service);//通过转账圈存48#获取
 						//去掉转入圈存不需要的域
+						context.setData(Constants.ISO8583_ADDDATAPRI, Constants.PE_NULL);//48#
 						context.setData(Constants.ISO8583_TRACK2_DATA, Constants.PE_NULL);
 						context.setData(Constants.ISO8583_TRACK3_DATA, Constants.PE_NULL);
 						try {
@@ -432,6 +448,7 @@ public class ISO8583Handler extends DefaultHandler {
 								log.info("=====================>insert journal " + peJournalNO + " successful");
 							}
 							context.setData(Constants.PE_RLTSEQNO, rlstseq);//更新原交易流水号
+							context.setData(Constants.PE_TRANS_STAT, Constants.PE_INIT);//由于验证密码改变了交易状态 交易状态为初始化
 							updateJoural.execute(context);//更新转入圈存流水的原交易
 							log.info("=====================>update journal " + peJournalNO + " successful");
 						} catch (Exception e) {
@@ -479,6 +496,7 @@ public class ISO8583Handler extends DefaultHandler {
 								log.info("=====================>insert journal " + peJournalNO + " successful");
 							}
 							context.setData(Constants.PE_RLTSEQNO, map.get(Constants.PE_SYSSEQNO));//更新原交易流水号
+							context.setData(Constants.PE_TRANS_STAT, Constants.PE_INIT);//交易状态为初始化
 							updateJoural.execute(context);//更新转入圈存冲正流水的原交易
 							log.info("=====================>update journal " + peJournalNO + " successful");
 						} catch (Exception e) {

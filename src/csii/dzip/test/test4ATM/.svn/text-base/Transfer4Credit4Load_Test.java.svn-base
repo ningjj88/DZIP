@@ -24,7 +24,7 @@ public class Transfer4Credit4Load_Test extends Abstract4Test8583ToHost  implemen
 
 	    map.put(Constants.ISO8583_TRANSACTION_ID,"020062");
 		map.put(Constants.ISO8583_HEAD_TX_TYPE, "0200");
-	    map.put(Constants.ISO8583_ACCTNO,"6221359010100149972");                               /* 2#  n..19 LLVAR */
+	    map.put(Constants.ISO8583_ACCTNO,"6235881000000000026");                               /* 2#  n..19 LLVAR */
 	    map.put(Constants.ISO8583_PRO_CODE,"620000");                                            /* 3# n6 */
 	    map.put(Constants.ISO8583_TRANAMT,"300");                                           /* 4# n12 */
 	    map.put(Constants.ISO8583_TRANSDTTIME, Util.getDateString(Constants.PE_MDHMS));     /* 7# n10(MMDDhhmmss)*/
@@ -46,12 +46,12 @@ public class Transfer4Credit4Load_Test extends Abstract4Test8583ToHost  implemen
 	    map.put(Constants.ISO8583_CARDACCNAME,"_CHNGDGZSGRGBANKING_");                      /*43# ans40*/
 	    map.put(Constants.ISO8583_ADDDATAPRI, "1234132PB051");									//48#
 	    map.put(Constants.ISO8583_CURCODE,"156");                                           /*49# an3*/
-	    map.put(Constants.ISO8583_PINDATA,"111111");              							/*52# b64*/
+	    map.put(Constants.ISO8583_PINDATA,"222222");              							/*52# b64*/
 	    map.put(Constants.ISO8583_SECURCONTRINFO,"2000000000000000");                       /*53# n16*/
 	    map.put(Constants.ISO8583_ICCSYSRELDATA, Util.HexToString("9F26080B61E36C79357C5A9F2701809F100807010199A0B806019F3704000000009F360201C2950500001800009A031312109C01609F02060000000000005F2A02015682027D009F1A0201569F03060000000000009F3303E0F0F09F34036003029F3501119F1E0832303033313233318405FFFFFFFFFF9F090220069F4104000000019F74064543433030319F631030313032303030308030303030303030"));
 	    map.put(Constants.ISO8583_REACODE,"000005101000000000000002200");                                    /*60# LLL*/
-	    map.put(Constants.ISO8583_ACCIDE_N1,"6221359010100149972");                            /*102# LLL*/
-	    map.put(Constants.ISO8583_ACCIDE_N2,"6212339010100009642");                            /*103# LLL*/
+	    map.put(Constants.ISO8583_ACCIDE_N1,"6235881000000000026");                            /*102# LLL*/
+	    map.put(Constants.ISO8583_ACCIDE_N2,"6235881000000000018");                            /*103# LLL*/
 		return map;
 	}
 

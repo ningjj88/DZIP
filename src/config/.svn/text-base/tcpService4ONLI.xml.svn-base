@@ -56,14 +56,12 @@
 		<ref name="updateJoural">dzip.UpdateJoural</ref>
 		<ref name="cupsTransport">dzip.CupsTransport</ref>
 		<ref name="pinSecurityModule">dzip.pinSecurityModule</ref>
-		<ref name="pinSecurityModule4Onli">dzip.pinSecurityModule4Onli</ref>
 		<ref name="utilProcessor">dzip.UtilProcessor4Action</ref>
 	</handler>
 
 	<bean id="transactionIdResolver" class="com.csii.pe.channel.stream.MappingTrsIdResolver">
 		<param name="idParameterName">_TransactionId</param>
 		<map name="mapping">
-
 		</map>
 	</bean>
 

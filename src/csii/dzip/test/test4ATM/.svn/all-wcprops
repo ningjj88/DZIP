@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 63
-/svn/dzip/!svn/ver/281/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM
+/svn/dzip/!svn/ver/330/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM
 END
 PersNameQuery_Test.java
 K 25
@@ -9,17 +9,17 @@ svn:wc:ra_dav:version-url
 V 85
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/PersNameQuery_Test.java
 END
-Credit4LoadReversal_test.java
-K 25
-svn:wc:ra_dav:version-url
-V 93
-/svn/dzip/!svn/ver/237/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/Credit4LoadReversal_test.java
-END
 ModifyPwd_Test.java
 K 25
 svn:wc:ra_dav:version-url
 V 81
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/ModifyPwd_Test.java
+END
+Credit4LoadReversal_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dzip/!svn/ver/237/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/Credit4LoadReversal_test.java
 END
 Withdrawal_Test.java
 K 25
@@ -37,7 +37,7 @@ Test_Transfer4CreditForLoad.java
 K 25
 svn:wc:ra_dav:version-url
 V 96
-/svn/dzip/!svn/ver/209/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/Test_Transfer4CreditForLoad.java
+/svn/dzip/!svn/ver/316/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/Test_Transfer4CreditForLoad.java
 END
 Debit4Load_test.java
 K 25
@@ -45,35 +45,35 @@ svn:wc:ra_dav:version-url
 V 84
 /svn/dzip/!svn/ver/269/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/Debit4Load_test.java
 END
-QueryForOther_Test.java
-K 25
-svn:wc:ra_dav:version-url
-V 85
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/QueryForOther_Test.java
-END
 Test_Transfer4CreditForLoadReversal.java
 K 25
 svn:wc:ra_dav:version-url
 V 104
 /svn/dzip/!svn/ver/209/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/Test_Transfer4CreditForLoadReversal.java
 END
-WithdrawalForOther_Test.java
-K 25
-svn:wc:ra_dav:version-url
-V 90
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/WithdrawalForOther_Test.java
-END
-ReversaForOther_Test.java
+QueryForOther_Test.java
 K 25
 svn:wc:ra_dav:version-url
 V 87
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/ReversaForOther_Test.java
+/svn/dzip/!svn/ver/330/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/QueryForOther_Test.java
+END
+WithdrawalForOther_Test.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dzip/!svn/ver/316/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/WithdrawalForOther_Test.java
 END
 DepositForOther_Test.java
 K 25
 svn:wc:ra_dav:version-url
 V 87
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/DepositForOther_Test.java
+END
+ReversaForOther_Test.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dzip/!svn/ver/316/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/ReversaForOther_Test.java
 END
 CashRecharge4Credit4Load_test.java
 K 25
@@ -96,8 +96,8 @@ END
 ComfirmDeposit_Test.java
 K 25
 svn:wc:ra_dav:version-url
-V 86
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/ComfirmDeposit_Test.java
+V 88
+/svn/dzip/!svn/ver/316/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/ComfirmDeposit_Test.java
 END
 CashRecharge4Credit4LoadReversal_test.java
 K 25
@@ -109,7 +109,7 @@ Transfer4Credit4Load_Test.java
 K 25
 svn:wc:ra_dav:version-url
 V 94
-/svn/dzip/!svn/ver/255/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/Transfer4Credit4Load_Test.java
+/svn/dzip/!svn/ver/316/DZIP_NEWDEDV/src/csii/dzip/test/test4ATM/Transfer4Credit4Load_Test.java
 END
 CashRecharge4Credit4LoadCancel_test.java
 K 25

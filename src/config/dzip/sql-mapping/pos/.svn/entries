@@ -1,15 +1,15 @@
 8
 
 dir
-308
+341
 https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src/config/dzip/sql-mapping/pos
 https://192.168.20.210:8443/svn/dzip
 
 
 
-2013-10-23T01:47:10.755375Z
-177
-zengli
+2014-05-09T07:05:49.689250Z
+336
+xiehai
 
 
 svn:special svn:externals svn:needs-lock
@@ -56,9 +56,9 @@ file
 
 
 
-2013-10-23T04:43:22.000000Z
-00904d2c2c9445aae1d1e86bddbe2c92
-2013-10-23T01:47:10.755375Z
-177
-zengli
+2014-05-08T07:46:46.000000Z
+2bd91eb90f287d9e7a41f86e80d54117
+2014-05-09T07:05:49.689250Z
+336
+xiehai
 

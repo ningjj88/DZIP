@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/dzip/core
+/svn/dzip/!svn/ver/339/DZIP_NEWDEDV/src/csii/dzip/core
 END
 DzipVirtualSegment.java
 K 25
@@ -73,25 +73,25 @@ CUPSResponse4ATMHandler.java
 K 25
 svn:wc:ra_dav:version-url
 V 83
-/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/dzip/core/CUPSResponse4ATMHandler.java
+/svn/dzip/!svn/ver/339/DZIP_NEWDEDV/src/csii/dzip/core/CUPSResponse4ATMHandler.java
 END
 ISO8583Handler.java
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/dzip/!svn/ver/280/DZIP_NEWDEDV/src/csii/dzip/core/ISO8583Handler.java
+/svn/dzip/!svn/ver/315/DZIP_NEWDEDV/src/csii/dzip/core/ISO8583Handler.java
 END
 DzipToCUPSTransport.java
 K 25
 svn:wc:ra_dav:version-url
 V 79
-/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/dzip/core/DzipToCUPSTransport.java
+/svn/dzip/!svn/ver/315/DZIP_NEWDEDV/src/csii/dzip/core/DzipToCUPSTransport.java
 END
 Dict.java
 K 25
 svn:wc:ra_dav:version-url
 V 64
-/svn/dzip/!svn/ver/296/DZIP_NEWDEDV/src/csii/dzip/core/Dict.java
+/svn/dzip/!svn/ver/365/DZIP_NEWDEDV/src/csii/dzip/core/Dict.java
 END
 JinchengHandler.java
 K 25
@@ -103,7 +103,7 @@ XML2ISO8583Handler.java
 K 25
 svn:wc:ra_dav:version-url
 V 78
-/svn/dzip/!svn/ver/280/DZIP_NEWDEDV/src/csii/dzip/core/XML2ISO8583Handler.java
+/svn/dzip/!svn/ver/339/DZIP_NEWDEDV/src/csii/dzip/core/XML2ISO8583Handler.java
 END
 CUPS8583Handler_temp.java
 K 25

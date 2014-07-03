@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--IC卡柜面会计科目查询查询-->
+<segment>
+	<xmlTag>
+	  	<idxField name="RecordList" >
+			<Group name="RecordMap">
+			    <xmlTag><String name="glaccttitlenbr"></String></xmlTag><!-- 科目号 -->
+			    <xmlTag><String name="glaccttitlename"></String></xmlTag><!-- 科目名 -->
+			</Group>
+		</idxField>
+	</xmlTag>
+</segment>

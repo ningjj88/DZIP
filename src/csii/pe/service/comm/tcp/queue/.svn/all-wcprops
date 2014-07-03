@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 70
-/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue
+/svn/dzip/!svn/ver/317/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue
 END
 QueueStream.java
 K 25
@@ -43,7 +43,7 @@ LockUtil.java
 K 25
 svn:wc:ra_dav:version-url
 V 84
-/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/LockUtil.java
+/svn/dzip/!svn/ver/317/DZIP_NEWDEDV/src/csii/pe/service/comm/tcp/queue/LockUtil.java
 END
 SingleTcpClient.java
 K 25

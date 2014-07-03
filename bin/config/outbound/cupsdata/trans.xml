@@ -4,8 +4,14 @@
 	<!-- 交易定义 -->
 	<bean id="hostTrsCodeResolver" class="com.csii.ibs.action.HostTrsCodeResolver">
 		<map name="map">
+			<!--=========IC卡信息校验================-->
 			<param name="platformAdmin.ValidateICData">cupsdata.ValidateICData</param>
+			<!--=========柜面IC卡销户登记================-->
 			<param name="platformAdmin.CloseAccountRegistration">cupsdata.CloseAccountRegistration</param>
+			<!--=========柜面IC卡销户结清================-->
+			<param name="platformAdmin.CloseAccountSettle">cupsdata.CloseAccountSettle</param>
+			<!--=========柜面IC卡销户结清冲正================-->
+			<param name="platformAdmin.CloseAccountSettleReversal">cupsdata.CloseAccountSettleReversal</param>
 		</map>
 	</bean>
 

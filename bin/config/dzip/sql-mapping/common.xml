@@ -14,6 +14,7 @@
 	<typeAlias alias="param" type="java.util.HashMap" />
 	<typeAlias alias="string" type="java.lang.String" />
 	<typeAlias alias="double" type="java.lang.Double" />
+	<typeAlias alias="int" type="java.lang.Integer" />
 
 	<!--========================查询渠道管理==============================-->
 	<resultMap id="channel" class="result">
@@ -229,6 +230,9 @@
 			<isNotNull prepend= "," property="rltacctno">
 				RLTACCTNO=#rltacctno#
 			</isNotNull>
+			<isNotNull prepend= "," property="refcd">
+				REFCD=#refcd#
+			</isNotNull>
 			<isNotNull prepend= "," property="transtat">
 				TRANSTAT=#transtat#
 			</isNotNull>
@@ -270,6 +274,9 @@
 			</isNotNull>
 			<isNotNull prepend= "," property="rtxnplatcd">
 				 RTXNPLATCD=#rtxnplatcd#
+			</isNotNull>
+			<isNotNull prepend= "," property="tranamt"><!-- IC卡结清,银联数据返回交易金额 -->
+				 TRANAMT=#tranamt#
 			</isNotNull>
 		</dynamic>
 		where SYSSEQNO=#peJournalNO#
@@ -354,10 +361,13 @@
 		<result property="rltpostdate" column="RLTPOSTDATE"/>
 		<result property="settlmtdate" column="SETTLMTDATE"/>
 		<result property="refcd" column="REFCD"/>
+		<result property="acctid1" column="ACCTID1"/>
+		<result property="acctid2" column="ACCTID2"/>
 	</resultMap>
 	<select id="getJournalNO" resultMap="getJournalNOMap" parameterClass="param">
 		select POSTDATE,SYSSEQNO,DECODE(HSTSEQNO,'0',null,HSTSEQNO) HSTSEQNO,
-		       TRANSTAT,TRANAMT,NVL(OPTNBR,'0') OPTNBR,RLTSEQNO,RLTPOSTDATE,SETTLMTDATE,REFCD
+		       TRANSTAT,TRANAMT,NVL(OPTNBR,'0') OPTNBR,RLTSEQNO,RLTPOSTDATE,SETTLMTDATE,REFCD,
+		       ACCTID1,ACCTID2
 		       from t_journal
 		       where SYSTRACENUM=#origSysTraNumber#
 		       and REQCHANN = #channelId#
@@ -1030,7 +1040,7 @@
 		<parameter property="in_CARD_No" jdbcType="VARCHAR" javaType="string" mode="IN" />
 		<parameter property="in_TrxType" jdbcType="VARCHAR" javaType="string" mode="IN" />
 		<parameter property="in_ActCode" jdbcType="VARCHAR" javaType="string" mode="IN" />
-		<parameter property="iN_LgnType" jdbcType="VARCHAR" javaType="string" mode="IN" />
+		<parameter property="in_LgnType" jdbcType="VARCHAR" javaType="string" mode="IN" />
 		<parameter property="in_Source" jdbcType="VARCHAR" javaType="string" mode="IN" />
 		<parameter property="in_LgnInstCode" jdbcType="VARCHAR" javaType="string" mode="IN" />
 		<parameter property="in_TraceNo" jdbcType="VARCHAR" javaType="string" mode="IN" />
@@ -1052,6 +1062,7 @@
 	<update id="updateIcClosingPay" parameterClass="param">
 		UPDATE T_ICCLOSINGPAY
 		   SET TRXTYPE      = #TrxType#,
+		   	   ACTCODE		= #ActCode#,
 		       LGNTYPE      = #LgnType#,
 		       RETCODE      = #RetCode#,
 		       LGNINSTCODE  = #LgnInstCode#,
@@ -1064,7 +1075,7 @@
 		       SEC_AMOUNT   = #Sec_Amount#,
 		       TXN_DATE     = #Txn_Date#,
 		       TRANNO       = #TranNo#
-		 WHERE CARD_NO = #Card_No#
+		 WHERE PAN = #Card_No#
 	</update>
 	<!-- 获得柜面可用的电子现金交易名 -->
 	<resultMap class="param" id="getActiveIcTran4OnliMap">
@@ -1074,13 +1085,110 @@
 	<select id="getActiveIcTran4Onli" resultMap="getActiveIcTran4OnliMap">
 		SELECT MINORCODE, CODEVAL FROM T_CODETYPE WHERE MAJORCODE = 'ICTRANTP' AND ACTIVEYN = 'Y'
 	</select>
+
 	<!-- 获得圈存金额上限返回给柜面 -->
 	<select id="getCredit4LoadLimit" parameterClass="string" resultClass="string">
 		SELECT TRANLLIMITAMT FROM T_CHANNELTYPTRAN
 		WHERE TRANCD = '020060'
 	</select>
+
 	<!-- 通过现金箱号获得现金箱所在的机构号 -->
 	<select id="getOrgNbrByCashboxnbr" parameterClass="string" resultClass="string">
 		SELECT LOCORGNBR FROM CASHBOX WHERE CASHBOXNBR = #cashboxnbr#
+	</select>
+
+	<!-- 判断41#中的交易终端号是否存在 -->
+	<select id="isExistTerminalCd" parameterClass="string" resultClass="int">
+		SELECT COUNT(*) FROM NTWKNODE WHERE NTWKNODENBR = #ntwknodenbr#
+	</select>
+
+	<!-- 柜面做现金充值撤销前查询现金充值交易流水 -->
+	<resultMap class="param" id="getCashRecharge4Credit4LoadJournalMap">
+		<result property="acctno" column="ACCTNO"/>
+		<result property="systracenum" column="SYSTRACENUM"/>
+		<result property="msgtyp" column="MSGTYP"/>
+		<result property="rtxncatcd" column="RTXNCATCD"/>
+		<result property="trandatetime" column="TRANDATETIME"/>
+		<result property="reqorgcd" column="REQORGCD"/>
+		<result property="fwdorgcd" column="FWDORGCD"/>
+		<result property="tranamt" column="TRANAMT"/>
+		<result property="persnbr" column="PERSNBR"/>
+	</resultMap>
+	<select id="getCashRecharge4Credit4LoadJournal" parameterClass="param" resultMap="getCashRecharge4Credit4LoadJournalMap">
+		SELECT ACCTNO,
+		       SYSTRACENUM,
+		       MSGTYP,
+		       DECODE(RTXNCATCD, '0', '本代本', '02', '本代他') AS RTXNCATCD,
+		       TRANDATETIME,
+		       REQORGCD,
+		       FWDORGCD,
+		       TRANAMT,
+		       PERSNBR
+		  FROM T_JOURNAL
+		 WHERE POSTDATE = #postdate#
+		   AND RTXNCATCD != '03'
+		   AND MERTYPE = '6010'
+		   AND OUTTRANCD = '020063'
+		   AND ACCTNO = #acctno#
+		   AND TRANSTAT = '0'
+			<dynamic>
+				<isNotEmpty property="tranamt">
+					AND TRANAMT = #tranamt#
+				</isNotEmpty>
+				<isNotEmpty property="persnbr">
+					AND PERSNBR = #persnbr#
+				</isNotEmpty>
+			</dynamic>
+			ORDER BY SYSTRACENUM DESC
+	</select>
+
+	<!-- 查询IC销户登记记录只会存在一条记录 -->
+	<resultMap class="param" id="queryCloseAccountRegisterMap">
+		<result property="PAN" column="PAN"/>
+		<result property="RegDate" column="REGDATE"/>
+		<result property="LgnType" column="LGNTYPE"/>
+		<result property="LgnInstCode" column="LGNINSTCODE"/>
+		<result property="TraceNo" column="TRACENO"/>
+		<result property="LgnMerchCode" column="LGNMERCHCODE"/>
+		<result property="LgnUserCode" column="LGNUSERCODE"/>
+		<result property="Id_Type" column="ID_TYPE"/>
+		<result property="Id_Code" column="ID_CODE"/>
+		<result property="RtnFlag" column="RTNFLG"/>
+	</resultMap>
+	<select id="queryCloseAccountRegister" parameterClass="string" resultMap="queryCloseAccountRegisterMap">
+		SELECT PAN,
+		       REGDATE,
+		       LGNTYPE,
+		       LGNINSTCODE,
+		       TRACENO,
+		       LGNMERCHCODE,
+		       LGNUSERCODE,
+		       ID_TYPE,
+		       ID_CODE,
+		       RTNFLG
+		  FROM T_ICCLOSINGPAY
+		 WHERE PAN = #PAN#
+		   AND ACTCODE = '0'
+	</select>
+
+	<!--============================更新核心表CARDICEWALLETCTL待补登金额===============================-->
+	<update id="updateICEWALLETCTL" parameterClass="param">
+		UPDATE CARDICEWALLETCTL SET STAYBALAMT = #tranamt# WHERE PAN = #Card_No#
+	</update>
+	<!-- 柜面IC卡待补登金额查询 -->
+	<resultMap class="param" id="queryAdditionalAmtMap">
+		<result property="PAN" column="PAN"/>
+		<result property="AMT" column="STAYBALAMT"/>
+	</resultMap>
+	<select id="queryAdditionalAmt" parameterClass="param" resultMap="queryAdditionalAmtMap">
+		SELECT PAN, STAYBALAMT
+		  FROM CARDICEWALLETCTL
+		 WHERE PAN IN (SELECT MEDIUMID
+		                 FROM MEDIUMPAG
+		                WHERE TAXRPTFORPERSNBR IN
+		                      (SELECT TAXRPTFORPERSNBR
+		                         FROM MEDIUMPAG
+		                        WHERE MEDIUMID = #PAN#))
+		   AND STAYBALAMT != 0
 	</select>
 </sqlMap>

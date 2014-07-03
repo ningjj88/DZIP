@@ -167,6 +167,16 @@
 			<param name="platformAdmin.DoICJournalStatistics">platformAdmin.DoICJournalStatistics</param>
 			<!--=========IC卡柜面交易前获得数据===============-->
 			<param name="platformAdmin.GetOnliIcCardTranInfo">platformAdmin.GetOnliIcCardTranInfo</param>
+			<!--=========柜面现金充值撤销前现金充值流水查询================-->
+			<param name="platformAdmin.GetCashRecharge4Credit4LoadJournal">platformAdmin.GetCashRecharge4Credit4LoadJournal</param>
+			<!--=========柜面IC卡销户登记查询================-->
+			<param name="platformAdmin.CloseAccountRegistrationQuery">platformAdmin.CloseAccountRegistrationQuery</param>
+			<!--=========柜面IC卡待补登金额查询================-->
+			<param name="platformAdmin.AdditionalAmtQuery">platformAdmin.AdditionalAmtQuery</param>
+			<!--=========柜面IC卡差错处理会计科目查询================-->
+			<param name="platformAdmin.QueryIcChargeGlacct">platformAdmin.QueryIcChargeGlacct</param>
+			<!--=========柜面IC卡差错处理================-->
+			<param name="platformAdmin.CounterICErrorHandle">platformAdmin.CounterICErrorHandle</param>
 		</map>
 	</bean>
 

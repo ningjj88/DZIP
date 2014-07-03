@@ -1,5 +1,7 @@
 package csii.dzip.action.atmother;
 
+import java.util.Map;
+
 import com.csii.pe.core.Context;
 import com.csii.pe.core.PeException;
 
@@ -25,12 +27,15 @@ public class Credit4LoadAction extends DzipBaseAction {
 //		if(dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ).equals(ctx.getData(Constants.ISO8583_SOURID))){
 		if("00010000".equals(ctx.getData(Constants.ISO8583_SOURID))){
 			//根据原地址判断是银联数据过来的报文,则是本代本的电子现金交易
-			logger.info("Credit4LoadAction(本代本指定账户圈存) for our card=======================>Start");
+			logger.info("Credit4LoadAction(本代本指定账户圈存/柜面补登圈存) for our card=======================>Start");
 			ctx.setData(Constants.IN_BUSITYP, Constants.PE_01);//业务类型：现金及转账
 			ctx.setData(Constants.RTXNCATCD, Constants.RTXNCATCD_0);
 			String responcd = Constants.PE_OK;
 			if(!Init.isTransactionFromOnli(ctx)){//交易来自atm
 				responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+			}else{//交易来自柜面
+				//设置柜面站点号
+				ctx.setData(Constants.IN_ORIGNTWKNODENBR, ctx.getData(Constants.ISO8583_CARDACCID));
 			}
 			if(Constants.PE_OK.equals(ctx.getData(Constants.PE_HOST_RESP_CD))
 					&& Constants.PE_OK.equals(responcd)){	//若银联数据卡验证响应码为：成功
@@ -42,6 +47,12 @@ public class Credit4LoadAction extends DzipBaseAction {
 				ctx.setData(Constants.IN_FUNDTYPCD, Constants.TRS_FUND_TYP_EL);//资金类型：电子现金
 				ctx.setData(Constants.IN_RTXNSTATCD, Constants.RTXNSTAT_C);//交易状态,正常、冲正：'C' 抹帐:'EC'
 				ctx.setData(Constants.IN_REVFLAG, Constants.PE_ZERO);//冲正标志:0：正常 1：冲正 2：抹帐 ,5:境外
+				Map<String, Object> map = utilProcessor.getJournalInfo(String.valueOf(ctx.getData(Constants.PE_JOURNAL_NO)));
+				if(null != map.get(Constants.PE_ACCTID1)){//判断交易是否是来自柜面的补登圈存
+					logger.info("=================>柜面补登圈存!");
+					ctx.setData(Constants.TransactionId, Constants.TRANCD_02106001);
+					ctx.setData(Constants.ISO8583_ACCIDE_N1, map.get(Constants.PE_ACCTID1));
+				}
 				utilProcessor.deductTranAMT(ctx, Constants.ISO8583);
 				ctx.setData(Constants.ISO8583_RESCODE, ctx.getData(Constants.PE_HOST_RESP_CD)); //响应码
 				ctx.setData(Constants.ISO8583_SETDATE, ctx.getString(Constants.PE_POST_DATE).substring(4, 8));//获得清算日期

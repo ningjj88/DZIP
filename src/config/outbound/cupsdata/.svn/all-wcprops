@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 64
-/svn/dzip/!svn/ver/292/DZIP_NEWDEDV/src/config/outbound/cupsdata
+/svn/dzip/!svn/ver/325/DZIP_NEWDEDV/src/config/outbound/cupsdata
 END
 transformer.xml
 K 25
@@ -13,7 +13,7 @@ trans.xml
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/dzip/!svn/ver/292/DZIP_NEWDEDV/src/config/outbound/cupsdata/trans.xml
+/svn/dzip/!svn/ver/325/DZIP_NEWDEDV/src/config/outbound/cupsdata/trans.xml
 END
 common.xml
 K 25

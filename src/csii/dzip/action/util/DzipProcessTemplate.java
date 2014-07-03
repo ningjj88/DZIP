@@ -23,6 +23,7 @@ import com.csii.pe.core.PeException;
 import csii.base.action.util.Util;
 import csii.base.constant.Constants;
 import csii.base.constant.SqlMaps;
+import csii.dzip.core.Dict;
 
 /**
  * @author 张永庆
@@ -335,10 +336,13 @@ public class DzipProcessTemplate {
 	 */
 	public String queryTaxrptForPersNbr(final Context ctx,String type8583 ){
 		String in_cardnbr = "";
-		if(Constants.ISO8583.equals(type8583))
+		if(Constants.ISO8583.equals(type8583)){
 			in_cardnbr = (String)ctx.getData(Constants.ISO8583_ACCTNO);
-		if(Constants.FIX8583.equals(type8583))
+		}else if(Constants.FIX8583.equals(type8583)){
 			in_cardnbr = (String)ctx.getData(Constants.FIX8583_PAN);
+		}else if(Constants.XML.equals(type8583)){
+			in_cardnbr = String.valueOf(ctx.getData(Dict.CARD_NO));
+		}
 		String taxrptForPersNbr=null;
 		 try {
 			 taxrptForPersNbr = (String)corebankAccess.getSqlMap().queryForObject("common.queryTaxrptForPersNbr",in_cardnbr);
@@ -778,6 +782,52 @@ public class DzipProcessTemplate {
 		return journalMap;
 	}
 
+	/**
+	 * 初始化销户结清和销户结清冲正流水
+	 * @param ctx
+	 * @return
+	 */
+	public Map<String, Object> getJournalMap4ClosingAccountRegisteration(Context ctx){
+		Map<String, Object> map = new HashMap<String, Object>();
+		String trandatetimeString = String.valueOf(ctx.getData(Constants.PE_TRANDATETIME));//交易日期时间
+		map.put(Constants.PE_POST_DATE, ctx.getData(Constants.PE_POST_DATE));
+		map.put(Constants.PE_JOURNAL_NO, ctx.getData(Constants.PE_JOURNAL_NO));
+		map.put(Constants.PE_TRANS_STAT, Constants.PE_INIT);
+		map.put(Constants.PE_ACC_NO, ctx.getData(Dict.CARD_NO));
+		map.put(Constants.PE_TRAN_DATE, Util.getDateString(Constants.PE_YYYY) + trandatetimeString.substring(0, 4));//交易日期
+		map.put(Constants.PE_TRAN_TIME, Util.getDateString(Constants.PE_HHMMSS));//交易时间
+		map.put(Constants.PE_TRANDATETIME, trandatetimeString);//日期时间
+		map.put(Constants.PE_CURR_CD, Constants.CURCODE_CN);
+		map.put(Constants.PE_REQ_ORG_CD, ctx.getData(Constants.PE_REQ_ORG_CD));
+		map.put(Constants.PE_FOW_ORG_CD, ctx.getData(Constants.PE_FOW_ORG_CD));
+		map.put(Constants.PE_REQ_CHANN, ctx.getData(Constants.PE_REQ_CHANN));
+		map.put(Constants.PE_TRM_CD, ctx.getData(Dict.TRM_CD));//终端号
+		map.put(Constants.PE_MER_TYPE, Constants.MERTYPCD_6011);
+		map.put(Constants.PE_PROCESSCODE, Constants.PROCODE_6031);
+		map.put(Constants.PE_ACCPID, ctx.getData(Dict.ACCP_ID));//受理方标识
+		map.put(Constants.PE_ACCPADDR, ctx.getData(Dict.ACCP_ADDR));//受理方地址
+		map.put(Constants.PE_HOSTCHKCD, Constants.PE_ONE);
+		map.put(Constants.PE_PERSNBR, queryTaxrptForPersNbr(ctx, Constants.XML));
+		map.put(Constants.PE_RTXNCATCD, Constants.PE_ZERO);
+		map.put(Constants.PE_HOST_RESP_CD, Constants.PE_09);
+		map.put(Constants.PE_SYS_TRACE_NUM, ctx.getData(Dict.TRACENO));//终端跟踪号
+		if(ctx.getData(Constants.ISO8583_ORGDATA) != null
+				&& String.valueOf(ctx.getData(Constants.ISO8583_ORGDATA)).trim().length() == 42){
+			String origDataElement = String.valueOf(ctx.getData(Constants.ISO8583_ORGDATA));  //获得90#上笔交易的信息
+			String origMsgTyp = origDataElement.substring(0, 4); 			  					//原始报文消息类型
+			String origSysTraNumber = origDataElement.substring(4, 10); 			  			//原交易系统跟踪号
+			String origDateTime = origDataElement.substring(10, 20); 			  				//原始交易的日期时间
+			String origAcquInstituIdCd = origDataElement.substring(23, 31);            			//原交易受理机构标识码
+			String origiForwInstituIdCd = origDataElement.substring(34, 42);           			//原交易发送机构标识码
+			map.put(Constants.PE_ORIGMSGTYP, origMsgTyp);    								//原始报文消息类型
+			map.put(Constants.PE_ORIGTRACENUM, origSysTraNumber);  						//原始交易的系统跟踪号
+			map.put(Constants.PE_ORIGDATETIME, origDateTime);  							//原始交易的日期时间
+			map.put(Constants.PE_ORIGREQORGCD, origAcquInstituIdCd);  					//原始受理机构号
+			map.put(Constants.PE_ORIGFWDORGCD, origiForwInstituIdCd);  					//原始受理机构号
+		}
+		return map;
+	}
+
 
 	/**
 	 * 记平台流水
@@ -1096,7 +1146,7 @@ public class DzipProcessTemplate {
 	public void getIcCardExpDate(Context ctx){
 		try{
 			String expdat = (String )corebankAccess.getSqlMap().queryForObject("common.getIcCardExpDate", ctx.getData(Constants.ISO8583_ACCTNO));
-			if(null == expdat || "".equals(expdat)){
+			if(null == expdat || Constants.PE_NULL.equals(expdat)){
 				ctx.setData(Constants.ISO8583_EXPDAT, Constants.PE_EXPIREYEAR);
 			}else{
 				ctx.setData(Constants.ISO8583_EXPDAT, expdat);
@@ -1133,7 +1183,7 @@ public class DzipProcessTemplate {
 		try {
 			dzipdbAccess.getSqlMap().update(SqlMaps.COMMON_UPDATEICCLOSINGPAY, paramMap);
 		} catch (Exception e) {
-			logger.error("更新T_ICCLOSINGPAY出错!" + e.getMessage());
+			logger.error("更新T_ICCLOSINGPAY出错!" + e.getMessage() + paramMap);
 			e.printStackTrace();
 		}
 	}
@@ -1143,7 +1193,7 @@ public class DzipProcessTemplate {
 	 * @param cashboxnbr
 	 * @return
 	 */
-	public String getOrgNbrByCashboxnbr(String cashboxnbr){
+	public String getOrgNbrByCashboxnbr(final String cashboxnbr){
 		String orgnbr = null;
 		try {
 			orgnbr = String.valueOf(corebankAccess.getSqlMap().queryForObject("common.getOrgNbrByCashboxnbr", cashboxnbr));
@@ -1152,6 +1202,42 @@ public class DzipProcessTemplate {
 			e.printStackTrace();
 		}
 		return orgnbr;
+	}
+
+	/**
+	 * 通过终端号 判断终端号是否存在
+	 * @param ntwknodenbr
+	 * @return
+	 */
+	public boolean isExistTerminalCd(String ntwknodenbr){
+		int count = 0;
+		try {
+			count = Integer.parseInt(
+						String.valueOf(
+							corebankAccess.getSqlMap().queryForObject("common.isExistTerminalCd", ntwknodenbr)));
+		} catch (Exception e) {
+			logger.error("判断终端号是否存在出错!" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return 0 == count ? false : true;
+	}
+
+	/**
+	 * 更新待补登金额
+	 * @param paramMap
+	 * @return
+	 */
+	public boolean updateICEWALLETCTL(final Map<String, Object> paramMap){
+		boolean flg = true;
+		try {
+			corebankAccess.getSqlMap().update(SqlMaps.COMMON_UPDATE_CARDICEWALLETCTL, paramMap);
+		} catch (Exception e) {
+			logger.error("更新待补登金额出错!" + e.getMessage() + paramMap);
+			flg = false;
+		}
+
+		return flg;
 	}
 
 	/**

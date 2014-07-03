@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package csii.dzip.test.test4ATM;
 
@@ -22,30 +22,30 @@ public class ReversaForOther_Test extends Abstract4Test8583ToHost implements Run
 	@Override
 	protected Map prepare() {
 		Map map=new HashMap();
-		map.put(Constants.ISO8583_TRANSACTION_ID,"042001");                
+		map.put(Constants.ISO8583_TRANSACTION_ID,"042001");
 		map.put(Constants.ISO8583_HEAD_TX_TYPE, "0420");
-	    map.put(Constants.ISO8583_ACCTNO,"6223230000000000121");                                   /* 2#  n..19 LLVAR */
-	    map.put(Constants.ISO8583_PRO_CODE,"010000");                                           /* 3# n6 */      
-	    map.put(Constants.ISO8583_TRANAMT,"200000");                                          	/* 4# n12 */
+	    map.put(Constants.ISO8583_ACCTNO,"6217993300000000015");                                   /* 2#  n..19 LLVAR */
+	    map.put(Constants.ISO8583_PRO_CODE,"010000");                                           /* 3# n6 */
+	    map.put(Constants.ISO8583_TRANAMT,"2000000");                                          	/* 4# n12 */
 	    map.put(Constants.ISO8583_TRANSDTTIME, Util.getDateString(Constants.PE_MDHMS));         /* 7# n10(MMDDhhmmss)*/
 	    map.put(Constants.ISO8583_SYSTRACENUM, Util.getDateString("mmss")+"01");                   /*11# n6 */
-	    map.put(Constants.ISO8583_LOCTRANSTIME,"100511");        								/*12# n6(hhmmss) */
+	    map.put(Constants.ISO8583_LOCTRANSTIME,"162515");        								/*12# n6(hhmmss) */
 	    map.put(Constants.ISO8583_LOCTRANSDATE,Util.getDateString(Constants.PE_MMDD));          /*13# n4(MMDD) */
 	    map.put(Constants.ISO8583_SETDATE,"0915");          									/*15# n4(MMDD) */
 	    map.put(Constants.ISO8583_MERCHANTTYPE,"6011");                                         /*18# n4 */
 	    map.put(Constants.ISO8583_SERENTRYMODE,"021");                                          /*22# n3 */
 	    map.put(Constants.ISO8583_SERCONDCODE,"02");                                            /*25# n2 */
-	    map.put(Constants.ISO8583_ACQCODE,"04296510");                                       	/*32# n..11 LLVAR*/
-	    map.put(Constants.ISO8583_FORWARDCODE,"04296510");                                   	/*33# n..11 LLVAR*/
+	    map.put(Constants.ISO8583_ACQCODE,"05576750");                                       	/*32# n..11 LLVAR*/
+	    map.put(Constants.ISO8583_FORWARDCODE,"05576750");                                   	/*33# n..11 LLVAR*/
 	    map.put(Constants.ISO8583_RTVREFNUM,"002440818168");                                    /*37# n12*/
 	    map.put(Constants.ISO8583_AUTRESCOD,"000000");                                   		/*38# n6*/
-	    map.put(Constants.ISO8583_CARDACCID,"00002001");                                        /*41# ans8*/
+	    map.put(Constants.ISO8583_CARDACCID,"10010016");                                        /*41# ans8*/
 	    map.put(Constants.ISO8583_CARDACCCODE,"000129000000000");                               /*42# ans15*/
 	    map.put(Constants.ISO8583_CARDACCNAME,"_CHNGDGZSGRGBANKING自动柜员机");                  /*43# ans40*/
-	    map.put(Constants.ISO8583_CURCODE,"156");                                               /*49# an3*/	    
-	    map.put(Constants.ISO8583_REACODE,"01400000200010000");                          		/*60# n16*/
-	    map.put(Constants.ISO8583_ORGDATA,"020005110902161005110000429651000004296510");        /*90# LLL Original Message Type+11#+7#+32#(右对齐，前补0)+33#(右对齐，前补0)*/
-	    map.put(Constants.ISO8583_RCVCODE,"03041000");                           				/*100# n16*/
+	    map.put(Constants.ISO8583_CURCODE,"156");                                               /*49# an3*/
+	    map.put(Constants.ISO8583_REACODE,"027000002000100000000000021000");                          		/*60# n16*/
+	    map.put(Constants.ISO8583_ORGDATA,"020025150903181625150000557675000005576750");        /*90# LLL Original Message Type+11#+7#+32#(右对齐，前补0)+33#(右对齐，前补0)*/
+	    map.put(Constants.ISO8583_RCVCODE,"00001000");                           				/*100# n16*/
 	    map.put(Constants.ISO8583_NANSCRESERVE,"01C002100000000000000000000000");          	    /*121# n16*/
 	    map.put(Constants.ISO8583_MESAUTHCD,"EEEEEEEE");                          				/*128# n16*/
 	  		return map;
@@ -70,5 +70,5 @@ public class ReversaForOther_Test extends Abstract4Test8583ToHost implements Run
 			e.printStackTrace();
 		}
 	}
-	
+
 }

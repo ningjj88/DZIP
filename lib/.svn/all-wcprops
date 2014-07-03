@@ -93,17 +93,17 @@ svn:wc:ra_dav:version-url
 V 49
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/ojdbc14.jar
 END
-commons-collections.jar
-K 25
-svn:wc:ra_dav:version-url
-V 61
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-collections.jar
-END
 jaxrpc.jar
 K 25
 svn:wc:ra_dav:version-url
 V 48
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jaxrpc.jar
+END
+commons-collections.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-collections.jar
 END
 pe-tcp-guard.jar
 K 25
@@ -111,17 +111,17 @@ svn:wc:ra_dav:version-url
 V 54
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-tcp-guard.jar
 END
-pe-monitor.jar
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-monitor.jar
-END
 commons-fileupload-1.1.1.jar
 K 25
 svn:wc:ra_dav:version-url
 V 66
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/commons-fileupload-1.1.1.jar
+END
+pe-monitor.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-monitor.jar
 END
 commons-lang.jar
 K 25
@@ -165,17 +165,17 @@ svn:wc:ra_dav:version-url
 V 58
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-service-guard.jar
 END
-jcl-over-slf4j-1.6.4.jar
-K 25
-svn:wc:ra_dav:version-url
-V 62
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jcl-over-slf4j-1.6.4.jar
-END
 ognl-2.6.5.jar
 K 25
 svn:wc:ra_dav:version-url
 V 52
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/ognl-2.6.5.jar
+END
+jcl-over-slf4j-1.6.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/jcl-over-slf4j-1.6.4.jar
 END
 pe-security-guard.jar
 K 25
@@ -300,8 +300,8 @@ END
 pe-lc.jar
 K 25
 svn:wc:ra_dav:version-url
-V 47
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/lib/pe-lc.jar
+V 49
+/svn/dzip/!svn/ver/355/DZIP_NEWDEDV/lib/pe-lc.jar
 END
 jcraft_jzlib.jar
 K 25

@@ -13,6 +13,7 @@ public class TranName {
 	public static final String dzipCounter_Deposit_Code  = "019702";
 
 	/**********************柜面电子现金交易的transactionID******************************/
+	/**********************namespace=onli******************************/
 	/**柜面电子现金交易指定账户圈存*/
 	public static final String ONLI_CREDIT4LOAD = "onli.Credit4Load";
 	/**柜面电子现金交易指定账户圈存冲正*/
@@ -35,4 +36,17 @@ public class TranName {
 	public static final String ONLI_TRANSFERCREDIT4LOADREVERSAL = "onli.TransferCredit4LoadReversal";
 	/**柜面电子现金交易脚本通知*/
 	public static final String ONLI_SCRIPT_NOTICE = "onli.ScriptNotice";
+	/**柜面电子现金交易补登圈存*/
+	public static final String ONLI_ADDITIONAL_CREDIT4LOAD = "onli.AdditionalCredit4Load";
+	/**柜面电子现金交易补登圈存冲正*/
+	public static final String ONLI_ADDITIONAL_CREDIT4LOADREVERSAL = "onli.AdditionalCredit4LoadReversal";
+	/**柜面电子现金交易转待补登*/
+	public static final String ONLI_SWITCH_ADDITIONAL_CREDIT4LOAD = "onli.SwitchAdditionalCredit4Load";
+	/**柜面电子现金交易转待补登确认*/
+	public static final String ONLI_SWITCH_ADDITIONAL_CREDIT4LOAD_CONFIRM = "onli.SwitchAdditionalCredit4LoadConfirm";
+	/**********************namespace=platformAdmin******************************/
+	/**柜面IC卡销户结清*/
+	public static final String PLATFORM_CLOSE_ACCOUNT_SETTLE = "platformAdmin.CloseAccountSettle";
+	/**柜面IC卡销户结清冲正*/
+	public static final String PLATFORM_CLOSE_ACCOUNT_SETTLE_REVERSAL = "platformAdmin.CloseAccountSettleReversal";
 }

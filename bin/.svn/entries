@@ -1,0 +1,88 @@
+8
+
+dir
+308
+https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src
+https://192.168.20.210:8443/svn/dzip
+
+
+
+2014-03-10T06:34:44.022625Z
+308
+zengli
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0e52adb7-1c73-714e-b5c1-db04d86b8944
+
+xml
+dir
+
+logback.xml
+file
+
+
+
+
+2013-10-14T06:50:00.000000Z
+98a27c58b41a4164a7277d43f6c0aed2
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+config
+dir
+
+csii
+dir
+
+file.dtd
+file
+
+
+
+
+2013-10-14T06:50:00.000000Z
+2f7a59ef721493cd6e6f16b1a76f1b84
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+packets
+dir
+
+record.txt
+file
+
+
+
+
+2013-10-14T06:50:00.000000Z
+8d04d6db514faad28ce1578cc6c1dafb
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+Start.java
+file
+
+
+
+
+2013-10-14T06:50:00.000000Z
+5499d409ee5a320b99c68b7f6f6d20c2
+2013-05-07T07:15:09.421875Z
+2
+longtun
+

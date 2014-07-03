@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+	<!--
+		DZIP IC卡相关配置 add by xiehai 2014-06-17
+	-->
+<sqlMap namespace="ic">
+	<!--别名设置-->
+	<typeAlias alias="result" type="java.util.HashMap" />
+	<typeAlias alias="param" type="java.util.HashMap" />
+	<typeAlias alias="integer" type="java.lang.Integer" />
+	<typeAlias alias="string" type="java.lang.String" />
+	<typeAlias alias="bigDecimal" type="java.math.BigDecimal" />
+	<typeAlias alias="date" type="java.util.Date" />
+	<!-- 查询前置差错处理的会计科目 -->
+	<resultMap id="queryGlacctMap" class="result">
+		<result property="glaccttitlenbr" column="glaccttitlenbr"/>
+		<result property="glaccttitlename" column="glaccttitlename"/>
+	</resultMap>
+	<select id="queryDzipGlacct" resultMap="queryGlacctMap">
+		SELECT GLACCTTITLENBR, GLACCTTITLENAME FROM T_GLACCTTITLE
+	</select>
+</sqlMap>

@@ -1,14 +1,14 @@
 8
 
 dir
-308
+341
 https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src/packets/dzip/toplatformAdmin
 https://192.168.20.210:8443/svn/dzip
 
 
 
-2013-11-12T06:37:26.718880Z
-197
+2014-05-09T07:07:16.783000Z
+341
 xiehai
 
 
@@ -49,6 +49,18 @@ ac7fcc8cb373fae18657ee28938b6aa7
 2013-05-07T07:15:09.421875Z
 2
 longtun
+
+fsegplatformAdmin.CounterICErrorHandle.xml
+file
+367
+
+
+
+2014-06-18T07:30:18.000000Z
+ae4fc81d206ccdd9262a2516fde414a6
+2014-07-02T03:08:44.145000Z
+367
+xiehai
 
 fsegplatformAdmin.GetFeeCodex.xml
 file
@@ -194,6 +206,18 @@ af29281ef895d3145c8cbd109e3c999a
 185
 longtun
 
+fsegplatformAdmin.AdditionalAmtQuery.xml
+file
+
+
+
+
+2014-05-05T07:02:56.000000Z
+7ad17b0dbdae482c6dbf1fa2ddbc42c0
+2014-05-09T07:07:16.783000Z
+341
+xiehai
+
 fsegplatformAdmin.TranJournalBatch.xml
 file
 
@@ -242,6 +266,18 @@ file
 2
 longtun
 
+fsegplatformAdmin.CloseAccountRegistrationQuery.xml
+file
+
+
+
+
+2014-04-15T07:58:00.000000Z
+5752bc6541c05c30deca3f098ecdcdc9
+2014-05-04T09:27:10.788875Z
+332
+xiehai
+
 fsegplatformAdmin.DoICErrorHandle.xml
 file
 
@@ -265,6 +301,30 @@ file
 2013-05-07T07:15:09.421875Z
 2
 longtun
+
+fsegplatformAdmin.CloseAccountSettleReversal.xml
+file
+
+
+
+
+2014-05-04T08:57:58.000000Z
+703cfb5e0cb00e687ea820e3b186b958
+2014-05-04T09:27:10.788875Z
+332
+xiehai
+
+fsegplatformAdmin.GetOnliIcCardTranInfo.xml
+file
+
+
+
+
+2014-03-12T09:20:12.000000Z
+2ea3ecfab6a07a6774460c43c5e59827
+2014-04-04T08:23:09.770500Z
+320
+xiehai
 
 fsegplatformAdmin.GetChannel.xml
 file
@@ -314,6 +374,18 @@ file
 2
 longtun
 
+fsegplatformAdmin.GetCashRecharge4Credit4LoadJournal.xml
+file
+
+
+
+
+2014-03-21T02:04:00.000000Z
+158f034fdda38bc91ec7989014d1018d
+2014-04-04T08:23:09.770500Z
+320
+xiehai
+
 fsegplatformAdmin.UpdChannelTyp.xml
 file
 
@@ -322,30 +394,6 @@ file
 
 2013-10-14T06:49:54.000000Z
 f78315459a9653b45d0746257a46b80f
-2013-05-07T07:15:09.421875Z
-2
-longtun
-
-xmlaliasmapping.properties
-file
-
-
-
-
-2013-10-14T06:49:54.000000Z
-01abfc750a0c942167651c40d088531d
-2013-05-07T07:15:09.421875Z
-2
-longtun
-
-fsegplatformAdmin.DownLoadFtpFile.xml
-file
-
-
-
-
-2013-10-14T06:49:54.000000Z
-bb7e86f3e89a118069b70e14878fadc6
 2013-05-07T07:15:09.421875Z
 2
 longtun
@@ -362,6 +410,18 @@ file
 2
 longtun
 
+fsegplatformAdmin.DownLoadFtpFile.xml
+file
+
+
+
+
+2013-10-14T06:49:54.000000Z
+bb7e86f3e89a118069b70e14878fadc6
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
 fsegplatformAdmin.UpdChannel.xml
 file
 
@@ -370,6 +430,18 @@ file
 
 2013-10-14T06:49:54.000000Z
 76f6fd8d95bb66584e849873b017bb5a
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+xmlaliasmapping.properties
+file
+
+
+
+
+2013-10-14T06:49:54.000000Z
+01abfc750a0c942167651c40d088531d
 2013-05-07T07:15:09.421875Z
 2
 longtun
@@ -530,6 +602,18 @@ file
 2
 longtun
 
+fsegplatformAdmin.CloseAccountSettle.xml
+file
+
+
+
+
+2014-04-24T02:58:12.000000Z
+d7cf33fbce2bd1fdf3b428b1126ddbfd
+2014-05-04T09:27:10.788875Z
+332
+xiehai
+
 fsegplatformAdmin.generalAudit.xml
 file
 
@@ -577,4 +661,28 @@ dad5addb7a7af0a5531ab4a55a9f458e
 2013-05-07T07:15:09.421875Z
 2
 longtun
+
+fsegplatformAdmin.QueryIcChargeGlacct.xml
+file
+367
+
+
+
+2014-06-17T06:26:20.000000Z
+4914d11c08b73ff6a3c457a7e39f289e
+2014-07-02T03:08:44.145000Z
+367
+xiehai
+
+fsegplatformAdmin.CloseAccountRegistration.xml
+file
+
+
+
+
+2014-04-24T02:58:06.000000Z
+1a0cff88a95888c0e5de422b60a6215d
+2014-05-04T09:27:10.788875Z
+332
+xiehai
 

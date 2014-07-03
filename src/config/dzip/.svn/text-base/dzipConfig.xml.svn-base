@@ -62,7 +62,7 @@
 		<ref name="fixedLength8583Processor">FixedLength8583Processor</ref>
 		<ref name="utilProcessor">UtilProcessor4Action</ref>
 		<param name="path">/packets/dzip/fromCUPS</param>
-		<parm name="timeout">60000</parm>
+		<param name="timeout">120000</param>
 	</bean>
 	<!-- 对账功能处理 -->
 	<bean id="AuditProcessor" class="csii.dzip.action.util.AuditProcessor">
@@ -125,11 +125,6 @@
 <!--		<param name="pinkey">${common.pinSecurityModule.pinkey}</param>-->
 		<param name="bankpinkey">${CUPS8583.pinSecurityModule.bankpinkey}</param>
 		<param name="mackey">${CUPS8583.pinSecurityModule.mackey}</param>
-	</bean>
-	<!-- 密码解密来自柜面交易的密码 -->
-	<bean id="pinSecurityModule4Onli" class="csii.dzip.action.util.PinSecurityModule">
-		<param name="bankpinkey">${onli.pinSecurityModule.bankpinkey}</param>
-		<param name="mackey">${onli.pinSecurityModule.mackey}</param>
 	</bean>
 	<!--加密机IP和端口配置参数-->
 	<bean id="secApiConf" class="csii.dzip.action.util.secapipackage.SecApiConf">

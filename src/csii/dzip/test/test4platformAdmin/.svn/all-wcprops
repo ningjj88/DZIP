@@ -1,7 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 73
-/svn/dzip/!svn/ver/297/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin
+/svn/dzip/!svn/ver/340/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin
+END
+AdditionalAmtQuery_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dzip/!svn/ver/340/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/AdditionalAmtQuery_test.java
+END
+ClearDataHistory_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/ClearDataHistory_test.java
 END
 QueryICEwalletctl_test.java
 K 25
@@ -9,11 +21,17 @@ svn:wc:ra_dav:version-url
 V 101
 /svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/QueryICEwalletctl_test.java
 END
-ClearDataHistory_test.java
+CloseAccountSettle_test.java
 K 25
 svn:wc:ra_dav:version-url
-V 98
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/ClearDataHistory_test.java
+V 102
+/svn/dzip/!svn/ver/330/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/CloseAccountSettle_test.java
+END
+CloseAccountRegistrationQuery_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/dzip/!svn/ver/330/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/CloseAccountRegistrationQuery_test.java
 END
 DoICErrorHandle_test.java
 K 25
@@ -27,17 +45,41 @@ svn:wc:ra_dav:version-url
 V 96
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/UpdChannelTran_test.java
 END
+CloseAccountSettleReversal_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/dzip/!svn/ver/330/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/CloseAccountSettleReversal_test.java
+END
 GetChannel_test.java
 K 25
 svn:wc:ra_dav:version-url
 V 92
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/GetChannel_test.java
 END
+GetOnliIcCardTranInfo_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/dzip/!svn/ver/316/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/GetOnliIcCardTranInfo_test.java
+END
+QueryIcChargeGlacct_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dzip/!svn/ver/366/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/QueryIcChargeGlacct_test.java
+END
 CloseAccountRegistration_test.java
 K 25
 svn:wc:ra_dav:version-url
 V 108
-/svn/dzip/!svn/ver/297/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/CloseAccountRegistration_test.java
+/svn/dzip/!svn/ver/330/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/CloseAccountRegistration_test.java
+END
+GetCashRecharge4Credit4LoadJournal_test.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/dzip/!svn/ver/316/DZIP_NEWDEDV/src/csii/dzip/test/test4platformAdmin/GetCashRecharge4Credit4LoadJournal_test.java
 END
 ClearDataOnLin_test.java
 K 25

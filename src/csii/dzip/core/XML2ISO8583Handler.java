@@ -34,7 +34,6 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 	private ActionUtilProcessor utilProcessor;
 	private DzipToCUPSTransport cupsTransport;
 	private PinSecurityModule pinSecurityModule ;
-	private PinSecurityModule pinSecurityModule4Onli;
 	@Override
 	@SuppressWarnings("unchecked")
 	protected Object parseStream(Channel paramChannel, byte[] paramArrayOfByte)
@@ -60,7 +59,6 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 		String errorFormatName = null; // 错误报文格式定义文件名
 		String pin = null;
 		String peJournalNO = null; // 交易流水号
-		String peOnliNo = null;//37#
 		String cardType = null; // 卡种名称
 		Map<String, Object> journalMap = new HashMap<String, Object>(); // 记录交易流水的参数Map
 		Map<String, Object> paramsMap = (Map<String, Object>) paramObject; // 传入的参数Map
@@ -84,8 +82,6 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 				log.info("=====================>the channel is available!");
 				peJournalNO = String.valueOf(peJournalNOIdFactory.generate()); // 交易流水赋值
 				log.info("=====================>peJournalNO is: "	+ peJournalNO);
-				peOnliNo = String.valueOf(peOnliNoIdFactory.generate());
-				context.setData(Constants.ISO8583_RTVREFNUM, peOnliNo);
 				context.setData(Constants.RTXNCATCD, Constants.RTXNCATCD_0);// 业务性质 ；本代本
 				log.info("=====================>check the Card is our card ?");
 				String AccNum = String.valueOf(paramsMap.get(Constants.ISO8583_ACCTNO)); // 取卡号
@@ -99,12 +95,21 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 					AccNum = String.valueOf(paramsMap.get(Constants.ISO8583_ACCIDE_N2));// 取转入卡号
 					cardType = dzipProcessTemplate.queryCardType(AccNum); //验证转入卡号 是否属于达州商行本行卡
 				}
-				//设置接受机构码 报文头目标地址发往银联数据
-				context.setData(Constants.ISO8583_DESTID, "00010000"/*dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ)*/);
-				context.setData(Constants.ISO8583_RCVCODE, InitData4Dzip.getAcqOrgCd()); //接收方机构码
+//				cardType = Constants.CUPS_CARD;
 				context.setData(Constants.PE_CARD_TYPE, cardType);
+				if(Constants.CUPS_CARD.equals(cardType)){
+					context.setData(Constants.ISO8583_RCVCODE, InitData4Dzip.getRcvgCd());
+				}else if(Constants.OUR_IC_CARD.equals(cardType)){
+					context.setData(Constants.ISO8583_RCVCODE, dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ));
+				}
+				context.setData(Constants.ISO8583_RCVCODE, InitData4Dzip.getRcvgCd());
+				//设置接受机构码
+				//如果是本行IC卡 报文头目标地址发往银联数据
+				//如果是银联卡 报文头目标地址发往银联
+				context.setData(Constants.ISO8583_DESTID, context.getData(Constants.ISO8583_RCVCODE));
 				if(Constants.PE_NULL.equals(context.getData(Constants.TransactionId))
-				  || !Constants.OUR_IC_CARD.equals(cardType)){//如果交易码在Init中不存在或不是IC卡电子现金交易
+				//  || !Constants.OUR_IC_CARD.equals(cardType)
+				  ){//如果交易码在Init中不存在或不是IC卡电子现金交易
 					return exceptionProcessor(errorFormatName, context, "柜面目前只支持电子现金交易");
 				}
 				//设置交易信息
@@ -112,11 +117,20 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 				context.setData(Constants.PE_HOSTCHKCD, Constants.PE_ONE);//主机对账标识
 				context.setData(Constants.TAXRPTFORPERSNBR,
 						dzipProcessTemplate.queryTaxrptForPersNbr(context, Constants.ISO8583));//客户号
-				context.setData(Constants.IN_ORIGNTWKNODENBR, context.getData(Constants.ISO8583_CARDACCID));//终端号ntwknodenbr
+				String ntwknodenbr = String.valueOf(context.getData(Constants.ISO8583_CARDACCID));
+				if(dzipProcessTemplate.isExistTerminalCd(ntwknodenbr)){//判断终端号是否存在
+					context.setData(Constants.IN_ORIGNTWKNODENBR, ntwknodenbr);//终端号ntwknodenbr
+				}else{
+					return exceptionProcessor(errorFormatName, context, "终端号不存在!");
+				}
 
 				context.setData(Constants.PE_CRDB, checkMap.get(Constants.PE_CRDB)); 	// 填充借贷标记
 				context.setData(Constants.PE_JOURNAL_NO, peJournalNO);					//平台流水号
-				context.setData(Constants.PE_REQ_CHANN, Constants.PE_ATMP);  			//通信渠道
+				context.setData(Constants.PE_REQ_CHANN, Constants.PE_COUNTER);  			//通信渠道
+				String peOnliNo = String.valueOf(peOnliNoIdFactory.generate());
+				context.setData(Constants.ISO8583_RTVREFNUM, peOnliNo);//填充37#
+				context.setData(Constants.ISO8583_TRANAMT,
+						Util.getAmt(String.valueOf(context.getData(Constants.ISO8583_TRANAMT))));//格式化前台的交易金额
 				journalMap = dzipProcessTemplate.getJournalMap4ISO(context.getDataMap(), journalMap); // 初始化journalMap
 				context.setData(Constants.PE_TRAN_AMT, journalMap.get(Constants.PE_TRAN_AMT)); // 填充交易金额
 				context.setData(Constants.PE_ACC_NO, journalMap.get(Constants.PE_ACC_NO));// 填充账号
@@ -128,19 +142,19 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 				log.info("=====================>insertJournal " + peJournalNO + " successful");
 				//测试不验密码
 //				context.setData(Constants.CHECK_PIN, Constants.PE_N);
+				//解析柜面报文中的密码
+				if(Constants.PE_Y.equals(context.getString(Constants.CHECK_PIN))) {//有密码交易
+					pin = String.valueOf(context.getData(Constants.ISO8583_PINDATA));
+					String timeStamp = String.valueOf(context.getData(Dict.IBS_TIME_STAMP));//PE时间戳
+					context.setData(Constants.IN_PIN, Init.getPinFromOnli(timeStamp, pin));
+				}
+				//取出报文中的二磁
+				if(null != context.getData(Constants.ISO8583_TRACK2_DATA)
+						&& !Constants.PE_NULL.equals(context.getData(Constants.ISO8583_TRACK2_DATA))
+						&& Constants.PE_Y.equals(context.getData(Constants.CHECK_TRACK2))){
+					context.setData(Constants.IN_TRACK2, context.getData(Constants.ISO8583_TRACK2_DATA));
+				}
 				if(Constants.OUR_IC_CARD.equals(cardType)) {
-					if(Constants.PE_Y.equals(context.getString(Constants.CHECK_PIN))) {//有密码交易
-						pin = String.valueOf(context.getData(Constants.ISO8583_PINDATA));
-						String timeStamp = String.valueOf(context.getData(Dict.IBS_TIME_STAMP));//PE时间戳
-						int len = timeStamp.length();
-						String pinKey = timeStamp.substring(len-8, len);//取时间戳的后8位
-						context.setData(Constants.IN_PIN, Init.getPinFromOnli(pinKey, pin));
-					}
-					if(null != context.getData(Constants.ISO8583_TRACK2_DATA)
-							&& !Constants.PE_NULL.equals(context.getData(Constants.ISO8583_TRACK2_DATA))
-							&& Constants.PE_Y.equals(context.getData(Constants.CHECK_TRACK2))){
-						context.setData(Constants.IN_TRACK2, context.getData(Constants.ISO8583_TRACK2_DATA));
-					}
 					//账户验证
 					context.setData(Constants.PE_ACC_NO, context.getData(Constants.ISO8583_ACCTNO));
 					context.setData(Constants.IN_CASHBOXNBR, InitData4Dzip.getYLCashBoxNbr());
@@ -152,6 +166,7 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 						String errorMsg = new String(String.valueOf(resMap.get(Constants.RESPNAME)));
 						return exceptionProcessor(errorFormatName, context, errorMsg);
 					}
+					context.setData(Constants.PE_TRANS_STAT, Constants.PE_INIT);//交易状态为初始化
 					log.info("==========================>check card is ok!");
 				}
 				handleTransaction(errorFormatName, context);
@@ -170,7 +185,7 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 					localFileOutputStream.close();
 					writeStream(paramChannel, msg.getBytes());
 			    }
-				msg = new String(msg.getBytes(Constants.CHARSET_GBK), Constants.CHARSET_UTF8);
+				msg = new String(msg.getBytes(), Constants.CHARSET_UTF8);
 				log.info("发送到ONLI数据["+ msg +"]");
 				return null;
 			}else{// 渠道不可用
@@ -195,7 +210,8 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 		String origData = "";			//临时变量，存放原始数据
 		String pin = context.getString(Constants.IN_PIN);//获得解密后的密码
 		String peJournalNO = context.getString(Constants.PE_JOURNAL_NO);//获得平台流水号
-		if(Constants.TRANCD_020062.equals(context.getData(Constants.TransactionId))){//如果是本代本的非指定账户转账圈存交易
+		String cardType = (String) context.getData(Constants.PE_CARD_TYPE);
+		if(Constants.TRANCD_020062.equals(context.getData(Constants.TransactionId)) && cardType.equals(Constants.OUR_IC_CARD)){//如果是本代本的非指定账户转账圈存交易
 			String rlstseq = String.valueOf(context.getData(Constants.PE_JOURNAL_NO));//获得原交易(转账圈存)流水号
 			peJournalNO = peJournalNOIdFactory.generate().toString();
 			//转入圈存需要修改的域
@@ -210,8 +226,9 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 			String service = field48.substring(index+2, index+2+3);
 			context.setData(Constants.ISO8583_SERENTRYMODE, service);//通过转账圈存48#获取
 			//去掉转入圈存不需要的域
-			context.setData(Constants.ISO8583_TRACK2_DATA, Constants.PE_NULL);
-			context.setData(Constants.ISO8583_TRACK3_DATA, Constants.PE_NULL);
+			context.setData(Constants.ISO8583_ADDDATAPRI, Constants.PE_NULL);//48#
+			context.setData(Constants.ISO8583_TRACK2_DATA, Constants.PE_NULL);//35#
+			context.setData(Constants.ISO8583_TRACK3_DATA, Constants.PE_NULL);//36#
 			try {
 				Map checkMap = new HashMap();
 				checkMap.put(Constants.PE_CHANN_ID, Constants.PE_ATMP);
@@ -234,7 +251,7 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 				return exceptionProcessor(formatName, context, message);// 异常处理
 			}
 		}
-		if(Constants.TRANCD_042062.equals(context.getData(Constants.TransactionId))){//如果是本代本的非指定账户转账圈存冲正交易
+		if(Constants.TRANCD_042062.equals(context.getData(Constants.TransactionId)) && cardType.equals(Constants.OUR_IC_CARD)){//如果是本代本的非指定账户转账圈存冲正交易
 			try {
 				//通过90#获得原交易(转账圈存)流水号
 				Map resultMap = utilProcessor.getOriSysTraNum(context);
@@ -305,14 +322,28 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 				String origTracNum = String.valueOf(resultMap.get(Constants.JOURNAL_NO));
 				origData=origData.substring(0, 4)+origTracNum+origData.substring(10, 42);
 				context.setData(Constants.ISO8583_ORGDATA, origData);
+				//非冲正交易37#生成序列,冲正交易使用原交易37#
 				context.setData(Constants.ISO8583_RTVREFNUM, resultMap.get(Constants.PE_REF_CD));//填充原交易37#
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put(Constants.PE_REF_CD, resultMap.get(Constants.PE_REF_CD));
+				map.put(Constants.PE_JOURNAL_NO, peJournalNO);
+				updateJoural.execute(map);//更新当前冲正/撤销交易的37#
+				//暂时注释, 转账圈存脚本通知主帐号为转出圈存的帐号, 不切合实际(应为转入圈存帐号)
+//				String acctid2 = String.valueOf(context.getData(Constants.ISO8583_ACCIDE_N2));
+//				if(Constants.TRANCD_0620.equals(context.getData(Constants.TransactionId))
+//					&& (null != acctid2 || !Constants.PE_NULL.equals(acctid2))){//如果是转账圈存的脚本通知
+//					context.setData(Constants.ISO8583_ACCTNO, acctid2);
+//				}
 			}
 			if(!Constants.PE_NULL.equals(context.getData(Constants.ISO8583_ICCSYSRELDATA))){
 				context.setData(Constants.ISO8583_ICCSYSRELDATA,
 						Util.HexToString(String.valueOf(context.getData(Constants.ISO8583_ICCSYSRELDATA))));
 			}
-			context.setData(Constants.ISO8583_TRANAMT,
-					Util.getAmt(String.valueOf(context.getData(Constants.ISO8583_TRANAMT))));//格式化前台的交易金额
+			if(Constants.TRANCD_020060.equals(context.getData(Constants.TransactionId))
+					|| Constants.TRANCD_042060.equals(context.getData(Constants.TransactionId))){//指定账户圈存/冲正发往银联前 不发送102#和103#
+				context.setData(Constants.ISO8583_ACCIDE_N1, null);
+				context.setData(Constants.ISO8583_ACCIDE_N2, null);
+			}
 			cupsTransport.submit(context); // 转到银联前置
 		} catch (Exception e){
 			log.error(e.getMessage());
@@ -343,6 +374,7 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 			return responMessage;
 		} catch (Exception e) {
 			log.error("=============>发送到柜面数据失败,方法(XML2ISO8583Handler.exceptionProcessor)" );
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -401,13 +433,5 @@ public class XML2ISO8583Handler extends SimpleXMLHandler {
 
 	public void setPinSecurityModule(PinSecurityModule pinSecurityModule) {
 		this.pinSecurityModule = pinSecurityModule;
-	}
-
-	public PinSecurityModule getPinSecurityModule4Onli() {
-		return pinSecurityModule4Onli;
-	}
-
-	public void setPinSecurityModule4Onli(PinSecurityModule pinSecurityModule4Onli) {
-		this.pinSecurityModule4Onli = pinSecurityModule4Onli;
 	}
 }

@@ -22,7 +22,7 @@ public class Credit4Load_test extends Abstract4TestOnliToHost {
 	@Override
 	protected Map prepare() {
 		Map map = new HashMap();
-		map.put("_TransactionCode","onli.Credit4Load");
+		map.put(Constants.ISO8583_TRANSACTION_ID,"onli.Credit4Load");
 	    map.put(Constants.ISO8583_ACCTNO,"6221359010100149972");                                /* 2#  n..19 LLVAR */
 	    map.put(Constants.ISO8583_TRANAMT,"100");                                               /* 4# n12 */
 	    map.put(Constants.ISO8583_TRANSDTTIME, Util.getDateString(Constants.PE_MDHMS));

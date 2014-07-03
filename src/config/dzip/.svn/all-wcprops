@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/config/dzip
+/svn/dzip/!svn/ver/336/DZIP_NEWDEDV/src/config/dzip
 END
 tran4JCK.xml
 K 25
@@ -37,7 +37,7 @@ tran4PlatformAdmin.xml
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/dzip/!svn/ver/291/DZIP_NEWDEDV/src/config/dzip/tran4PlatformAdmin.xml
+/svn/dzip/!svn/ver/362/DZIP_NEWDEDV/src/config/dzip/tran4PlatformAdmin.xml
 END
 tran4Scheduler.xml
 K 25
@@ -49,5 +49,5 @@ dzipConfig.xml
 K 25
 svn:wc:ra_dav:version-url
 V 66
-/svn/dzip/!svn/ver/308/DZIP_NEWDEDV/src/config/dzip/dzipConfig.xml
+/svn/dzip/!svn/ver/309/DZIP_NEWDEDV/src/config/dzip/dzipConfig.xml
 END

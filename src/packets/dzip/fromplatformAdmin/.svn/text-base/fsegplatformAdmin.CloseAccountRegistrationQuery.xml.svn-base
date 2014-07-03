@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!-- 柜面销户登记查询请求报文 -->
+<segment>
+	<xmlTag><String name="Card_No"/></xmlTag><!--卡号-->
+</segment>

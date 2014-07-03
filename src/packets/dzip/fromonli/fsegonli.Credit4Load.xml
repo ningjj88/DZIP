@@ -22,6 +22,7 @@
 	<xmlTag><String name="CARDACCCODE"/></xmlTag><!--受卡方标识码-->
 	<xmlTag><String name="CARDACCNAME"/></xmlTag><!--受卡方名称地址-->
 	<xmlTag><String name="CURCODE"/></xmlTag><!--币种-->
+	<xmlTag><String name="PINDATA"/></xmlTag><!--卡密码-->
 	<xmlTag><String name="ICCSYSRELDATA"/></xmlTag><!--基于PBOC借贷记标准的IC卡数据-->
 	<xmlTag><String name="REACODE"/></xmlTag><!--自定义域-->
 	<xmlTag><String name="in_ORGNBR"/></xmlTag><!--机构号-->

@@ -1,14 +1,14 @@
 8
 
 dir
-308
+341
 https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin
 https://192.168.20.210:8443/svn/dzip
 
 
 
-2014-02-25T02:55:58.639625Z
-299
+2014-05-09T07:07:16.783000Z
+341
 xiehai
 
 
@@ -49,6 +49,18 @@ bb7e86f3e89a118069b70e14878fadc6
 2013-05-07T07:15:09.421875Z
 2
 longtun
+
+fsegplatformAdmin.CounterICErrorHandle.xml
+file
+367
+
+
+
+2014-06-24T07:59:46.000000Z
+640c34b5c6d235f4d956d67edb4c1922
+2014-07-02T03:08:44.145000Z
+367
+xiehai
 
 fsegplatformAdmin.GetFeeCodex.xml
 file
@@ -194,6 +206,18 @@ file
 177
 zengli
 
+fsegplatformAdmin.AdditionalAmtQuery.xml
+file
+
+
+
+
+2014-05-05T06:33:06.000000Z
+359dbbab1c7f31f25f5b888222d7262e
+2014-05-09T07:07:16.783000Z
+341
+xiehai
+
 fsegplatformAdmin.TranJournalBatch.xml
 file
 
@@ -242,6 +266,18 @@ cbf9424f211156db7ba691b77909a721
 2
 longtun
 
+fsegplatformAdmin.CloseAccountRegistrationQuery.xml
+file
+
+
+
+
+2014-04-15T07:54:36.000000Z
+a0e2fd1497bc651efb576598bf169764
+2014-05-04T09:26:55.163875Z
+331
+xiehai
+
 fsegplatformAdmin.DoICErrorHandle.xml
 file
 
@@ -265,6 +301,30 @@ file
 2013-05-07T07:15:09.421875Z
 2
 longtun
+
+fsegplatformAdmin.CloseAccountSettleReversal.xml
+file
+
+
+
+
+2014-05-04T02:26:24.000000Z
+93538a9f359107eb747b09c1a7d29fba
+2014-05-04T09:26:55.163875Z
+331
+xiehai
+
+fsegplatformAdmin.GetOnliIcCardTranInfo.xml
+file
+
+
+
+
+2014-02-25T08:00:16.000000Z
+14d0a1bbdadab6ac476efd72d5049cb6
+2014-04-04T08:22:49.161125Z
+319
+xiehai
 
 fsegplatformAdmin.GetChannel.xml
 file
@@ -301,6 +361,18 @@ file
 2013-05-07T07:15:09.421875Z
 2
 longtun
+
+fsegplatformAdmin.GetCashRecharge4Credit4LoadJournal.xml
+file
+
+
+
+
+2014-03-20T03:31:14.000000Z
+bc4b8d483545601dd172c9af20e684f2
+2014-04-04T08:22:49.161125Z
+319
+xiehai
 
 fsegplatformAdmin.UpdChannelTyp.xml
 file
@@ -374,18 +446,6 @@ file
 175
 zengli
 
-fsegplatformAdmin.DoICJournalStatistics.xml
-file
-
-
-
-
-2013-10-23T04:43:24.000000Z
-3f9a8f60aac90212c5e72ea091704088
-2013-10-23T01:47:10.755375Z
-177
-zengli
-
 fsegplatformAdmin.GetICJournal4Charge.xml
 file
 
@@ -396,6 +456,18 @@ file
 48cfa5fbb4ffe27722ab5bf075224dba
 2013-10-21T03:24:09.644930Z
 175
+zengli
+
+fsegplatformAdmin.DoICJournalStatistics.xml
+file
+
+
+
+
+2013-10-23T04:43:24.000000Z
+3f9a8f60aac90212c5e72ea091704088
+2013-10-23T01:47:10.755375Z
+177
 zengli
 
 fsegplatformAdmin.DoSingleICJournalCharge.xml
@@ -518,6 +590,18 @@ bfb97f5c18809ff88d144fb01dbb6ddf
 2
 longtun
 
+fsegplatformAdmin.CloseAccountSettle.xml
+file
+353
+
+
+
+2014-05-14T07:29:08.000000Z
+873ad64862b3ba23546d9e405276a409
+2014-06-09T08:27:17.402654Z
+353
+xiehai
+
 fsegplatformAdmin.generalAudit.xml
 file
 
@@ -566,15 +650,27 @@ e39a5ed75a8cbde945c552c57884734d
 2
 longtun
 
+fsegplatformAdmin.QueryIcChargeGlacct.xml
+file
+367
+
+
+
+2014-06-17T06:25:24.000000Z
+d2bb3470afe763308b56cbd8b85d40c8
+2014-07-02T03:08:44.145000Z
+367
+xiehai
+
 fsegplatformAdmin.CloseAccountRegistration.xml
 file
+367
 
 
 
-
-2014-02-21T04:47:46.000000Z
-adfb78e0d7128cf4d82c29c318e83dd3
-2014-02-25T02:55:58.639625Z
-299
+2014-06-10T06:25:08.000000Z
+31c7d7df8c9323cbbd191752536e334f
+2014-07-02T03:08:44.145000Z
+367
 xiehai
 

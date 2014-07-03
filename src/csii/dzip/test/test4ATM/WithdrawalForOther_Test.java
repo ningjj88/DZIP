@@ -33,9 +33,9 @@ public class WithdrawalForOther_Test extends Abstract4Test8583ToHost  implements
 	    map.put(Constants.ISO8583_SERENTRYMODE,"021");                                          /*22# n3 */
 	    map.put(Constants.ISO8583_SERCONDCODE,"02");                                            /*25# n2 */
 	    map.put(Constants.ISO8583_SERCAPCODE,"06");                                             /*26# n2 */
-	    map.put(Constants.ISO8583_ACQCODE,"04296510");                                       	/*32# n..11 LLVAR*/
-	    map.put(Constants.ISO8583_FORWARDCODE,"04296510");                                   	/*33# n..11 LLVAR*/
-	    map.put(Constants.ISO8583_TRACK2_DATA,"6217993300000000015=49122205180600000");            	/*35# z..37(LLVAR)*/
+	    map.put(Constants.ISO8583_ACQCODE,"05576750");                                       	/*32# n..11 LLVAR*/
+	    map.put(Constants.ISO8583_FORWARDCODE,"05576750");                                   	/*33# n..11 LLVAR*/
+	    map.put(Constants.ISO8583_TRACK2_DATA,"6217993300000000015=00000000000000000");            	/*35# z..37(LLVAR)*/
 	    map.put(Constants.ISO8583_TRACK3_DATA,"94386160000080034=1561560000000000000003976999236000002070000000000000000000000=000000000000=0000000345");            /*36# z..37(LLVAR)*/
 	    map.put(Constants.ISO8583_RTVREFNUM,"002440818168");                                    /*37# n12*/
 	    map.put(Constants.ISO8583_CARDACCID,"10010016");                                          /*41# ans8*/
@@ -46,8 +46,8 @@ public class WithdrawalForOther_Test extends Abstract4Test8583ToHost  implements
 	    map.put(Constants.ISO8583_SECURCONTRINFO,"2600000000000000");                           /*53# n16*/
 	    map.put(Constants.ISO8583_REACODE,"027000002000100000000000021000");                          			/*60# n16*/
 	    map.put(Constants.ISO8583_IDENNUMBE,"0100000000000000000001");                          /*61# n16*/
-	    map.put(Constants.ISO8583_RCVCODE,"04296510");                           				/*100# n16*/
-	    map.put(Constants.ISO8583_NANSCRESERVE," ");          	    							/*121# n16*/
+	    map.put(Constants.ISO8583_RCVCODE,"00001000");                           				/*100# n16*/
+//	    map.put(Constants.ISO8583_NANSCRESERVE," ");          	    							/*121# n16*/
 	    map.put(Constants.ISO8583_MESAUTHCD,"EEEEEEEE");                          				/*128# n16*/
 		return map;
 	}

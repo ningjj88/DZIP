@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!-- 销户结清柜面请求报文 -->
+<segment>
+	<xmlTag><String name="Card_No"/></xmlTag><!--卡号-->
+	<xmlTag><String name="ActCode"/></xmlTag><!--动作代码-->
+	<xmlTag><String name="TrxType" /></xmlTag><!--交易代码-->
+	<xmlTag><String name="LgnType" /></xmlTag><!--登录身份类型-->
+	<xmlTag><String name="Source" /></xmlTag><!--交易来源-->
+	<xmlTag><String name="LgnInstCode" /></xmlTag><!--登录机构代码-->
+	<xmlTag><String name="TraceNo" /></xmlTag><!--系统跟踪号-->
+	<xmlTag><String name="LgnMerchCode" /></xmlTag><!--登录网点代码-->
+	<xmlTag><String name="LgnUserCode" /></xmlTag><!--登录操作员代码-->
+	<xmlTag><String name="RtnWay" /></xmlTag><!--IC卡余额退还方式-->
+	<xmlTag><String name="NameFlag" /></xmlTag><!--是否验证客户信息-->
+	<xmlTag><String name="Id_Type" /></xmlTag><!--证件类型-->
+	<xmlTag><String name="Id_Code" /></xmlTag><!--证件号码-->
+	<xmlTag><String name="PinFlag" /></xmlTag><!--是否验证密码-->
+	<xmlTag><String name="PIN" /></xmlTag><!--密码-->
+	<xmlTag><String name="RtnFlag" /></xmlTag><!--是否回收卡片-->
+	<!-- <xmlTag><String name="Trans_Type" /></xmlTag><!--交易类型：1.销户清算(可读) 2.销户清算(不可读或挂失) 3.补登(可读) 4.补登(不可读或挂失)--> -->
+	<xmlTag><String name="in_CASHBOXNBR" /></xmlTag><!--现金箱号号-->
+	<xmlTag><String name="in_ORIGPERSNBR" /></xmlTag><!--柜员号号-->
+	<xmlTag><String name="in_ORGNBR" /></xmlTag><!--机构号-->
+	<xmlTag><String name="trandatetime" /></xmlTag><!--交易日期时间-->
+	<xmlTag><String name="accpid" /></xmlTag><!--受理方标识-->
+	<xmlTag><String name="accpaddr" /></xmlTag><!--受理方地址-->
+	<xmlTag><String name="trmcd" /></xmlTag><!--终端号-->
+	<xmlTag><String name="availamt" /></xmlTag><!--可读卡IC卡余额-->
+</segment>

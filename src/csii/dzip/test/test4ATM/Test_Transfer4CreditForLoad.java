@@ -28,20 +28,20 @@ public class Test_Transfer4CreditForLoad extends Abstract4Test8583ToHost impleme
 		map.put(Constants.ISO8583_LOCTRANSDATE, Util.getDateString(Constants.PE_MMDD));      /*13# n4(MMDD) */
 		map.put(Constants.ISO8583_EXPDAT, "0000");
 		map.put(Constants.ISO8583_MERCHANTTYPE, "6011");                                      /*18# n4 */
-		map.put(Constants.ISO8583_SERENTRYMODE, "051");    //若卡1为磁条卡021                                    /*22# n3 */
-		map.put(Constants.ISO8583_CARDSEQNBR, "001");     //若卡1为磁条卡则不需要23#
+		map.put(Constants.ISO8583_SERENTRYMODE, "021");    //若卡1为磁条卡021                                    /*22# n3 */
+//		map.put(Constants.ISO8583_CARDSEQNBR, "001");     //若卡1为磁条卡则不需要23#
 	    map.put(Constants.ISO8583_SERCONDCODE, "91");                                          /*25# n2 */
 	    map.put(Constants.ISO8583_SERCAPCODE, "06");                                           /*26# n6 */
 	    map.put(Constants.ISO8583_ACQCODE, "00005576750");                                       	/*32# n..11 LLVAR*/
 	    map.put(Constants.ISO8583_FORWARDCODE, "00005576750");                                   	/*33# n..11 LLVAR*/
 	    //若卡1磁条卡需35#和36#
-	    //map.put(Constants.ISO8583_TRACK2_DATA, "6217993300000000015=49122205180600000");            /*35# z..37(LLVAR)*/
-	    //map.put(Constants.ISO8583_TRACK3_DATA, "996217993300000000015=1561560000000000000003000000114000049121=000000000000=000000000000=000000051806000");            /*36# z..37(LLVAR)*/
+	    map.put(Constants.ISO8583_TRACK2_DATA, "6217993300000000015=49122205180600000");            /*35# z..37(LLVAR)*/
+//	    map.put(Constants.ISO8583_TRACK3_DATA, "996217993300000000015=1561560000000000000003000000114000049121=000000000000=000000000000=000000051806000");            /*36# z..37(LLVAR)*/
 	    map.put(Constants.ISO8583_RTVREFNUM, "055767011533");                                    /*37# n12*/
 	    map.put(Constants.ISO8583_CARDACCID, "01010009");                                          /*41# ans8*/
 	    map.put(Constants.ISO8583_CARDACCCODE, "123456789012345");                               /*42# ans15*/
 	    map.put(Constants.ISO8583_CARDACCNAME, "CHN29000CHINA UNIONPAY SIMULATOR");                  /*43# ans40*/
-	    map.put(Constants.ISO8583_ADDDATAPRI, "AA");
+	    map.put(Constants.ISO8583_ADDDATAPRI, "PB0521");
 	    map.put(Constants.ISO8583_CURCODE, "156");                                               /*49# an3*/
 	    map.put(Constants.ISO8583_PINDATA, "111111");                  						    /*52# b64*/
 	    map.put(Constants.ISO8583_SECURCONTRINFO, "2600000000000000");                           /*53# n16*/

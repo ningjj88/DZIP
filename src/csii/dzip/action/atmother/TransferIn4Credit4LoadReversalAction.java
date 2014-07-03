@@ -10,6 +10,7 @@ import csii.base.constant.Constants;
 import csii.dzip.action.DzipBaseAction;
 import csii.dzip.action.util.ActionUtilProcessor;
 import csii.dzip.action.util.DzipProcessTemplate;
+import csii.dzip.action.util.Init;
 import csii.dzip.action.util.UpdateJoural;
 
 /**
@@ -55,7 +56,13 @@ public class TransferIn4Credit4LoadReversalAction extends DzipBaseAction {
 					ctx.setData(Constants.ISO8583_RESCODE, Constants.PE_22);          //响应码:已冲正
 					ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);        //交易状态：异常
 				}else{
-					String responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+					String responcd = Constants.PE_OK;
+					if(!Init.isTransactionFromOnli(ctx)){//交易来自atm
+						responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+					}else{//交易来自柜面
+						//设置柜面站点号
+						ctx.setData(Constants.IN_ORIGNTWKNODENBR, ctx.getData(Constants.ISO8583_CARDACCID));
+					}
 					if(Constants.PE_OK.equals(responcd)){
 						logger.info("本行转账圈存冲正上笔交易信息(transfer)==================>"+transfer);
 						ctx.setData(Constants.ISO8583_ACCTNO, transfer.get(Constants.PE_ACC_NO));
@@ -81,11 +88,14 @@ public class TransferIn4Credit4LoadReversalAction extends DzipBaseAction {
 						}else{
 							transferRe.put(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);
 						}
+					}else {
+						ctx.setData(Constants.ISO8583_RESCODE, responcd);
 					}
 				}
 			}else {
 				ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);
 				transferRe.put(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);
+				ctx.setData(Constants.ISO8583_RESCODE, ctx.getData(Constants.PE_HOST_RESP_CD)); //响应码
 			}
 			updateJoural.execute(ctx, transferRe);
 			ctx.setData(Constants.ISO8583_ACCTNO, transferRe.get(Constants.PE_ACC_NO));//转账圈存冲正主帐号是转出主帐号

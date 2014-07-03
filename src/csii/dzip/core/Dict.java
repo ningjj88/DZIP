@@ -154,7 +154,7 @@ public class Dict {
     public static final String SOURCE = "Source"; //交易来源：BP柜面
     public static final String TRACENO = "TraceNo"; //系统跟踪号
     public static final String LGNMERCHCODE = "LgnMerchCode"; //登录网点代码
-    public static final String LGNUSERCODE = "LgnSerCode"; //登录操作员代码
+    public static final String LGNUSERCODE = "LgnUserCode"; //登录操作员代码
     public static final String RTNWAY = "RtnWay"; //IC卡余额退还方式
     public static final String NAMEFLAG = "NameFlag"; //是否验证客户信息
     public static final String ID_TYPE = "Id_Type"; //证件类型
@@ -166,6 +166,7 @@ public class Dict {
     public static final String FIR_AMOUNT = "Fir_Amount"; //主币种账户返回金额
     public static final String SEC_CUR = "Sec_Cur"; //次币种
     public static final String SEC_AMOUNT = "Sec_Amount"; //次币种账户返回金额
+    public static final String TXN_DATE = "Txn_Date"; //清算日期
     public static final String RESERVED = "Reserved"; //保留域
     public static final String LASTMAINTDATE = "LastMaintDate"; //最后维护日期
     public static final String INSTNO = "InstNo";	//机构号
@@ -174,16 +175,37 @@ public class Dict {
     public static final String RSPNO = "RspNo";	//交易应答码
     public static final String ICDATA = "ICData";	//IC卡数据域
     public static final String ICDATALENGTH = "ICDataLength";	//IC卡数据域
+    /**自定义*/
+    public static final String TRANS_TYPE = "Trans_Type"; //交易类型：1.销户清算(可读) 2.销户清算(不可读或挂失) 3.补登(可读) 4.补登(不可读或挂失)
+    public static final String ACCP_ID = "accpid";//受理方标识
+    public static final String ACCP_ADDR = "accpaddr";//受理方地址
+    public static final String TRM_CD = "trmcd";//终端号
+    public static final String AVAIL_AMT = "availamt";//可读卡IC卡余额
 
     public static final String SOURCE_BP = "BP";//交易来源：柜面
     public static final String PE_TP = "TP";//证件类型用于替换组装的61#的1-2位证件类型
     public static final String PE_ID_CODE = "IDCODE";//证件号码用于替换组装的61#证件号码
     public static final String IDENUMBER_X = "X";//身份证号码中的X
+
+    public static final String D_ORGNBR = "d_orgnbr";//借方机构号
+    public static final String D_GLACCT = "d_glacct";//借方科目号
+    public static final String D_ACCTNO = "d_acctno";//借方帐号
+    public static final String C_ORGNBR = "c_orgnbr";//贷方机构号
+    public static final String C_GLACCT = "c_glacct";//贷方科目号
+    public static final String C_ACCTNO = "c_acctno";//贷方帐号
+
+    public static final String GLACCT_6601013817 = "6601013817";//借记IC卡电子钱包存款
+    public static final String GLACCT_6601013837 = "6601013837";//IC卡待补登余额
+
+    /**交易名及处理码*/
+    public static final String TRANCD_02006031 = "02006031";
+    public static final String PROCCD_6031 = "6031";
+
     /**调用前置存储过程参数名*/
     public static final String IN_CARD_NO = "in_CARD_No"; //卡号
     public static final String IN_TRXTYPE = "in_TrxType"; //交易代码
     public static final String IN_ACTCODE = "in_ActCode"; //动作代码
-    public static final String IN_LGNTYPE = "iN_LgnType"; //登录类型
+    public static final String IN_LGNTYPE = "in_LgnType"; //登录类型
     public static final String IN_SOURCE = "in_Source"; //交易来源
     public static final String IN_LGNINSTCODE = "in_LgnInstCode"; //登录机构代码
     public static final String IN_TRACENO = "in_TraceNo"; //系统跟踪号

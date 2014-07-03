@@ -37,19 +37,23 @@ public class Init {
 	public static void initXml2Iso8583(Map<String, Object> map){
 		String transactionID = String.valueOf(map.get(Constants.ISO8583_TRANSACTION_ID));
 		//初始化报文类型,3#,交易码
-		if(TranName.ONLI_CREDIT4LOAD.equals(transactionID)){//指定账户圈存
+		if(TranName.ONLI_CREDIT4LOAD.equals(transactionID)
+				|| TranName.ONLI_ADDITIONAL_CREDIT4LOAD.equals(transactionID)){//指定账户圈存或补登圈存
 			map.put(Constants.ISO8583_HEAD_TX_TYPE, Constants.MSG_TYPE_0200);
 			map.put(Constants.ISO8583_PRO_CODE, Constants.PROCODE_600000);
 			map.put(Constants.ISO8583_TRANSACTION_ID, Constants.TRANCD_020060);
-		}else if (TranName.ONLI_CREDIT4LOADREVERSAL.equals(transactionID)) {//指定账户圈存冲正
+		}else if (TranName.ONLI_CREDIT4LOADREVERSAL.equals(transactionID)
+				|| TranName.ONLI_ADDITIONAL_CREDIT4LOADREVERSAL.equals(transactionID)) {//指定账户圈存冲正或补登圈存冲正
 			map.put(Constants.ISO8583_HEAD_TX_TYPE, Constants.MSG_TYPE_0420);
 			map.put(Constants.ISO8583_PRO_CODE, Constants.PROCODE_600000);
 			map.put(Constants.ISO8583_TRANSACTION_ID, Constants.TRANCD_042060);
-		}else if (TranName.ONLI_DEBIT4LOAD.equals(transactionID)) {//指定账户圈提
+		}else if (TranName.ONLI_DEBIT4LOAD.equals(transactionID)
+				|| TranName.ONLI_SWITCH_ADDITIONAL_CREDIT4LOAD.equals(transactionID)) {//指定账户圈提或转待补登
 			map.put(Constants.ISO8583_HEAD_TX_TYPE, Constants.MSG_TYPE_0100);
 			map.put(Constants.ISO8583_PRO_CODE, Constants.PROCODE_610000);
 			map.put(Constants.ISO8583_TRANSACTION_ID, Constants.TRANCD_010061);
-		}else if (TranName.ONLI_DEBIT4LOADCONFIRM.equals(transactionID)) {//指定账户圈提确认
+		}else if (TranName.ONLI_DEBIT4LOADCONFIRM.equals(transactionID)
+				|| TranName.ONLI_SWITCH_ADDITIONAL_CREDIT4LOAD_CONFIRM.equals(transactionID)) {//指定账户圈提确认或转待补登确认
 			map.put(Constants.ISO8583_HEAD_TX_TYPE, Constants.MSG_TYPE_0200);
 			map.put(Constants.ISO8583_PRO_CODE, Constants.PROCODE_610000);
 			map.put(Constants.ISO8583_TRANSACTION_ID, Constants.TRANCD_020061);
@@ -93,28 +97,58 @@ public class Init {
 	 */
 	public static void getResponseTransactionID(Context ctx){
 		String transactionID = String.valueOf(ctx.getData(Constants.ISO8583_TRANSACTION_ID));
-		if(Constants.TRANCD_021060.equals(transactionID)){
+		if(Constants.TRANCD_021060.equals(transactionID)
+				|| Constants.TRANCD_020060.equals(transactionID)
+				|| Constants.TRANCD_02106001.equals(transactionID)){
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_CREDIT4LOAD);
-		}else if (Constants.TRANCD_043060.equals(transactionID) || Constants.TRANCD_042060.equals(transactionID)) {
+			if(null != ctx.getData(Constants.ISO8583_ACCIDE_N1)//判断是否是补登圈存
+					&& !Constants.PE_NULL.equals(ctx.getData(Constants.ISO8583_ACCIDE_N1))){
+				//如果验证不通过,直接返回柜面
+				ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_ADDITIONAL_CREDIT4LOAD);
+			}
+		}else if (Constants.TRANCD_043060.equals(transactionID)
+				|| Constants.TRANCD_042060.equals(transactionID)
+				|| Constants.TRANCD_04306001.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_CREDIT4LOADREVERSAL);
-		}else if (Constants.TRANCD_011061.equals(transactionID)) {
+			if(null != ctx.getData(Constants.ISO8583_ACCIDE_N1)//判断是否是补登圈存冲正
+					&& !Constants.PE_NULL.equals(ctx.getData(Constants.ISO8583_ACCIDE_N1))){
+				//如果验证不通过,直接返回柜面
+				ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_ADDITIONAL_CREDIT4LOADREVERSAL);
+			}
+		}else if (Constants.TRANCD_011061.equals(transactionID) || Constants.TRANCD_010061.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_DEBIT4LOAD);
-		}else if (Constants.TRANCD_021061.equals(transactionID)) {
+			if(null != ctx.getData(Constants.ISO8583_ACCIDE_N1)//判断是否是转待补登圈提
+					&& !Constants.PE_NULL.equals(ctx.getData(Constants.ISO8583_ACCIDE_N1))){
+				//如果验证不通过,直接返回柜面
+				ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_SWITCH_ADDITIONAL_CREDIT4LOAD);
+			}
+		}else if (Constants.TRANCD_021061.equals(transactionID)
+				|| Constants.TRANCD_020061.equals(transactionID)
+				|| Constants.TRANCD_02106101.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_DEBIT4LOADCONFIRM);
-		}else if (Constants.TRANCD_021063.equals(transactionID)) {
+			if(null != ctx.getData(Constants.ISO8583_ACCIDE_N1)//判断是否是转待补登确认
+					&& !Constants.PE_NULL.equals(ctx.getData(Constants.ISO8583_ACCIDE_N1))){
+				//如果验证不通过,直接返回柜面
+				ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_SWITCH_ADDITIONAL_CREDIT4LOAD_CONFIRM);
+			}
+		}else if (Constants.TRANCD_021063.equals(transactionID) || Constants.TRANCD_020063.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_CASHRECHARGE4CREDIT4LOAD);
-		}else if (Constants.TRANCD_043063.equals(transactionID)) {
+		}else if (Constants.TRANCD_043063.equals(transactionID) || Constants.TRANCD_042063.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_CASHRECHARGE4CREDIT4LOADREVERSAL);
-		}else if (Constants.TRANCD_02101791.equals(transactionID)) {
+		}else if (Constants.TRANCD_02101791.equals(transactionID) || Constants.TRANCD_02001791.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_CASHRECHARGE4CREDIT4LOADCANCEL);
-		}else if (Constants.TRANCD_04301791.equals(transactionID)) {
+		}else if (Constants.TRANCD_04301791.equals(transactionID) || Constants.TRANCD_04201791.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_CASHRECHARGE4CREDIT4LOADCANCELREVERSAL);
-		}else if (Constants.TRANCD_021062.equals(transactionID)) {
+		}else if (Constants.TRANCD_021062.equals(transactionID) || Constants.TRANCD_021065.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_TRANSFERCREDIT4LOAD);
 		}else if (Constants.TRANCD_043065.equals(transactionID) || Constants.TRANCD_043062.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_TRANSFERCREDIT4LOADREVERSAL);
-		}else if (Constants.TRANCD_0630.equals(transactionID)) {
+		}else if (Constants.TRANCD_0630.equals(transactionID) || Constants.TRANCD_0620.equals(transactionID)) {
 			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_SCRIPT_NOTICE);
+		}else if(Constants.TRANCD_02106001.equals(transactionID)){
+			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_ADDITIONAL_CREDIT4LOAD);
+		}else if(Constants.TRANCD_04306001.equals(transactionID)){
+			ctx.setData(Constants.ISO8583_TRANSACTION_ID, TranName.ONLI_ADDITIONAL_CREDIT4LOADREVERSAL);
 		}
 	}
 
@@ -124,7 +158,11 @@ public class Init {
 	 * @return
 	 */
 	public static boolean isTransactionFromOnli(Context ctx){
-		return Constants.MERTYPCD_6010.equals(String.valueOf(ctx.getData(Constants.ISO8583_MERCHANTTYPE)));
+		String reacode = ctx.getString(Constants.ISO8583_REACODE);//60#
+		String type = reacode.substring(9, 10);
+		//银联数据脚本通知应答不返回18#,只有通过60#判断交易是否是来自柜面
+		return Constants.MERTYPCD_6010.equals(String.valueOf(ctx.getData(Constants.ISO8583_MERCHANTTYPE)))
+				|| Constants.PE_SIX.equals(type);
 	}
 
 	/**
@@ -944,6 +982,51 @@ public class Init {
 		journalMap.put(Constants.IN_EFFDATE, ctx.getString(Constants.IN_EFFDATE));     		//填充帐务日期
 		return journalMap;
 	}
+
+	/**
+	 * 柜面IC卡差错记账存储过程参数初始化
+	 * @param ctx
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static  Map initICErrorHandle(Context ctx){
+		Map journalMap = new HashMap();
+		journalMap.put(Constants.IN_RTXNREASONCD, ctx.getString(Constants.IN_RTXNREASONCD));
+		journalMap.put(Constants.IN_RTXNTYPCD, ctx.getString(Constants.IN_RTXNTYPCD)); 	// 交易类型
+		journalMap.put(Constants.IN_CARDACCTFLAG, ctx.getString(Constants.MEDIUM_TYPE)); // 账号/卡号标志
+		journalMap.put(Constants.IN_RTXNSTATCD, ctx.getString(Constants.IN_RTXNSTATCD));  //填充交易状态
+		journalMap.put(Constants.IN_ORIGPOSTDATE, ctx.getString(Constants.PE_POST_DATE));   //填充原来交易日期
+		journalMap.put(Constants.IN_ORIGTRACKNBR, ctx.getString(Constants.IN_ORIGTRACKNBR));
+		journalMap.put(Constants.IN_PARENTACCTNBR, ctx.getString(Constants.IN_PARENTACCTNBR));       	                            //填充父账号
+		journalMap.put(Constants.IN_PARENTRTXNNBR, ctx.getString(Constants.IN_PARENTRTXNNBR));       	                            //填充父交易号
+		journalMap.put(Constants.IN_PARENTRTXNTYPCD, null);
+		journalMap.put(Constants.IN_INITIALCARDNBR, ctx.getString(Constants.IN_INITIALCARDNBR));
+		journalMap.put(Constants.IN_TRACENBR, ctx.getString(Constants.PE_JOURNAL_NO));           //填充平台流水号
+		journalMap.put(Constants.IN_POSTYN, Constants.PE_Y);
+		journalMap.put(Constants.IN_COMMITYN, Constants.PE_N);
+		journalMap.put(Constants.IN_DEBUGYN, Constants.PE_N);
+		journalMap.put(Constants.IN_CASHANALYSISCD,null);
+	    journalMap.put(Constants.IN_RTXNREASONCD, Constants.PE_NULL);
+		journalMap.put(Constants.IN_ACCTNBR, ctx.getString(Constants.IN_ACCTNBR));       	     //填充账号
+		journalMap.put(Constants.IN_NBROFITEMS, Constants.PE_ONE);       	                     //填充资金类型顺序号
+		journalMap.put(Constants.IN_CLEARCATCD, Constants.CLEARCATCD_IMED);      //填充清算类别
+		journalMap.put(Constants.IN_BALCATCD, Constants.BALCATCD_NOTE);  //余额大类
+		journalMap.put(Constants.IN_BALTYPCD, Constants.BALTYPCD_BAL);    //余额类型
+		journalMap.put(Constants.IN_BALCATARRAYSIZE, Constants.PE_NUM_ZERO);                      //余额类型数组长度
+		journalMap.put(Constants.IN_FUNDTYPARRAYSIZE, Constants.PE_NUM_ZERO);                      //资金类型数组长度
+		journalMap.put(Constants.IN_FUNDSAMT, ctx.getString(Constants.PE_TRAN_AMT));              //填充资金金额
+		journalMap.put(Constants.IN_BALAMT, ctx.getString(Constants.PE_TRAN_AMT));                //填充本金发生额
+		journalMap.put(Constants.IN_FUNDTYPCD, Constants.TRS_FUND_TYP_EL);
+		journalMap.put(Constants.IN_FUNDTYPDTLCD, Constants.FUND_TYP_DTL_INTER);
+		journalMap.put(Constants.IN_RTXNSOURCECD, ctx.getString(Constants.IN_RTXNSOURCECD));
+		journalMap.put(Constants.IN_ORGNBR, InitData4Dzip.getYLOrgNbr()); //机构号数据库配置参数
+		journalMap.put(Constants.IN_CASHBOXNBR, InitData4Dzip.getYLCashBoxNbr()); // 钱箱号,数据库配置参数
+		journalMap.put(Constants.IN_ORIGPERSNBR, InitData4Dzip.getYLPersNbr()); // 柜员号，数据库配置参数
+		journalMap.put(Constants.IN_ORIGNTWKNODENBR, InitData4Dzip.getJCNtwkNodeNbr()); // 交易站点号，数据库配置参数
+		journalMap.put(Constants.IN_EFFDATE, ctx.getString(Constants.IN_EFFDATE));     		//填充帐务日期
+		return journalMap;
+	}
+
 	/**
 	 * 调用3DES+MD5算法生成密文
 	 * @param ctx
@@ -1018,6 +1101,19 @@ public class Init {
 	}
 
 	/**
+	 * 解密柜面发来报文中的密码
+	 * @param timeStamp PE时间戳
+	 * @param pin 柜面通过时间戳加密的密码
+	 * @return
+	 */
+	public static String getPinFromOnli(String timeStamp, String pin){
+		int len = timeStamp.length();
+		String pinKey = timeStamp.substring(len-8, len);//取时间戳的后8位
+		DesEncrypt des = new DesEncrypt(pinKey);
+		return des.Decrypt(StringChange.HexToString(pin)).trim();//柜面传来的8位密码=6位真实密码+2个空格
+	}
+
+	/**
 	 * 初始化PE.INSERTORUPDATEICCLOSIONGPAY参数
 	 * @param ctx
 	 */
@@ -1040,16 +1136,5 @@ public class Init {
 		map.put(Dict.IN_RTNFLG, ctx.getData(Dict.RTNFLG));
 
 		return  map;
-	}
-
-	/**
-	 * 解密柜面发来报文中的密码
-	 * @param pinKey
-	 * @param pin
-	 * @return
-	 */
-	public static String getPinFromOnli(String pinKey, String pin){
-		DesEncrypt des = new DesEncrypt(pinKey);
-		return des.Decrypt(StringChange.HexToString(pin)).trim();//柜面传来的8位密码=6位真实密码+2个空格
 	}
 }

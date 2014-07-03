@@ -454,6 +454,74 @@
 			<ref name="act01">QueryICEwalletctlAction</ref>
 		</actions>
 	</transaction>
+
+	<!--=====================IC卡电子现金柜面交易前获得数据==========================-->
+	<action id="GetOnliIcCardTranInfoAction"
+		class="csii.dzip.action.platformAdmin.GetOnliIcCardTranInfoAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetOnliIcCardTranInfo" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetOnliIcCardTranInfoAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================柜面现金充值撤销前现金充值流水查询==========================-->
+	<action id="GetCashRecharge4Credit4LoadJournalAction"
+		class="csii.dzip.action.platformAdmin.GetCashRecharge4Credit4LoadJournalAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="GetCashRecharge4Credit4LoadJournal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">GetCashRecharge4Credit4LoadJournalAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================柜面IC卡销户登记查询==========================-->
+	<action id="CloseAccountRegistrationQueryAction"
+		class="csii.dzip.action.platformAdmin.CloseAccountRegistrationQueryAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="CloseAccountRegistrationQuery" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CloseAccountRegistrationQueryAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================柜面IC卡待补登金额查询==========================-->
+	<action id="AdditionalAmtQueryAction"
+		class="csii.dzip.action.platformAdmin.AdditionalAmtQueryAction">
+		<ref name="corebankAccess">corebankdb.jdbcAccessCoreBank</ref>
+	</action>
+	<transaction id="AdditionalAmtQuery" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">AdditionalAmtQueryAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================柜面IC卡差错处理会计科目查询==========================-->
+	<action id="QueryIcChargeGlacctAction"
+		class="csii.dzip.action.platformAdmin.QueryIcChargeGlacctAction">
+		<ref name="dzipdbAccess">localdb.jdbcAccessDzip</ref>
+	</action>
+	<transaction id="QueryIcChargeGlacct" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">QueryIcChargeGlacctAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================柜面IC卡差错处理==========================-->
+	<action id="CounterICErrorHandleAction"
+		class="csii.dzip.action.platformAdmin.CounterICErrorHandleAction">
+		<ref name="actionUtilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+	</action>
+	<transaction id="CounterICErrorHandle" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CounterICErrorHandleAction</ref>
+		</actions>
+	</transaction>
+
 	<!--**********************与银联数据的交易**************************-->
 	<!--=====================借记IC卡ARQC校验==========================-->
 	<action id="ValidateICDataAction"
@@ -470,11 +538,38 @@
 		class="csii.dzip.action.platformAdmin.CloseAccountRegistrationAction" parent="cupsdata.BaseQueryAction">
 		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
 		<ref name="actionUtilProcessor">dzip.UtilProcessor4Action</ref>
-		<ref name="peJournalNOIdFactory">dzipService.peJournalNO</ref>
 	</action>
 	<transaction id="CloseAccountRegistration" template="SequenceTemplate">
 		<actions>
 			<ref name="act01">CloseAccountRegistrationAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================借记IC卡销户结清==========================-->
+	<action id="CloseAccountSettleAction"
+		class="csii.dzip.action.platformAdmin.CloseAccountSettleAction" parent="cupsdata.BaseQueryAction">
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="actionUtilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="peJournalNOIdFactory">dzipService.peJournalNO</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+	</action>
+	<transaction id="CloseAccountSettle" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CloseAccountSettleAction</ref>
+		</actions>
+	</transaction>
+
+	<!--=====================借记IC卡销户结清冲正==========================-->
+	<action id="CloseAccountSettleReversalAction"
+		class="csii.dzip.action.platformAdmin.CloseAccountSettleReversalAction" parent="cupsdata.BaseQueryAction">
+		<ref name="dzipProcessTemplate">dzip.DzipProcessTemplate</ref>
+		<ref name="actionUtilProcessor">dzip.UtilProcessor4Action</ref>
+		<ref name="peJournalNOIdFactory">dzipService.peJournalNO</ref>
+		<ref name="updateJoural">dzip.UpdateJoural</ref>
+	</action>
+	<transaction id="CloseAccountSettleReversal" template="SequenceTemplate">
+		<actions>
+			<ref name="act01">CloseAccountSettleReversalAction</ref>
 		</actions>
 	</transaction>
 </config>

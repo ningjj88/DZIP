@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 70
-/svn/dzip/!svn/ver/299/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin
+/svn/dzip/!svn/ver/341/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin
 END
 fsegplatformAdmin.ManagementFeeCodex.xml
 K 25
@@ -14,6 +14,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 104
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.QueryFileInfo.xml
+END
+fsegplatformAdmin.CounterICErrorHandle.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/dzip/!svn/ver/367/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.CounterICErrorHandle.xml
 END
 fsegplatformAdmin.GetFeeCodex.xml
 K 25
@@ -87,6 +93,12 @@ svn:wc:ra_dav:version-url
 V 107
 /svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.ValidateICData.xml
 END
+fsegplatformAdmin.AdditionalAmtQuery.xml
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/dzip/!svn/ver/341/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.AdditionalAmtQuery.xml
+END
 fsegplatformAdmin.TranJournalBatch.xml
 K 25
 svn:wc:ra_dav:version-url
@@ -111,6 +123,12 @@ svn:wc:ra_dav:version-url
 V 108
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.UpdChannelTypTran.xml
 END
+fsegplatformAdmin.CloseAccountRegistrationQuery.xml
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/dzip/!svn/ver/331/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.CloseAccountRegistrationQuery.xml
+END
 fsegplatformAdmin.DoICErrorHandle.xml
 K 25
 svn:wc:ra_dav:version-url
@@ -122,6 +140,18 @@ K 25
 svn:wc:ra_dav:version-url
 V 105
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.UpdChannelTran.xml
+END
+fsegplatformAdmin.CloseAccountSettleReversal.xml
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dzip/!svn/ver/331/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.CloseAccountSettleReversal.xml
+END
+fsegplatformAdmin.GetOnliIcCardTranInfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/dzip/!svn/ver/319/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.GetOnliIcCardTranInfo.xml
 END
 fsegplatformAdmin.GetChannel.xml
 K 25
@@ -135,6 +165,12 @@ svn:wc:ra_dav:version-url
 V 110
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.QueryImportFileInfo.xml
 END
+fsegplatformAdmin.GetCashRecharge4Credit4LoadJournal.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/dzip/!svn/ver/319/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.GetCashRecharge4Credit4LoadJournal.xml
+END
 fsegplatformAdmin.DoOffLinePreAuthComp.xml
 K 25
 svn:wc:ra_dav:version-url
@@ -146,12 +182,6 @@ K 25
 svn:wc:ra_dav:version-url
 V 104
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.UpdChannelTyp.xml
-END
-fsegplatformAdmin.UpdChannel.xml
-K 25
-svn:wc:ra_dav:version-url
-V 101
-/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.UpdChannel.xml
 END
 fsegplatformAdmin.InqDepAndWthJournal.xml
 K 25
@@ -165,6 +195,12 @@ svn:wc:ra_dav:version-url
 V 106
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.DownLoadFtpFile.xml
 END
+fsegplatformAdmin.UpdChannel.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.UpdChannel.xml
+END
 xmlaliasmapping.properties
 K 25
 svn:wc:ra_dav:version-url
@@ -177,17 +213,17 @@ svn:wc:ra_dav:version-url
 V 110
 /svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.DoICJournalCharge.xml
 END
-fsegplatformAdmin.GetICJournal4Charge.xml
-K 25
-svn:wc:ra_dav:version-url
-V 112
-/svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.GetICJournal4Charge.xml
-END
 fsegplatformAdmin.DoICJournalStatistics.xml
 K 25
 svn:wc:ra_dav:version-url
 V 114
 /svn/dzip/!svn/ver/177/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.DoICJournalStatistics.xml
+END
+fsegplatformAdmin.GetICJournal4Charge.xml
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/dzip/!svn/ver/175/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.GetICJournal4Charge.xml
 END
 fsegplatformAdmin.DoSingleICJournalCharge.xml
 K 25
@@ -249,6 +285,12 @@ svn:wc:ra_dav:version-url
 V 107
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.ClearDataHistory.xml
 END
+fsegplatformAdmin.CloseAccountSettle.xml
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/dzip/!svn/ver/353/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.CloseAccountSettle.xml
+END
 fsegplatformAdmin.generalAudit.xml
 K 25
 svn:wc:ra_dav:version-url
@@ -273,9 +315,15 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/dzip/!svn/ver/2/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.ImportJournalBatch.xml
 END
+fsegplatformAdmin.QueryIcChargeGlacct.xml
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/dzip/!svn/ver/367/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.QueryIcChargeGlacct.xml
+END
 fsegplatformAdmin.CloseAccountRegistration.xml
 K 25
 svn:wc:ra_dav:version-url
 V 117
-/svn/dzip/!svn/ver/299/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.CloseAccountRegistration.xml
+/svn/dzip/!svn/ver/367/DZIP_NEWDEDV/src/packets/dzip/fromplatformAdmin/fsegplatformAdmin.CloseAccountRegistration.xml
 END

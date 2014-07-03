@@ -10,6 +10,7 @@ import csii.base.constant.Constants;
 import csii.dzip.action.DzipBaseAction;
 import csii.dzip.action.util.ActionUtilProcessor;
 import csii.dzip.action.util.DzipProcessTemplate;
+import csii.dzip.action.util.Init;
 import csii.dzip.action.util.UpdateJoural;
 
 /**
@@ -33,7 +34,13 @@ public class TransferIn4Credit4LoadAction extends DzipBaseAction {
 			paramMap.put(Constants.PE_JOURNAL_NO, sqlMap.get(Constants.PE_RLTSEQNO));
 			if(Constants.PE_OK.equals(ctx.getData(Constants.PE_HOST_RESP_CD))){
 				ctx.setData(Constants.ISO8583_ACCTNO, ctx.getData(Constants.ISO8583_ACCIDE_N1));//设置记账账户为转出卡
-				String responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+				String responcd = Constants.PE_OK;
+				if(!Init.isTransactionFromOnli(ctx)){//交易来自atm
+					responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+				}else{//交易来自柜面
+					//设置柜面站点号
+					ctx.setData(Constants.IN_ORIGNTWKNODENBR, ctx.getData(Constants.ISO8583_CARDACCID));
+				}
 				if(Constants.PE_OK.equals(responcd)){
 					//设置卡的有效期
 					dzipProcessTemplate.getIcCardExpDate(ctx);
@@ -51,10 +58,13 @@ public class TransferIn4Credit4LoadAction extends DzipBaseAction {
 					}else{
 						paramMap.put(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);
 					}
+				}else {
+					ctx.setData(Constants.ISO8583_RESCODE, responcd);
 				}
 			}else{
 				ctx.setData(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);
 				paramMap.put(Constants.PE_TRANS_STAT, Constants.PE_EIGHT);
+				ctx.setData(Constants.ISO8583_RESCODE, ctx.getData(Constants.PE_HOST_RESP_CD)); //响应码
 			}
 			paramMap.put(Constants.IN_BUSITYP, Constants.PE_01); //在更新原交易时,更新原交易的业务类型
 			updateJoural.execute(ctx, paramMap);

@@ -27,7 +27,7 @@ public class Credit4LoadReversalAction extends DzipBaseAction {
 	public void execute(Context ctx) throws PeException {
 //		if(dzipProcessTemplate.queryParam(Constants.RCVG_CD_YLSJ).equals(ctx.getData(Constants.ISO8583_SOURID))){//若为银联数据的响应报文
 		if("00010000".equals(ctx.getData(Constants.ISO8583_SOURID))){
-			logger.info("Credit4LoadReversalAction(本代本指定账户圈存冲正)=======================>Start");
+			logger.info("Credit4LoadReversalAction(本代本指定账户圈存冲正/柜面补登圈存冲正)=======================>Start");
 			ctx.setData(Constants.IN_BUSITYP, Constants.PE_01);//关联业务类型：01 现金及转账
 			ctx.setData(Constants.RTXNCATCD, Constants.RTXNCATCD_0);
 			Map procedureMap = new HashMap();
@@ -47,10 +47,19 @@ public class Credit4LoadReversalAction extends DzipBaseAction {
 						String responcd = Constants.PE_OK;
 						if(!Init.isTransactionFromOnli(ctx)){//交易来自atm
 							responcd = utilProcessor.getTranParamInfo(ctx, Constants.ISO8583); //获得交易参数信息
+						}else{//交易来自柜面
+							//设置柜面站点号
+							ctx.setData(Constants.IN_ORIGNTWKNODENBR, ctx.getData(Constants.ISO8583_CARDACCID));
 						}
 						if(Constants.PE_OK.equals(responcd)){
 							Map resultMap = utilProcessor.getJournalNO(orgDataMap);
-							logger.info("本代本指定账户圈存冲正上笔交易信息(resultMap)==================>"+resultMap);
+							if(null != resultMap.get(Constants.PE_ACCTID1)
+									&& !Constants.PE_NULL.equals(resultMap.get(Constants.PE_ACCTID1))){//判断交易是否是补登圈存冲正
+								logger.info("=================>柜面补登圈存冲正!");
+								ctx.setData(Constants.TransactionId, Constants.TRANCD_04306001);
+								ctx.setData(Constants.ISO8583_ACCIDE_N1, resultMap.get(Constants.PE_ACCTID1));
+							}
+							logger.info("本代本指定账户圈存冲正/柜面补登圈存冲正上笔交易信息(resultMap)==================>"+resultMap);
 							ctx.setData(Constants.IN_RTXNSOURCECD, CLM); //交易来源
 							ctx.setData(Constants.IN_FUNDTYPCD, Constants.TRS_FUND_TYP_EL);   //资金类型
 							ctx.setData(Constants.IN_RTXNNBR, resultMap.get(Constants.PE_HOST_SEQ_NO)); // 原交易主机流水号

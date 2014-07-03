@@ -1,12 +1,11 @@
 /**
- * 
+ *
  */
 package csii.dzip.core;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -23,6 +22,7 @@ import csii.base.action.util.ISO8583MsgLogUtils;
 import csii.base.action.util.Util;
 import csii.base.constant.Constants;
 import csii.dzip.action.util.ActionUtilProcessor;
+import csii.dzip.action.util.Init;
 import csii.pe.service.comm.tcp.queue.BeanQueueStreamLoader;
 import csii.pe.service.comm.tcp.queue.LockUtil;
 
@@ -32,7 +32,7 @@ import csii.pe.service.comm.tcp.queue.LockUtil;
  * @since 2010-8-10
  */
 public class DzipToCUPSTransport{
-	
+
 	private int timeout;
 	private int port;
 	private String host;
@@ -43,7 +43,7 @@ public class DzipToCUPSTransport{
 	protected final Log logger = LogFactory.getLog(getClass());
 	@SuppressWarnings("unchecked")
 	public Object submit(Object content) throws PeException {
-		logger.info("====================>Here is Sending  to CUPS ");
+		logger.info("====================>Here is Sending  to CUPS!");
 		Context context = (Context)content;
 		try{
 			String transactionId=context.getString(Constants.ISO8583_TRANSACTION_ID);
@@ -55,7 +55,7 @@ public class DzipToCUPSTransport{
 			if(Constants.MSG_TYPE_0620.equals(transactionId)){
 //				if(context.getData(Constants.PE_TRAN_AMT)==null
 //						||Double.valueOf(context.getString(Constants.PE_TRAN_AMT))==0){
-				if(Util.getAmount(context.getString(Constants.PE_TRAN_AMT)).signum()==0){				
+				if(Util.getAmount(context.getString(Constants.PE_TRAN_AMT)).signum()==0){
 					//本带他ATM脚本处理结果交易(原始交易没有F4)tranAmt
 					context.setData(Constants.ISO8583_TRANSACTION_ID,Constants.TRANCD_0621);
 				}
@@ -64,21 +64,24 @@ public class DzipToCUPSTransport{
 			TransformerFactoryInterface tf = getTransformerFactory();
 			Transformer f = tf.getTransformer("OutboundPacket");
 			Map outputMap=context.getDataMap();
-			ISO8583MsgLogUtils.logFormat(outputMap,"转发ATMP端报文到银联", logger);
 			byte[] sndBuffer = (byte[]) f.format(outputMap, null);
-			logger.info("The length of message :"+ sndBuffer.length);
-			logger.info("Data to CUPS Host:["+ new String(sndBuffer)+"]");
-			if("柜面".equals("柜面")){
-				String key="TraceNo="+context.getData("TraceNo");
+			if(Init.isTransactionFromOnli(context)){
+				ISO8583MsgLogUtils.logFormat(outputMap,"转柜面报文报文到银联", logger);
+				logger.info("The length of message :"+ sndBuffer.length);
+				logger.info("Data to CUPS Host:["+ new String(sndBuffer)+"]");
+				String key="TraceNo="+context.getData(Constants.ISO8583_SYSTRACENUM);
 				Map replyMap=LockUtil.execute(new LockUtil(key,timeout,sndBuffer){
 					public void doLockWaitAction(Object sndBuffer) throws Exception {
 						BeanQueueStreamLoader.getSpecialQueueStream("cupsIso").QueueSubmit(sndBuffer);
 					}
-					
 				});
 				context.setDataMap(replyMap);
-			}else
+			}else{
+				ISO8583MsgLogUtils.logFormat(outputMap,"转发ATMP端报文到银联", logger);
+				logger.info("The length of message :"+ sndBuffer.length);
+				logger.info("Data to CUPS Host:["+ new String(sndBuffer)+"]");
 				BeanQueueStreamLoader.getSpecialQueueStream("cupsIso").QueueSubmit(sndBuffer);
+			}
 		}
 		catch (TransformException e) {
 			context.setData(Constants.ISO8583_RESCODE,Constants.PE_30);
@@ -91,7 +94,7 @@ public class DzipToCUPSTransport{
 	}
 	/**
 	 * 读取输入流并转换为字符串
-	 * 
+	 *
 	 * @param is
 	 * @return
 	 * @throws IOException
@@ -105,7 +108,7 @@ public class DzipToCUPSTransport{
 		return baos.toString();
 	}
 	/**
-	 * 
+	 *
 	 * @return
 	 * @throws Exception
 	 */

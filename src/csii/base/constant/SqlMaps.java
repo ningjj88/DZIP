@@ -28,13 +28,19 @@ public class SqlMaps {
 	public static final String COMMON_GETACTIVEICTRAN4ONLI = "common.getActiveIcTran4Onli";
 	/**获得圈存上限返回给柜面*/
 	public static final String COMMON_GETCREDIT4LOADLIMIT = "common.getCredit4LoadLimit";
+	/**查询IC卡销户登记记录*/
+	public static final String COMMON_QUERYCLOSEACCOUNTRETISTER = "common.queryCloseAccountRegister";
+	/**COMMON_UPDATECARDICEWALLETCTL*/
+	public static final String COMMON_UPDATE_CARDICEWALLETCTL = "common.updateICEWALLETCTL";
+	/**查询指定卡号的待补登金额*/
+	public static final String COMMON_QUERY_ADDITIONAL_AMT = "common.queryAdditionalAmt";
 
 	/*******************atm 命名空间的SQL********************/
 	public static final String ATM_TRANSFERINBRCH = "atm.TransferInBrch"; // ATM存款/取款,查询交易，调用核心存储过程
 	public static final String ATM_CONFIRMDEPOSIT = "atm.ConfirmDeposit"; // ATM 存款确认交易
 	public static final String ATM_UPDATECARDPASSWORD = "atm.UpdCardPassword"; // ATM 改密交易
 	public static final String ATM_CHECKOURCARDYN = "atm.ChkOurCardYN"; // ATM ATM 验证是否达州商行本行卡
-	/**ATM获得电子钱包余额*/
+	/**更新核心表CARDICEWALLETCTL待补登金额*/
 	public static final String ATM_ICCARD_BAL = "atm.getIcCardBal";
 
 	/*******************audit 命名空间的SQL********************/
@@ -76,5 +82,7 @@ public class SqlMaps {
 	public static final String POS_VAL_DEPWTH = "pos.Val_DepWth";     //存/取款验证交易
 	public static final String POS_DEPWTH = "pos.DepWth";     //存/取款验证交易
 
-
+	/*******************IC 命名空间的SQL********************/
+	/**查询前置差错处理的会计科目*/
+	public static final String IC_QUERY_DZIP_GLACCT = "ic.queryDzipGlacct";
 }

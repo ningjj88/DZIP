@@ -1,7 +1,7 @@
 8
 
 dir
-308
+341
 https://192.168.20.210:8443/svn/dzip/DZIP_NEWDEDV/src/csii/dzip/test/testCUPS
 https://192.168.20.210:8443/svn/dzip
 
@@ -50,18 +50,6 @@ file
 2
 longtun
 
-Query_test.java
-file
-
-
-
-
-2013-10-14T06:49:46.000000Z
-90ba375035bdda67a75e1e062e8a5875
-2013-05-07T07:15:09.421875Z
-2
-longtun
-
 PosConsumeCancelReversal_test.java
 file
 
@@ -70,6 +58,18 @@ file
 
 2013-10-14T06:49:46.000000Z
 860eb0d5ccbbcb10d1c17f4ff68c4f52
+2013-05-07T07:15:09.421875Z
+2
+longtun
+
+Query_test.java
+file
+
+
+
+
+2013-10-14T06:49:46.000000Z
+90ba375035bdda67a75e1e062e8a5875
 2013-05-07T07:15:09.421875Z
 2
 longtun
@@ -122,14 +122,14 @@ d101a7b5cfb5962caf61d2bf48567b99
 2
 longtun
 
-TransferOutReversal_test.java
+WithdrawAtATM_test.java
 file
 
 
 
 
 2013-10-14T06:49:46.000000Z
-e99460623066700aee02aa76ddc83547
+8620a8a0bb2dcafd8d73d079bd4c120a
 2013-05-07T07:15:09.421875Z
 2
 longtun
@@ -146,14 +146,14 @@ file
 2
 longtun
 
-WithdrawAtATM_test.java
+TransferOutReversal_test.java
 file
 
 
 
 
 2013-10-14T06:49:46.000000Z
-8620a8a0bb2dcafd8d73d079bd4c120a
+e99460623066700aee02aa76ddc83547
 2013-05-07T07:15:09.421875Z
 2
 longtun
@@ -182,6 +182,9 @@ b4edad068e325081d9ddbe7150c53334
 2
 longtun
 
+testPreauthorization
+dir
+
 QueryDetail_test.java
 file
 
@@ -193,9 +196,6 @@ e69778a1a8f3260d721f0d2308a9cb00
 2013-05-07T07:15:09.421875Z
 2
 longtun
-
-testPreauthorization
-dir
 
 TransferInComfirm_test.java
 file

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE segment SYSTEM "packetutf8.dtd">
+<!--柜面IC卡差错处理请求报文-->
+<segment>
+	<xmlTag><String name="TranCd"/></xmlTag><!--交易码 客户为借方 000000 客户为贷方 000001 000002贷方借方都是内部帐-->
+	<xmlTag><String name="d_orgnbr"/></xmlTag><!--借方机构号-->
+	<xmlTag><String name="d_glacct" /></xmlTag><!--借方科目号-->
+	<xmlTag><String name="d_acctno" /></xmlTag><!--借方帐号-->
+	<xmlTag><String name="c_orgnbr"/></xmlTag><!--贷方机构号-->
+	<xmlTag><String name="c_glacct" /></xmlTag><!--贷方科目号-->
+	<xmlTag><String name="c_acctno" /></xmlTag><!--贷方帐号-->
+	<xmlTag><String name="tranamt" /></xmlTag><!--交易金额-->
+	<xmlTag><String name="in_ORGNBR"/></xmlTag><!--机构号-->
+	<xmlTag><String name="in_CASHBOXNBR"/></xmlTag><!--钱箱号-->
+	<xmlTag><String name="in_ORIGPERSNBR"/></xmlTag><!--柜员号-->
+	<xmlTag><String name="trmcd"/></xmlTag><!--终端号-->
+</segment>
